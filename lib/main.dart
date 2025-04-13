@@ -40,11 +40,16 @@ class StartScreen extends StatelessWidget {
       body: Center(
         child: Column(
           // Setze den MainAxisSize auf min, damit der Abstand minimiert wird
-          mainAxisSize: MainAxisSize.min,
+          //mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Dein Logo
+            // Leerer Container oder SizedBox für den Abstand nach oben
+            const SizedBox(
+              height: 60,
+            ), // Hier Höhe zwischen Oben und Logo bestimmen
+            //Unser Logo
             SizedBox(
-              child: Image.asset('assets/logo.png', height: 500, width: 500),
+              child: Image.asset('assets/logo.png', height: 350, width: 350),
             ),
             const SizedBox(
               height: 8,
@@ -52,18 +57,23 @@ class StartScreen extends StatelessWidget {
             const Text(
               'Willkommen bei Kuvio!',
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 1), // Ein kleiner Abstand
-            const Text(
-              'Entdecke leckere Rezepte zum Nachkochen.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18, color: Colors.white),
+            const SizedBox(height: 2), // Abstand zwischen beiden Texten
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 4.7,
+              ), // Abstand links und rechts
+              child: const Text(
+                'Entdecke leckere Rezepte zum Nachkochen. Egal ob Anfänger oder Küchenprofi – mit Kuvio wird Kochen einfach, kreativ und lecker!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 150), //Button abstand zum Text
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
