@@ -113,38 +113,137 @@ class RecipesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF122620),
+      appBar: AppBar(
+        title: const Text("Rezeptauswahl"),
+        backgroundColor: const Color(0xFF122620),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Überschrift für den oberen Bereich
               const Text(
-                'Hier werden dann Gloger Rezepte angezeigt',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-                textAlign: TextAlign.center,
+                "Was möchtest du heute kochen?",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              const SizedBox(height: 40),
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pop(context); // 👈 geht zurück zur Startseite
-                },
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('Zurück'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: const Color(0xFF122620),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
+              const SizedBox(height: 20),
+              // Ernährungsart (Kreisfilter mit Icons)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildFilterCircle('assets/rohkost_icon.png', 'Rohkost'),
+                  _buildFilterCircle(
+                    'assets/gluten_free_icon.png',
+                    'Glutenfrei',
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  _buildFilterCircle('assets/fish_icon.png', 'Fisch'),
+                  _buildFilterCircle('assets/keto_icon.png', 'Keto'),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildFilterCircle('assets/proteins_icon.png', 'Fleisch'),
+                  _buildFilterCircle(
+                    'assets/vegetarian_icon.png',
+                    'Vegetarisch',
+                  ),
+                  _buildFilterCircle('assets/alles_icon.png', 'Omnivor'),
+                  _buildFilterCircle('assets/vegan_icon.png', 'Vegan'),
+                ],
+              ),
+              const SizedBox(height: 30),
+              // Weitere Filter: Gerichtskategorien
+              const Text(
+                "Wähle die Gerichtskategorie:",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 20,
+                runSpacing: 20,
+                children: [
+                  _buildCategoryFilter("Vorspeise"),
+                  _buildCategoryFilter("Hauptgericht"),
+                  _buildCategoryFilter("Dessert"),
+                  _buildCategoryFilter("Beilage"),
+                  _buildCategoryFilter("Snack"),
+                  _buildCategoryFilter("Frühstück"),
+                  _buildCategoryFilter("Kalorienarm"),
+                ],
+              ),
+              const Spacer(), // Füllt  verbleibenden Platz
+              // "Zeige mir Rezepte" Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Hier könnte man die Logik für das Anzeigen der Rezepte hinzufügen
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: const Color(0xFF122620),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 14,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Zeige mir Rezepte',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  // Funktion für runde Icons
+  Widget _buildFilterCircle(String assetPath, String label) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 40,
+          backgroundImage: AssetImage(assetPath),
+          backgroundColor: Colors.transparent,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white, fontSize: 14),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  // Funktion für die Kategorien (Vorspeise, Hauptgericht, etc.)
+  Widget _buildCategoryFilter(String category) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        category,
+        style: const TextStyle(
+          color: Color(0xFF122620),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
