@@ -184,7 +184,14 @@ class RecipesScreen extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Hier könnte man die Logik für das Anzeigen der Rezepte hinzufügen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                const RecipesListScreen(), // Navigiere zu RecipesListScreen
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -244,6 +251,96 @@ class RecipesScreen extends StatelessWidget {
           color: Color(0xFF122620),
           fontSize: 16,
           fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+class RecipesListScreen extends StatelessWidget {
+  const RecipesListScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Rezepte Übersicht"),
+        backgroundColor: const Color(0xFF122620),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Obere Zeile mit der Farbe Color(0xFF122620)
+            Container(
+              color: const Color(0xFF122620),
+              height: 10, // Höhe der oberen Zeile
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.white, // Weißer Hintergrund für den Inhalt
+                child: ListView.builder(
+                  itemCount: 10, // Beispiel, hier werden 10 Rezepte angezeigt
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        _buildRecipeRow(
+                          "Rezept $index", // Beispiel-Titel
+                          "assets/sample_image.png", // Beispiel-Bild
+                          "assets/sample_icon.png", // Beispiel-Icon
+                          "Vegetarisch", // Beispiel-Kategorie
+                        ),
+                        const Divider(
+                          color:
+                              Colors.grey, // Graue Linie zwischen den Rezepten
+                          thickness: 1, // Dicke der Linie
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+            // Untere Zeile mit der Farbe Color(0xFF122620)
+            Container(
+              color: const Color(0xFF122620),
+              height: 10, // Höhe der unteren Zeile
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Funktion, um eine Zeile mit einem Rezept zu erstellen
+  Widget _buildRecipeRow(
+    String title,
+    String imageUrl,
+    String iconUrl,
+    String category,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(8.0),
+        leading: Image.asset(
+          imageUrl,
+          width: 60,
+          height: 60,
+          fit: BoxFit.cover,
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Row(
+          children: [
+            Image.asset(iconUrl, width: 20, height: 20, fit: BoxFit.cover),
+            const SizedBox(width: 8),
+            Text(
+              category,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ],
         ),
       ),
     );
