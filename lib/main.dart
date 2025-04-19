@@ -264,7 +264,7 @@ class RecipesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Rezepte Übersicht"),
+        title: const Text("Rezepte für dich"),
         backgroundColor: const Color(0xFF122620),
       ),
       body: SafeArea(
