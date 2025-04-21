@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544137355783",
+    "project_id": "kuvioapp",
+    "storage_bucket": "kuvioapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544137355783:android:71f205526d0d19186c80a2",
+        "android_client_info": {
+          "package_name": "com.example.kuvio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2_JQm3Ti3mmnu967mSWjWsL_lDTtVhOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
