@@ -1,6 +1,1 @@
-{
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  }
-}
+{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"flutter":{"platforms":{"android":{"default":{"projectId":"kuvioapp","appId":"1:544137355783:android:71f205526d0d19186c80a2","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"kuvioapp","configurations":{"android":"1:544137355783:android:71f205526d0d19186c80a2","ios":"1:544137355783:ios:42476a057a1025886c80a2","macos":"1:544137355783:ios:42476a057a1025886c80a2","web":"1:544137355783:web:3f72a0253066904c6c80a2","windows":"1:544137355783:web:ca2e1999c5897b7a6c80a2"}}}}}}
