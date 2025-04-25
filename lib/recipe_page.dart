@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:kuvio/widgets/hamburger_menu.dart';
 
 class RecipePage extends StatefulWidget {
   const RecipePage({super.key});
@@ -40,6 +41,9 @@ class _RecipePageState extends State<RecipePage> {
       appBar: AppBar(
         title: Text(recipe!['title']),
         backgroundColor: const Color(0xFF122620),
+        actions: const [
+          HamburgerMenu(),
+        ],
       ),
       backgroundColor: const Color(0xFF122620),
       body: SingleChildScrollView(
@@ -52,11 +56,10 @@ class _RecipePageState extends State<RecipePage> {
               Image.asset(
                 'assets/${recipe!['image']}',
                 fit: BoxFit.cover,
-                errorBuilder:
-                    (ctx, error, stack) => const Text(
-                      "Bild nicht gefunden",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                errorBuilder: (ctx, error, stack) => const Text(
+                  "Bild nicht gefunden",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             const SizedBox(height: 20),
 
@@ -113,9 +116,9 @@ class _RecipePageState extends State<RecipePage> {
   }
 
   TextStyle _titleStyle() => const TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-  );
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      );
   TextStyle _textStyle() => const TextStyle(fontSize: 16, color: Colors.white);
 }

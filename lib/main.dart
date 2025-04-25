@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kuvio/widgets/hamburger_menu.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const KuvioApp());
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const KuvioApp(),
+    ),
+  );
 }
 
 class KuvioApp extends StatelessWidget {
@@ -13,23 +22,40 @@ class KuvioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       title: 'Kuvio Kochapp',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF122620),
-        fontFamily: 'Roboto',
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.white),
-          bodyLarge: TextStyle(color: Colors.white),
-          titleLarge: TextStyle(color: Colors.white),
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
+      theme: themeProvider.isDarkMode
+          ? ThemeData(
+              scaffoldBackgroundColor: const Color(0xFF122620),
+              fontFamily: 'Roboto',
+              textTheme: const TextTheme(
+                bodyMedium: TextStyle(color: Colors.white),
+                bodyLarge: TextStyle(color: Colors.white),
+                titleLarge: TextStyle(color: Colors.white),
+              ),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.white,
+                brightness: Brightness.dark,
+              ),
+              useMaterial3: true,
+            )
+          : ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              fontFamily: 'Roboto',
+              textTheme: const TextTheme(
+                bodyMedium: TextStyle(color: Color(0xFF122620)),
+                bodyLarge: TextStyle(color: Color(0xFF122620)),
+                titleLarge: TextStyle(color: Color(0xFF122620)),
+              ),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color(0xFF122620),
+                brightness: Brightness.light,
+              ),
+              useMaterial3: true,
+            ),
       home: const StartScreen(),
     );
   }
@@ -120,6 +146,9 @@ class RecipesScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Rezeptauswahl"),
         backgroundColor: const Color(0xFF122620),
+        actions: const [
+          HamburgerMenu(),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -191,9 +220,8 @@ class RecipesScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) =>
-                                const RecipesListScreen(), // Navigiere zu RecipesListScreen
+                        builder: (context) =>
+                            const RecipesListScreen(), // Navigiere zu RecipesListScreen
                       ),
                     );
                   },
@@ -270,6 +298,9 @@ class RecipesListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Rezepte für dich"),
         backgroundColor: const Color(0xFF122620),
+        actions: const [
+          HamburgerMenu(),
+        ],
       ),
       body: SafeArea(
         child: Column(
