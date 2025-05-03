@@ -1,10 +1,19 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'screens/filtered_recipes_screen.dart';
+import 'models/recipe.dart';
+import 'utils/upload_recipes.dart'; // ✅ Importiert die Upload-Methode
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // ✅ Nur EINMAL zum Hochladen benutzen – danach auskommentieren!
+  await uploadRecipesFromJson();
+
   runApp(const KuvioApp());
 }
 
@@ -43,21 +52,13 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          // Setze den MainAxisSize auf min, damit der Abstand minimiert wird
-          //mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Leerer Container oder SizedBox für den Abstand nach oben
-            const SizedBox(
-              height: 60,
-            ), // Hier Höhe zwischen Oben und Logo bestimmen
-            //Unser Logo
+            const SizedBox(height: 60),
             SizedBox(
               child: Image.asset('assets/logo.png', height: 350, width: 350),
             ),
-            const SizedBox(
-              height: 8,
-            ), // Sehr kleiner Abstand zwischen Logo und Text
+            const SizedBox(height: 8),
             const Text(
               'Willkommen bei Kuvio!',
               style: TextStyle(
@@ -66,18 +67,16 @@ class StartScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 2), // Abstand zwischen beiden Texten
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 4.7,
-              ), // Abstand links und rechts
-              child: const Text(
+            const SizedBox(height: 2),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.7),
+              child: Text(
                 'Entdecke leckere Rezepte zum Nachkochen. Egal ob Anfänger oder Küchenprofi – mit Kuvio wird Kochen einfach, kreativ und lecker!',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-            const SizedBox(height: 150), //Button abstand zum Text
+            const SizedBox(height: 150),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -90,10 +89,8 @@ class StartScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF122620),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 14,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -110,11 +107,46 @@ class StartScreen extends StatelessWidget {
   }
 }
 
-class RecipesScreen extends StatelessWidget {
+class RecipesScreen extends StatefulWidget {
   const RecipesScreen({super.key});
 
   @override
+  State<RecipesScreen> createState() => _RecipesScreenState();
+}
+
+class _RecipesScreenState extends State<RecipesScreen> {
+  String? selectedDiet;
+  String? selectedCategory;
+  List<Recipe> allRecipesList = []; // <-- Rezepteliste
+  bool isLoading = true; // <-- Ladeanzeige
+
+  @override
+  void initState() {
+    super.initState();
+    loadRecipes(); // <-- Lade Rezepte beim Start
+  }
+
+  Future<void> loadRecipes() async {
+    final String jsonString = await rootBundle.loadString('assets/recipe.json');
+    final List<dynamic> jsonData = json.decode(jsonString);
+
+    setState(() {
+      allRecipesList = jsonData.map((item) => Recipe.fromJson(item)).toList();
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        backgroundColor: Color(0xFF122620),
+        body: Center(
+          child: CircularProgressIndicator(color: Colors.greenAccent),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFF122620),
       appBar: AppBar(
@@ -127,7 +159,6 @@ class RecipesScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Überschrift für den oberen Bereich
               const Text(
                 "Was möchtest du heute kochen?",
                 style: TextStyle(
@@ -137,15 +168,12 @@ class RecipesScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              // Ernährungsart (Kreisfilter mit Icons)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildFilterCircle('assets/rohkost_icon.png', 'Rohkost'),
                   _buildFilterCircle(
-                    'assets/gluten_free_icon.png',
-                    'Glutenfrei',
-                  ),
+                      'assets/gluten_free_icon.png', 'Glutenfrei'),
                   _buildFilterCircle('assets/fish_icon.png', 'Fisch'),
                   _buildFilterCircle('assets/keto_icon.png', 'Keto'),
                 ],
@@ -156,15 +184,12 @@ class RecipesScreen extends StatelessWidget {
                 children: [
                   _buildFilterCircle('assets/proteins_icon.png', 'Fleisch'),
                   _buildFilterCircle(
-                    'assets/vegetarian_icon.png',
-                    'Vegetarisch',
-                  ),
+                      'assets/vegetarian_icon.png', 'Vegetarisch'),
                   _buildFilterCircle('assets/alles_icon.png', 'Omnivor'),
                   _buildFilterCircle('assets/vegan_icon.png', 'Vegan'),
                 ],
               ),
               const SizedBox(height: 30),
-              // Weitere Filter: Gerichtskategorien
               const Text(
                 "Wähle die Gerichtskategorie:",
                 style: TextStyle(fontSize: 20, color: Colors.white),
@@ -183,27 +208,33 @@ class RecipesScreen extends StatelessWidget {
                   _buildCategoryFilter("Kalorienarm"),
                 ],
               ),
-              const Spacer(), // Füllt  verbleibenden Platz
-              // "Zeige mir Rezepte" Button
+              const Spacer(),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) =>
-                                const RecipesListScreen(), // Navigiere zu RecipesListScreen
-                      ),
-                    );
+                    if (selectedDiet != null && selectedCategory != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FilteredRecipesScreen(
+                            selectedDiet: selectedDiet!,
+                            selectedCategory: selectedCategory!,
+                            allRecipes: allRecipesList,
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text("Bitte beide Filter auswählen!")),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF122620),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 14,
-                    ),
+                        horizontal: 32, vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -222,129 +253,59 @@ class RecipesScreen extends StatelessWidget {
     );
   }
 
-  // Funktion für runde Icons
   Widget _buildFilterCircle(String assetPath, String label) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundImage: AssetImage(assetPath),
-          backgroundColor: Colors.transparent,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white, fontSize: 14),
-          textAlign: TextAlign.center,
-        ),
-      ],
+    final isSelected = selectedDiet == label;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedDiet = label;
+        });
+      },
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 40,
+            backgroundImage: AssetImage(assetPath),
+            backgroundColor:
+                isSelected ? Colors.greenAccent : Colors.transparent,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.greenAccent : Colors.white,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 
-  // Funktion für die Kategorien (Vorspeise, Hauptgericht, etc.)
   Widget _buildCategoryFilter(String category) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        category,
-        style: const TextStyle(
-          color: Color(0xFF122620),
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-}
+    final isSelected = selectedCategory == category;
 
-class RecipesListScreen extends StatelessWidget {
-  const RecipesListScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Rezepte für dich"),
-        backgroundColor: const Color(0xFF122620),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Obere Zeile mit der Farbe Color(0xFF122620)
-            Container(
-              color: const Color(0xFF122620),
-              height: 10, // Höhe der oberen Zeile
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.white, // Weißer Hintergrund für den Inhalt
-                child: ListView.builder(
-                  itemCount: 10, // Beispiel, hier werden 10 Rezepte angezeigt
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        _buildRecipeRow(
-                          "Rezept $index", // Beispiel-Titel
-                          "assets/sample_image.png", // Beispiel-Bild
-                          "assets/sample_icon.png", // Beispiel-Icon
-                          "Vegetarisch", // Beispiel-Kategorie
-                        ),
-                        const Divider(
-                          color:
-                              Colors.grey, // Graue Linie zwischen den Rezepten
-                          thickness: 1, // Dicke der Linie
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-            // Untere Zeile mit der Farbe Color(0xFF122620)
-            Container(
-              color: const Color(0xFF122620),
-              height: 10, // Höhe der unteren Zeile
-            ),
-          ],
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedCategory = category;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.greenAccent : Colors.white,
+          borderRadius: BorderRadius.circular(12),
         ),
-      ),
-    );
-  }
-
-  // Funktion, um eine Zeile mit einem Rezept zu erstellen
-  Widget _buildRecipeRow(
-    String title,
-    String imageUrl,
-    String iconUrl,
-    String category,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(8.0),
-        leading: Image.asset(
-          imageUrl,
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Row(
-          children: [
-            Image.asset(iconUrl, width: 20, height: 20, fit: BoxFit.cover),
-            const SizedBox(width: 8),
-            Text(
-              category,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-          ],
+        child: Text(
+          category,
+          style: const TextStyle(
+            color: Color(0xFF122620),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
