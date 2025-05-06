@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
+import '../screens/login_screen.dart';
+import '../screens/account_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HamburgerMenu extends StatelessWidget {
-  const HamburgerMenu({super.key});
+  const HamburgerMenu(
+      {super.key}); // <- const ist erlaubt, weil keine Felder drin sind
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       color: Colors.white,
       icon: const Icon(Icons.menu, color: Colors.white),
-      onSelected: (value) {
-        // Hier kannst du Navigation oder Aktionen hinzufügen
-        if (value == 'konto') {
-          // TODO: Navigation zum Konto
-        } else if (value == 'favoriten') {
-          // TODO: Navigation zu Favoriten
-        } else if (value == 'darkmode') {
-          // TODO: Darkmode umschalten
-        } else if (value == 'einstellungen') {
-          // TODO: Einstellungen öffnen
-        } else if (value == 'login') {
-          // TODO: Anmelden / Registrieren
-        }
-      },
       itemBuilder: (BuildContext context) {
         return [
           const PopupMenuItem<String>(
@@ -49,6 +39,35 @@ class HamburgerMenu extends StatelessWidget {
                 style: TextStyle(color: Color(0xFF122620))),
           ),
         ];
+      },
+
+      // Aktionen bei Auswahl
+      onSelected: (value) {
+        if (value == 'konto') {
+          final user = FirebaseAuth.instance.currentUser;
+          final isLoggedIn = user != null;
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  isLoggedIn ? const AccountScreen() : const LoginScreen(),
+            ),
+          );
+        } else if (value == 'favoriten') {
+          // TODO: Navigation zu Favoriten
+        } else if (value == 'darkmode') {
+          // TODO: Darkmode umschalten
+        } else if (value == 'einstellungen') {
+          // TODO: Einstellungen öffnen
+        } else if (value == 'login') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ),
+          );
+        }
       },
     );
   }
