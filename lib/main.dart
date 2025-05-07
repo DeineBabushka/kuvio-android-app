@@ -2,19 +2,22 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kuvio/widgets/hamburger_menu.dart';
 import 'firebase_options.dart';
-import 'screens/filtered_recipes_screen.dart';
-import 'models/recipe.dart';
-import 'utils/upload_recipes.dart'; // ✅ Importiert die Upload-Methode
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
+import 'package:kuvio/models/recipe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // ✅ Nur EINMAL zum Hochladen benutzen – danach auskommentieren!
-  await uploadRecipesFromJson();
-
-  runApp(const KuvioApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const KuvioApp(),
+    ),
+  );
 }
 
 class KuvioApp extends StatelessWidget {
@@ -22,23 +25,40 @@ class KuvioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       title: 'Kuvio Kochapp',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF122620),
-        fontFamily: 'Roboto',
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.white),
-          bodyLarge: TextStyle(color: Colors.white),
-          titleLarge: TextStyle(color: Colors.white),
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
+      theme: themeProvider.isDarkMode
+          ? ThemeData(
+              scaffoldBackgroundColor: const Color(0xFF122620),
+              fontFamily: 'Roboto',
+              textTheme: const TextTheme(
+                bodyMedium: TextStyle(color: Colors.white),
+                bodyLarge: TextStyle(color: Colors.white),
+                titleLarge: TextStyle(color: Colors.white),
+              ),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.white,
+                brightness: Brightness.dark,
+              ),
+              useMaterial3: true,
+            )
+          : ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              fontFamily: 'Roboto',
+              textTheme: const TextTheme(
+                bodyMedium: TextStyle(color: Color(0xFF122620)),
+                bodyLarge: TextStyle(color: Color(0xFF122620)),
+                titleLarge: TextStyle(color: Color(0xFF122620)),
+              ),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color(0xFF122620),
+                brightness: Brightness.light,
+              ),
+              useMaterial3: true,
+            ),
       home: const StartScreen(),
     );
   }
@@ -131,7 +151,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
     final List<dynamic> jsonData = json.decode(jsonString);
 
     setState(() {
-      allRecipesList = jsonData.map((item) => Recipe.fromJson(item)).toList();
+      allRecipesList =
+          jsonData.map<Recipe>((item) => Recipe.fromJson(item)).toList();
       isLoading = false;
     });
   }
@@ -152,6 +173,9 @@ class _RecipesScreenState extends State<RecipesScreen> {
       appBar: AppBar(
         title: const Text("Rezeptauswahl"),
         backgroundColor: const Color(0xFF122620),
+        actions: const [
+          HamburgerMenu(),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -212,23 +236,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    if (selectedDiet != null && selectedCategory != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FilteredRecipesScreen(
-                            selectedDiet: selectedDiet!,
-                            selectedCategory: selectedCategory!,
-                            allRecipes: allRecipesList,
-                          ),
-                        ),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text("Bitte beide Filter auswählen!")),
-                      );
-                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const RecipesListScreen(), // Navigiere zu RecipesListScreen
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -285,27 +299,111 @@ class _RecipesScreenState extends State<RecipesScreen> {
   }
 
   Widget _buildCategoryFilter(String category) {
-    final isSelected = selectedCategory == category;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedCategory = category;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.greenAccent : Colors.white,
-          borderRadius: BorderRadius.circular(12),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        category,
+        style: const TextStyle(
+          color: Color(0xFF122620),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
         ),
-        child: Text(
-          category,
-          style: const TextStyle(
-            color: Color(0xFF122620),
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+      ),
+    );
+  }
+}
+
+class RecipesListScreen extends StatelessWidget {
+  const RecipesListScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Rezepte für dich"),
+        backgroundColor: const Color(0xFF122620),
+        actions: const [
+          HamburgerMenu(),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Obere Zeile mit der Farbe Color(0xFF122620)
+            Container(
+              color: const Color(0xFF122620),
+              height: 10, // Höhe der oberen Zeile
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.white, // Weißer Hintergrund für den Inhalt
+                child: ListView.builder(
+                  itemCount: 10, // Beispiel, hier werden 10 Rezepte angezeigt
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        _buildRecipeRow(
+                          "Rezept $index", // Beispiel-Titel
+                          "assets/sample_image.png", // Beispiel-Bild
+                          "assets/sample_icon.png", // Beispiel-Icon
+                          "Vegetarisch", // Beispiel-Kategorie
+                        ),
+                        const Divider(
+                          color:
+                              Colors.grey, // Graue Linie zwischen den Rezepten
+                          thickness: 1, // Dicke der Linie
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+            // Untere Zeile mit der Farbe Color(0xFF122620)
+            Container(
+              color: const Color(0xFF122620),
+              height: 10, // Höhe der unteren Zeile
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Funktion, um eine Zeile mit einem Rezept zu erstellen
+  Widget _buildRecipeRow(
+    String title,
+    String imageUrl,
+    String iconUrl,
+    String category,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(8.0),
+        leading: Image.asset(
+          imageUrl,
+          width: 60,
+          height: 60,
+          fit: BoxFit.cover,
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Row(
+          children: [
+            Image.asset(iconUrl, width: 20, height: 20, fit: BoxFit.cover),
+            const SizedBox(width: 8),
+            Text(
+              category,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ],
         ),
       ),
     );
