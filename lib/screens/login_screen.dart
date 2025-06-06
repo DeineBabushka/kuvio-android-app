@@ -109,10 +109,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF122620),
                                 foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                               child: const Text('Einloggen'),
                             ),
                             const SizedBox(height: 16),
+
+                            // ✅ Der ursprüngliche Text-Link, aber „Registrieren“ ist fett
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -123,11 +128,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
-                                'Noch kein Konto? Registrieren',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                  decoration: TextDecoration.underline,
+                              child: RichText(
+                                text: TextSpan(
+                                  text: 'Noch kein Konto? ',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'Registrieren',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
