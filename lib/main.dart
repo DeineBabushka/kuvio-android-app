@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'package:kuvio/models/recipe.dart';
+import 'package:kuvio/screens/filtered_recipes_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -236,13 +237,24 @@ class _RecipesScreenState extends State<RecipesScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const RecipesListScreen(), // Navigiere zu RecipesListScreen
-                      ),
-                    );
+                    if (selectedDiet != null && selectedCategory != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FilteredRecipesScreen(
+                            selectedDiet: selectedDiet!,
+                            selectedCategory: selectedCategory!,
+                            allRecipes: allRecipesList,
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Bitte wähle Ernährungstyp und Kategorie')),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -299,18 +311,27 @@ class _RecipesScreenState extends State<RecipesScreen> {
   }
 
   Widget _buildCategoryFilter(String category) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        category,
-        style: const TextStyle(
-          color: Color(0xFF122620),
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+    final isSelected = selectedCategory == category;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedCategory = category;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.greenAccent : Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          category,
+          style: TextStyle(
+            color: isSelected ? Colors.white : const Color(0xFF122620),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
