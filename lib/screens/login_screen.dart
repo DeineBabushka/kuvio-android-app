@@ -98,8 +98,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     password: _passwordController.text.trim(),
                                   );
 
+                                  if (!mounted) return;
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      backgroundColor: Color(0xFF2E6B4D),
+                                      content: Text(
+                                        'Erfolgreich eingeloggt',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  );
+
                                   Navigator.pop(
-                                      context); // Zurück zur Startseite oder zur Konto-Seite
+                                      context); // oder zur Startseite, wenn gewünscht
                                 } catch (e) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text('Fehler: $e')),
