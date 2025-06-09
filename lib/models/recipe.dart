@@ -1,12 +1,12 @@
 class Recipe {
-  final String? id;
+  final String id;
   final String title;
   final String image;
-  final String portions;
-  final List<String> dietTypes;
-  final List<String> categories;
+  final int portions;
   final List<String> ingredients;
   final List<String> instructions;
+  final List<String> dietTypes;
+  final List<String> categories;
   final String preparationTime;
   final int calories;
   final int proteinG;
@@ -14,14 +14,14 @@ class Recipe {
   final int fatG;
 
   Recipe({
-    this.id,
+    required this.id,
     required this.title,
     required this.image,
-    required this.dietTypes,
     required this.portions,
-    required this.categories,
     required this.ingredients,
     required this.instructions,
+    required this.dietTypes,
+    required this.categories,
     required this.preparationTime,
     required this.calories,
     required this.proteinG,
@@ -29,16 +29,16 @@ class Recipe {
     required this.fatG,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json, [String? id]) {
+  factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
-      id: id,
+      id: json['id'] ?? '', // <-- wichtig!
       title: json['title'],
       image: json['image'],
-      portions: json['portions'].toString(),
-      dietTypes: List<String>.from(json['diet_types']),
-      categories: List<String>.from(json['categories']),
+      portions: json['portions'],
       ingredients: List<String>.from(json['ingredients']),
       instructions: List<String>.from(json['instructions']),
+      dietTypes: List<String>.from(json['diet_types']),
+      categories: List<String>.from(json['categories']),
       preparationTime: json['preparation_time'],
       calories: json['nutrition']['calories'],
       proteinG: json['nutrition']['protein_g'],
