@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -14,13 +12,11 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
-  final _ageController = TextEditingController();
   final _bioController = TextEditingController();
-  final _experienceController = TextEditingController();
   final _dishController = TextEditingController();
 
-  File? _profileImage;
   String _selectedKitchen = 'Nicht angegeben';
+  String? _selectedProfileAsset; // character_1.png bis character_9.png
 
   final List<String> _kitchenOptions = [
     'Nicht angegeben',
@@ -41,16 +37,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _loadUserData();
   }
 
-  Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _profileImage = File(pickedFile.path);
-      });
-    }
-  }
-
   Future<void> _loadUserData() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -62,11 +48,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       if (data != null) {
         setState(() {
           _usernameController.text = data['username'] ?? '';
-          _ageController.text = data['age']?.toString() ?? '';
           _bioController.text = data['bio'] ?? '';
-          _experienceController.text = data['experience']?.toString() ?? '';
           _dishController.text = data['favdish'] ?? '';
           _selectedKitchen = data['kitchen'] ?? 'Nicht angegeben';
+          _selectedProfileAsset = data['profileImage'];
         });
       }
     }
@@ -82,26 +67,56 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           .doc(user.uid)
           .update({
         'username': _usernameController.text.trim(),
-        'age': int.tryParse(_ageController.text.trim()) ?? 0,
         'bio': _bioController.text.trim(),
         'kitchen': _selectedKitchen,
-        'experience': int.tryParse(_experienceController.text.trim()) ?? 0,
         'favdish': _dishController.text.trim(),
+        'profileImage': _selectedProfileAsset,
       });
 
       if (!mounted) return;
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Profil aktualisiert'),
           backgroundColor: Colors.green,
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.only(top: 16, right: 16, left: 16),
         ),
       );
-
       Navigator.pop(context);
     }
+  }
+
+  void _openImagePickerDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Profilbild auswählen'),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: 9,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemBuilder: (context, index) {
+                final assetName = 'assets/character_${index + 1}.png';
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedProfileAsset = assetName;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Image.asset(assetName),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -129,24 +144,45 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
-                  child: GestureDetector(
-                    onTap: _pickImage,
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: _profileImage != null
-                          ? FileImage(_profileImage!)
-                          : const AssetImage('assets/profile_placeholder.png')
-                              as ImageProvider,
-                    ),
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.grey[300],
+                        backgroundImage: AssetImage(
+                          _selectedProfileAsset ?? 'assets/character_1.png',
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: _openImagePickerDialog,
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.edit,
+                              size: 20,
+                              color: Color(0xFF122620),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 16),
                 const Text(
                   'Profilinformationen',
                   style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF122620)),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF122620),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 20),
@@ -171,16 +207,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  controller: _ageController,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: const InputDecoration(
-                    labelText: 'Alter',
-                    labelStyle: TextStyle(color: Color(0xFF122620)),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   value: _selectedKitchen,
                   style: const TextStyle(color: Colors.black),
@@ -197,16 +223,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   },
                   decoration: const InputDecoration(
                     labelText: 'Lieblingsküche',
-                    labelStyle: TextStyle(color: Color(0xFF122620)),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _experienceController,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: const InputDecoration(
-                    labelText: 'Kocherfahrung (Jahre)',
                     labelStyle: TextStyle(color: Color(0xFF122620)),
                   ),
                 ),
