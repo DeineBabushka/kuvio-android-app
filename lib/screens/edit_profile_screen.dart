@@ -66,7 +66,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           .collection('users')
           .doc(user.uid)
           .update({
-        'username': _usernameController.text.trim(),
         'bio': _bioController.text.trim(),
         'kitchen': _selectedKitchen,
         'favdish': _dishController.text.trim(),
@@ -188,13 +187,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: _usernameController,
+                  readOnly: true,
                   style: const TextStyle(color: Colors.black),
                   decoration: const InputDecoration(
                     labelText: 'Benutzername',
                     labelStyle: TextStyle(color: Color(0xFF122620)),
+                    border: OutlineInputBorder(),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
                   ),
-                  validator: (value) =>
-                      value == null || value.isEmpty ? 'Pflichtfeld' : null,
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
