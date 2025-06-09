@@ -28,7 +28,8 @@
     "diet_types": [
       "Vegetarisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -66,7 +67,8 @@
       "Vegetarisch",
       "Glutenfrei",
       "Keto",
-      "Rohkost"
+      "Rohkost",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -106,7 +108,8 @@
     "diet_types": [
       "Vegetarisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -149,7 +152,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -186,7 +190,8 @@
     "diet_types": [
       "Vegetarisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -225,7 +230,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -263,7 +269,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -301,7 +308,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -341,7 +349,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -380,7 +389,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -418,7 +428,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -456,7 +467,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -492,7 +504,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -530,7 +543,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -568,7 +582,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -608,7 +623,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -647,7 +663,8 @@
       "6. Nudeln nach Packung kochen und mit Sauce servieren."
     ],
     "diet_types": [
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -685,7 +702,8 @@
     "diet_types": [
       "Vegan",
       "Glutenfrei",
-      "Rohkost"
+      "Rohkost",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -724,7 +742,8 @@
       "5. Tofu wieder zugeben, mit Sesam bestreuen."
     ],
     "diet_types": [
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -762,7 +781,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -798,7 +818,8 @@
       "4. Optional: mit Tahinisoße servieren."
     ],
     "diet_types": [
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -837,7 +858,8 @@
     "diet_types": [
       "Vegan",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -872,7 +894,8 @@
       "4. Mit Chiliflocken bestreuen."
     ],
     "diet_types": [
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -908,7 +931,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -941,7 +965,8 @@
       "5. Mit frischem Obst servieren."
     ],
     "diet_types": [
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück"
@@ -978,7 +1003,8 @@
     "diet_types": [
       "Vegan",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -1014,7 +1040,8 @@
       "4. Mit Sojasauce abschmecken."
     ],
     "diet_types": [
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1046,7 +1073,8 @@
     "diet_types": [
       "Vegan",
       "Rohkost",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -1084,7 +1112,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1116,7 +1145,8 @@
     "diet_types": [
       "Vegan",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Dessert",
@@ -1155,7 +1185,8 @@
     "diet_types": [
       "Fleisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1192,7 +1223,8 @@
       "5. Mit den Nudeln servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1229,7 +1261,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1266,7 +1299,8 @@
     "diet_types": [
       "Fleisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1299,7 +1333,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1333,7 +1368,8 @@
       "4. In der Pfanne kurz anrösten oder kalt servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -1370,7 +1406,8 @@
       "4. Hackbällchen in Sauce 10 Min. köcheln lassen."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1406,7 +1443,8 @@
     "diet_types": [
       "Fleisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Salat",
@@ -1443,7 +1481,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1480,7 +1519,8 @@
     "diet_types": [
       "Fleisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1516,7 +1556,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1550,7 +1591,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1587,7 +1629,8 @@
       "5. Zusammen servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1622,7 +1665,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -1657,7 +1701,8 @@
       "4. Kurz scharf anbraten und servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1695,7 +1740,8 @@
     ],
     "diet_types": [
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1735,7 +1781,8 @@
     ],
     "diet_types": [
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1773,7 +1820,8 @@
     "diet_types": [
       "Fisch",
       "Glutenfrei",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Omnivor"
     ],
     "categories": [
       "Salat",
@@ -1808,7 +1856,8 @@
       "5. Mit Zitronenscheiben und frischer Petersilie servieren."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1844,7 +1893,8 @@
       "5. Mit Beilagen deiner Wahl servieren."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1883,7 +1933,8 @@
     "diet_types": [
       "Fisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -1924,7 +1975,8 @@
       "7. Die Frikadellen zusammen mit dem Kartoffelstampf anrichten."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -1963,7 +2015,8 @@
       "7. Mit frisch gehacktem Basilikum, Salz und Pfeffer abschmecken und servieren."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2003,7 +2056,8 @@
     ],
     "diet_types": [
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2040,7 +2094,8 @@
       "6. Dip in die Mitte geben und Bowl servieren."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -2080,7 +2135,8 @@
       "7. Bei 180 °C Umluft ca. 35 Minuten backen."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2114,7 +2170,8 @@
     "diet_types": [
       "Fisch",
       "Keto",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -2150,7 +2207,8 @@
     "diet_types": [
       "Fisch",
       "Keto",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2186,7 +2244,8 @@
     ],
     "diet_types": [
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2224,7 +2283,8 @@
       "6. Alles in die Tortillas füllen und sofort servieren."
     ],
     "diet_types": [
-      "Fisch"
+      "Fisch",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -2264,7 +2324,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -2303,7 +2364,8 @@
     "diet_types": [
       "Keto",
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2341,7 +2403,8 @@
     "diet_types": [
       "Keto",
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2378,7 +2441,8 @@
     "diet_types": [
       "Keto",
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -2417,7 +2481,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -2454,7 +2519,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -2493,7 +2559,8 @@
     "diet_types": [
       "Keto",
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -2530,7 +2597,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -2569,7 +2637,8 @@
     "diet_types": [
       "Keto",
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2606,7 +2675,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -2642,7 +2712,8 @@
     "diet_types": [
       "Keto",
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -2682,7 +2753,8 @@
     "diet_types": [
       "Keto",
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2716,7 +2788,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -2754,7 +2827,8 @@
     "diet_types": [
       "Keto",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -2794,7 +2868,8 @@
     "diet_types": [
       "Keto",
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -2836,7 +2911,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2873,7 +2949,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2909,7 +2986,8 @@
       "6. Kurz ruhen lassen und servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -2948,7 +3026,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -2988,7 +3067,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -3025,7 +3105,8 @@
     "diet_types": [
       "Fleisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3060,7 +3141,8 @@
     "diet_types": [
       "Fleisch",
       "Glutenfrei",
-      "Keto"
+      "Keto",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3097,7 +3179,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3136,7 +3219,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -3174,7 +3258,8 @@
       "6. Mit frischem Basilikum servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -3207,7 +3292,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -3243,7 +3329,8 @@
       "5. Gemüse würzen, alles gemeinsam servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3279,7 +3366,8 @@
       "5. Mit Sojasauce ablöschen, bei mittlerer Hitze kurz ziehen lassen."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3310,7 +3398,8 @@
       "4. Nach Wunsch mit Senf servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -3346,7 +3435,8 @@
       "5. Mit Beilage nach Wahl servieren."
     ],
     "diet_types": [
-      "Fleisch"
+      "Fleisch",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3385,7 +3475,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3424,7 +3515,8 @@
     ],
     "diet_types": [
       "Rohkost",
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3461,7 +3553,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -3498,7 +3591,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -3535,7 +3629,8 @@
     ],
     "diet_types": [
       "Rohkost",
-      "Vegan"
+      "Vegan",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -3574,7 +3669,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -3613,7 +3709,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -3650,7 +3747,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Vorspeise",
@@ -3686,7 +3784,8 @@
     "diet_types": [
       "Rohkost",
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -3725,7 +3824,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -3760,7 +3860,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Dessert"
@@ -3795,7 +3896,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Suppe",
@@ -3829,7 +3931,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -3864,7 +3967,8 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Dessert",
@@ -3900,7 +4004,8 @@
     ],
     "diet_types": [
       "Rohkost",
-      "Vegetarisch"
+      "Vegetarisch",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück"
@@ -3940,7 +4045,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -3976,7 +4082,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -4011,7 +4118,8 @@
     ],
     "diet_types": [
       "Fisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -4050,7 +4158,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
@@ -4086,7 +4195,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -4123,7 +4233,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -4160,7 +4271,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4197,7 +4309,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Suppe",
@@ -4235,7 +4348,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Salat",
@@ -4269,7 +4383,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück"
@@ -4306,7 +4421,8 @@
     ],
     "diet_types": [
       "Fleisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4342,7 +4458,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -4380,7 +4497,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4416,7 +4534,8 @@
     ],
     "diet_types": [
       "Vegetarisch",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -4454,7 +4573,8 @@
     ],
     "diet_types": [
       "Vegan",
-      "Glutenfrei"
+      "Glutenfrei",
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4490,7 +4610,7 @@
       "7. Sofort servieren, mit extra Parmesan bestreuen."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4525,7 +4645,7 @@
       "6. Vor dem Servieren mit frischen Kräutern garnieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4560,7 +4680,7 @@
       "6. Sobald die gewünschte Konsistenz erreicht ist, mit Schnittlauch bestreuen und servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Frühstück"
@@ -4597,7 +4717,7 @@
       "6. Gut durchziehen lassen oder sofort servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Salat",
@@ -4634,7 +4754,7 @@
       "6. Warm servieren, optional mit Frühlingszwiebeln garnieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4670,7 +4790,7 @@
       "6. Mit Schnittlauch bestreuen und servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Frühstück",
@@ -4708,7 +4828,7 @@
       "6. Mit Pommes servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht",
@@ -4745,7 +4865,7 @@
       "5. Nudeln untermischen und servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4780,7 +4900,7 @@
       "4. Mit Petersilie bestreuen und kalt servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Salat",
@@ -4816,7 +4936,7 @@
       "5. Mit Beilage nach Wahl servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4850,7 +4970,7 @@
       "5. Halbieren und servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Snack"
@@ -4884,7 +5004,7 @@
       "5. Alles zusammen servieren, mit Petersilie garnieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4914,7 +5034,7 @@
       "4. In Pfanne oder Sandwichmaker goldbraun rösten."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Snack",
@@ -4949,7 +5069,7 @@
       "5. Mit Beilage nach Wahl servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Hauptgericht"
@@ -4983,7 +5103,7 @@
       "4. Mit Petersilie bestreuen und kalt servieren."
     ],
     "diet_types": [
-      "Alles"
+      "Omnivor"
     ],
     "categories": [
       "Beilage",
