@@ -3,19 +3,43 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'edit_profile_screen.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
-  Future<Map<String, dynamic>?> _getUserData() async {
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  Map<String, dynamic>? userData;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final doc = await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
           .get();
-      return doc.data();
+      setState(() {
+        userData = doc.data();
+        isLoading = false;
+      });
     }
-    return null;
+  }
+
+  void _navigateToEditProfile() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+    );
+    _loadUserData(); // Nach Rückkehr neu laden
   }
 
   @override
@@ -29,77 +53,58 @@ class AccountScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
       ),
-      body: FutureBuilder<Map<String, dynamic>?>(
-        future: _getUserData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-                child: CircularProgressIndicator(color: Colors.white));
-          }
-
-          final data = snapshot.data;
-          if (data == null) {
-            return const Center(
-                child: Text('Keine Daten gefunden',
-                    style: TextStyle(color: Colors.white)));
-          }
-
-          return Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                const CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.teal, // Platzhalter
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  data['username'] ?? 'Unbekannt',
-                  style: const TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator(color: Colors.white))
+          : userData == null
+              ? const Center(
+                  child: Text('Keine Daten gefunden',
+                      style: TextStyle(color: Colors.white)))
+              : Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage(
+                          userData!['profileImage'] ?? 'assets/character_1.png',
+                        ),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        userData!['username'] ?? 'Unbekannt',
+                        style: const TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      const Divider(color: Colors.white54),
+                      _buildInfoRow("Über mich", userData!['bio']),
+                      const Divider(color: Colors.white54),
+                      _buildInfoRow("Lieblingsküche", userData!['kitchen']),
+                      const Divider(color: Colors.white54),
+                      _buildInfoRow("Lieblingsgericht", userData!['favdish']),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: _navigateToEditProfile,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color(0xFF122620),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: const Text('Profil bearbeiten',
+                            style: TextStyle(fontSize: 16)),
+                      ),
+                    ],
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 16),
-                const Divider(color: Colors.white54),
-                _buildInfoRow("Über mich", data['bio']),
-                const Divider(color: Colors.white54),
-                _buildInfoRow("Alter", data['age']?.toString()),
-                const Divider(color: Colors.white54),
-                _buildInfoRow("Lieblingsküche", data['kitchen']),
-                const Divider(color: Colors.white54),
-                _buildInfoRow("Kocherfahrung",
-                    (data['experience']?.toString() ?? '-') + ' Jahre'),
-                const Divider(color: Colors.white54),
-                _buildInfoRow("Lieblingsgericht", data['favdish']),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const EditProfileScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xFF122620),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: const Text('Profil bearbeiten',
-                      style: TextStyle(fontSize: 16)),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
     );
   }
 
@@ -112,7 +117,7 @@ class AccountScreen extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          value ?? 'Nicht angegeben',
+          value?.isNotEmpty == true ? value! : 'Nicht angegeben',
           style: const TextStyle(color: Colors.white, fontSize: 18),
           textAlign: TextAlign.center,
         ),

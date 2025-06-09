@@ -55,12 +55,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-
+  
   assets:
     - assets/logo.png
     - assets/vegetarian_icon.png
@@ -72,7 +68,153 @@ flutter:
     - assets/keto_icon.png
     - assets/rohkost_icon.png
     - assets/recipe.json
+
+    - assets/character_1.png
+    - assets/character_2.png
+    - assets/character_3.png
+    - assets/character_4.png
+    - assets/character_5.png
+    - assets/character_6.png
+    - assets/character_7.png
+    - assets/character_8.png
+    - assets/character_9.png
+
+    - assets/recipe_1.jpg
     - assets/recipe_2.jpg
+    - assets/recipe_3.jpg
+    - assets/recipe_4.jpg
+    - assets/recipe_5.jpg
+    - assets/recipe_6.jpg
+    - assets/recipe_7.jpg
+    - assets/recipe_8.jpg
+    - assets/recipe_9.jpg
+    - assets/recipe_10.jpg
+    - assets/recipe_11.jpg
+    - assets/recipe_12.jpg
+    - assets/recipe_13.jpg
+    - assets/recipe_14.jpg
+    - assets/recipe_15.jpg
+    - assets/recipe_16.jpg
+    - assets/recipe_17.jpg
+    - assets/recipe_18.jpg
+    - assets/recipe_19.jpg
+    - assets/recipe_20.jpg
+    - assets/recipe_21.jpg
+    - assets/recipe_22.jpg
+    - assets/recipe_23.jpg
+    - assets/recipe_24.jpg
+    - assets/recipe_25.jpg
+    - assets/recipe_26.jpg
+    - assets/recipe_27.jpg
+    - assets/recipe_28.jpg
+    - assets/recipe_29.jpg
+    - assets/recipe_30.jpg
+    - assets/recipe_31.jpg
+    - assets/recipe_32.jpg
+    - assets/recipe_33.jpg
+    - assets/recipe_34.jpg
+    - assets/recipe_35.jpg
+    - assets/recipe_36.jpg
+    - assets/recipe_37.jpg
+    - assets/recipe_38.jpg
+    - assets/recipe_39.jpg
+    - assets/recipe_40.jpg
+    - assets/recipe_41.jpg
+    - assets/recipe_42.jpg
+    - assets/recipe_43.jpg
+    - assets/recipe_44.jpg
+    - assets/recipe_45.jpg
+    - assets/recipe_46.jpg
+    - assets/recipe_47.jpg
+    - assets/recipe_48.jpg
+    - assets/recipe_49.jpg
+    - assets/recipe_50.jpg
+    - assets/recipe_51.jpg
+    - assets/recipe_52.jpg
+    - assets/recipe_53.jpg
+    - assets/recipe_54.jpg
+    - assets/recipe_55.jpg
+    - assets/recipe_56.jpg
+    - assets/recipe_57.jpg
+    - assets/recipe_58.jpg
+    - assets/recipe_59.jpg
+    - assets/recipe_60.jpg
+    - assets/recipe_61.jpg
+    - assets/recipe_62.jpg
+    - assets/recipe_63.jpg
+    - assets/recipe_64.jpg
+    - assets/recipe_65.jpg
+    - assets/recipe_66.jpg
+    - assets/recipe_67.jpg
+    - assets/recipe_68.jpg
+    - assets/recipe_69.jpg
+    - assets/recipe_70.jpg
+    - assets/recipe_71.jpg
+    - assets/recipe_72.jpg
+    - assets/recipe_73.jpg
+    - assets/recipe_74.jpg
+    - assets/recipe_75.jpg
+    - assets/recipe_76.jpg
+    - assets/recipe_77.jpg
+    - assets/recipe_78.jpg
+    - assets/recipe_79.jpg
+    - assets/recipe_80.jpg
+    - assets/recipe_81.jpg
+    - assets/recipe_82.jpg
+    - assets/recipe_83.jpg
+    - assets/recipe_84.jpg
+    - assets/recipe_85.jpg
+    - assets/recipe_86.jpg
+    - assets/recipe_87.jpg
+    - assets/recipe_88.jpg
+    - assets/recipe_89.jpg
+    - assets/recipe_90.jpg
+    - assets/recipe_91.jpg
+    - assets/recipe_92.jpg
+    - assets/recipe_93.jpg
+    - assets/recipe_94.jpg
+    - assets/recipe_95.jpg
+    - assets/recipe_96.jpg
+    - assets/recipe_97.jpg
+    - assets/recipe_98.jpg
+    - assets/recipe_99.jpg
+    - assets/recipe_100.jpg
+    - assets/recipe_101.jpg
+    - assets/recipe_102.jpg
+    - assets/recipe_103.jpg
+    - assets/recipe_104.jpg
+    - assets/recipe_105.jpg
+    - assets/recipe_106.jpg
+    - assets/recipe_107.jpg
+    - assets/recipe_108.jpg
+    - assets/recipe_109.jpg
+    - assets/recipe_110.jpg
+    - assets/recipe_111.jpg
+    - assets/recipe_112.jpg
+    - assets/recipe_113.jpg
+    - assets/recipe_114.jpg
+    - assets/recipe_115.jpg
+    - assets/recipe_116.jpg
+    - assets/recipe_117.jpg
+    - assets/recipe_118.jpg
+    - assets/recipe_119.jpg
+    - assets/recipe_120.jpg
+    - assets/recipe_121.jpg
+    - assets/recipe_122.jpg
+    - assets/recipe_123.jpg
+    - assets/recipe_124.jpg
+    - assets/recipe_125.jpg
+    - assets/recipe_126.jpg
+    - assets/recipe_127.jpg
+    - assets/recipe_128.jpg
+    - assets/recipe_129.jpg
+    - assets/recipe_130.jpg
+    - assets/recipe_131.jpg
+    - assets/recipe_132.jpg
+    - assets/recipe_133.jpg
+    - assets/recipe_134.jpg
+    - assets/recipe_135.jpg
+
     
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../screens/edit_profile_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -146,29 +147,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             _usernameController.text.trim(),
                                         'email': _emailController.text.trim(),
                                         'createdAt': Timestamp.now(),
+                                        'bio': '',
+                                        'kitchen': 'Nicht angegeben',
+                                        'favdish': '',
                                       });
 
-                                      if (!mounted) {
-                                        return;
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'Konto erfolgreich erstellt!')),
-                                        );
-                                        Navigator.pop(context);
-                                      }
+                                      if (!mounted) return;
+
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const EditProfileScreen()),
+                                      );
                                     } catch (e) {
                                       if (!mounted) return;
-                                      {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text('Fehler: $e'),
-                                          ),
-                                        );
-                                      }
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(content: Text('Fehler: $e')),
+                                      );
                                     }
                                   }
                                 },
