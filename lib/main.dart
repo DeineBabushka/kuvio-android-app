@@ -294,13 +294,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
             radius: 40,
             backgroundImage: AssetImage(assetPath),
             backgroundColor:
-                isSelected ? Colors.greenAccent : Colors.transparent,
+                isSelected ? const Color(0xFF2E6B4D) : Colors.transparent,
           ),
           const SizedBox(height: 8),
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? Colors.greenAccent : Colors.white,
+              color: isSelected ? const Color(0xFF2E6B4D) : Colors.white,
               fontSize: 14,
             ),
             textAlign: TextAlign.center,
@@ -322,7 +322,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.greenAccent : Colors.white,
+          color: isSelected ? const Color(0xFF2E6B4D) : Colors.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
