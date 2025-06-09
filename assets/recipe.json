@@ -40,7 +40,8 @@
       "protein_g": 23,
       "carbohydrates_g": 16,
       "fat_g": 36
-    }
+    },
+    "id": "2d5d3a48-2f8d-4c9d-9e96-30b8bf56b0d4"
   },
   {
     "title": "Tomaten-Mozzarella-Salat mit Basilikum",
@@ -80,7 +81,8 @@
       "protein_g": 16,
       "carbohydrates_g": 5,
       "fat_g": 25
-    }
+    },
+    "id": "688982a6-9622-4352-9caf-7fd4cd7bdae8"
   },
   {
     "title": "Zucchini-Nudeln mit Pesto",
@@ -121,7 +123,8 @@
       "protein_g": 14,
       "carbohydrates_g": 9,
       "fat_g": 30
-    }
+    },
+    "id": "de19d576-4538-4f4d-aac0-4b5e5b33f869"
   },
   {
     "title": "Vegetarisches Chili sin Carne",
@@ -164,7 +167,8 @@
       "protein_g": 17,
       "carbohydrates_g": 38,
       "fat_g": 17
-    }
+    },
+    "id": "4dfbf828-f4c9-49dd-9403-0180d14aceb4"
   },
   {
     "title": "Rührei mit Champignons",
@@ -203,7 +207,8 @@
       "protein_g": 23,
       "carbohydrates_g": 5,
       "fat_g": 31
-    }
+    },
+    "id": "c0e7d806-d046-4323-99c8-ddaf48557e96"
   },
   {
     "title": "Gemüsesuppe mit Lauch und Karotten",
@@ -243,7 +248,8 @@
       "protein_g": 4,
       "carbohydrates_g": 20,
       "fat_g": 8
-    }
+    },
+    "id": "cf8c264e-21d7-48bf-9fcd-314d92c04ed6"
   },
   {
     "title": "Kartoffelgratin mit Käse",
@@ -282,7 +288,8 @@
       "protein_g": 18,
       "carbohydrates_g": 46,
       "fat_g": 34
-    }
+    },
+    "id": "2bbbf7c2-e7aa-4bd0-bdca-51f465f11c5d"
   },
   {
     "title": "Auberginenröllchen mit Ricotta",
@@ -321,7 +328,8 @@
       "protein_g": 14,
       "carbohydrates_g": 8,
       "fat_g": 26
-    }
+    },
+    "id": "b09c9751-f767-4cbb-9b58-2ae038b500c2"
   },
   {
     "title": "Vegetarischer Linseneintopf",
@@ -362,7 +370,8 @@
       "protein_g": 22,
       "carbohydrates_g": 40,
       "fat_g": 12
-    }
+    },
+    "id": "c4d7fe55-cb79-47a0-93d5-55514e312bf7"
   },
   {
     "title": "Bulgursalat mit Gemüse",
@@ -402,7 +411,8 @@
       "protein_g": 10,
       "carbohydrates_g": 48,
       "fat_g": 14
-    }
+    },
+    "id": "30b52db9-33fa-402b-b2ad-123046d51531"
   },
   {
     "title": "Vegetarischer Wrap mit Hummus",
@@ -441,7 +451,8 @@
       "protein_g": 12,
       "carbohydrates_g": 38,
       "fat_g": 24
-    }
+    },
+    "id": "2bf4fe92-712f-4e90-bdec-cf2eb39fc389"
   },
   {
     "title": "Käse-Rührei mit Paprika",
@@ -480,7 +491,8 @@
       "protein_g": 24,
       "carbohydrates_g": 6,
       "fat_g": 34
-    }
+    },
+    "id": "e9d04a67-57de-43a7-8670-75073f320b90"
   },
   {
     "title": "Ofen-Kartoffeln mit Quark-Dip",
@@ -517,7 +529,8 @@
       "protein_g": 22,
       "carbohydrates_g": 45,
       "fat_g": 20
-    }
+    },
+    "id": "c04a338c-d233-4697-999f-65dde897bcf8"
   },
   {
     "title": "Paprika-Tomaten-Omelett",
@@ -556,7 +569,8 @@
       "protein_g": 21,
       "carbohydrates_g": 7,
       "fat_g": 30
-    }
+    },
+    "id": "6e3a1f2b-2119-4b65-87ab-6f2ba9b11554"
   },
   {
     "title": "Griechischer Salat mit Feta",
@@ -595,7 +609,8 @@
       "protein_g": 13,
       "carbohydrates_g": 10,
       "fat_g": 25
-    }
+    },
+    "id": "4c88a1e2-cb59-4594-ab87-b1e9a97e88f2"
   },
   {
     "title": "Linsen-Curry mit Kokosmilch",
@@ -635,7 +650,8 @@
       "protein_g": 20,
       "carbohydrates_g": 45,
       "fat_g": 25
-    }
+    },
+    "id": "a9663e04-789f-4b29-a1ef-99704bec1fe6"
   },
   {
     "title": "Vegane Bolognese mit Linsen",
@@ -675,7 +691,8 @@
       "protein_g": 22,
       "carbohydrates_g": 65,
       "fat_g": 12
-    }
+    },
+    "id": "8decf1d9-fd16-40d1-88bb-ad11dd78aa2e"
   },
   {
     "title": "Quinoasalat mit Avocado und Mango",
@@ -715,7 +732,8 @@
       "protein_g": 10,
       "carbohydrates_g": 35,
       "fat_g": 24
-    }
+    },
+    "id": "74fbe815-b8b5-46d7-93c5-fdebc51884a9"
   },
   {
     "title": "Vegane Gemüsepfanne mit Tofu",
@@ -754,7 +772,8 @@
       "protein_g": 22,
       "carbohydrates_g": 20,
       "fat_g": 32
-    }
+    },
+    "id": "bd4ee6e0-ae93-4d2f-98ef-3925ac6ead8c"
   },
   {
     "title": "Vegane Kürbissuppe mit Kokos",
@@ -794,7 +813,8 @@
       "protein_g": 7,
       "carbohydrates_g": 28,
       "fat_g": 30
-    }
+    },
+    "id": "b1885e82-ff8e-4ecc-ad1b-a8ca80a09b8d"
   },
   {
     "title": "Vegane Falafel mit Tahinisoße",
@@ -831,7 +851,8 @@
       "protein_g": 18,
       "carbohydrates_g": 35,
       "fat_g": 24
-    }
+    },
+    "id": "41002b4b-e062-4b44-b773-481edbba0ecf"
   },
   {
     "title": "Zucchini-Spaghetti mit Tomatensugo",
@@ -871,7 +892,8 @@
       "protein_g": 7,
       "carbohydrates_g": 18,
       "fat_g": 18
-    }
+    },
+    "id": "cdb8d1b3-0cb8-44bd-9995-0fa9d19747bb"
   },
   {
     "title": "Avocado-Toast mit Tomaten",
@@ -907,7 +929,8 @@
       "protein_g": 9,
       "carbohydrates_g": 35,
       "fat_g": 26
-    }
+    },
+    "id": "3f11e91d-f8b3-4b65-ac9d-006869d09836"
   },
   {
     "title": "Süßkartoffel-Curry mit Kichererbsen",
@@ -943,7 +966,8 @@
       "protein_g": 15,
       "carbohydrates_g": 50,
       "fat_g": 28
-    }
+    },
+    "id": "3941ac0b-fd76-4996-8c31-6b1026f06b3f"
   },
   {
     "title": "Veganes Bananen-Porridge",
@@ -977,7 +1001,8 @@
       "protein_g": 9,
       "carbohydrates_g": 55,
       "fat_g": 10
-    }
+    },
+    "id": "59480252-8afb-40c6-a93b-14d806f18669"
   },
   {
     "title": "Gerösteter Blumenkohl mit Tahini-Dip",
@@ -1016,7 +1041,8 @@
       "protein_g": 8,
       "carbohydrates_g": 14,
       "fat_g": 22
-    }
+    },
+    "id": "18826ab9-80ed-48ea-af45-d0639c92a098"
   },
   {
     "title": "Vegane Reispfanne mit Gemüse",
@@ -1052,7 +1078,8 @@
       "protein_g": 10,
       "carbohydrates_g": 55,
       "fat_g": 18
-    }
+    },
+    "id": "f3c9113e-328e-447f-89d5-e3fbe4cac91e"
   },
   {
     "title": "Rohkostsalat mit Apfel und Karotte",
@@ -1086,7 +1113,8 @@
       "protein_g": 3,
       "carbohydrates_g": 22,
       "fat_g": 12
-    }
+    },
+    "id": "0924066b-496f-4362-87d8-1f6915045e9d"
   },
   {
     "title": "Veganes Kartoffelgulasch",
@@ -1124,7 +1152,8 @@
       "protein_g": 9,
       "carbohydrates_g": 50,
       "fat_g": 15
-    }
+    },
+    "id": "d1153946-ce75-485e-b5d8-7b9b62988e6d"
   },
   {
     "title": "Vegane Schoko-Chia-Pudding",
@@ -1158,7 +1187,8 @@
       "protein_g": 7,
       "carbohydrates_g": 12,
       "fat_g": 20
-    }
+    },
+    "id": "2b4bbf76-be5e-4afe-8250-62af98a4c9da"
   },
   {
     "title": "Hähnchenbrust mit Gemüse aus dem Ofen",
@@ -1197,7 +1227,8 @@
       "protein_g": 50,
       "carbohydrates_g": 12,
       "fat_g": 28
-    }
+    },
+    "id": "95507a7a-8ba6-4e17-8bd2-7968cdef4591"
   },
   {
     "title": "Spaghetti Bolognese mit Rinderhack",
@@ -1235,7 +1266,8 @@
       "protein_g": 38,
       "carbohydrates_g": 55,
       "fat_g": 32
-    }
+    },
+    "id": "d7f427ea-d7fe-4dab-81b3-f3f44b91b2cb"
   },
   {
     "title": "Gefüllte Paprika mit Hackfleisch",
@@ -1273,7 +1305,8 @@
       "protein_g": 35,
       "carbohydrates_g": 28,
       "fat_g": 34
-    }
+    },
+    "id": "2a278182-1fea-425d-b78c-ba22b560360d"
   },
   {
     "title": "Putengeschnetzeltes mit Champignons",
@@ -1311,7 +1344,8 @@
       "protein_g": 47,
       "carbohydrates_g": 9,
       "fat_g": 30
-    }
+    },
+    "id": "2d65492a-d716-4a3b-a9c9-5cd24ac69b99"
   },
   {
     "title": "Rindersteak mit Ofenkartoffeln",
@@ -1345,7 +1379,8 @@
       "protein_g": 42,
       "carbohydrates_g": 30,
       "fat_g": 40
-    }
+    },
+    "id": "1bceaad1-9803-417a-a60c-f1010eee529d"
   },
   {
     "title": "Chicken Caesar Wrap",
@@ -1381,7 +1416,8 @@
       "protein_g": 32,
       "carbohydrates_g": 30,
       "fat_g": 28
-    }
+    },
+    "id": "d1923d3a-6916-4e99-8bb2-363cf3f100eb"
   },
   {
     "title": "Hackbällchen in Tomatensauce",
@@ -1418,7 +1454,8 @@
       "protein_g": 36,
       "carbohydrates_g": 18,
       "fat_g": 38
-    }
+    },
+    "id": "d49b9c41-c14c-441c-bcc7-8f70e0af9f60"
   },
   {
     "title": "Hähnchensalat mit Avocado",
@@ -1456,7 +1493,8 @@
       "protein_g": 32,
       "carbohydrates_g": 9,
       "fat_g": 28
-    }
+    },
+    "id": "6d082736-1146-4d63-89f2-45c0369431a6"
   },
   {
     "title": "Würzige Hähnchenpfanne mit Paprika",
@@ -1493,7 +1531,8 @@
       "protein_g": 40,
       "carbohydrates_g": 10,
       "fat_g": 28
-    }
+    },
+    "id": "f89d2346-23ed-4447-b7c6-ac3c1dc17191"
   },
   {
     "title": "Schweinefilet mit Kräuterkruste",
@@ -1531,7 +1570,8 @@
       "protein_g": 45,
       "carbohydrates_g": 4,
       "fat_g": 32
-    }
+    },
+    "id": "c9b3adb1-3de1-441d-bf67-cb2ee115a0c0"
   },
   {
     "title": "Hähnchencurry mit Reis",
@@ -1568,7 +1608,8 @@
       "protein_g": 38,
       "carbohydrates_g": 48,
       "fat_g": 30
-    }
+    },
+    "id": "a994584b-277f-4cac-bd4f-c74c1d16ae76"
   },
   {
     "title": "Hähnchenschenkel mit Süßkartoffeln",
@@ -1603,7 +1644,8 @@
       "protein_g": 34,
       "carbohydrates_g": 30,
       "fat_g": 38
-    }
+    },
+    "id": "32eb1ff9-76bc-4499-b9b0-eee199e0d716"
   },
   {
     "title": "Frikadellen mit Kartoffelpüree",
@@ -1641,7 +1683,8 @@
       "protein_g": 35,
       "carbohydrates_g": 38,
       "fat_g": 40
-    }
+    },
+    "id": "f78ea8d6-ceb0-4035-968e-23ed429e0800"
   },
   {
     "title": "Putensteak mit Grillgemüse",
@@ -1678,7 +1721,8 @@
       "protein_g": 42,
       "carbohydrates_g": 12,
       "fat_g": 24
-    }
+    },
+    "id": "a5d8865e-966c-46e0-9d9e-b8c356c8d081"
   },
   {
     "title": "Hähnchen-Gemüse-Wok",
@@ -1713,7 +1757,8 @@
       "protein_g": 38,
       "carbohydrates_g": 18,
       "fat_g": 28
-    }
+    },
+    "id": "9d421e11-9cfe-4c6c-8c0a-a6b88add6ddb"
   },
   {
     "title": "Lachsfilet mit Zitronen-Dill-Soße",
@@ -1752,7 +1797,8 @@
       "protein_g": 38,
       "carbohydrates_g": 8,
       "fat_g": 36
-    }
+    },
+    "id": "f72b2cc4-cc3d-46a0-a523-ed8390e4eb05"
   },
   {
     "title": "Fischcurry mit Kokosmilch",
@@ -1793,7 +1839,8 @@
       "protein_g": 34,
       "carbohydrates_g": 15,
       "fat_g": 30
-    }
+    },
+    "id": "48f8b685-b7dc-4ee3-937b-3bc06a63164f"
   },
   {
     "title": "Thunfischsalat mit weißen Bohnen",
@@ -1833,7 +1880,8 @@
       "protein_g": 28,
       "carbohydrates_g": 15,
       "fat_g": 18
-    }
+    },
+    "id": "cebc4261-1729-492a-9e56-51efe1cfbbbe"
   },
   {
     "title": "Forelle Müllerin Art",
@@ -1868,7 +1916,8 @@
       "protein_g": 40,
       "carbohydrates_g": 8,
       "fat_g": 36
-    }
+    },
+    "id": "b32c25ac-8f1c-4f3a-820d-f81648416f15"
   },
   {
     "title": "Ofenlachs mit Kräuterkruste",
@@ -1905,7 +1954,8 @@
       "protein_g": 36,
       "carbohydrates_g": 12,
       "fat_g": 32
-    }
+    },
+    "id": "58586e50-f2e0-49cd-9d96-153f18e66ef5"
   },
   {
     "title": "Gebratene Garnelen mit Knoblauch und Chili",
@@ -1946,7 +1996,8 @@
       "protein_g": 28,
       "carbohydrates_g": 2,
       "fat_g": 22
-    }
+    },
+    "id": "8a7c21ab-1716-4344-9d21-e9ff4042450c"
   },
   {
     "title": "Fischfrikadellen mit Kartoffelstampf",
@@ -1987,7 +2038,8 @@
       "protein_g": 34,
       "carbohydrates_g": 40,
       "fat_g": 28
-    }
+    },
+    "id": "272a1567-3c0a-461a-ba0f-9273ef6deec3"
   },
   {
     "title": "Thunfisch-Pasta mit Tomaten und Oliven",
@@ -2027,7 +2079,8 @@
       "protein_g": 32,
       "carbohydrates_g": 45,
       "fat_g": 28
-    }
+    },
+    "id": "c8d9fdeb-c36d-4a8c-9a47-384aa91e3f5c"
   },
   {
     "title": "Gebratener Zander auf Linsengemüse",
@@ -2068,7 +2121,8 @@
       "protein_g": 38,
       "carbohydrates_g": 22,
       "fat_g": 30
-    }
+    },
+    "id": "e6ec97b7-0c48-48c4-9253-77934cd01f29"
   },
   {
     "title": "Fischstäbchen-Bowl mit Quinoa und Gemüse",
@@ -2107,7 +2161,8 @@
       "protein_g": 30,
       "carbohydrates_g": 38,
       "fat_g": 32
-    }
+    },
+    "id": "f0471a6b-bf8e-4d79-a2df-25e1f0a01434"
   },
   {
     "title": "Lachs-Spinat-Lasagne",
@@ -2147,7 +2202,8 @@
       "protein_g": 34,
       "carbohydrates_g": 42,
       "fat_g": 32
-    }
+    },
+    "id": "6d7c9f38-8120-4eb5-b33f-ec3bf62976eb"
   },
   {
     "title": "Makrelenaufstrich mit Frischkäse",
@@ -2183,7 +2239,8 @@
       "protein_g": 20,
       "carbohydrates_g": 3,
       "fat_g": 28
-    }
+    },
+    "id": "a71acfc2-69d4-4d34-a456-fea1d23c498e"
   },
   {
     "title": "Gebratene Sardinen mit Zitronenöl",
@@ -2219,7 +2276,8 @@
       "protein_g": 32,
       "carbohydrates_g": 1,
       "fat_g": 30
-    }
+    },
+    "id": "fb2bbbbe-b663-4bff-a93a-795fd904381b"
   },
   {
     "title": "Zitronen-Kräuter-Forelle im Ofen",
@@ -2256,7 +2314,8 @@
       "protein_g": 36,
       "carbohydrates_g": 4,
       "fat_g": 32
-    }
+    },
+    "id": "65d63001-2057-4d0e-aeec-51ed85d937d2"
   },
   {
     "title": "Fisch-Tacos mit Rotkohl und Limette",
@@ -2296,7 +2355,8 @@
       "protein_g": 32,
       "carbohydrates_g": 30,
       "fat_g": 30
-    }
+    },
+    "id": "a02077f3-f179-4020-abd9-7f9bd4947a82"
   },
   {
     "title": "Zucchini-Nudeln mit Avocado-Pesto",
@@ -2337,7 +2397,8 @@
       "protein_g": 8,
       "carbohydrates_g": 10,
       "fat_g": 40
-    }
+    },
+    "id": "d56c3bd6-33a1-4ade-ada2-be3d60c34d67"
   },
   {
     "title": "Keto-Hähnchenbrust mit Brokkoli und Käse",
@@ -2376,7 +2437,8 @@
       "protein_g": 48,
       "carbohydrates_g": 9,
       "fat_g": 34
-    }
+    },
+    "id": "682dd7dd-4ed2-450b-8125-4d15e1a97184"
   },
   {
     "title": "Keto-Lachs auf Spinatbett",
@@ -2415,7 +2477,8 @@
       "protein_g": 42,
       "carbohydrates_g": 7,
       "fat_g": 36
-    }
+    },
+    "id": "8812a80e-55e3-4291-87ee-5dc7084cbab3"
   },
   {
     "title": "Eiersalat mit Speck und Schnittlauch",
@@ -2455,7 +2518,8 @@
       "protein_g": 22,
       "carbohydrates_g": 3,
       "fat_g": 44
-    }
+    },
+    "id": "ac144bff-ffc7-4c57-91b8-622a28d502f8"
   },
   {
     "title": "Zucchini-Pizza mit Mozzarella",
@@ -2494,7 +2558,8 @@
       "protein_g": 20,
       "carbohydrates_g": 8,
       "fat_g": 34
-    }
+    },
+    "id": "aa15637a-5ef0-46d6-9b6c-f595149f5f6d"
   },
   {
     "title": "Keto-Rührei mit Champignons",
@@ -2532,7 +2597,8 @@
       "protein_g": 20,
       "carbohydrates_g": 4,
       "fat_g": 32
-    }
+    },
+    "id": "f8a6c030-a0d5-487f-b7a3-ab1e534ce6ac"
   },
   {
     "title": "Keto-Burger mit Salat statt Brötchen",
@@ -2572,7 +2638,8 @@
       "protein_g": 36,
       "carbohydrates_g": 5,
       "fat_g": 44
-    }
+    },
+    "id": "510dc2bb-67fe-4731-94bf-826929817531"
   },
   {
     "title": "Auberginen-Röllchen mit Frischkäsefüllung",
@@ -2610,7 +2677,8 @@
       "protein_g": 10,
       "carbohydrates_g": 6,
       "fat_g": 30
-    }
+    },
+    "id": "8abceec9-c6a9-40fb-8d5a-ac0a4ac48b57"
   },
   {
     "title": "Blumenkohlreis mit Hähnchen",
@@ -2649,7 +2717,8 @@
       "protein_g": 42,
       "carbohydrates_g": 9,
       "fat_g": 28
-    }
+    },
+    "id": "b7d00961-40c6-42dc-863f-a675d73902c5"
   },
   {
     "title": "Keto-Omelette mit Käse und Spinat",
@@ -2688,7 +2757,8 @@
       "protein_g": 24,
       "carbohydrates_g": 5,
       "fat_g": 32
-    }
+    },
+    "id": "6ceca33e-d16e-4b3e-9ad7-5408d17211c5"
   },
   {
     "title": "Thunfisch-Avocado-Salat",
@@ -2725,7 +2795,8 @@
       "protein_g": 22,
       "carbohydrates_g": 4,
       "fat_g": 30
-    }
+    },
+    "id": "44a85497-81c5-40e9-ada2-2bb2dcd3e34f"
   },
   {
     "title": "Gefüllte Paprika mit Hack und Feta",
@@ -2765,7 +2836,8 @@
       "protein_g": 38,
       "carbohydrates_g": 8,
       "fat_g": 40
-    }
+    },
+    "id": "b4711cb5-05ce-4105-97b7-0f3ebc0369fa"
   },
   {
     "title": "Keto-Pfannkuchen mit Frischkäsefüllung",
@@ -2801,7 +2873,8 @@
       "protein_g": 14,
       "carbohydrates_g": 4,
       "fat_g": 28
-    }
+    },
+    "id": "c5a646c5-3386-41a8-9337-59d1e99a8b6f"
   },
   {
     "title": "Mozzarella-Tomaten-Auflauf mit Pesto",
@@ -2841,7 +2914,8 @@
       "protein_g": 18,
       "carbohydrates_g": 6,
       "fat_g": 36
-    }
+    },
+    "id": "0dba31ce-271c-4b67-b8b5-8f6a956fc153"
   },
   {
     "title": "Keto-Suppe mit Lachs und Kokosmilch",
@@ -2881,7 +2955,8 @@
       "protein_g": 30,
       "carbohydrates_g": 8,
       "fat_g": 40
-    }
+    },
+    "id": "094f1bdd-49ab-4870-bb2f-35c8a52a30dd"
   },
   {
     "title": "Rindergeschnetzeltes mit Paprika",
@@ -2923,7 +2998,8 @@
       "protein_g": 40,
       "carbohydrates_g": 12,
       "fat_g": 42
-    }
+    },
+    "id": "0f6bfec4-fe37-4fb5-92a8-369badc912f6"
   },
   {
     "title": "Hähnchen-Curry mit Kokosmilch",
@@ -2961,7 +3037,8 @@
       "protein_g": 38,
       "carbohydrates_g": 10,
       "fat_g": 36
-    }
+    },
+    "id": "7e4660c6-8774-433e-88ec-50b98b6ae207"
   },
   {
     "title": "Gefüllte Hähnchenbrust mit Spinat und Käse",
@@ -2998,7 +3075,8 @@
       "protein_g": 46,
       "carbohydrates_g": 4,
       "fat_g": 34
-    }
+    },
+    "id": "81c2e318-066c-4d75-99c7-62492b12ca86"
   },
   {
     "title": "Hackfleischpfanne mit Gemüse",
@@ -3039,7 +3117,8 @@
       "protein_g": 36,
       "carbohydrates_g": 10,
       "fat_g": 30
-    }
+    },
+    "id": "fc0c0d8b-3b10-46d4-9f49-f7e8542049fd"
   },
   {
     "title": "Klassisches Gulasch",
@@ -3079,7 +3158,8 @@
       "protein_g": 46,
       "carbohydrates_g": 8,
       "fat_g": 40
-    }
+    },
+    "id": "e4656226-ee9c-48da-890c-ca944fdcbbb8"
   },
   {
     "title": "Hackfleisch-Zucchini-Röllchen",
@@ -3118,7 +3198,8 @@
       "protein_g": 34,
       "carbohydrates_g": 6,
       "fat_g": 32
-    }
+    },
+    "id": "917d8229-193d-475d-aa86-71f2aa001eef"
   },
   {
     "title": "Chicken Wings aus dem Ofen",
@@ -3154,7 +3235,8 @@
       "protein_g": 36,
       "carbohydrates_g": 1,
       "fat_g": 48
-    }
+    },
+    "id": "865c695a-9d21-4ceb-be19-a68b2444ea91"
   },
   {
     "title": "Cevapcici mit Ajvar und Zwiebeln",
@@ -3192,7 +3274,8 @@
       "protein_g": 32,
       "carbohydrates_g": 4,
       "fat_g": 42
-    }
+    },
+    "id": "f056d129-2e55-4ebb-b191-d8a578704938"
   },
   {
     "title": "Putenstreifen in Champignonrahm",
@@ -3231,7 +3314,8 @@
       "protein_g": 42,
       "carbohydrates_g": 6,
       "fat_g": 36
-    }
+    },
+    "id": "d0b91a13-2bef-4fa6-99cb-3215fa936eb8"
   },
   {
     "title": "Hackbällchen in Tomatensauce",
@@ -3270,7 +3354,8 @@
       "protein_g": 38,
       "carbohydrates_g": 10,
       "fat_g": 40
-    }
+    },
+    "id": "1c1d0543-7396-4561-9bfc-5f180207a583"
   },
   {
     "title": "Schweinemedaillons mit Kräuterbutter",
@@ -3304,7 +3389,8 @@
       "protein_g": 38,
       "carbohydrates_g": 2,
       "fat_g": 38
-    }
+    },
+    "id": "f25a177c-b355-44d3-823c-2ef57ce75f84"
   },
   {
     "title": "Frikadellen mit Zucchinigemüse",
@@ -3342,7 +3428,8 @@
       "protein_g": 34,
       "carbohydrates_g": 7,
       "fat_g": 42
-    }
+    },
+    "id": "94901095-0ac3-43f2-b133-bf772d4db818"
   },
   {
     "title": "Puten-Gemüse-Wok",
@@ -3379,7 +3466,8 @@
       "protein_g": 40,
       "carbohydrates_g": 8,
       "fat_g": 28
-    }
+    },
+    "id": "209b957d-fae9-4a24-bff3-44a89aabfb19"
   },
   {
     "title": "Leberkäse mit Spiegelei",
@@ -3411,7 +3499,8 @@
       "protein_g": 30,
       "carbohydrates_g": 3,
       "fat_g": 42
-    }
+    },
+    "id": "2baa73a0-4321-4ad4-b4eb-a87e5c9d096e"
   },
   {
     "title": "Schaschlikspieße mit Paprika und Zwiebel",
@@ -3448,7 +3537,8 @@
       "protein_g": 38,
       "carbohydrates_g": 6,
       "fat_g": 44
-    }
+    },
+    "id": "2552d92a-f245-436a-aa30-7a9f415fae1a"
   },
   {
     "title": "Zucchini-Spaghetti mit Avocado-Creme",
@@ -3488,7 +3578,8 @@
       "protein_g": 6,
       "carbohydrates_g": 14,
       "fat_g": 32
-    }
+    },
+    "id": "32318522-1885-46a8-acaa-a01fcc2c4726"
   },
   {
     "title": "Rohkost-Bowl mit Cashew-Dressing",
@@ -3528,7 +3619,8 @@
       "protein_g": 9,
       "carbohydrates_g": 22,
       "fat_g": 30
-    }
+    },
+    "id": "348a3ce6-8799-48d7-9ce3-91560472e830"
   },
   {
     "title": "Gefüllte Paprika mit Mandelmus",
@@ -3566,7 +3658,8 @@
       "protein_g": 8,
       "carbohydrates_g": 10,
       "fat_g": 30
-    }
+    },
+    "id": "425a37f0-a35f-4805-86cd-02aac1e9e68c"
   },
   {
     "title": "Rohes Porridge mit Chiasamen",
@@ -3604,7 +3697,8 @@
       "protein_g": 9,
       "carbohydrates_g": 28,
       "fat_g": 28
-    }
+    },
+    "id": "0069a5a6-fe17-42ab-b348-a330cc0ad20c"
   },
   {
     "title": "Zucchini-Carpaccio mit Walnüssen",
@@ -3642,7 +3736,8 @@
       "protein_g": 6,
       "carbohydrates_g": 8,
       "fat_g": 26
-    }
+    },
+    "id": "dd233e50-e814-48ed-bfd4-92180ba6f755"
   },
   {
     "title": "Rohkost-Wraps mit Mandelcreme",
@@ -3682,7 +3777,8 @@
       "protein_g": 7,
       "carbohydrates_g": 12,
       "fat_g": 28
-    }
+    },
+    "id": "5f5454ea-4c1d-4100-9685-406ec1b44ae3"
   },
   {
     "title": "Rohkost-Sushi mit Nussreis",
@@ -3722,7 +3818,8 @@
       "protein_g": 10,
       "carbohydrates_g": 16,
       "fat_g": 32
-    }
+    },
+    "id": "81088e07-cb41-4e43-b2f0-5a770b0a78f9"
   },
   {
     "title": "Fenchel-Orangen-Salat mit Walnüssen",
@@ -3760,7 +3857,8 @@
       "protein_g": 5,
       "carbohydrates_g": 20,
       "fat_g": 22
-    }
+    },
+    "id": "c770c3c1-897c-48bc-b9ce-0ef53a057afc"
   },
   {
     "title": "Karotten-Apfel-Salat mit Sesam",
@@ -3797,7 +3895,8 @@
       "protein_g": 3,
       "carbohydrates_g": 24,
       "fat_g": 16
-    }
+    },
+    "id": "92b3fa13-ff3a-4b47-b9fd-efe4ce6d0115"
   },
   {
     "title": "Rohkost-Lasagne mit Cashewcreme",
@@ -3836,7 +3935,8 @@
       "protein_g": 11,
       "carbohydrates_g": 20,
       "fat_g": 32
-    }
+    },
+    "id": "45a524c9-1b64-458c-b696-c0f82f48316f"
   },
   {
     "title": "Rohes Schoko-Bananen-Dessert",
@@ -3872,7 +3972,8 @@
       "protein_g": 5,
       "carbohydrates_g": 28,
       "fat_g": 26
-    }
+    },
+    "id": "70291a37-c264-4fe0-be2d-202e7613576a"
   },
   {
     "title": "Avocado-Gurken-Suppe (kalt)",
@@ -3909,7 +4010,8 @@
       "protein_g": 4,
       "carbohydrates_g": 8,
       "fat_g": 28
-    }
+    },
+    "id": "5926fbcd-876a-48cb-8535-e0ae611ea071"
   },
   {
     "title": "Wassermelonen-Feta-Salat (Rohkost-Variante)",
@@ -3944,7 +4046,8 @@
       "protein_g": 6,
       "carbohydrates_g": 18,
       "fat_g": 16
-    }
+    },
+    "id": "f36fd0ee-262b-421c-a47c-86e00553bc39"
   },
   {
     "title": "Rohkost-Energiekugeln mit Kakao",
@@ -3980,7 +4083,8 @@
       "protein_g": 5,
       "carbohydrates_g": 25,
       "fat_g": 20
-    }
+    },
+    "id": "c23f16ce-0ce3-4c06-a0f2-7090de7be183"
   },
   {
     "title": "Rohes Bircher Müsli",
@@ -4016,7 +4120,8 @@
       "protein_g": 8,
       "carbohydrates_g": 32,
       "fat_g": 20
-    }
+    },
+    "id": "856dc0af-77e4-432d-be5c-90b928cf43a8"
   },
   {
     "title": "Gefüllte Paprika mit Hackfleisch",
@@ -4057,7 +4162,8 @@
       "protein_g": 38,
       "carbohydrates_g": 10,
       "fat_g": 34
-    }
+    },
+    "id": "599d3ca6-8d6a-44b9-b91b-0681de9454e4"
   },
   {
     "title": "Süßkartoffelpfanne mit Spinat und Ei",
@@ -4095,7 +4201,8 @@
       "protein_g": 17,
       "carbohydrates_g": 35,
       "fat_g": 28
-    }
+    },
+    "id": "85fafa23-31ec-4e2f-b00d-ad86dec64886"
   },
   {
     "title": "Lachsfilet mit Brokkoli und Zitrone",
@@ -4131,7 +4238,8 @@
       "protein_g": 38,
       "carbohydrates_g": 8,
       "fat_g": 36
-    }
+    },
+    "id": "1b786dc5-574d-4f0e-b15f-abe1af927a6c"
   },
   {
     "title": "Quinoasalat mit Gemüse",
@@ -4172,7 +4280,8 @@
       "protein_g": 13,
       "carbohydrates_g": 40,
       "fat_g": 20
-    }
+    },
+    "id": "25907362-e4f4-4bda-949a-a4e51a2866b8"
   },
   {
     "title": "Rührei mit Paprika und Tomate",
@@ -4208,7 +4317,8 @@
       "protein_g": 22,
       "carbohydrates_g": 5,
       "fat_g": 30
-    }
+    },
+    "id": "f86d3ab2-13d4-45a4-b3fa-995527bbe862"
   },
   {
     "title": "Zucchinipuffer mit Quarkdip",
@@ -4246,7 +4356,8 @@
       "protein_g": 24,
       "carbohydrates_g": 10,
       "fat_g": 26
-    }
+    },
+    "id": "1f45fada-8730-4aaa-ad00-15c5c52df4fa"
   },
   {
     "title": "Gefüllte Aubergine mit Hackfleisch",
@@ -4283,7 +4394,8 @@
       "protein_g": 36,
       "carbohydrates_g": 10,
       "fat_g": 36
-    }
+    },
+    "id": "142d7738-1e1a-4c0f-adcf-810231f591e6"
   },
   {
     "title": "Linsensuppe mit Möhren",
@@ -4322,7 +4434,8 @@
       "protein_g": 24,
       "carbohydrates_g": 38,
       "fat_g": 12
-    }
+    },
+    "id": "c8a7d0a2-8849-4b5c-a224-67febcd51b9b"
   },
   {
     "title": "Reisnudelsalat mit Sesam-Dressing",
@@ -4361,7 +4474,8 @@
       "protein_g": 9,
       "carbohydrates_g": 45,
       "fat_g": 18
-    }
+    },
+    "id": "008c1a71-4527-4765-b62f-902b135b553b"
   },
   {
     "title": "Frühstücks-Bowl mit Beeren und Nüssen",
@@ -4395,7 +4509,8 @@
       "protein_g": 10,
       "carbohydrates_g": 22,
       "fat_g": 24
-    }
+    },
+    "id": "165f235f-e641-41a7-8f4c-34a013659ee7"
   },
   {
     "title": "Hähnchenbrust mit Ofengemüse",
@@ -4433,7 +4548,8 @@
       "protein_g": 42,
       "carbohydrates_g": 10,
       "fat_g": 30
-    }
+    },
+    "id": "2cf1a35b-703b-4460-a7ea-86bbbcf3d32d"
   },
   {
     "title": "Blumenkohlreis mit Gemüsepfanne",
@@ -4471,7 +4587,8 @@
       "protein_g": 10,
       "carbohydrates_g": 20,
       "fat_g": 22
-    }
+    },
+    "id": "91881418-ab9c-43f9-bb54-41566ff98e5a"
   },
   {
     "title": "Kichererbsen-Curry mit Kokosmilch",
@@ -4509,7 +4626,8 @@
       "protein_g": 16,
       "carbohydrates_g": 36,
       "fat_g": 34
-    }
+    },
+    "id": "040c602b-534c-4978-b300-1dedea0c6462"
   },
   {
     "title": "Maispfannkuchen mit Guacamole",
@@ -4547,7 +4665,8 @@
       "protein_g": 11,
       "carbohydrates_g": 30,
       "fat_g": 26
-    }
+    },
+    "id": "86ca6f46-0052-4599-b517-541840ae4087"
   },
   {
     "title": "Reis mit gebratenem Tofu und Gemüse",
@@ -4585,7 +4704,8 @@
       "protein_g": 22,
       "carbohydrates_g": 42,
       "fat_g": 26
-    }
+    },
+    "id": "ab51ba57-d947-4f8d-9904-758b45aa89dd"
   },
   {
     "title": "Spaghetti Carbonara",
@@ -4621,7 +4741,8 @@
       "protein_g": 28,
       "carbohydrates_g": 60,
       "fat_g": 40
-    }
+    },
+    "id": "6ba4afe3-5b9d-4352-bc28-6e15435b482c"
   },
   {
     "title": "Hähnchenschenkel mit Kartoffelspalten",
@@ -4656,7 +4777,8 @@
       "protein_g": 45,
       "carbohydrates_g": 30,
       "fat_g": 38
-    }
+    },
+    "id": "074a6736-0b8d-43aa-892e-081fa121972f"
   },
   {
     "title": "Rührei mit Schinken und Käse",
@@ -4691,7 +4813,8 @@
       "protein_g": 32,
       "carbohydrates_g": 3,
       "fat_g": 38
-    }
+    },
+    "id": "69c59e16-5b55-462a-8992-4654ff36c8be"
   },
   {
     "title": "Thunfischsalat mit Ei",
@@ -4729,7 +4852,8 @@
       "protein_g": 32,
       "carbohydrates_g": 5,
       "fat_g": 24
-    }
+    },
+    "id": "2118797a-48c4-4020-9c18-e17e6465c50c"
   },
   {
     "title": "Reispfanne mit Hähnchen und Erbsen",
@@ -4765,7 +4889,8 @@
       "protein_g": 38,
       "carbohydrates_g": 42,
       "fat_g": 20
-    }
+    },
+    "id": "fd43cd37-b48e-4732-b26a-cd69c9532488"
   },
   {
     "title": "Bauernfrühstück mit Speck und Kartoffeln",
@@ -4802,7 +4927,8 @@
       "protein_g": 26,
       "carbohydrates_g": 35,
       "fat_g": 40
-    }
+    },
+    "id": "8180e474-3c73-466f-8e5e-aa2a8fe4387e"
   },
   {
     "title": "Currywurst mit Pommes aus dem Ofen",
@@ -4840,7 +4966,8 @@
       "protein_g": 28,
       "carbohydrates_g": 50,
       "fat_g": 48
-    }
+    },
+    "id": "06f57917-3405-42a1-aed4-486ac8e3916c"
   },
   {
     "title": "Penne mit Thunfisch-Tomaten-Sauce",
@@ -4876,7 +5003,8 @@
       "protein_g": 34,
       "carbohydrates_g": 50,
       "fat_g": 28
-    }
+    },
+    "id": "0dee8ee7-e43d-46fc-9d50-89b585f83aaa"
   },
   {
     "title": "Linsensalat mit Schafskäse",
@@ -4912,7 +5040,8 @@
       "protein_g": 22,
       "carbohydrates_g": 32,
       "fat_g": 22
-    }
+    },
+    "id": "296af97f-c03f-457f-b1fa-0488eecde846"
   },
   {
     "title": "Rindergeschnetzeltes mit Paprika",
@@ -4947,7 +5076,8 @@
       "protein_g": 36,
       "carbohydrates_g": 10,
       "fat_g": 38
-    }
+    },
+    "id": "d3a71a7a-8558-4060-b6cc-653e44d30e0f"
   },
   {
     "title": "Tortilla mit Schinken und Käse",
@@ -4981,7 +5111,8 @@
       "protein_g": 22,
       "carbohydrates_g": 28,
       "fat_g": 30
-    }
+    },
+    "id": "2f84157c-3a6d-458e-9a6b-4d5e459e82d1"
   },
   {
     "title": "Bratkartoffeln mit Spiegelei",
@@ -5015,7 +5146,8 @@
       "protein_g": 14,
       "carbohydrates_g": 45,
       "fat_g": 30
-    }
+    },
+    "id": "920ee7ed-a047-42fb-9334-5f66d1f21289"
   },
   {
     "title": "Schinken-Käse-Toast",
@@ -5046,7 +5178,8 @@
       "protein_g": 18,
       "carbohydrates_g": 28,
       "fat_g": 22
-    }
+    },
+    "id": "5e3a70aa-44ef-4f2e-b55f-6cce0d1dd83f"
   },
   {
     "title": "Lachs mit Kräuterkruste",
@@ -5080,7 +5213,8 @@
       "protein_g": 36,
       "carbohydrates_g": 10,
       "fat_g": 38
-    }
+    },
+    "id": "50c216a3-dbf1-428c-9142-46b539bf4201"
   },
   {
     "title": "Nudelsalat mit Würstchen",
@@ -5115,6 +5249,7 @@
       "protein_g": 22,
       "carbohydrates_g": 45,
       "fat_g": 34
-    }
+    },
+    "id": "2aa318ae-7a7b-4501-aed3-eae5cd5f2cf3"
   }
 ]
