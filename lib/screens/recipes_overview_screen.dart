@@ -72,35 +72,105 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       backgroundColor: const Color(0xFF122620),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          // Bild
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                'assets/${widget.recipe.image}',
-                height: 250,
-                width: double.infinity,
-                fit: BoxFit.cover,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: Image.asset(
+                    'assets/${widget.recipe.image}',
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          // Meta
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Portionen: ${widget.recipe.portions}',
-                  style: const TextStyle(color: Colors.white, fontSize: 16)),
-              Text('Dauer: ${widget.recipe.preparationTime}',
-                  style: const TextStyle(color: Colors.white, fontSize: 16)),
-            ],
-          ),
-          const SizedBox(height: 20),
-          // Zutaten
-          const Text('Zutaten',
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Portionen: ${widget.recipe.portions}',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                Text(
+                  'Dauer: ${widget.recipe.preparationTime}',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Zutaten',
               style: TextStyle(
-                  color: Colors.greenAccent,
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            ...widget.recipe.ingredients.map(
+              (ingredient) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Text(
+                  '• $ingredient',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Zubereitung',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            ...widget.recipe.instructions.map(
+              (step) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6.0),
+                child: Text(
+                  step,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Nährwerte (pro Portion)',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Kalorien: ${widget.recipe.calories} kcal',
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            Text(
+              'Protein: ${widget.recipe.proteinG} g',
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            Text(
+              'Kohlenhydrate: ${widget.recipe.carbohydratesG} g',
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            Text(
+              'Fett: ${widget.recipe.fatG} g',
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 30),
+            const Divider(color: Colors.white54),
+            const Text(
+              'Kommentare',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 22,
                   fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
@@ -160,22 +230,47 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   trailing: Text(
                       '${comment.timestamp.day.toString().padLeft(2, '0')}.${comment.timestamp.month.toString().padLeft(2, '0')}.${comment.timestamp.year} – ${comment.timestamp.hour.toString().padLeft(2, '0')}:${comment.timestamp.minute.toString().padLeft(2, '0')}',
                       style:
-                          const TextStyle(color: Colors.white60, fontSize: 12)),
-                )),
-
-          const SizedBox(height: 10),
-          Row(children: [
-            Expanded(
-              child: TextField(
-                controller: commentController,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  hintText: 'Kommentar schreiben...',
-                  hintStyle: TextStyle(color: Colors.white54),
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.greenAccent)),
+                          const TextStyle(color: Colors.white60, fontSize: 12),
+                    ),
+                  )),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: commentController,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                      hintText: 'Kommentar schreiben...',
+                      hintStyle: TextStyle(color: Colors.white54),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                IconButton(
+                  icon: const Icon(Icons.send,
+                      color: Color.fromARGB(255, 255, 255, 255)),
+                  onPressed: () async {
+                    if (commentController.text.trim().isEmpty) return;
+
+                    final newComment = Comment(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      userId: 'user_1',
+                      username: 'Max', // später dynamisch vom eingeloggten User
+                      text: commentController.text.trim(),
+                      timestamp: DateTime.now(),
+                    );
+
+                    await addComment(newComment);
+                    commentController.clear();
+                    await loadRecipeComments();
+                  },
+                )
+              ],
             ),
             IconButton(
               icon: const Icon(Icons.send, color: Colors.greenAccent),

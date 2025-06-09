@@ -75,8 +75,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Profil aktualisiert'),
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF2E6B4D),
+          content: Text(
+            'Profil aktualisiert',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       );
       Navigator.pop(context);
@@ -210,6 +213,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
+                  dropdownColor: Colors.white,
                   value: _selectedKitchen,
                   style: const TextStyle(color: Colors.black),
                   items: _kitchenOptions

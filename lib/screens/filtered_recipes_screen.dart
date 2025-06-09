@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
-import 'recipes_overview_screen.dart'; // Damit wir auf die Detailseite navigieren können!
+import 'recipes_overview_screen.dart'; // Für Navigation zur Detailseite
 
 class FilteredRecipesScreen extends StatelessWidget {
   final String selectedDiet;
@@ -25,9 +25,9 @@ class FilteredRecipesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF122620),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Gefundene Rezepte',
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xFF122620),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -62,6 +62,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
+                    elevation: 4,
                     margin: const EdgeInsets.only(bottom: 20),
                     child: Row(
                       children: [
@@ -70,21 +71,43 @@ class FilteredRecipesScreen extends StatelessWidget {
                             topLeft: Radius.circular(16),
                             bottomLeft: Radius.circular(16),
                           ),
-                          child: Image.asset(
-                            'assets/${recipe.image}',
-                            height: 100,
+                          child: SizedBox(
                             width: 100,
-                            fit: BoxFit.cover,
+                            height: 150,
+                            child: AspectRatio(
+                              aspectRatio: 2 / 3,
+                              child: Image.asset(
+                                'assets/${recipe.image}',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Text(
-                            recipe.title,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF122620),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  recipe.title,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF122620),
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  '${recipe.portions} Portionen • ${recipe.preparationTime}',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
