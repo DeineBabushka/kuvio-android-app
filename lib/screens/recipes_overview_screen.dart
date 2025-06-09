@@ -62,11 +62,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  'assets/${widget.recipe.image}',
-                  height: 250,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: Image.asset(
+                    'assets/${widget.recipe.image}',
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
@@ -186,12 +187,16 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       hintText: 'Kommentar schreiben...',
                       hintStyle: TextStyle(color: Colors.white54),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send, color: Color.fromARGB(255, 255, 255, 255)),
+                  icon: const Icon(Icons.send,
+                      color: Color.fromARGB(255, 255, 255, 255)),
                   onPressed: () async {
                     if (commentController.text.trim().isEmpty) return;
 
@@ -205,7 +210,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
                     await addComment(newComment);
                     commentController.clear();
-                    await loadRecipeComments(); // neu laden
+                    await loadRecipeComments();
                   },
                 )
               ],
