@@ -88,7 +88,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             const Text(
               'Zutaten',
               style: TextStyle(
-                color: Colors.greenAccent,
+                color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -107,7 +107,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             const Text(
               'Zubereitung',
               style: TextStyle(
-                color: Colors.greenAccent,
+                color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -126,7 +126,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             const Text(
               'Nährwerte (pro Portion)',
               style: TextStyle(
-                color: Colors.greenAccent,
+                color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -153,7 +153,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             const Text(
               'Kommentare',
               style: TextStyle(
-                  color: Colors.greenAccent,
+                  color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 22,
                   fontWeight: FontWeight.bold),
             ),
@@ -186,12 +186,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       hintText: 'Kommentar schreiben...',
                       hintStyle: TextStyle(color: Colors.white54),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.greenAccent)),
+                          borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send, color: Colors.greenAccent),
+                  icon: const Icon(Icons.send, color: Color.fromARGB(255, 255, 255, 255)),
                   onPressed: () async {
                     if (commentController.text.trim().isEmpty) return;
 
