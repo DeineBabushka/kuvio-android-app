@@ -210,6 +210,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
+                  dropdownColor: Colors.white,
                   value: _selectedKitchen,
                   style: const TextStyle(color: Colors.black),
                   items: _kitchenOptions
