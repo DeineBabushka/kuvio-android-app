@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'filtered_recipes_screen.dart';
-import '../models/recipe.dart';
-import '../widgets/hamburger_menu.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:kuvio/screens/recipes_screen.dart';
 
 class StartScreen extends StatelessWidget {
