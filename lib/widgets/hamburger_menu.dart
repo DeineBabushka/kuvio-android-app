@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../screens/account_screen.dart';
 import '../screens/login_screen.dart';
 
+import '../screens/account_screen.dart';
+import '../screens/login_screen.dart';
+
 class HamburgerMenu extends StatelessWidget {
   const HamburgerMenu({super.key});
 
