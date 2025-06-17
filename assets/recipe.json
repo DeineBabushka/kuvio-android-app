@@ -32,7 +32,8 @@
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -154,6 +155,7 @@
       "8. Noch einmal abschmecken und heiß servieren."
     ],
     "diet_types": [
+      "Vegan",
       "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
@@ -234,13 +236,15 @@
       "6. Petersilie fein hacken und beim Servieren darüberstreuen."
     ],
     "diet_types": [
+      "Vegan",
       "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
       "Vorspeise",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Hauptgericht"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -320,7 +324,8 @@
     ],
     "categories": [
       "Vorspeise",
-      "Snack"
+      "Snack",
+      "Kalorienarm"
     ],
     "preparation_time": "25 Minuten",
     "nutrition": {
@@ -356,6 +361,7 @@
       "6. Optional pürieren oder stückig lassen."
     ],
     "diet_types": [
+      "Vegan",
       "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
@@ -397,13 +403,15 @@
       "6. Gut durchziehen lassen und kalt servieren."
     ],
     "diet_types": [
+      "Vegan",
       "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
       "Beilage",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Snack"
     ],
     "preparation_time": "25 Minuten",
     "nutrition": {
@@ -437,13 +445,15 @@
       "5. Rucola dazugeben, aufrollen und servieren."
     ],
     "diet_types": [
+      "Vegan",
       "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
       "Snack",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Hauptgericht"
     ],
     "preparation_time": "15 Minuten",
     "nutrition": {
@@ -479,6 +489,7 @@
     "diet_types": [
       "Vegetarisch",
       "Glutenfrei",
+      "Keto",
       "Omnivor"
     ],
     "categories": [
@@ -557,11 +568,13 @@
     "diet_types": [
       "Vegetarisch",
       "Glutenfrei",
+      "Keto",
       "Omnivor"
     ],
     "categories": [
       "Frühstück",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Hauptgericht"
     ],
     "preparation_time": "20 Minuten",
     "nutrition": {
@@ -597,11 +610,13 @@
     "diet_types": [
       "Vegetarisch",
       "Glutenfrei",
+      "Rohkost",
       "Omnivor"
     ],
     "categories": [
       "Beilage",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Vorspeise"
     ],
     "preparation_time": "15 Minuten",
     "nutrition": {
@@ -638,6 +653,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -680,6 +696,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -718,13 +735,14 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
-      "Rohkost",
       "Omnivor"
     ],
     "categories": [
       "Beilage",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Snack"
     ],
     "preparation_time": "25 Minuten",
     "nutrition": {
@@ -761,10 +779,12 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -800,12 +820,14 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
       "Vorspeise",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Hauptgericht"
     ],
     "preparation_time": "35 Minuten",
     "nutrition": {
@@ -839,6 +861,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -878,6 +901,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Keto",
       "Omnivor"
@@ -917,6 +941,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -954,6 +979,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -990,10 +1016,12 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
-      "Frühstück"
+      "Frühstück",
+      "Kalorienarm"
     ],
     "preparation_time": "10 Minuten",
     "nutrition": {
@@ -1027,13 +1055,15 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Keto",
       "Omnivor"
     ],
     "categories": [
       "Beilage",
-      "Snack"
+      "Snack",
+      "Kalorienarm"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -1067,6 +1097,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -1099,13 +1130,15 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Rohkost",
       "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
       "Beilage",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Snack"
     ],
     "preparation_time": "10 Minuten",
     "nutrition": {
@@ -1140,6 +1173,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -1173,13 +1207,15 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Keto",
       "Omnivor"
     ],
     "categories": [
       "Dessert",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Snack"
     ],
     "preparation_time": "5 Minuten + Kühlzeit",
     "nutrition": {
@@ -1219,7 +1255,8 @@
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "40 Minuten",
     "nutrition": {
@@ -1336,7 +1373,8 @@
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -1485,7 +1523,8 @@
     ],
     "categories": [
       "Salat",
-      "Kalorienarm"
+      "Kalorienarm",
+      "Hauptgericht"
     ],
     "preparation_time": "20 Minuten",
     "nutrition": {
@@ -1523,7 +1562,8 @@
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "25 Minuten",
     "nutrition": {
@@ -1636,7 +1676,8 @@
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "45 Minuten",
     "nutrition": {
@@ -1749,7 +1790,8 @@
       "Omnivor"
     ],
     "categories": [
-      "Hauptgericht"
+      "Hauptgericht",
+      "Kalorienarm"
     ],
     "preparation_time": "25 Minuten",
     "nutrition": {
@@ -1872,7 +1914,8 @@
     ],
     "categories": [
       "Salat",
-      "Beilage"
+      "Beilage",
+      "Snack"
     ],
     "preparation_time": "15 Minuten",
     "nutrition": {
@@ -2153,7 +2196,8 @@
     ],
     "categories": [
       "Hauptgericht",
-      "Bowl"
+      "Bowl",
+      "Snack"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -2231,7 +2275,8 @@
     ],
     "categories": [
       "Snack",
-      "Frühstück"
+      "Frühstück",
+      "Aufstrich"
     ],
     "preparation_time": "10 Minuten",
     "nutrition": {
@@ -2347,7 +2392,8 @@
     ],
     "categories": [
       "Snack",
-      "Hauptgericht"
+      "Hauptgericht",
+      "Streetfood"
     ],
     "preparation_time": "30 Minuten",
     "nutrition": {
@@ -3064,6 +3110,7 @@
     ],
     "diet_types": [
       "Fleisch",
+      "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
@@ -3416,6 +3463,7 @@
     ],
     "diet_types": [
       "Fleisch",
+      "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
@@ -3454,6 +3502,7 @@
     ],
     "diet_types": [
       "Fleisch",
+      "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
@@ -3525,6 +3574,7 @@
     ],
     "diet_types": [
       "Fleisch",
+      "Glutenfrei",
       "Omnivor"
     ],
     "categories": [
@@ -3565,6 +3615,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3607,6 +3658,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -3645,6 +3697,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3684,6 +3737,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3724,6 +3778,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -3764,6 +3819,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3805,6 +3861,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3844,6 +3901,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3923,6 +3981,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3960,6 +4019,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -3997,6 +4057,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4033,6 +4094,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4070,6 +4132,7 @@
     "diet_types": [
       "Rohkost",
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4421,6 +4484,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4574,6 +4638,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4614,6 +4679,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4692,6 +4758,7 @@
     ],
     "diet_types": [
       "Vegan",
+      "Vegetarisch",
       "Glutenfrei",
       "Omnivor"
     ],
@@ -4730,6 +4797,7 @@
       "7. Sofort servieren, mit extra Parmesan bestreuen."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -4766,6 +4834,7 @@
       "6. Vor dem Servieren mit frischen Kräutern garnieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -4802,6 +4871,7 @@
       "6. Sobald die gewünschte Konsistenz erreicht ist, mit Schnittlauch bestreuen und servieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -4840,6 +4910,7 @@
       "6. Gut durchziehen lassen oder sofort servieren."
     ],
     "diet_types": [
+      "Fisch",
       "Omnivor"
     ],
     "categories": [
@@ -4878,6 +4949,7 @@
       "6. Warm servieren, optional mit Frühlingszwiebeln garnieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -4915,6 +4987,7 @@
       "6. Mit Schnittlauch bestreuen und servieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -4954,6 +5027,7 @@
       "6. Mit Pommes servieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -4992,6 +5066,7 @@
       "5. Nudeln untermischen und servieren."
     ],
     "diet_types": [
+      "Fisch",
       "Omnivor"
     ],
     "categories": [
@@ -5028,6 +5103,7 @@
       "4. Mit Petersilie bestreuen und kalt servieren."
     ],
     "diet_types": [
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -5065,6 +5141,7 @@
       "5. Mit Beilage nach Wahl servieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -5100,6 +5177,7 @@
       "5. Halbieren und servieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -5135,6 +5213,7 @@
       "5. Alles zusammen servieren, mit Petersilie garnieren."
     ],
     "diet_types": [
+      "Vegetarisch",
       "Omnivor"
     ],
     "categories": [
@@ -5166,6 +5245,7 @@
       "4. In Pfanne oder Sandwichmaker goldbraun rösten."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
@@ -5202,6 +5282,7 @@
       "5. Mit Beilage nach Wahl servieren."
     ],
     "diet_types": [
+      "Fisch",
       "Omnivor"
     ],
     "categories": [
@@ -5237,6 +5318,7 @@
       "4. Mit Petersilie bestreuen und kalt servieren."
     ],
     "diet_types": [
+      "Fleisch",
       "Omnivor"
     ],
     "categories": [
