@@ -47,8 +47,8 @@ class HamburgerMenu extends StatelessWidget {
             ),
             const PopupMenuItem<String>(
               value: 'favoriten',
-              child:
-                  Text('Favoriten', style: TextStyle(color: Color(0xFF122620))),
+              child: Text('Meine Favoriten',
+                  style: TextStyle(color: Color(0xFF122620))),
             ),
           ]);
 
