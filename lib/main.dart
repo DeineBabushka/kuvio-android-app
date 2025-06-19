@@ -30,30 +30,65 @@ class KuvioApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeProvider.isDarkMode
           ? ThemeData(
-              scaffoldBackgroundColor: const Color(0xFF122620),
+              scaffoldBackgroundColor: const Color(0xFF1a1a1a),
               fontFamily: 'Roboto',
               textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Colors.white),
-                bodyLarge: TextStyle(color: Colors.white),
-                titleLarge: TextStyle(color: Colors.white),
+                bodyMedium: TextStyle(color: Color(0xFFFFFFFF)),
+                bodyLarge: TextStyle(color: Color(0xFFFFFFFF)),
+                titleLarge: TextStyle(color: Color(0xFFFFFFFF)),
+              ),
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Color(0xFF1a1a1a),
+                iconTheme: IconThemeData(color: Colors.white),
+                titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF0E1415),
+                  foregroundColor: Color(0xFF2E6B4D),
+                ),
               ),
               colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.white,
+                seedColor: Color(0xFF959595),
                 brightness: Brightness.dark,
+              ).copyWith(
+                primary: Color(0xFFFFFFFF),
+                onPrimary: Color(0xFFFFFFFF),
               ),
               useMaterial3: true,
             )
           : ThemeData(
-              scaffoldBackgroundColor: Colors.white,
+              scaffoldBackgroundColor: const Color(0xFF122620),
               fontFamily: 'Roboto',
               textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Color(0xFF122620)),
-                bodyLarge: TextStyle(color: Color(0xFF122620)),
+                bodyMedium: TextStyle(color: Color(0xFFFFFFFF)),
+                bodyLarge: TextStyle(color: Color(0xFFFFFFFF)),
                 titleLarge: TextStyle(color: Color(0xFF122620)),
               ),
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Color(0xFF122620),
+                iconTheme: IconThemeData(color: Colors.white),
+                titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Color(0xFF2E6B4D),
+                ),
+              ),
               colorScheme: ColorScheme.fromSeed(
-                seedColor: const Color(0xFF122620),
+                seedColor: Color(0xFF122620),
                 brightness: Brightness.light,
+              ).copyWith(
+                primary: Color(0xFF2E6B4D),
               ),
               useMaterial3: true,
             ),

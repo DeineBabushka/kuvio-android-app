@@ -20,8 +20,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final cardColor = isDark ? Colors.grey[900] : Colors.white;
+    final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
+    final fieldTextColor = isDark ? Colors.white : Colors.black;
+    final buttonBackground = isDark ? theme.colorScheme.primary : const Color(0xFF122620);
+    final buttonTextColor = isDark ? Colors.black : Colors.white;
+
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -45,28 +56,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: cardColor,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Text(
+                              Text(
                                 'Konto erstellen',
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF122620),
+                                  color: textColor,
                                 ),
                               ),
                               const SizedBox(height: 16),
                               TextFormField(
                                 controller: _usernameController,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: const InputDecoration(
+                                style: TextStyle(color: fieldTextColor),
+                                decoration: InputDecoration(
                                   labelText: 'Benutzername',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFF122620)),
+                                  labelStyle: TextStyle(color: labelColor),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -78,11 +88,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const SizedBox(height: 16),
                               TextFormField(
                                 controller: _emailController,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: const InputDecoration(
+                                style: TextStyle(color: fieldTextColor),
+                                decoration: InputDecoration(
                                   labelText: 'E-Mail',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFF122620)),
+                                  labelStyle: TextStyle(color: labelColor),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -99,18 +108,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const SizedBox(height: 16),
                               TextFormField(
                                 controller: _passwordController,
-                                style: const TextStyle(color: Colors.black),
+                                style: TextStyle(color: fieldTextColor),
                                 obscureText: _obscurePassword,
                                 decoration: InputDecoration(
                                   labelText: 'Passwort',
-                                  labelStyle:
-                                      const TextStyle(color: Color(0xFF122620)),
+                                  labelStyle: TextStyle(color: labelColor),
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       _obscurePassword
                                           ? Icons.visibility
                                           : Icons.visibility_off,
-                                      color: const Color(0xFF122620),
+                                      color: labelColor,
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -172,10 +180,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF122620),
-                                  foregroundColor: Colors.white,
+                                  backgroundColor: buttonBackground,
+                                  foregroundColor: buttonTextColor,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 32, vertical: 14),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
-                                child: const Text('Registrieren'),
+                                child: Text('Registrieren',
+                                    style:
+                                        TextStyle(color: buttonTextColor)),
                               ),
                             ],
                           ),

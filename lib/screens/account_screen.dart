@@ -39,26 +39,35 @@ class _AccountScreenState extends State<AccountScreen> {
       context,
       MaterialPageRoute(builder: (_) => const EditProfileScreen()),
     );
-    _loadUserData(); // Nach Rückkehr neu laden
+    _loadUserData();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
+    final labelColor = Colors.white;
+    final dividerColor = isDark ? Colors.white54 : Colors.black26;
+    final buttonBackground = isDark ? theme.cardColor : Colors.white;
+    final buttonTextColor = isDark ? theme.colorScheme.primary : const Color(0xFF122620);
+
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text('Mein Konto'),
+        title: Text('Mein Konto', style: TextStyle(color: textColor, fontSize: 20)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
-        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.white))
+          ? Center(child: CircularProgressIndicator(color: textColor))
           : userData == null
-              ? const Center(
+              ? Center(
                   child: Text('Keine Daten gefunden',
-                      style: TextStyle(color: Colors.white)))
+                      style: TextStyle(color: textColor)))
               : Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
@@ -73,34 +82,33 @@ class _AccountScreenState extends State<AccountScreen> {
                       const SizedBox(height: 24),
                       Text(
                         userData!['username'] ?? 'Unbekannt',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 22,
-                          color: Colors.white,
+                          color: textColor,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
-                      const Divider(color: Colors.white54),
-                      _buildInfoRow("Über mich", userData!['bio']),
-                      const Divider(color: Colors.white54),
-                      _buildInfoRow("Lieblingsküche", userData!['kitchen']),
-                      const Divider(color: Colors.white54),
-                      _buildInfoRow("Lieblingsgericht", userData!['favdish']),
+                      Divider(color: dividerColor),
+                      _buildInfoRow("Über mich", userData!['bio'], textColor, labelColor),
+                      Divider(color: dividerColor),
+                      _buildInfoRow("Lieblingsküche", userData!['kitchen'], textColor, labelColor),
+                      Divider(color: dividerColor),
+                      _buildInfoRow("Lieblingsgericht", userData!['favdish'], textColor, labelColor),
                       const Spacer(),
                       ElevatedButton(
                         onPressed: _navigateToEditProfile,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: const Color(0xFF122620),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 14),
+                          backgroundColor: buttonBackground,
+                          foregroundColor: buttonTextColor,
+                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: const Text('Profil bearbeiten',
-                            style: TextStyle(fontSize: 16)),
+                        child: Text('Profil bearbeiten',
+                            style: TextStyle(fontSize: 16, color: buttonTextColor)),
                       ),
                     ],
                   ),
@@ -108,17 +116,17 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  Widget _buildInfoRow(String label, String? value) {
+  Widget _buildInfoRow(String label, String? value, Color textColor, Color labelColor) {
     return Column(
       children: [
         Text(
           label,
-          style: const TextStyle(color: Colors.white70, fontSize: 16),
+          style: TextStyle(color: labelColor, fontSize: 16),
         ),
         const SizedBox(height: 4),
         Text(
           value?.isNotEmpty == true ? value! : 'Nicht angegeben',
-          style: const TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(color: textColor, fontSize: 18),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),

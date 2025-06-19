@@ -16,7 +16,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _dishController = TextEditingController();
 
   String _selectedKitchen = 'Nicht angegeben';
-  String? _selectedProfileAsset; // character_1.png bis character_9.png
+  String? _selectedProfileAsset;
 
   final List<String> _kitchenOptions = [
     'Nicht angegeben',
@@ -123,14 +123,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final containerColor = isDarkMode ? theme.cardColor : Colors.white;
+    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
+    final labelColor = isDarkMode ? Colors.white70 : const Color(0xFF122620);
+    final inputTextColor = isDarkMode ? Colors.white : Colors.black;
+    final buttonBackground = isDarkMode ? theme.cardColor : const Color(0xFF122620);
+    final buttonTextColor = isDarkMode ? theme.colorScheme.primary : Colors.white;
+
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text('Profil bearbeiten'),
+        title: Text('Profil bearbeiten', style: TextStyle(color: textColor)),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -139,7 +149,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: containerColor,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -162,14 +172,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           onTap: _openImagePickerDialog,
                           child: Container(
                             padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
+                            decoration: BoxDecoration(
+                              color: containerColor,
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.edit,
                               size: 20,
-                              color: Color(0xFF122620),
+                              color: labelColor,
                             ),
                           ),
                         ),
@@ -178,12 +188,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   'Profilinformationen',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF122620),
+                    color: labelColor,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -191,12 +201,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 TextFormField(
                   controller: _usernameController,
                   readOnly: true,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: inputTextColor),
+                  decoration: InputDecoration(
                     labelText: 'Benutzername',
-                    labelStyle: TextStyle(color: Color(0xFF122620)),
-                    border: OutlineInputBorder(),
-                    disabledBorder: OutlineInputBorder(
+                    labelStyle: TextStyle(color: labelColor),
+                    border: const OutlineInputBorder(),
+                    disabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
                     ),
                   ),
@@ -204,18 +214,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _bioController,
-                  maxLines: 3,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: inputTextColor),
+                  decoration: InputDecoration(
                     labelText: 'Über mich',
-                    labelStyle: TextStyle(color: Color(0xFF122620)),
+                    labelStyle: TextStyle(color: labelColor),
                   ),
+                  minLines: 1,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
-                  dropdownColor: Colors.white,
+                  dropdownColor: containerColor,
                   value: _selectedKitchen,
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(color: inputTextColor),
                   items: _kitchenOptions
                       .map((kitchen) => DropdownMenuItem<String>(
                             value: kitchen,
@@ -227,28 +239,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       _selectedKitchen = value ?? 'Nicht angegeben';
                     });
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Lieblingsküche',
-                    labelStyle: TextStyle(color: Color(0xFF122620)),
+                    labelStyle: TextStyle(color: labelColor),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _dishController,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: inputTextColor),
+                  decoration: InputDecoration(
                     labelText: 'Lieblingsgericht',
-                    labelStyle: TextStyle(color: Color(0xFF122620)),
+                    labelStyle: TextStyle(color: labelColor),
                   ),
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: _saveProfile,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF122620),
-                    foregroundColor: Colors.white,
+                    backgroundColor: buttonBackground,
+                    foregroundColor: buttonTextColor,
                   ),
-                  child: const Text('Speichern'),
+                  child: Text('Speichern', style: TextStyle(color: buttonTextColor)),
                 ),
               ],
             ),

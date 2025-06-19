@@ -23,16 +23,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   final TextEditingController commentController = TextEditingController();
   List<Comment> comments = [];
   bool isLoading = true;
-
   bool isFavorite = false;
-  final currentUser = FirebaseAuth.instance.currentUser;
+
   @override
   void initState() {
     super.initState();
     loadRecipeComments();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      checkIfFavorite();
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => checkIfFavorite());
   }
 
   Future<void> checkIfFavorite() async {
@@ -134,12 +131,16 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final cardColor = theme.cardColor;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF122620),
-        title: Text(widget.recipe.title,
-            style: const TextStyle(color: Colors.white)),
-        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: backgroundColor,
+        title: Text(widget.recipe.title, style: TextStyle(color: textColor)),
+        iconTheme: IconThemeData(color: textColor),
         actions: [
           IconButton(
             icon: Icon(
@@ -150,7 +151,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ),
         ],
       ),
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -201,76 +202,67 @@ ${widget.recipe.instructions.take(3).join('\n')}...
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Portionen: ${widget.recipe.portions}',
-                    style: const TextStyle(color: Colors.white, fontSize: 16)),
+                    style: TextStyle(color: textColor, fontSize: 16)),
                 Text('Dauer: ${widget.recipe.preparationTime}',
-                    style: const TextStyle(color: Colors.white, fontSize: 16)),
+                    style: TextStyle(color: textColor, fontSize: 16)),
               ],
             ),
             const SizedBox(height: 20),
-            const Text('Zutaten',
+            Text('Zutaten',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold)),
+                    color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             ...widget.recipe.ingredients.map((ingredient) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text('• $ingredient',
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 16)),
+                      style: TextStyle(color: textColor, fontSize: 16)),
                 )),
             const SizedBox(height: 20),
-            const Text('Zubereitung',
+            Text('Zubereitung',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold)),
+                    color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             ...widget.recipe.instructions.map((step) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6.0),
                   child: Text(step,
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 16)),
+                      style: TextStyle(color: textColor, fontSize: 16)),
                 )),
             const SizedBox(height: 20),
-            const Text('Nährwerte (pro Portion)',
+            Text('Nährwerte (pro Portion)',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold)),
+                    color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             Text('Kalorien: ${widget.recipe.calories} kcal',
-                style: const TextStyle(color: Colors.white, fontSize: 16)),
+                style: TextStyle(color: textColor, fontSize: 16)),
             Text('Protein: ${widget.recipe.proteinG} g',
-                style: const TextStyle(color: Colors.white, fontSize: 16)),
+                style: TextStyle(color: textColor, fontSize: 16)),
             Text('Kohlenhydrate: ${widget.recipe.carbohydratesG} g',
-                style: const TextStyle(color: Colors.white, fontSize: 16)),
+                style: TextStyle(color: textColor, fontSize: 16)),
             Text('Fett: ${widget.recipe.fatG} g',
-                style: const TextStyle(color: Colors.white, fontSize: 16)),
+                style: TextStyle(color: textColor, fontSize: 16)),
             const SizedBox(height: 30),
-            const Divider(color: Colors.white54),
-            const Text('Kommentare',
+            Divider(color: textColor.withOpacity(0.5)),
+            Text('Kommentare',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold)),
+                    color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             if (isLoading)
               const CircularProgressIndicator()
             else if (comments.isEmpty)
-              const Text("Keine Kommentare vorhanden.",
-                  style: TextStyle(color: Colors.white))
+              Text("Keine Kommentare vorhanden.",
+                  style: TextStyle(color: textColor))
             else
               ...comments.map((comment) => ListTile(
+                    tileColor: cardColor,
                     title: Text(comment.username,
-                        style: const TextStyle(color: Colors.white)),
+                        style: TextStyle(color: textColor)),
                     subtitle: Text(comment.text,
-                        style: const TextStyle(color: Colors.white70)),
+                        style: TextStyle(color: textColor.withOpacity(0.7))),
                     trailing: Text(
                       '${comment.timestamp.day.toString().padLeft(2, '0')}.${comment.timestamp.month.toString().padLeft(2, '0')}.${comment.timestamp.year} – '
                       '${comment.timestamp.hour.toString().padLeft(2, '0')}:${comment.timestamp.minute.toString().padLeft(2, '0')}',
-                      style:
-                          const TextStyle(color: Colors.white60, fontSize: 12),
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.5), fontSize: 12),
                     ),
                   )),
             const SizedBox(height: 10),
@@ -279,18 +271,18 @@ ${widget.recipe.instructions.take(3).join('\n')}...
                 Expanded(
                   child: TextField(
                     controller: commentController,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
+                    style: TextStyle(color: textColor),
+                    decoration: InputDecoration(
                       hintText: 'Kommentar schreiben...',
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: textColor.withOpacity(0.5)),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: textColor),
                       ),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send, color: Colors.white),
+                  icon: Icon(Icons.send, color: textColor),
                   onPressed: () async {
                     final text = commentController.text.trim();
                     if (text.isEmpty) return;

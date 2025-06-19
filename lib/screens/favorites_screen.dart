@@ -87,114 +87,124 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         '${localDate.minute.toString().padLeft(2, '0')}';
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meine Favoriten'),
-        backgroundColor: const Color(0xFF122620),
-      ),
-      backgroundColor: const Color(0xFF122620),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : favoriteRecipes.isEmpty
-              ? const Center(
-                  child: Text(
-                    'Keine Favoriten gefunden.',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: favoriteRecipes.length,
-                  itemBuilder: (context, index) {
-                    final favItem = favoriteRecipes[index];
-                    final recipe = favItem.recipe;
+ @override
+Widget build(BuildContext context) {
+  final theme = Theme.of(context);
+  final isDarkMode = theme.brightness == Brightness.dark;
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => RecipeDetailScreen(
-                              recipe: recipe,
-                              recipeId: recipe.id,
+  final backgroundColor = theme.scaffoldBackgroundColor;
+  final textColor = isDarkMode ? Colors.white : const Color(0xFF122620);
+  final subtitleColor = isDarkMode ? Colors.white70 : const Color(0xFF122620);
+  final timestampColor = isDarkMode ? Colors.white54 : Colors.black54;
+  final cardColor = isDarkMode ? theme.cardColor : Colors.white;
+
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Meine Favoriten', style: TextStyle(color: Colors.white)),
+      backgroundColor: backgroundColor,
+      iconTheme: IconThemeData(color: Colors.white),
+    ),
+    backgroundColor: backgroundColor,
+    body: isLoading
+        ? Center(child: CircularProgressIndicator(color: Colors.white))
+        : favoriteRecipes.isEmpty
+            ? Center(
+                child: Text(
+                  'Keine Favoriten gefunden.',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            : ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: favoriteRecipes.length,
+                itemBuilder: (context, index) {
+                  final favItem = favoriteRecipes[index];
+                  final recipe = favItem.recipe;
+
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecipeDetailScreen(
+                            recipe: recipe,
+                            recipeId: recipe.id,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: cardColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      elevation: 4,
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              bottomLeft: Radius.circular(16),
+                            ),
+                            child: SizedBox(
+                              width: 100,
+                              height: 150,
+                              child: AspectRatio(
+                                aspectRatio: 2 / 3,
+                                child: recipe.image.isNotEmpty
+                                    ? Image.asset(
+                                        'assets/${recipe.image}',
+                                        fit: BoxFit.cover,
+                                      )
+                                    : const SizedBox(),
+                              ),
                             ),
                           ),
-                        );
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        elevation: 4,
-                        margin: const EdgeInsets.only(bottom: 20),
-                        child: Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                bottomLeft: Radius.circular(16),
-                              ),
-                              child: SizedBox(
-                                width: 100,
-                                height: 150,
-                                child: AspectRatio(
-                                  aspectRatio: 2 / 3,
-                                  child: recipe.image.isNotEmpty
-                                      ? Image.asset(
-                                          'assets/${recipe.image}',
-                                          fit: BoxFit.cover,
-                                        )
-                                      : const SizedBox(),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 12.0, horizontal: 8),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      recipe.title,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF122620),
-                                      ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    recipe.title,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: textColor,
                                     ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      '${recipe.portions} Portionen • ${recipe.preparationTime}',
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF122620),
-                                      ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    '${recipe.portions} Portionen • ${recipe.preparationTime}',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: subtitleColor,
                                     ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'Hinzugefügt am: ${_formatDate(favItem.addedAt)}',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black54,
-                                      ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'Hinzugefügt am: ${_formatDate(favItem.addedAt)}',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: timestampColor,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
-    );
-  }
+                    ),
+                  );
+                },
+              ),
+  );
+}
 }
 
 class _FavoriteItem {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  bool isDarkMode = true; // Startet im Dark Mode
+  bool _isDarkMode = false;
+
+  bool get isDarkMode => _isDarkMode;
 
   void toggleTheme() {
-    isDarkMode = !isDarkMode;
+    _isDarkMode = !_isDarkMode;
     notifyListeners();
   }
 }
