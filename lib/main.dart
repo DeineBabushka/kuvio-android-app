@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'package:kuvio/models/recipe.dart';
 import 'package:kuvio/screens/filtered_recipes_screen.dart';
+import 'package:kuvio/screens/admin_dashboard_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +61,9 @@ class KuvioApp extends StatelessWidget {
               ),
               useMaterial3: true,
             ),
+      routes: {
+        '/admin': (context) => const AdminDashboardScreen(),
+      },
       home: const StartScreen(),
     );
   }
@@ -138,13 +142,13 @@ class RecipesScreen extends StatefulWidget {
 class _RecipesScreenState extends State<RecipesScreen> {
   String? selectedDiet;
   String? selectedCategory;
-  List<Recipe> allRecipesList = []; // <-- Rezepteliste
-  bool isLoading = true; // <-- Ladeanzeige
+  List<Recipe> allRecipesList = [];
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    loadRecipes(); // <-- Lade Rezepte beim Start
+    loadRecipes();
   }
 
   Future<void> loadRecipes() async {
@@ -354,29 +358,27 @@ class RecipesListScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Obere Zeile mit der Farbe Color(0xFF122620)
             Container(
               color: const Color(0xFF122620),
-              height: 10, // Höhe der oberen Zeile
+              height: 10,
             ),
             Expanded(
               child: Container(
-                color: Colors.white, // Weißer Hintergrund für den Inhalt
+                color: Colors.white,
                 child: ListView.builder(
-                  itemCount: 10, // Beispiel, hier werden 10 Rezepte angezeigt
+                  itemCount: 10,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
                         _buildRecipeRow(
-                          "Rezept $index", // Beispiel-Titel
-                          "assets/sample_image.png", // Beispiel-Bild
-                          "assets/sample_icon.png", // Beispiel-Icon
-                          "Vegetarisch", // Beispiel-Kategorie
+                          "Rezept $index",
+                          "assets/sample_image.png",
+                          "assets/sample_icon.png",
+                          "Vegetarisch",
                         ),
                         const Divider(
-                          color:
-                              Colors.grey, // Graue Linie zwischen den Rezepten
-                          thickness: 1, // Dicke der Linie
+                          color: Colors.grey,
+                          thickness: 1,
                         ),
                       ],
                     );
@@ -384,10 +386,9 @@ class RecipesListScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // Untere Zeile mit der Farbe Color(0xFF122620)
             Container(
               color: const Color(0xFF122620),
-              height: 10, // Höhe der unteren Zeile
+              height: 10,
             ),
           ],
         ),
@@ -395,7 +396,6 @@ class RecipesListScreen extends StatelessWidget {
     );
   }
 
-  // Funktion, um eine Zeile mit einem Rezept zu erstellen
   Widget _buildRecipeRow(
     String title,
     String imageUrl,
