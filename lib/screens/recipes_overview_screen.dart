@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:share_plus/share_plus.dart';
 import '../models/recipe.dart';
 import '../models/comment.dart';
 
@@ -88,6 +89,38 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+
+// Teilen-Button
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  final shareText = '''
+🥗 ${widget.recipe.title}
+
+📋 Zutaten:
+${widget.recipe.ingredients.join(', ')}
+
+📖 Zubereitung:
+${widget.recipe.instructions.take(3).join('\n')}...
+
+✨ Gekocht mit der Kuvio App!
+''';
+                  Share.share(shareText);
+                },
+                icon: const Icon(Icons.share),
+                label: const Text("Teilen"),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor:
+                      const Color(0xFF417B5A), // Grünton passend zur App
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+
             const SizedBox(height: 20),
 
             // Portionen und Dauer
