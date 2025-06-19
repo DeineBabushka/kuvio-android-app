@@ -16,7 +16,6 @@ class FilteredRecipesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Filtere die Rezepte basierend auf den gewählten Kriterien
     final List<Recipe> filteredRecipes = allRecipes.where((recipe) {
       return recipe.dietTypes.contains(selectedDiet) &&
           recipe.categories.contains(selectedCategory);
