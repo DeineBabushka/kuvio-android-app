@@ -1,133 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:provider/provider.dart';
-import 'theme_provider.dart';
+import 'package:flutter/services.dart';
 import 'package:kuvio/models/recipe.dart';
 import 'package:kuvio/screens/filtered_recipes_screen.dart';
-import 'package:kuvio/screens/admin_dashboard_screen.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const KuvioApp(),
-    ),
-  );
-}
-
-class KuvioApp extends StatelessWidget {
-  const KuvioApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
-    return MaterialApp(
-      title: 'Kuvio Kochapp',
-      debugShowCheckedModeBanner: false,
-      theme: themeProvider.isDarkMode
-          ? ThemeData(
-              scaffoldBackgroundColor: const Color(0xFF122620),
-              fontFamily: 'Roboto',
-              textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Colors.white),
-                bodyLarge: TextStyle(color: Colors.white),
-                titleLarge: TextStyle(color: Colors.white),
-              ),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.white,
-                brightness: Brightness.dark,
-              ),
-              useMaterial3: true,
-            )
-          : ThemeData(
-              scaffoldBackgroundColor: Colors.white,
-              fontFamily: 'Roboto',
-              textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Color(0xFF122620)),
-                bodyLarge: TextStyle(color: Color(0xFF122620)),
-                titleLarge: TextStyle(color: Color(0xFF122620)),
-              ),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: const Color(0xFF122620),
-                brightness: Brightness.light,
-              ),
-              useMaterial3: true,
-            ),
-      routes: {
-        '/admin': (context) => const AdminDashboardScreen(),
-      },
-      home: const StartScreen(),
-    );
-  }
-}
-
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 60),
-            SizedBox(
-              child: Image.asset('assets/logo.png', height: 350, width: 350),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Willkommen bei Kuvio!',
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 2),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.7),
-              child: Text(
-                'Entdecke leckere Rezepte zum Nachkochen. Egal ob Anfänger oder Küchenprofi – mit Kuvio wird Kochen einfach, kreativ und lecker!',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
-            const SizedBox(height: 150),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RecipesScreen(),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFF122620),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Los geht’s',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'package:kuvio/widgets/hamburger_menu.dart';
 
 class RecipesScreen extends StatefulWidget {
   const RecipesScreen({super.key});
@@ -252,8 +128,9 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text(
-                                'Bitte wähle Ernährungstyp und Kategorie')),
+                          content:
+                              Text('Bitte wähle Ernährungstyp und Kategorie'),
+                        ),
                       );
                     }
                   },
@@ -333,95 +210,6 @@ class _RecipesScreenState extends State<RecipesScreen> {
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class RecipesListScreen extends StatelessWidget {
-  const RecipesListScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Rezepte für dich"),
-        backgroundColor: const Color(0xFF122620),
-        actions: const [
-          HamburgerMenu(),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              color: const Color(0xFF122620),
-              height: 10,
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.white,
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        _buildRecipeRow(
-                          "Rezept $index",
-                          "assets/sample_image.png",
-                          "assets/sample_icon.png",
-                          "Vegetarisch",
-                        ),
-                        const Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-            Container(
-              color: const Color(0xFF122620),
-              height: 10,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRecipeRow(
-    String title,
-    String imageUrl,
-    String iconUrl,
-    String category,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(8.0),
-        leading: Image.asset(
-          imageUrl,
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Row(
-          children: [
-            Image.asset(iconUrl, width: 20, height: 20, fit: BoxFit.cover),
-            const SizedBox(width: 8),
-            Text(
-              category,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-          ],
         ),
       ),
     );
