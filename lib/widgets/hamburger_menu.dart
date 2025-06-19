@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:provider/provider.dart';
 import '../screens/account_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../models/recipe.dart';
+import '../theme_provider.dart';
+
 
 class HamburgerMenu extends StatelessWidget {
   final List<Recipe> allRecipes;
@@ -107,9 +109,8 @@ class HamburgerMenu extends StatelessWidget {
             ),
           );
         } else if (value == 'darkmode') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Darkmode kommt bald!')),
-          );
+              final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+              themeProvider.toggleTheme();
         } else if (value == 'login') {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => const LoginScreen()));

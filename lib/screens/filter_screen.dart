@@ -37,20 +37,27 @@ class _RecipesScreenState extends State<RecipesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final buttonTextColor = isDark ? Colors.white : const Color(0xFF122620);
+    final filterTextColor = Colors.white;
+
     if (isLoading) {
-      return const Scaffold(
-        backgroundColor: Color(0xFF122620),
-        body: Center(
+      return Scaffold(
+        backgroundColor: theme.scaffoldBackgroundColor,
+        body: const Center(
           child: CircularProgressIndicator(color: Colors.greenAccent),
         ),
       );
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text("Rezeptauswahl"),
-        backgroundColor: const Color(0xFF122620),
+        title: Text("Rezeptauswahl",
+            style: TextStyle(color: theme.textTheme.bodyLarge?.color)),
+        backgroundColor: theme.scaffoldBackgroundColor,
         actions: [
           HamburgerMenu(allRecipes: allRecipesList),
         ],
@@ -61,11 +68,11 @@ class _RecipesScreenState extends State<RecipesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Was möchtest du heute kochen?",
                 style: TextStyle(
                   fontSize: 24,
-                  color: Colors.white,
+                  color: theme.colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -73,41 +80,40 @@ class _RecipesScreenState extends State<RecipesScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFilterCircle('assets/rohkost_icon.png', 'Rohkost'),
-                  _buildFilterCircle(
-                      'assets/gluten_free_icon.png', 'Glutenfrei'),
-                  _buildFilterCircle('assets/fish_icon.png', 'Fisch'),
-                  _buildFilterCircle('assets/keto_icon.png', 'Keto'),
+                  _buildFilterCircle('assets/rohkost_icon.png', 'Rohkost', filterTextColor),
+                  _buildFilterCircle('assets/gluten_free_icon.png', 'Glutenfrei', filterTextColor),
+                  _buildFilterCircle('assets/fish_icon.png', 'Fisch', filterTextColor),
+                  _buildFilterCircle('assets/keto_icon.png', 'Keto', filterTextColor),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFilterCircle('assets/proteins_icon.png', 'Fleisch'),
-                  _buildFilterCircle(
-                      'assets/vegetarian_icon.png', 'Vegetarisch'),
-                  _buildFilterCircle('assets/alles_icon.png', 'Omnivor'),
-                  _buildFilterCircle('assets/vegan_icon.png', 'Vegan'),
+                  _buildFilterCircle('assets/proteins_icon.png', 'Fleisch', filterTextColor),
+                  _buildFilterCircle('assets/vegetarian_icon.png', 'Vegetarisch', filterTextColor),
+                  _buildFilterCircle('assets/alles_icon.png', 'Omnivor', filterTextColor),
+                  _buildFilterCircle('assets/vegan_icon.png', 'Vegan', filterTextColor),
                 ],
               ),
               const SizedBox(height: 30),
-              const Text(
+              Text(
                 "Wähle die Gerichtskategorie:",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 20, color: theme.textTheme.bodyLarge?.color),
               ),
               const SizedBox(height: 10),
               Wrap(
                 spacing: 20,
                 runSpacing: 20,
                 children: [
-                  _buildCategoryFilter("Vorspeise"),
-                  _buildCategoryFilter("Hauptgericht"),
-                  _buildCategoryFilter("Dessert"),
-                  _buildCategoryFilter("Beilage"),
-                  _buildCategoryFilter("Snack"),
-                  _buildCategoryFilter("Frühstück"),
-                  _buildCategoryFilter("Kalorienarm"),
+                  _buildCategoryFilter("Vorspeise", buttonTextColor),
+                  _buildCategoryFilter("Hauptgericht", buttonTextColor),
+                  _buildCategoryFilter("Dessert", buttonTextColor),
+                  _buildCategoryFilter("Beilage", buttonTextColor),
+                  _buildCategoryFilter("Snack", buttonTextColor),
+                  _buildCategoryFilter("Frühstück", buttonTextColor),
+                  _buildCategoryFilter("Kalorienarm", buttonTextColor),
                 ],
               ),
               const Spacer(),
@@ -128,24 +134,18 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content:
-                              Text('Bitte wähle Ernährungstyp und Kategorie'),
+                          content: Text('Bitte wähle Ernährungstyp und Kategorie'),
                         ),
                       );
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xFF122620),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
+                  child: Text(
                     'Zeige mir Rezepte',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: buttonTextColor,
+                    ),
                   ),
                 ),
               ),
@@ -157,7 +157,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
     );
   }
 
-  Widget _buildFilterCircle(String assetPath, String label) {
+  Widget _buildFilterCircle(String assetPath, String label, Color textColor) {
     final isSelected = selectedDiet == label;
 
     return GestureDetector(
@@ -178,7 +178,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? const Color(0xFF2E6B4D) : Colors.white,
+              color: isSelected ? const Color(0xFF2E6B4D) : textColor,
               fontSize: 14,
             ),
             textAlign: TextAlign.center,
@@ -188,7 +188,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
     );
   }
 
-  Widget _buildCategoryFilter(String category) {
+  Widget _buildCategoryFilter(String category, Color textColor) {
+    final theme = Theme.of(context);
     final isSelected = selectedCategory == category;
 
     return GestureDetector(
@@ -200,13 +201,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF2E6B4D) : Colors.white,
+          color: isSelected ? const Color(0xFF2E6B4D) : theme.cardColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           category,
           style: TextStyle(
-            color: isSelected ? Colors.white : const Color(0xFF122620),
+            color: isSelected ? Colors.white : textColor,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),

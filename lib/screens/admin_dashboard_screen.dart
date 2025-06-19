@@ -6,27 +6,41 @@ class AdminDashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final textColor = Colors.white;
+    final cardTextColor = const Color(0xFF122620);
+
     final usersRef = FirebaseFirestore.instance.collection('users');
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text('Admin Dashboard'),
-        backgroundColor: const Color(0xFF122620),
+        backgroundColor: backgroundColor,
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          'Admin Dashboard',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
-      backgroundColor: const Color(0xFF122620),
       body: StreamBuilder<QuerySnapshot>(
         stream: usersRef.snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: Colors.white));
           }
 
           final users = snapshot.data?.docs ?? [];
 
           if (users.isEmpty) {
             return const Center(
-                child: Text('Keine Benutzer gefunden.',
-                    style: TextStyle(color: Colors.white)));
+              child: Text(
+                'Keine Benutzer gefunden.',
+                style: TextStyle(color: Colors.white),
+              ),
+            );
           }
 
           return ListView.builder(
@@ -41,9 +55,17 @@ class AdminDashboardScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 color: Colors.white,
                 child: ListTile(
-                  title: Text(username,
-                      style: const TextStyle(color: Color(0xFF122620))),
-                  subtitle: Text(isAdmin ? 'Admin' : 'Benutzer'),
+                  title: Text(
+                    username,
+                    style: TextStyle(
+                      color: cardTextColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    isAdmin ? 'Admin' : 'Benutzer',
+                    style: TextStyle(color: cardTextColor.withOpacity(0.8)),
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -55,8 +77,12 @@ class AdminDashboardScreen extends StatelessWidget {
                               .update({'isAdmin': value});
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content: Text(
-                                    'Adminstatus von "$username" geändert.')),
+                              content: Text(
+                                'Adminstatus von "$username" geändert.',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: const Color(0xFF2E6B4D),
+                            ),
                           );
                         },
                       ),
@@ -68,16 +94,20 @@ class AdminDashboardScreen extends StatelessWidget {
                             builder: (context) => AlertDialog(
                               title: const Text('Benutzer löschen'),
                               content: Text(
-                                  'Willst du "$username" wirklich löschen?'),
+                                'Willst du "$username" wirklich löschen?',
+                                style: const TextStyle(color: Colors.black),
+                              ),
                               actions: [
                                 TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(context, false),
-                                    child: const Text('Abbrechen')),
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: const Text('Abbrechen'),
+                                ),
                                 TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(context, true),
-                                    child: const Text('Löschen')),
+                                  onPressed: () =>
+                                      Navigator.pop(context, true),
+                                  child: const Text('Löschen'),
+                                ),
                               ],
                             ),
                           );
@@ -85,8 +115,12 @@ class AdminDashboardScreen extends StatelessWidget {
                             await usersRef.doc(userDoc.id).delete();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                  content: Text(
-                                      'Benutzer "$username" wurde gelöscht.')),
+                                content: Text(
+                                  'Benutzer "$username" wurde gelöscht.',
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
                             );
                           }
                         },

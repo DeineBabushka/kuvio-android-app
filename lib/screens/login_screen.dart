@@ -17,8 +17,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final cardColor = isDark ? Colors.grey[900] : Colors.white;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
+    final headingColor = isDark ? Colors.white : const Color(0xFF122620);
+    final iconColor = isDark ? Colors.white60 : const Color(0xFF122620);
+    final buttonBackground = isDark ? theme.colorScheme.primary : const Color(0xFF122620);
+    final buttonTextColor = isDark ? Colors.black : Colors.white;
+
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -30,9 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight,
-              ),
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: IntrinsicHeight(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -42,44 +52,43 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: cardColor,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text(
+                            Text(
                               'Anmelden',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF122620),
+                                color: headingColor,
                               ),
                             ),
                             const SizedBox(height: 16),
                             TextField(
                               controller: _emailController,
-                              style: const TextStyle(color: Colors.black),
-                              decoration: const InputDecoration(
+                              style: TextStyle(color: textColor),
+                              decoration: InputDecoration(
                                 labelText: 'Email-Adresse',
-                                labelStyle: TextStyle(color: Color(0xFF122620)),
+                                labelStyle: TextStyle(color: labelColor),
                               ),
                             ),
                             const SizedBox(height: 16),
                             TextField(
                               controller: _passwordController,
-                              style: const TextStyle(color: Colors.black),
+                              style: TextStyle(color: textColor),
                               obscureText: _obscurePassword,
                               decoration: InputDecoration(
                                 labelText: 'Passwort',
-                                labelStyle:
-                                    const TextStyle(color: Color(0xFF122620)),
+                                labelStyle: TextStyle(color: labelColor),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _obscurePassword
                                         ? Icons.visibility
                                         : Icons.visibility_off,
-                                    color: const Color(0xFF122620),
+                                    color: iconColor,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -110,8 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   final isAdmin =
                                       doc.data()?['isAdmin'] ?? false;
 
-                                  print(
-                                      'Angemeldeter Benutzer ist Admin: $isAdmin');
+                                  print('Angemeldeter Benutzer ist Admin: $isAdmin');
 
                                   if (!mounted) return;
 
@@ -133,13 +141,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF122620),
-                                foregroundColor: Colors.white,
+                                backgroundColor: buttonBackground,
+                                foregroundColor: buttonTextColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              child: const Text('Einloggen'),
+                              child: Text(
+                                'Einloggen',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: buttonTextColor,
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 16),
                             GestureDetector(
@@ -155,13 +169,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: RichText(
                                 text: TextSpan(
                                   text: 'Noch kein Konto? ',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
+                                  style: TextStyle(color: textColor),
                                   children: [
                                     TextSpan(
                                       text: 'Registrieren',
                                       style: TextStyle(
+                                        color: textColor,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

@@ -16,26 +16,35 @@ class FilteredRecipesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
+    final cardBackground = isDarkMode ? theme.cardColor : Colors.white;
+    final titleColor = isDarkMode ? theme.colorScheme.primary : const Color(0xFF122620);
+    final subtitleColor = isDarkMode ? theme.textTheme.bodyMedium?.color ?? Colors.white70 : Colors.black87;
+
     final List<Recipe> filteredRecipes = allRecipes.where((recipe) {
       return recipe.dietTypes.contains(selectedDiet) &&
           recipe.categories.contains(selectedCategory);
     }).toList();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Gefundene Rezepte',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: textColor),
         ),
-        backgroundColor: const Color(0xFF122620),
-        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: backgroundColor,
+        iconTheme: IconThemeData(color: textColor),
       ),
       body: filteredRecipes.isEmpty
-          ? const Center(
+          ? Center(
               child: Text(
                 'Keine Rezepte gefunden!',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: textColor, fontSize: 18),
               ),
             )
           : ListView.builder(
@@ -57,7 +66,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                     );
                   },
                   child: Card(
-                    color: Colors.white,
+                    color: cardBackground,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -92,18 +101,18 @@ class FilteredRecipesScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   recipe.title,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF122620),
+                                    color: titleColor,
                                   ),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   '${recipe.portions} Portionen • ${recipe.preparationTime}',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.black87,
+                                    color: subtitleColor,
                                   ),
                                 ),
                               ],
