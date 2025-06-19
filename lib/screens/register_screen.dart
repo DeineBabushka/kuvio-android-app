@@ -151,6 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         'kitchen': 'Nicht angegeben',
                                         'favdish': '',
                                         'isAdmin': false,
+                                        'favorites': [],
                                       });
 
                                       if (!mounted) return;

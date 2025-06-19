@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../screens/account_screen.dart';
 import '../screens/login_screen.dart';
+import '../screens/favorites_screen.dart';
+import '../models/recipe.dart';
 
 class HamburgerMenu extends StatelessWidget {
-  const HamburgerMenu({super.key});
+  final List<Recipe> allRecipes;
+
+  const HamburgerMenu({super.key, required this.allRecipes});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,6 @@ class HamburgerMenu extends StatelessWidget {
         final user = snapshot.data;
         final isLoggedIn = user != null;
 
-        // Nur wenn eingeloggt: Adminstatus prüfen
         if (!isLoggedIn) {
           return _buildMenu(context, false, false);
         }
@@ -31,7 +35,6 @@ class HamburgerMenu extends StatelessWidget {
     );
   }
 
-  /// Menüaufbau je nach Status
   Widget _buildMenu(BuildContext context, bool isAdmin, bool isLoggedIn) {
     return PopupMenuButton<String>(
       color: Colors.white,
@@ -47,8 +50,8 @@ class HamburgerMenu extends StatelessWidget {
             ),
             const PopupMenuItem<String>(
               value: 'favoriten',
-              child: Text('Meine Favoriten',
-                  style: TextStyle(color: Color(0xFF122620))),
+              child:
+                  Text('Favoriten', style: TextStyle(color: Color(0xFF122620))),
             ),
           ]);
 
@@ -97,18 +100,24 @@ class HamburgerMenu extends StatelessWidget {
           Navigator.push(context,
               MaterialPageRoute(builder: (_) => const AccountScreen()));
         } else if (value == 'favoriten') {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Favoriten kommen bald!')));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => FavoritesScreen(allRecipes: allRecipes),
+            ),
+          );
         } else if (value == 'darkmode') {
           ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Darkmode kommt bald!')));
+            const SnackBar(content: Text('Darkmode kommt bald!')),
+          );
         } else if (value == 'login') {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => const LoginScreen()));
         } else if (value == 'logout') {
           await FirebaseAuth.instance.signOut();
           ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Du wurdest abgemeldet.')));
+            const SnackBar(content: Text('Du wurdest abgemeldet.')),
+          );
         } else if (value == 'admin') {
           Navigator.pushNamed(context, '/admin');
         }
@@ -116,7 +125,6 @@ class HamburgerMenu extends StatelessWidget {
     );
   }
 
-  /// Holt den Admin-Status aus Firestore
   Future<bool> _checkIfAdmin(User? user) async {
     if (user == null) return false;
 
@@ -124,7 +132,6 @@ class HamburgerMenu extends StatelessWidget {
         .collection('users')
         .doc(user.uid)
         .get();
-
     return doc.data()?['isAdmin'] == true;
   }
 }

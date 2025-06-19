@@ -17,7 +17,6 @@ class Comment {
     required this.timestamp,
   });
 
-  /// Konvertieren für Firestore (zum Speichern)
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -29,7 +28,6 @@ class Comment {
     };
   }
 
-  /// Erzeugen aus Firestore-Daten (beim Abrufen)
   factory Comment.fromMap(Map<String, dynamic> map) {
     return Comment(
       id: map['id'] ?? '',
@@ -41,7 +39,6 @@ class Comment {
     );
   }
 
-  /// Kopieren + einzelnes Feld ersetzen
   Comment copyWith({
     String? id,
     String? userId,
