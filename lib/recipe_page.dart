@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:kuvio/models/recipe.dart';
 import 'package:kuvio/widgets/hamburger_menu.dart';
 
 class RecipePage extends StatefulWidget {
@@ -11,7 +12,8 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
-  Map<String, dynamic>? recipe;
+  Recipe? recipe;
+  List<Recipe> allRecipesList = [];
 
   @override
   void initState() {
@@ -23,26 +25,30 @@ class _RecipePageState extends State<RecipePage> {
     final jsonString = await rootBundle.loadString('assets/recipe.json');
     final List<dynamic> jsonList = jsonDecode(jsonString);
 
-    // Beispiel: zeige das 1. Rezept
-    final Map<String, dynamic> firstRecipe = jsonList[0];
+    // Mappe jsonList zu Recipe-Objekten
+    final List<Recipe> recipes =
+        jsonList.map<Recipe>((item) => Recipe.fromJson(item)).toList();
 
     setState(() {
-      recipe = firstRecipe;
+      recipe = recipes.isNotEmpty ? recipes[0] : null;
+      allRecipesList = recipes;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     if (recipe == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(recipe!['title']),
+        title: Text(recipe!.title),
         backgroundColor: const Color(0xFF122620),
-        actions: const [
-          HamburgerMenu(),
+        actions: [
+          HamburgerMenu(allRecipes: allRecipesList),
         ],
       ),
       backgroundColor: const Color(0xFF122620),
@@ -51,10 +57,9 @@ class _RecipePageState extends State<RecipePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Bild
-            if (recipe!['image'] != null)
+            if (recipe!.image.isNotEmpty)
               Image.asset(
-                'assets/${recipe!['image']}',
+                'assets/${recipe!.image}',
                 fit: BoxFit.cover,
                 errorBuilder: (ctx, error, stack) => const Text(
                   "Bild nicht gefunden",
@@ -62,51 +67,42 @@ class _RecipePageState extends State<RecipePage> {
                 ),
               ),
             const SizedBox(height: 20),
-
-            // Portionen & Zeit
             Text(
-              'Portionen: ${recipe!['portions']} | Zeit: ${recipe!['preparation_time']}',
+              'Portionen: ${recipe!.portions} | Zeit: ${recipe!.preparationTime}',
               style: const TextStyle(fontSize: 16, color: Colors.white),
             ),
             const SizedBox(height: 16),
-
-            // Zutaten
             Text('Zutaten:', style: _titleStyle()),
             const SizedBox(height: 8),
-            for (final ingredient
-                in recipe!['ingredients'] ?? recipe!['ingredient'])
+            for (final ingredient in recipe!.ingredients)
               Text('• $ingredient', style: _textStyle()),
-
             const SizedBox(height: 16),
             Text('Anleitung:', style: _titleStyle()),
             const SizedBox(height: 8),
-            for (final step in recipe!['instructions'])
+            for (final step in recipe!.instructions)
               Text(step, style: _textStyle()),
-
             const SizedBox(height: 16),
             Text('Ernährungsform:', style: _titleStyle()),
             const SizedBox(height: 8),
             Text(
-              (recipe!['diet_types'] as List).join(', '),
+              recipe!.dietTypes.join(', '),
               style: _textStyle(),
             ),
-
             const SizedBox(height: 16),
             Text('Kategorien:', style: _titleStyle()),
             const SizedBox(height: 8),
             Text(
-              (recipe!['categories'] as List).join(', '),
+              recipe!.categories.join(', '),
               style: _textStyle(),
             ),
-
             const SizedBox(height: 16),
             Text('Nährwerte (pro Portion):', style: _titleStyle()),
             const SizedBox(height: 8),
             Text(
-              'Kalorien: ${recipe!['nutrition']['calories']} kcal\n'
-              'Protein: ${recipe!['nutrition']['protein_g']} g\n'
-              'Kohlenhydrate: ${recipe!['nutrition']['carbohydrates_g']} g\n'
-              'Fett: ${recipe!['nutrition']['fat_g']} g',
+              'Kalorien: ${recipe!.calories} kcal\n'
+              'Protein: ${recipe!.proteinG} g\n'
+              'Kohlenhydrate: ${recipe!.carbohydratesG} g\n'
+              'Fett: ${recipe!.fatG} g',
               style: _textStyle(),
             ),
           ],
@@ -120,5 +116,6 @@ class _RecipePageState extends State<RecipePage> {
         fontWeight: FontWeight.bold,
         color: Colors.white,
       );
+
   TextStyle _textStyle() => const TextStyle(fontSize: 16, color: Colors.white);
 }

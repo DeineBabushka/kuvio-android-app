@@ -24,10 +24,81 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   List<Comment> comments = [];
   bool isLoading = true;
 
+  bool isFavorite = false;
+  final currentUser = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
     super.initState();
     loadRecipeComments();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkIfFavorite();
+    });
+  }
+
+  Future<void> checkIfFavorite() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null || widget.recipeId == null) return;
+
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+
+    final List<dynamic> favorites = userDoc.data()?['favorites'] ?? [];
+
+    setState(() {
+      isFavorite = favorites.contains(widget.recipeId);
+    });
+  }
+
+  Future<void> toggleFavorite() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null || widget.recipeId == null) return;
+
+    final userDocRef =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
+    final favoritesCollection =
+        FirebaseFirestore.instance.collection('favorites');
+
+    final userDoc = await userDocRef.get();
+    final List<dynamic> favorites = userDoc.data()?['favorites'] ?? [];
+
+    final isCurrentlyFavorite = favorites.contains(widget.recipeId);
+
+    if (isCurrentlyFavorite) {
+      await userDocRef.update({
+        'favorites': FieldValue.arrayRemove([widget.recipeId]),
+      });
+
+      final favSnapshot = await favoritesCollection
+          .where('userId', isEqualTo: user.uid)
+          .where('recipeId', isEqualTo: widget.recipeId)
+          .get();
+
+      for (var doc in favSnapshot.docs) {
+        await doc.reference.delete();
+      }
+
+      setState(() => isFavorite = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Aus Favoriten entfernt")),
+      );
+    } else {
+      await userDocRef.update({
+        'favorites': FieldValue.arrayUnion([widget.recipeId]),
+      });
+
+      await favoritesCollection.add({
+        'userId': user.uid,
+        'recipeId': widget.recipeId,
+        'addedAt': FieldValue.serverTimestamp(),
+      });
+
+      setState(() => isFavorite = true);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Zu Favoriten hinzugefügt")),
+      );
+    }
   }
 
   Future<void> loadRecipeComments() async {
@@ -69,6 +140,15 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         title: Text(widget.recipe.title,
             style: const TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: Colors.redAccent,
+            ),
+            onPressed: toggleFavorite,
+          ),
+        ],
       ),
       backgroundColor: const Color(0xFF122620),
       body: SingleChildScrollView(
@@ -76,7 +156,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Rezeptbild
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
@@ -90,8 +169,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               ),
             ),
             const SizedBox(height: 20),
-
-// Teilen-Button
             Center(
               child: ElevatedButton.icon(
                 onPressed: () {
@@ -112,18 +189,14 @@ ${widget.recipe.instructions.take(3).join('\n')}...
                 label: const Text("Teilen"),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor:
-                      const Color(0xFF417B5A), // Grünton passend zur App
+                  backgroundColor: const Color(0xFF417B5A),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Portionen und Dauer
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -134,8 +207,6 @@ ${widget.recipe.instructions.take(3).join('\n')}...
               ],
             ),
             const SizedBox(height: 20),
-
-            // Zutaten
             const Text('Zutaten',
                 style: TextStyle(
                     color: Colors.white,
@@ -149,8 +220,6 @@ ${widget.recipe.instructions.take(3).join('\n')}...
                           const TextStyle(color: Colors.white, fontSize: 16)),
                 )),
             const SizedBox(height: 20),
-
-            // Zubereitung
             const Text('Zubereitung',
                 style: TextStyle(
                     color: Colors.white,
@@ -164,8 +233,6 @@ ${widget.recipe.instructions.take(3).join('\n')}...
                           const TextStyle(color: Colors.white, fontSize: 16)),
                 )),
             const SizedBox(height: 20),
-
-            // Nährwerte
             const Text('Nährwerte (pro Portion)',
                 style: TextStyle(
                     color: Colors.white,
@@ -181,10 +248,7 @@ ${widget.recipe.instructions.take(3).join('\n')}...
             Text('Fett: ${widget.recipe.fatG} g',
                 style: const TextStyle(color: Colors.white, fontSize: 16)),
             const SizedBox(height: 30),
-
             const Divider(color: Colors.white54),
-
-            // Kommentare
             const Text('Kommentare',
                 style: TextStyle(
                     color: Colors.white,
@@ -210,8 +274,6 @@ ${widget.recipe.instructions.take(3).join('\n')}...
                     ),
                   )),
             const SizedBox(height: 10),
-
-            // Kommentar schreiben
             Row(
               children: [
                 Expanded(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/screens/recipes_screen.dart';
+import 'recipes_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});

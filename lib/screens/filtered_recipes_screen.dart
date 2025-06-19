@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
-import 'recipes_overview_screen.dart'; // Für Navigation zur Detailseite
+import 'recipes_singleview_screen.dart';
 
 class FilteredRecipesScreen extends StatelessWidget {
   final String selectedDiet;
