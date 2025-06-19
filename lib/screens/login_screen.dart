@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -92,11 +93,25 @@ class _LoginScreenState extends State<LoginScreen> {
                             ElevatedButton(
                               onPressed: () async {
                                 try {
-                                  await FirebaseAuth.instance
+                                  final credential = await FirebaseAuth.instance
                                       .signInWithEmailAndPassword(
                                     email: _emailController.text.trim(),
                                     password: _passwordController.text.trim(),
                                   );
+
+                                  final user = credential.user;
+                                  if (user == null) return;
+
+                                  final doc = await FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(user.uid)
+                                      .get();
+
+                                  final isAdmin =
+                                      doc.data()?['isAdmin'] ?? false;
+
+                                  print(
+                                      'Angemeldeter Benutzer ist Admin: $isAdmin');
 
                                   if (!mounted) return;
 
@@ -110,8 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   );
 
-                                  Navigator.pop(
-                                      context); // oder zur Startseite, wenn gewünscht
+                                  Navigator.pop(context);
                                 } catch (e) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text('Fehler: $e')),
@@ -128,8 +142,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text('Einloggen'),
                             ),
                             const SizedBox(height: 16),
-
-                            // ✅ Der ursprüngliche Text-Link, aber „Registrieren“ ist fett
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(

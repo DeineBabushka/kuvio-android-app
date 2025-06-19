@@ -150,6 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         'bio': '',
                                         'kitchen': 'Nicht angegeben',
                                         'favdish': '',
+                                        'isAdmin': false,
                                       });
 
                                       if (!mounted) return;
