@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'package:kuvio/screens/start_screen.dart';
 import 'package:kuvio/screens/admin_dashboard_screen.dart';
+import 'package:kuvio/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -93,6 +94,7 @@ class KuvioApp extends StatelessWidget {
               useMaterial3: true,
             ),
       routes: {
+        '/login': (context) => const LoginScreen(),
         '/admin': (context) => const AdminDashboardScreen(),
       },
       home: const StartScreen(),
