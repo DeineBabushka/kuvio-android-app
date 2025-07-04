@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'change_password_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -131,8 +132,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final labelColor = isDarkMode ? Colors.white70 : const Color(0xFF122620);
     final inputTextColor = isDarkMode ? Colors.white : Colors.black;
-    final buttonBackground = isDarkMode ? theme.cardColor : const Color(0xFF122620);
-    final buttonTextColor = isDarkMode ? theme.colorScheme.primary : Colors.white;
+    final buttonBackground =
+        isDarkMode ? theme.cardColor : const Color(0xFF122620);
+    final buttonTextColor =
+        isDarkMode ? theme.colorScheme.primary : Colors.white;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -140,7 +143,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         title: Text('Profil bearbeiten', style: TextStyle(color: textColor)),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -260,7 +263,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     backgroundColor: buttonBackground,
                     foregroundColor: buttonTextColor,
                   ),
-                  child: Text('Speichern', style: TextStyle(color: buttonTextColor)),
+                  child: Text('Speichern',
+                      style: TextStyle(color: buttonTextColor)),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ChangePasswordScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Passwort ändern'),
                 ),
               ],
             ),
