@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,6 +16,67 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return;
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final user = userCredential.user;
+      if (user == null) return;
+
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(user.uid);
+      final doc = await userRef.get();
+
+      if (!doc.exists) {
+        await userRef.set({
+          'username': user.displayName ?? 'Google Nutzer',
+          'email': user.email,
+          'createdAt': Timestamp.now(),
+          'bio': '',
+          'kitchen': 'Nicht angegeben',
+          'favdish': '',
+          'isAdmin': false,
+          'favorites': [],
+        });
+        print('Neuer Google-Nutzer in Firestore angelegt.');
+      }
+
+      final userData = (await userRef.get()).data();
+      final isAdmin = userData?['isAdmin'] ?? false;
+
+      print('Angemeldeter Google-Nutzer ist Admin: $isAdmin');
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Color(0xFF2E6B4D),
+          content: Text(
+            'Erfolgreich mit Google eingeloggt',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google-Login fehlgeschlagen: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -26,7 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
     final headingColor = isDark ? Colors.white : const Color(0xFF122620);
     final iconColor = isDark ? Colors.white60 : const Color(0xFF122620);
-    final buttonBackground = isDark ? theme.colorScheme.primary : const Color(0xFF122620);
+    final buttonBackground =
+        isDark ? theme.colorScheme.primary : const Color(0xFF122620);
     final buttonTextColor = isDark ? Colors.black : Colors.white;
 
     return Scaffold(
@@ -119,7 +182,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   final isAdmin =
                                       doc.data()?['isAdmin'] ?? false;
 
-                                  print('Angemeldeter Benutzer ist Admin: $isAdmin');
+                                  print(
+                                      'Angemeldeter Benutzer ist Admin: $isAdmin');
 
                                   if (!mounted) return;
 
@@ -152,6 +216,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: buttonTextColor,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            ElevatedButton.icon(
+                              onPressed: _signInWithGoogle,
+                              icon: const Icon(Icons.login),
+                              label: const Text('Mit Google anmelden'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
                             ),
