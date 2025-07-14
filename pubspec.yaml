@@ -72,6 +72,7 @@ flutter:
     - assets/keto_icon.png
     - assets/rohkost_icon.png
     - assets/recipe.json
+    - assets/logo-horizontale.png
 
     - assets/character_1.png
     - assets/character_2.png
