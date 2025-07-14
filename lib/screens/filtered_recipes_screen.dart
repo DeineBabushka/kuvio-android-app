@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 import 'recipes_singleview_screen.dart';
+import '../widgets/bottom_nav.dart'; // ← wichtig!
 
 class FilteredRecipesScreen extends StatelessWidget {
   final String selectedDiet;
@@ -22,8 +23,11 @@ class FilteredRecipesScreen extends StatelessWidget {
     final backgroundColor = theme.scaffoldBackgroundColor;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final cardBackground = isDarkMode ? theme.cardColor : Colors.white;
-    final titleColor = isDarkMode ? theme.colorScheme.primary : const Color(0xFF122620);
-    final subtitleColor = isDarkMode ? theme.textTheme.bodyMedium?.color ?? Colors.white70 : Colors.black87;
+    final titleColor =
+        isDarkMode ? theme.colorScheme.primary : const Color(0xFF122620);
+    final subtitleColor = isDarkMode
+        ? theme.textTheme.bodyMedium?.color ?? Colors.white70
+        : Colors.black87;
 
     final List<Recipe> filteredRecipes = allRecipes.where((recipe) {
       return recipe.dietTypes.contains(selectedDiet) &&
@@ -125,6 +129,10 @@ class FilteredRecipesScreen extends StatelessWidget {
                 );
               },
             ),
+      bottomNavigationBar: BottomNavWidget(
+        allRecipes: allRecipes,
+        currentIndex: 1, // "Suche"-Tab ist aktiv
+      ),
     );
   }
 }

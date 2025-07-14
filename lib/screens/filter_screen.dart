@@ -54,13 +54,16 @@ class _RecipesScreenState extends State<RecipesScreen> {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
+      drawer: HamburgerDrawer(allRecipes: allRecipesList),
       appBar: AppBar(
-        title: Text("Rezeptauswahl",
-            style: TextStyle(color: theme.textTheme.bodyLarge?.color)),
         backgroundColor: theme.scaffoldBackgroundColor,
-        actions: [
-          HamburgerMenu(allRecipes: allRecipesList),
-        ],
+        iconTheme: const IconThemeData(color: Colors.white),
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Image.asset(
+          'assets/logo-horizontale.png',
+          height: 200,
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -80,20 +83,28 @@ class _RecipesScreenState extends State<RecipesScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFilterCircle('assets/rohkost_icon.png', 'Rohkost', filterTextColor),
-                  _buildFilterCircle('assets/gluten_free_icon.png', 'Glutenfrei', filterTextColor),
-                  _buildFilterCircle('assets/fish_icon.png', 'Fisch', filterTextColor),
-                  _buildFilterCircle('assets/keto_icon.png', 'Keto', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/rohkost_icon.png', 'Rohkost', filterTextColor),
+                  _buildFilterCircle('assets/gluten_free_icon.png',
+                      'Glutenfrei', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/fish_icon.png', 'Fisch', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/keto_icon.png', 'Keto', filterTextColor),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFilterCircle('assets/proteins_icon.png', 'Fleisch', filterTextColor),
-                  _buildFilterCircle('assets/vegetarian_icon.png', 'Vegetarisch', filterTextColor),
-                  _buildFilterCircle('assets/alles_icon.png', 'Omnivor', filterTextColor),
-                  _buildFilterCircle('assets/vegan_icon.png', 'Vegan', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/proteins_icon.png', 'Fleisch', filterTextColor),
+                  _buildFilterCircle('assets/vegetarian_icon.png',
+                      'Vegetarisch', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/alles_icon.png', 'Omnivor', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/vegan_icon.png', 'Vegan', filterTextColor),
                 ],
               ),
               const SizedBox(height: 30),
@@ -134,7 +145,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Bitte wähle Ernährungstyp und Kategorie'),
+                          content:
+                              Text('Bitte wähle Ernährungstyp und Kategorie'),
                         ),
                       );
                     }

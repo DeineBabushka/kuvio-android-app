@@ -49,16 +49,17 @@ class _AccountScreenState extends State<AccountScreen> {
 
     final backgroundColor = theme.scaffoldBackgroundColor;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
-    final labelColor = Colors.white;
-    final dividerColor = isDark ? Colors.white54 : Colors.black26;
-    final buttonBackground = isDark ? theme.cardColor : Colors.white;
-    final buttonTextColor =
-        isDark ? theme.colorScheme.primary : const Color(0xFF122620);
+    final sectionStyle = TextStyle(
+      color: Colors.white70,
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+    );
+    final cardColor = const Color(0xFF2E6B4D);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text('Mein Konto',
-            style: TextStyle(color: textColor, fontSize: 20)),
+        title: Text('Profil', style: TextStyle(color: textColor)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -69,67 +70,79 @@ class _AccountScreenState extends State<AccountScreen> {
               ? Center(
                   child: Text('Keine Daten gefunden',
                       style: TextStyle(color: textColor)))
-              : Padding(
-                  padding: const EdgeInsets.all(24.0),
+              : SingleChildScrollView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage(
-                          userData!['profileImage'] ?? 'assets/character_1.png',
+                      Center(
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundImage: AssetImage(
+                                  userData!['profileImage'] ??
+                                      'assets/character_1.png'),
+                              backgroundColor: Colors.transparent,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              userData!['username'] ?? 'Unbekannt',
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              FirebaseAuth.instance.currentUser?.email ?? '',
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white60),
+                            ),
+                          ],
                         ),
-                        backgroundColor: Colors.transparent,
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        userData!['username'] ?? 'Unbekannt',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: textColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 16),
-                      Divider(color: dividerColor),
-                      _buildInfoRow(
-                          "Über mich", userData!['bio'], textColor, labelColor),
-                      Divider(color: dividerColor),
-                      _buildInfoRow("Lieblingsküche", userData!['kitchen'],
-                          textColor, labelColor),
-                      Divider(color: dividerColor),
-                      _buildInfoRow("Lieblingsgericht", userData!['favdish'],
-                          textColor, labelColor),
-                      const Spacer(),
-                      ElevatedButton(
-                        onPressed: _navigateToEditProfile,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: buttonBackground,
-                          foregroundColor: buttonTextColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Text('Profil bearbeiten',
-                            style: TextStyle(
-                                fontSize: 16, color: buttonTextColor)),
-                      ),
+                      const SizedBox(height: 32),
+                      Text("DEIN KONTO", style: sectionStyle),
                       const SizedBox(height: 12),
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.delete),
-                        label: Text('Konto löschen'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                      _buildCardTile(
+                          "Über mich", userData!['bio'], textColor, cardColor),
+                      _buildCardTile("Lieblingsküche", userData!['kitchen'],
+                          textColor, cardColor),
+                      _buildCardTile("Lieblingsgericht", userData!['favdish'],
+                          textColor, cardColor),
+                      const SizedBox(height: 10),
+                      Center(
+                        child: TextButton.icon(
+                          onPressed: _navigateToEditProfile,
+                          icon: const Icon(Icons.edit, color: Colors.white70),
+                          label: const Text(
+                            "Profil bearbeiten",
+                            style:
+                                TextStyle(color: Colors.white70, fontSize: 18),
+                          ),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white70,
                           ),
                         ),
-                        onPressed: _showDeleteConfirmationDialog,
+                      ),
+                      const SizedBox(height: 60),
+                      Center(
+                        child: _buildActionButton(
+                          "Konto löschen",
+                          _showDeleteConfirmationDialog,
+                          Colors.red,
+                          Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Center(
+                        child: Text(
+                          "Wenn du dein Konto löscht, werden all deine\nBenutzerdaten und dein Zugang unwiderruflich gelöscht.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white60, fontSize: 13),
+                        ),
                       ),
                     ],
                   ),
@@ -137,22 +150,36 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  Widget _buildInfoRow(
-      String label, String? value, Color textColor, Color labelColor) {
-    return Column(
-      children: [
-        Text(
-          label,
-          style: TextStyle(color: labelColor, fontSize: 16),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value?.isNotEmpty == true ? value! : 'Nicht angegeben',
-          style: TextStyle(color: textColor, fontSize: 18),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 16),
-      ],
+  Widget _buildCardTile(
+      String label, String? value, Color textColor, Color tileColor) {
+    return Card(
+      color: tileColor,
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        title: Text(label,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            )),
+        subtitle: Text(value?.isNotEmpty == true ? value! : 'Nicht angegeben',
+            style: TextStyle(color: textColor, fontSize: 16)),
+      ),
+    );
+  }
+
+  Widget _buildActionButton(
+      String text, VoidCallback onPressed, Color bgColor, Color textColor) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: bgColor,
+        foregroundColor: textColor,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+      child: Text(text, style: const TextStyle(fontSize: 16)),
     );
   }
 
@@ -161,23 +188,18 @@ class _AccountScreenState extends State<AccountScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
-            'Konto wirklich löschen?',
-            style: TextStyle(color: Colors.black),
-          ),
-          content: Text(
-            'Dieser Vorgang kann nicht rückgängig gemacht werden.',
-            style: TextStyle(color: Colors.black),
-          ),
+          title: const Text('Konto wirklich löschen?',
+              style: TextStyle(color: Colors.black)),
+          content: const Text(
+              'Dieser Vorgang kann nicht rückgängig gemacht werden.',
+              style: TextStyle(color: Colors.black)),
           actions: [
             TextButton(
-              child: Text('Abbrechen'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              child: const Text('Abbrechen'),
+              onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: Text('Löschen', style: TextStyle(color: Colors.red)),
+              child: const Text('Löschen', style: TextStyle(color: Colors.red)),
               onPressed: () {
                 Navigator.of(context).pop();
                 _deleteAccount();
@@ -191,26 +213,15 @@ class _AccountScreenState extends State<AccountScreen> {
 
   void _deleteAccount() async {
     final user = FirebaseAuth.instance.currentUser;
-
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Kein Benutzer angemeldet.')),
-      );
-      return;
-    }
+    if (user == null) return;
 
     final password = await _askForPassword();
     if (password == null) return;
 
     try {
-      final cred = EmailAuthProvider.credential(
-        email: user.email!,
-        password: password,
-      );
-
+      final cred =
+          EmailAuthProvider.credential(email: user.email!, password: password);
       await user.reauthenticateWithCredential(cred);
-
-      // Firestore-Daten löschen
       await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
@@ -219,17 +230,13 @@ class _AccountScreenState extends State<AccountScreen> {
           .collection('favorites')
           .doc(user.uid)
           .delete();
-
-      // Auth-Konto löschen
       await user.delete();
 
-      // Zur Login-Seite weiterleiten
       if (!mounted) return;
       Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Fehler beim Löschen: $e')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Fehler beim Löschen: $e')));
     }
   }
 
@@ -241,8 +248,7 @@ class _AccountScreenState extends State<AccountScreen> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
@@ -254,16 +260,14 @@ class _AccountScreenState extends State<AccountScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Passwort bestätigen',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              const Text('Passwort bestätigen',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
               TextField(
                 controller: controller,
                 obscureText: true,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
+                style: const TextStyle(color: Colors.black),
+                decoration: const InputDecoration(
                   labelText: 'Passwort',
                   border: OutlineInputBorder(),
                   labelStyle: TextStyle(color: Colors.black),
@@ -274,12 +278,12 @@ class _AccountScreenState extends State<AccountScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: Text('Abbrechen'),
+                    child: const Text('Abbrechen'),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    child: Text('Bestätigen'),
+                    child: const Text('Bestätigen'),
                     onPressed: () {
                       result = controller.text;
                       Navigator.of(context).pop();
