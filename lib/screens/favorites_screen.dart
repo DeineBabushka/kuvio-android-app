@@ -17,10 +17,42 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   List<_FavoriteItem> favoriteRecipes = [];
   bool isLoading = true;
 
+  final TextEditingController searchController = TextEditingController();
+  String searchQuery = '';
+  String? selectedCategory;
+  String? selectedDietType;
+
+  final List<String> availableCategories = [
+    "Vorspeise",
+    "Hauptgericht",
+    "Dessert",
+    "Beilage",
+    "Snack",
+    "Frühstück",
+    "Kalorienarm"
+  ];
+
+  final List<String> availableDietTypes = [
+    'Rohkost',
+    'Glutenfrei',
+    'Fisch',
+    'Keto',
+    'Fleisch',
+    'Vegetarisch',
+    'Omnivor',
+    'Vegan'
+  ];
+
   @override
   void initState() {
     super.initState();
     loadFavorites();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   Future<void> loadFavorites() async {
@@ -78,6 +110,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     }
   }
 
+  List<_FavoriteItem> filteredFavorites() {
+    return favoriteRecipes.where((fav) {
+      final recipe = fav.recipe;
+      final matchesSearch = recipe.title.toLowerCase().contains(searchQuery);
+      final matchesCategory = selectedCategory == null ||
+          recipe.categories.contains(selectedCategory);
+      final matchesDiet = selectedDietType == null ||
+          recipe.dietTypes.contains(selectedDietType);
+      return matchesSearch && matchesCategory && matchesDiet;
+    }).toList();
+  }
+
   String _formatDate(DateTime date) {
     final localDate = date.toLocal();
     return '${localDate.day.toString().padLeft(2, '0')}.'
@@ -87,124 +131,230 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         '${localDate.minute.toString().padLeft(2, '0')}';
   }
 
- @override
-Widget build(BuildContext context) {
-  final theme = Theme.of(context);
-  final isDarkMode = theme.brightness == Brightness.dark;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
 
-  final backgroundColor = theme.scaffoldBackgroundColor;
-  final textColor = isDarkMode ? Colors.white : const Color(0xFF122620);
-  final subtitleColor = isDarkMode ? Colors.white70 : const Color(0xFF122620);
-  final timestampColor = isDarkMode ? Colors.white54 : Colors.black54;
-  final cardColor = isDarkMode ? theme.cardColor : Colors.white;
+    final backgroundColor = theme.scaffoldBackgroundColor;
+    final textColor = isDarkMode ? Colors.white : const Color(0xFF122620);
+    final subtitleColor = isDarkMode ? Colors.white70 : const Color(0xFF122620);
+    final timestampColor = isDarkMode ? Colors.white54 : Colors.black54;
+    final cardColor = isDarkMode ? theme.cardColor : Colors.white;
 
-  return Scaffold(
-    appBar: AppBar(
-      title: Text('Meine Favoriten', style: TextStyle(color: Colors.white)),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Meine Favoriten',
+            style: TextStyle(color: Colors.white)),
+        backgroundColor: backgroundColor,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       backgroundColor: backgroundColor,
-      iconTheme: IconThemeData(color: Colors.white),
-    ),
-    backgroundColor: backgroundColor,
-    body: isLoading
-        ? Center(child: CircularProgressIndicator(color: Colors.white))
-        : favoriteRecipes.isEmpty
-            ? Center(
-                child: Text(
-                  'Keine Favoriten gefunden.',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            : ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: favoriteRecipes.length,
-                itemBuilder: (context, index) {
-                  final favItem = favoriteRecipes[index];
-                  final recipe = favItem.recipe;
-
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RecipeDetailScreen(
-                            recipe: recipe,
-                            recipeId: recipe.id,
-                          ),
-                        ),
-                      );
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator(color: Colors.white))
+          : Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: TextField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value.toLowerCase();
+                      });
                     },
-                    child: Card(
-                      color: cardColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      elevation: 4,
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              bottomLeft: Radius.circular(16),
-                            ),
-                            child: SizedBox(
-                              width: 100,
-                              height: 150,
-                              child: AspectRatio(
-                                aspectRatio: 2 / 3,
-                                child: recipe.image.isNotEmpty
-                                    ? Image.asset(
-                                        'assets/${recipe.image}',
-                                        fit: BoxFit.cover,
-                                      )
-                                    : const SizedBox(),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12.0, horizontal: 8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    recipe.title,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    '${recipe.portions} Portionen • ${recipe.preparationTime}',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: subtitleColor,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Hinzugefügt am: ${_formatDate(favItem.addedAt)}',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: timestampColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: 'Suche nach Rezepten...',
+                      hintStyle: const TextStyle(color: Colors.white70),
+                      filled: true,
+                      fillColor: Colors.white10,
+                      prefixIcon: const Icon(Icons.search, color: Colors.white),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
                       ),
                     ),
-                  );
-                },
-              ),
-  );
-}
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: selectedCategory,
+                          dropdownColor: backgroundColor,
+                          decoration: InputDecoration(
+                            labelText: 'Kategorie',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            filled: true,
+                            fillColor: Colors.white10,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          icon: const Icon(Icons.arrow_drop_down,
+                              color: Colors.white),
+                          items: [
+                            const DropdownMenuItem(
+                              value: null,
+                              child: Text('Kategorien',
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                            ...availableCategories
+                                .map((cat) => DropdownMenuItem(
+                                      value: cat,
+                                      child: Text(cat,
+                                          style: const TextStyle(
+                                              color: Colors.white)),
+                                    )),
+                          ],
+                          onChanged: (value) {
+                            setState(() => selectedCategory = value);
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: selectedDietType,
+                          dropdownColor: backgroundColor,
+                          decoration: InputDecoration(
+                            labelText: 'Ernährungsform',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            filled: true,
+                            fillColor: Colors.white10,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          icon: const Icon(Icons.arrow_drop_down,
+                              color: Colors.white),
+                          items: [
+                            const DropdownMenuItem(
+                              value: null,
+                              child: Text('Ernährungsformen',
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                            ...availableDietTypes
+                                .map((diet) => DropdownMenuItem(
+                                      value: diet,
+                                      child: Text(diet,
+                                          style: const TextStyle(
+                                              color: Colors.white)),
+                                    )),
+                          ],
+                          onChanged: (value) {
+                            setState(() => selectedDietType = value);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  child: filteredFavorites().isEmpty
+                      ? const Center(
+                          child: Text(
+                            'Keine passenden Favoriten gefunden.',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.all(16),
+                          itemCount: filteredFavorites().length,
+                          itemBuilder: (context, index) {
+                            final favItem = filteredFavorites()[index];
+                            final recipe = favItem.recipe;
+
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RecipeDetailScreen(
+                                      recipe: recipe,
+                                      recipeId: recipe.id,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Card(
+                                color: cardColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                elevation: 4,
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(16),
+                                        bottomLeft: Radius.circular(16),
+                                      ),
+                                      child: SizedBox(
+                                        width: 100,
+                                        height: 150,
+                                        child: recipe.image.isNotEmpty
+                                            ? Image.asset(
+                                                'assets/${recipe.image}',
+                                                fit: BoxFit.cover,
+                                              )
+                                            : const SizedBox(),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 12.0, horizontal: 8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              recipe.title,
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                color: textColor,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              '${recipe.portions} Portionen • ${recipe.preparationTime}',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: subtitleColor,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              'Hinzugefügt am: ${_formatDate(favItem.addedAt)}',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: timestampColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
+    );
+  }
 }
 
 class _FavoriteItem {
