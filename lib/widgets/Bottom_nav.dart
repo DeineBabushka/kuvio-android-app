@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../screens/start_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../models/recipe.dart';
+import '../screens/login_screen.dart';
+import '../screens/account_screen.dart';
 import '../screens/filter_screen.dart';
 import '../screens/favorites_screen.dart';
-import '../models/recipe.dart';
 
 class BottomNavWidget extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -22,34 +24,34 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
   void _onItemTapped(int index) {
     if (index == widget.currentIndex) return;
 
+    final user = FirebaseAuth.instance.currentUser; // <-- hier zentral
+
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => const StartScreen(),
+            builder: (_) =>
+                user == null ? const LoginScreen() : const AccountScreen(),
           ),
         );
         break;
 
       case 1:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const RecipesScreen(),
-          ),
-        );
+        // TODO: Navigation zu Einkaufsliste (Valentin)
         break;
 
       case 2:
-        // TODO: Navigation zu Kommentare
+        // TODO: Navigation zu Kommentarseite (Symeon)
         break;
 
       case 3:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => FavoritesScreen(allRecipes: widget.allRecipes),
+            builder: (_) => user == null
+                ? const LoginScreen()
+                : FavoritesScreen(allRecipes: widget.allRecipes),
           ),
         );
         break;
@@ -59,7 +61,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: const Color(0xFF1B1B1B),
+      backgroundColor: const Color(0xFF122620),
       currentIndex: widget.currentIndex,
       selectedItemColor: const Color(0xFF6FC38D),
       unselectedItemColor: Colors.white70,
@@ -67,12 +69,12 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
       onTap: _onItemTapped,
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Start',
+          icon: Icon(Icons.person),
+          label: 'Konto',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Suche',
+          icon: Icon(Icons.shopping_cart),
+          label: 'Einkaufsliste',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat_bubble_outline),
