@@ -17,7 +17,7 @@ class RecipesListScreen extends StatelessWidget {
         title: const Text("Rezepte für dich"),
         backgroundColor: const Color(0xFF122620),
         actions: [
-          HamburgerMenu(allRecipes: allRecipes),
+          HamburgerDrawer(allRecipes: allRecipes),
         ],
       ),
       body: SafeArea(

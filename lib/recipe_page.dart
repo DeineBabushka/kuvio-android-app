@@ -48,7 +48,7 @@ class _RecipePageState extends State<RecipePage> {
         title: Text(recipe!.title),
         backgroundColor: const Color(0xFF122620),
         actions: [
-          HamburgerMenu(allRecipes: allRecipesList),
+          HamburgerDrawer(allRecipes: allRecipesList),
         ],
       ),
       backgroundColor: const Color(0xFF122620),

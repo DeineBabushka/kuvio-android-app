@@ -4,16 +4,56 @@
     "image": "recipe_1.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Zucchini",
-      "1 rote Paprika",
-      "1 gelbe Paprika",
-      "1 rote Zwiebel",
-      "2 EL Olivenöl",
-      "200 g Halloumi",
-      "1 TL Paprikapulver",
-      "1 TL getrockneter Thymian",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "gelbe Paprika"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Halloumi"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "getrockneter Thymian"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zucchini, Paprika und Zwiebel in Streifen schneiden.",
@@ -49,13 +89,41 @@
     "image": "recipe_2.jpg",
     "portions": 2,
     "ingredients": [
-      "3 Tomaten",
-      "150 g Mozzarella",
-      "1 Handvoll Basilikum",
-      "2 EL Olivenöl",
-      "1 EL Balsamico",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Tomaten"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Mozzarella"
+      },
+      {
+        "quantity": 10,
+        "unit": "g",
+        "name": "Basilikum"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Balsamico"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Tomaten und Mozzarella in Scheiben schneiden.",
@@ -90,15 +158,51 @@
     "image": "recipe_3.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zucchini",
-      "50 g Parmesan",
-      "30 g Pinienkerne",
-      "1 Bund Basilikum",
-      "1 Knoblauchzehe",
-      "3 EL Olivenöl",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Parmesan"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Pinienkerne"
+      },
+      {
+        "quantity": 15,
+        "unit": "g",
+        "name": "Basilikum"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 3,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zucchini mit Spiralschneider zu Nudeln verarbeiten.",
@@ -132,17 +236,61 @@
     "image": "recipe_4.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Dose Kidneybohnen",
-      "1 Dose Mais",
-      "1 Dose gehackte Tomaten",
-      "1 rote Paprika",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 TL Paprikapulver",
-      "1 TL Kreuzkümmel",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 240,
+        "unit": "g",
+        "name": "Kidneybohnen (Abtropfgewicht)"
+      },
+      {
+        "quantity": 140,
+        "unit": "g",
+        "name": "Mais (Abtropfgewicht)"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "gehackte Tomaten (Dose)"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kreuzkümmel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zwiebel und Knoblauch fein hacken.",
@@ -177,13 +325,41 @@
     "image": "recipe_5.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "200 g Champignons",
-      "1 EL Butter",
-      "2 EL Milch",
-      "1 EL Schnittlauch",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Champignons"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Milch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Schnittlauch"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Champignons in Scheiben schneiden.",
@@ -217,15 +393,51 @@
     "image": "recipe_6.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Karotten",
-      "1 Stange Lauch",
-      "1/4 Sellerieknolle",
-      "1 Liter Gemüsebrühe (glutenfrei)",
-      "1 EL Olivenöl",
-      "1 TL Majoran",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Karotten"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Lauch"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Sellerieknolle"
+      },
+      {
+        "quantity": 1000,
+        "unit": "ml",
+        "name": "Gemüsebrühe (glutenfrei)"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Majoran"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 5,
+        "unit": "g",
+        "name": "Petersilie"
+      }
     ],
     "instructions": [
       "1. Gemüse schälen, waschen und klein schneiden.",
@@ -260,14 +472,46 @@
     "image": "recipe_7.jpg",
     "portions": 2,
     "ingredients": [
-      "500 g Kartoffeln",
-      "150 ml Sahne",
-      "100 g geriebener Käse",
-      "1 Knoblauchzehe",
-      "1 Prise Muskat",
-      "Salz",
-      "Pfeffer",
-      "Butter für die Form"
+      {
+        "quantity": 500,
+        "unit": "g",
+        "name": "Kartoffeln"
+      },
+      {
+        "quantity": 150,
+        "unit": "ml",
+        "name": "Sahne"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "geriebener Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Muskat"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Butter (für die Form)"
+      }
     ],
     "instructions": [
       "1. Kartoffeln schälen und in dünne Scheiben schneiden.",
@@ -300,14 +544,46 @@
     "image": "recipe_8.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Aubergine",
-      "150 g Ricotta",
-      "1 TL Zitronensaft",
-      "2 EL Olivenöl",
-      "1 EL gehacktes Basilikum",
-      "1 Knoblauchzehe",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Aubergine"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Ricotta"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehacktes Basilikum"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Aubergine längs in dünne Scheiben schneiden.",
@@ -341,16 +617,56 @@
     "image": "recipe_9.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g rote Linsen",
-      "1 Karotte",
-      "1 Kartoffel",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 EL Olivenöl",
-      "800 ml Gemüsebrühe (glutenfrei)",
-      "1 TL Kreuzkümmel",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "rote Linsen"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Kartoffel"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 800,
+        "unit": "ml",
+        "name": "Gemüsebrühe (glutenfrei)"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kreuzkümmel"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Gemüse klein schneiden.",
@@ -384,15 +700,51 @@
     "image": "recipe_10.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g glutenfreier Buchweizen oder Hirse",
-      "1 Paprika",
-      "1 Gurke",
-      "2 Tomaten",
-      "1 Bund Petersilie",
-      "2 EL Olivenöl",
-      "2 EL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "glutenfreier Buchweizen oder Hirse"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Gurke"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Tomaten"
+      },
+      {
+        "quantity": 15,
+        "unit": "g",
+        "name": "Petersilie"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Getreide nach Packungsanweisung garen und abkühlen lassen.",
@@ -427,15 +779,51 @@
     "image": "recipe_11.jpg",
     "portions": 2,
     "ingredients": [
-      "2 glutenfreie Wraps",
-      "100 g Hummus",
-      "1 Avocado",
-      "1 Karotte",
-      "1/2 Gurke",
-      "1 Handvoll Rucola",
-      "1 EL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "glutenfreie Wraps"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Hummus"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Gurke"
+      },
+      {
+        "quantity": 15,
+        "unit": "g",
+        "name": "Rucola"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Gemüse in dünne Streifen schneiden.",
@@ -469,14 +857,46 @@
     "image": "recipe_12.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "50 g geriebener Käse",
-      "1 rote Paprika",
-      "1 Frühlingszwiebel",
-      "1 EL Butter",
-      "2 EL Milch",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "geriebener Käse"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Frühlingszwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Milch"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Paprika in Würfel, Frühlingszwiebel in Ringe schneiden.",
@@ -510,14 +930,46 @@
     "image": "recipe_13.jpg",
     "portions": 2,
     "ingredients": [
-      "500 g kleine Kartoffeln",
-      "2 EL Olivenöl",
-      "1 TL Rosmarin",
-      "250 g Magerquark",
-      "1 EL Schnittlauch",
-      "1 Knoblauchzehe",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 500,
+        "unit": "g",
+        "name": "kleine Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Rosmarin"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Magerquark"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Schnittlauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Kartoffeln waschen, halbieren und mit Öl, Rosmarin, Salz und Pfeffer vermengen.",
@@ -548,14 +1000,46 @@
     "image": "recipe_14.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "1 Paprika",
-      "1 Tomate",
-      "1 EL Butter",
-      "2 EL Milch",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 120,
+        "unit": "g",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Milch"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Petersilie"
+      }
     ],
     "instructions": [
       "1. Paprika und Tomate würfeln.",
@@ -590,15 +1074,51 @@
     "image": "recipe_15.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Tomaten",
-      "1/2 Gurke",
-      "1 rote Zwiebel",
-      "1 Paprika",
-      "100 g Feta",
-      "1 EL Olivenöl",
-      "1 TL Oregano",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Tomaten"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Gurke"
+      },
+      {
+        "quantity": 80,
+        "unit": "g",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 120,
+        "unit": "g",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Feta"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Gemüse würfeln, Zwiebel in feine Ringe schneiden.",
@@ -632,16 +1152,56 @@
     "image": "recipe_16.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g rote Linsen",
-      "1 Dose Kokosmilch",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 TL Currypulver",
-      "1 TL Kurkuma",
-      "1 EL Öl",
-      "200 ml Wasser",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "rote Linsen"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Currypulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kurkuma"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 200,
+        "unit": "ml",
+        "name": "Wasser"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zwiebel und Knoblauch fein hacken.",
@@ -674,17 +1234,61 @@
     "image": "recipe_17.jpg",
     "portions": 2,
     "ingredients": [
-      "160 g Vollkornnudeln",
-      "100 g braune Linsen",
-      "1 Möhre",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "400 ml passierte Tomaten",
-      "1 TL Oregano",
-      "1 TL Thymian",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 160,
+        "unit": "g",
+        "name": "Vollkornnudeln"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "braune Linsen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "passierte Tomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Thymian"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Linsen nach Packung garen.",
@@ -716,15 +1320,51 @@
     "image": "recipe_18.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g Quinoa",
-      "1 Mango",
-      "1 Avocado",
-      "1 rote Paprika",
-      "1 Limette",
-      "2 EL Olivenöl",
-      "Frischer Koriander",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Quinoa"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Mango"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Limette"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "frischer Koriander"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Quinoa nach Packung garen, abkühlen lassen.",
@@ -758,17 +1398,61 @@
     "image": "recipe_19.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Tofu",
-      "1 Brokkoli",
-      "1 Paprika",
-      "1 Zucchini",
-      "1 Karotte",
-      "2 EL Sojasauce",
-      "1 EL Sesamöl",
-      "1 TL Ingwer",
-      "1 TL Knoblauch",
-      "Sesam",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Tofu"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Brokkoli"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sojasauce"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sesamöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "geriebener Ingwer"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "gehackter Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sesam"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Tofu würfeln, Gemüse in Stücke schneiden.",
@@ -800,16 +1484,56 @@
     "image": "recipe_20.jpg",
     "portions": 2,
     "ingredients": [
-      "400 g Hokkaidokürbis",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 Stück Ingwer",
-      "1 Dose Kokosmilch",
-      "200 ml Gemüsebrühe",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer",
-      "Chili"
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Hokkaidokürbis"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 15,
+        "unit": "g",
+        "name": "frischer Ingwer"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 200,
+        "unit": "ml",
+        "name": "Gemüsebrühe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Chili"
+      }
     ],
     "instructions": [
       "1. Kürbis würfeln (mit Schale), Zwiebel, Knoblauch und Ingwer hacken.",
@@ -843,15 +1567,51 @@
     "image": "recipe_21.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Kichererbsen (gekocht)",
-      "1 Zwiebel",
-      "2 Knoblauchzehen",
-      "1 Bund Petersilie",
-      "1 TL Kreuzkümmel",
-      "2 EL Mehl",
-      "Öl zum Braten",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Kichererbsen (gekocht)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Knoblauchzehen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Bund",
+        "name": "Petersilie"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kreuzkümmel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Mehl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl zum Braten"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Kichererbsen mit Zwiebel, Knoblauch, Petersilie pürieren.",
@@ -882,15 +1642,51 @@
     "image": "recipe_22.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zucchini",
-      "400 g gehackte Tomaten",
-      "1 Knoblauchzehe",
-      "1 Zwiebel",
-      "1 EL Olivenöl",
-      "Basilikum",
-      "Oregano",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "gehackte Tomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Basilikum"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zucchini mit Spiralschneider in Spaghetti schneiden.",
@@ -924,14 +1720,46 @@
     "image": "recipe_23.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Scheiben Vollkornbrot",
-      "1 Avocado",
-      "1 Knoblauchzehe",
-      "6 Cherrytomaten",
-      "1 EL Zitronensaft",
-      "Salz",
-      "Pfeffer",
-      "Chiliflocken"
+      {
+        "quantity": 4,
+        "unit": "Scheiben",
+        "name": "Vollkornbrot"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 6,
+        "unit": "Stück",
+        "name": "Cherrytomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Chiliflocken"
+      }
     ],
     "instructions": [
       "1. Avocado zerdrücken, mit Knoblauch, Zitrone, Salz, Pfeffer würzen.",
@@ -962,14 +1790,46 @@
     "image": "recipe_24.jpg",
     "portions": 2,
     "ingredients": [
-      "1 große Süßkartoffel",
-      "1 Dose Kichererbsen",
-      "1 Dose Kokosmilch",
-      "1 Zwiebel",
-      "1 TL Currypulver",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "groß",
+        "name": "Süßkartoffel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Kichererbsen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Currypulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Süßkartoffel schälen und würfeln.",
@@ -1000,12 +1860,36 @@
     "image": "recipe_25.jpg",
     "portions": 2,
     "ingredients": [
-      "100 g Haferflocken",
-      "300 ml Hafermilch",
-      "1 Banane",
-      "1 TL Zimt",
-      "1 TL Ahornsirup",
-      "Obst nach Wahl"
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Haferflocken"
+      },
+      {
+        "quantity": 300,
+        "unit": "ml",
+        "name": "Hafermilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Banane"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zimt"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Ahornsirup"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Obst nach Wahl"
+      }
     ],
     "instructions": [
       "1. Haferflocken mit Milch in Topf geben.",
@@ -1037,15 +1921,51 @@
     "image": "recipe_26.jpg",
     "portions": 2,
     "ingredients": [
-      "1 kleiner Blumenkohl",
-      "2 EL Olivenöl",
-      "1 TL Paprikapulver",
-      "1 TL Kreuzkümmel",
-      "Salz",
-      "Pfeffer",
-      "2 EL Tahini",
-      "1 EL Zitronensaft",
-      "Wasser"
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Blumenkohl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kreuzkümmel"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Tahini"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Wasser"
+      }
     ],
     "instructions": [
       "1. Blumenkohl in Röschen teilen, mit Öl und Gewürzen mischen.",
@@ -1079,15 +1999,51 @@
     "image": "recipe_27.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g Reis",
-      "1 Paprika",
-      "1 Zucchini",
-      "1 Karotte",
-      "1 Frühlingszwiebel",
-      "2 EL Sojasauce",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Reis"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Frühlingszwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sojasauce"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Reis kochen und beiseite stellen.",
@@ -1117,11 +2073,31 @@
     "image": "recipe_28.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Karotten",
-      "1 Apfel",
-      "1 TL Zitronensaft",
-      "1 EL Walnüsse",
-      "1 TL Ahornsirup"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Karotten"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Apfel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Walnüsse (gehackt)"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Ahornsirup"
+      }
     ],
     "instructions": [
       "1. Karotten und Apfel raspeln.",
@@ -1154,16 +2130,56 @@
     "image": "recipe_29.jpg",
     "portions": 2,
     "ingredients": [
-      "400 g Kartoffeln",
-      "1 Paprika",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 EL Tomatenmark",
-      "1 TL Paprika edelsüß",
-      "400 ml Gemüsebrühe",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Kartoffeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver (edelsüß)"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Gemüsebrühe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Kartoffeln, Paprika, Zwiebel würfeln.",
@@ -1194,11 +2210,31 @@
     "image": "recipe_30.jpg",
     "portions": 2,
     "ingredients": [
-      "4 EL Chiasamen",
-      "250 ml Mandelmilch",
-      "1 EL Kakaopulver",
-      "1 TL Ahornsirup",
-      "Beeren zum Garnieren"
+      {
+        "quantity": 4,
+        "unit": "EL",
+        "name": "Chiasamen"
+      },
+      {
+        "quantity": 250,
+        "unit": "ml",
+        "name": "Mandelmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Kakaopulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Ahornsirup"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Beeren (zum Garnieren)"
+      }
     ],
     "instructions": [
       "1. Chiasamen mit Mandelmilch, Kakao und Sirup verrühren.",
@@ -1231,15 +2267,51 @@
     "image": "recipe_31.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Hähnchenbrüste",
-      "1 Zucchini",
-      "1 Paprika",
-      "1 rote Zwiebel",
-      "2 EL Olivenöl",
-      "1 TL Rosmarin",
-      "1 TL Paprika edelsüß",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Rosmarin"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver (edelsüß)"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 200 °C vorheizen.",
@@ -1272,16 +2344,56 @@
     "image": "recipe_32.jpg",
     "portions": 2,
     "ingredients": [
-      "160 g Spaghetti",
-      "250 g Rinderhackfleisch",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "400 ml passierte Tomaten",
-      "1 TL Oregano",
-      "1 TL Basilikum",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 160,
+        "unit": "g",
+        "name": "Spaghetti"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Rinderhackfleisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "passierte Tomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Basilikum"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Nudeln nach Packung kochen.",
@@ -1311,15 +2423,51 @@
     "image": "recipe_33.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Paprika",
-      "250 g gemischtes Hackfleisch",
-      "1 kleine Zwiebel",
-      "1 Knoblauchzehe",
-      "1 Ei",
-      "50 g Reis",
-      "1 TL Paprikapulver",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "große Paprika"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "gemischtes Hackfleisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Reis (gekocht)"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Reis garen und abkühlen lassen.",
@@ -1350,15 +2498,51 @@
     "image": "recipe_34.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Putenbrust",
-      "200 g Champignons",
-      "1 Zwiebel",
-      "100 ml Soja- oder Kochsahne",
-      "1 TL Senf",
-      "1 TL Paprikapulver",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Putenbrust"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Champignons"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Sojasahne oder Kochsahne"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fleisch und Pilze in Streifen schneiden, Zwiebel hacken.",
@@ -1390,12 +2574,36 @@
     "image": "recipe_35.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Rindersteaks (je ca. 180 g)",
-      "400 g kleine Kartoffeln",
-      "2 EL Olivenöl",
-      "1 TL Rosmarin",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 350,
+        "unit": "g",
+        "name": "Rindersteak"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "kleine Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Rosmarin"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 200 °C vorheizen.",
@@ -1425,14 +2633,46 @@
     "image": "recipe_36.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Wraps",
-      "200 g Hähnchenbrust",
-      "4 Blätter Römersalat",
-      "2 EL veganer Caesar-Dressing",
-      "1 Tomate",
-      "1 TL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "große Wraps"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 4,
+        "unit": "Blätter",
+        "name": "Römersalat"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "veganer Caesar-Dressing"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hähnchen in Streifen schneiden und in Öl braten, würzen.",
@@ -1462,16 +2702,56 @@
     "image": "recipe_37.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rinderhack",
-      "1 kleine Zwiebel",
-      "1 Ei",
-      "2 EL Semmelbrösel",
-      "400 ml Tomatenpassata",
-      "1 Knoblauchzehe",
-      "Basilikum",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rinderhack"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Semmelbrösel"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Tomatenpassata"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Basilikum"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hack mit Zwiebel, Ei, Bröseln, Salz, Pfeffer vermengen.",
@@ -1500,14 +2780,46 @@
     "image": "recipe_38.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Hähnchenbrust",
-      "1 Avocado",
-      "1 kleine Salatgurke",
-      "1 Handvoll Rucola",
-      "1 EL Olivenöl",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Salatgurke"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Rucola"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hähnchen grillen oder braten, abkühlen lassen.",
@@ -1540,15 +2852,51 @@
     "image": "recipe_39.jpg",
     "portions": 2,
     "ingredients": [
-      "250 g Hähnchenbrust",
-      "1 rote Paprika",
-      "1 gelbe Paprika",
-      "1 Zwiebel",
-      "1 TL Paprikapulver",
-      "1 TL Currypulver",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "gelbe Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Currypulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fleisch und Gemüse in Streifen schneiden.",
@@ -1579,14 +2927,46 @@
     "image": "recipe_40.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Schweinefilet",
-      "1 EL Senf",
-      "1 Knoblauchzehe",
-      "1 TL Thymian",
-      "1 TL Rosmarin",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Schweinefilet"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Thymian"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Rosmarin"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 180 °C vorheizen.",
@@ -1618,14 +2998,46 @@
     "image": "recipe_41.jpg",
     "portions": 2,
     "ingredients": [
-      "250 g Hähnchenbrust",
-      "150 g Reis",
-      "1 Zwiebel",
-      "1 TL Currypaste",
-      "1 Dose Kokosmilch",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Reis"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Currypaste"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Reis garen.",
@@ -1656,13 +3068,41 @@
     "image": "recipe_42.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Hähnchenschenkel",
-      "2 Süßkartoffeln",
-      "1 TL Paprikapulver",
-      "1 TL Knoblauchpulver",
-      "2 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenschenkel"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Süßkartoffeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Knoblauchpulver"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 200 °C vorheizen.",
@@ -1693,16 +3133,56 @@
     "image": "recipe_43.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Hackfleisch",
-      "1 Ei",
-      "1 EL Senf",
-      "2 EL Semmelbrösel",
-      "400 g Kartoffeln",
-      "2 EL Pflanzenmilch",
-      "1 EL Margarine",
-      "Salz",
-      "Pfeffer",
-      "Muskat"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Hackfleisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Semmelbrösel"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Pflanzenmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Margarine"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Muskat"
+      }
     ],
     "instructions": [
       "1. Hack mit Ei, Senf, Bröseln, Gewürzen mischen, Frikadellen formen.",
@@ -1732,14 +3212,46 @@
     "image": "recipe_44.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Putensteaks",
-      "1 Zucchini",
-      "1 Aubergine",
-      "1 Paprika",
-      "2 EL Olivenöl",
-      "Salz",
-      "Pfeffer",
-      "Thymian"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Putensteaks"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Aubergine"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Thymian"
+      }
     ],
     "instructions": [
       "1. Gemüse in Scheiben schneiden, mit Öl und Gewürzen marinieren.",
@@ -1770,14 +3282,46 @@
     "image": "recipe_45.jpg",
     "portions": 2,
     "ingredients": [
-      "250 g Hähnchenbrust",
-      "1 Paprika",
-      "1 Karotte",
-      "1 Handvoll Zuckerschoten",
-      "2 EL Sojasauce",
-      "1 TL Sesamöl",
-      "1 TL Ingwer",
-      "Pfeffer"
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Zuckerschoten"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sojasauce"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Sesamöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Ingwer"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fleisch und Gemüse in Streifen schneiden.",
@@ -1807,15 +3351,51 @@
     "image": "recipe_46.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Lachsfilets (je ca. 150 g)",
-      "1 Bio-Zitrone",
-      "1 Bund Dill",
-      "1 Schalotte",
-      "100 ml Hafercuisine",
-      "1 TL Senf",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Lachsfilet (je ca. 150 g)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Bio-Zitrone"
+      },
+      {
+        "quantity": 1,
+        "unit": "Bund",
+        "name": "Dill"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Schalotte"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Hafercuisine"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Den Lachs unter kaltem Wasser abspülen, trocken tupfen und mit Salz und Pfeffer würzen.",
@@ -1847,16 +3427,56 @@
     "image": "recipe_47.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Kabeljaufilet",
-      "1 Dose Kokosmilch",
-      "1 rote Paprika",
-      "1 Möhre",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 EL rote Currypaste",
-      "1 EL Öl",
-      "Salz",
-      "Limettensaft"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Kabeljaufilet"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Kokosmilch (1 Dose)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "rote Currypaste"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Limettensaft"
+      }
     ],
     "instructions": [
       "1. Den Fisch in mundgerechte Stücke schneiden und beiseite stellen.",
@@ -1889,15 +3509,51 @@
     "image": "recipe_48.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Dose Thunfisch in Wasser",
-      "200 g weiße Bohnen (aus der Dose)",
-      "1 rote Zwiebel",
-      "8 Cherrytomaten",
-      "1 EL Olivenöl",
-      "1 TL Balsamico",
-      "1 TL Senf",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Thunfisch in Wasser"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "weiße Bohnen (aus der Dose)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 8,
+        "unit": "Stück",
+        "name": "Cherrytomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Balsamico"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Bohnen in ein Sieb geben, gut abspülen und abtropfen lassen.",
@@ -1931,13 +3587,41 @@
     "image": "recipe_49.jpg",
     "portions": 2,
     "ingredients": [
-      "2 küchenfertige Forellen",
-      "50 g Mehl",
-      "2 EL Butter",
-      "1 Zitrone",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "küchenfertige Forellen"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Mehl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zitrone"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "gehackte Petersilie"
+      }
     ],
     "instructions": [
       "1. Die Forellen innen und außen waschen und trocken tupfen.",
@@ -1967,15 +3651,51 @@
     "image": "recipe_50.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Lachsfilets",
-      "2 Scheiben Vollkornbrot",
-      "1 Knoblauchzehe",
-      "1 TL Senf",
-      "1 EL Zitronensaft",
-      "1 Bund Petersilie",
-      "1 TL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Lachsfilets"
+      },
+      {
+        "quantity": 2,
+        "unit": "Scheiben",
+        "name": "Vollkornbrot"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "Bund",
+        "name": "Petersilie"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Den Ofen auf 180 °C Umluft vorheizen.",
@@ -2005,14 +3725,46 @@
     "image": "recipe_51.jpg",
     "portions": 2,
     "ingredients": [
-      "250 g Garnelen (geschält)",
-      "2 Knoblauchzehen",
-      "1 rote Chilischote",
-      "1 EL Olivenöl",
-      "1 TL Zitronensaft",
-      "2 EL gehackte Petersilie",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Garnelen (geschält)"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Knoblauchzehen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Chilischote"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "gehackte Petersilie"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Garnelen unter kaltem Wasser abspülen, gut abtropfen lassen und mit Küchenpapier trocken tupfen.",
@@ -2047,17 +3799,61 @@
     "image": "recipe_52.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Seelachsfilet",
-      "1 Ei",
-      "2 EL Semmelbrösel",
-      "1 kleine Zwiebel",
-      "1 TL Senf",
-      "400 g Kartoffeln",
-      "2 EL Pflanzenmilch",
-      "1 EL Margarine",
-      "Salz",
-      "Pfeffer",
-      "Muskat"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Seelachsfilet"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Semmelbrösel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Pflanzenmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Margarine"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Muskat"
+      }
     ],
     "instructions": [
       "1. Die Kartoffeln schälen, in Stücke schneiden und in Salzwasser ca. 20 Minuten weich kochen.",
@@ -2089,16 +3885,56 @@
     "image": "recipe_53.jpg",
     "portions": 2,
     "ingredients": [
-      "160 g Vollkornnudeln",
-      "1 Dose Thunfisch in Öl",
-      "10 Kirschtomaten",
-      "1 kleine Zwiebel",
-      "1 Knoblauchzehe",
-      "2 EL schwarze Oliven",
-      "1 EL Olivenöl",
-      "Basilikum",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 160,
+        "unit": "g",
+        "name": "Vollkornnudeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Thunfisch in Öl"
+      },
+      {
+        "quantity": 10,
+        "unit": "Stück",
+        "name": "Kirschtomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "schwarze Oliven"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "frischer Basilikum"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Nudeln nach Packungsanweisung in reichlich Salzwasser al dente kochen.",
@@ -2130,16 +3966,56 @@
     "image": "recipe_54.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zanderfilets",
-      "100 g rote Linsen",
-      "1 Möhre",
-      "1 Stange Sellerie",
-      "1 Schalotte",
-      "200 ml Gemüsebrühe",
-      "1 EL Öl",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zanderfilets"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "rote Linsen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stange",
+        "name": "Sellerie"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Schalotte"
+      },
+      {
+        "quantity": 200,
+        "unit": "ml",
+        "name": "Gemüsebrühe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Linsen mit der Brühe in einem Topf zum Kochen bringen und ca. 15 Minuten köcheln lassen.",
@@ -2172,15 +4048,51 @@
     "image": "recipe_55.jpg",
     "portions": 2,
     "ingredients": [
-      "6 Fischstäbchen",
-      "120 g Quinoa",
-      "1 Avocado",
-      "1 Karotte",
-      "1/2 Gurke",
-      "2 EL Sojajoghurt",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 6,
+        "unit": "Stück",
+        "name": "Fischstäbchen"
+      },
+      {
+        "quantity": 120,
+        "unit": "g",
+        "name": "Quinoa"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Gurke"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sojajoghurt"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Quinoa nach Packung mit Wasser gar kochen und abkühlen lassen.",
@@ -2213,16 +4125,56 @@
     "image": "recipe_56.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g frischer Lachs",
-      "200 g TK-Spinat",
-      "6 Lasagneplatten",
-      "100 ml Hafercuisine",
-      "1 Knoblauchzehe",
-      "1 kleine Zwiebel",
-      "1 EL Öl",
-      "Muskat",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "frischer Lachs"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "TK-Spinat"
+      },
+      {
+        "quantity": 6,
+        "unit": "Stück",
+        "name": "Lasagneplatten"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Hafercuisine"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Muskat"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Den Spinat auftauen und gut ausdrücken.",
@@ -2254,11 +4206,56 @@
     "image": "recipe_57.jpg",
     "portions": 2,
     "ingredients": [
-      "100 g geräucherte Makrele",
-      "100 g Frischkäse",
-      "1 TL Zitronensaft",
-      "1 EL Schnittlauch",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "frischer Lachs"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "TK-Spinat"
+      },
+      {
+        "quantity": 6,
+        "unit": "Stück",
+        "name": "Lasagneplatten"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Hafercuisine"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Muskat"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Makrele von Haut und Gräten befreien und mit einer Gabel zerdrücken.",
@@ -2292,13 +4289,41 @@
     "image": "recipe_58.jpg",
     "portions": 2,
     "ingredients": [
-      "6 frische Sardinen (ausgenommen)",
-      "2 EL Olivenöl",
-      "1 Bio-Zitrone",
-      "1 Knoblauchzehe",
-      "Petersilie",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 6,
+        "unit": "Stück",
+        "name": "frische Sardinen (ausgenommen)"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Bio-Zitrone"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Petersilie"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Sardinen waschen, trocknen und leicht salzen.",
@@ -2329,13 +4354,41 @@
     "image": "recipe_59.jpg",
     "portions": 2,
     "ingredients": [
-      "2 ganze Forellen",
-      "1 Zitrone",
-      "1 Bund Petersilie",
-      "1 Zweig Thymian",
-      "2 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "ganze Forellen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zitrone"
+      },
+      {
+        "quantity": 1,
+        "unit": "Bund",
+        "name": "Petersilie"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zweig",
+        "name": "Thymian"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 180 °C vorheizen.",
@@ -2367,16 +4420,56 @@
     "image": "recipe_60.jpg",
     "portions": 2,
     "ingredients": [
-      "2 kleine Fischfilets (z. B. Kabeljau)",
-      "4 kleine Tortillas",
-      "100 g Rotkohl",
-      "1 Karotte",
-      "1 EL Limettensaft",
-      "1 TL Joghurt",
-      "1 TL Mayonnaise",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "kleine Fischfilets (z. B. Kabeljau)"
+      },
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "kleine Tortillas"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Rotkohl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Limettensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Joghurt"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Mayonnaise"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fisch in mundgerechte Stücke schneiden, salzen und pfeffern.",
@@ -2409,15 +4502,51 @@
     "image": "recipe_61.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zucchini",
-      "1 reife Avocado",
-      "30 g Pinienkerne",
-      "1 Knoblauchzehe",
-      "1 Bund Basilikum",
-      "2 EL Zitronensaft",
-      "2 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Pinienkerne"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Bund",
+        "name": "Basilikum"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Die Zucchini mit einem Spiralschneider in feine Nudeln schneiden.",
@@ -2451,14 +4580,46 @@
     "image": "recipe_62.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Hähnchenbrüste",
-      "300 g Brokkoli",
-      "100 g Frischkäse",
-      "50 g geriebener Käse",
-      "1 EL Olivenöl",
-      "1 TL Paprikapulver",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Brokkoli"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Frischkäse"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "geriebener Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hähnchenbrust waschen, trocknen und mit Paprika, Salz und Pfeffer würzen.",
@@ -2491,14 +4652,46 @@
     "image": "recipe_63.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Lachsfilets",
-      "300 g frischer Blattspinat",
-      "1 Schalotte",
-      "2 EL Frischkäse",
-      "1 EL Butter",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Lachsfilet"
+      },
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "frischer Blattspinat"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Schalotte"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Frischkäse"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Lachsfilets mit etwas Zitronensaft, Salz und Pfeffer marinieren.",
@@ -2531,14 +4724,46 @@
     "image": "recipe_64.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "80 g Bacon",
-      "100 g Mayonnaise",
-      "1 TL Senf",
-      "1 TL Zitronensaft",
-      "2 EL gehackter Schnittlauch",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 80,
+        "unit": "g",
+        "name": "Bacon"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Mayonnaise"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "gehackter Schnittlauch"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Eier hart kochen, abschrecken, schälen und grob würfeln.",
@@ -2572,13 +4797,41 @@
     "image": "recipe_65.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Zucchini",
-      "100 g Tomatensauce",
-      "125 g Mozzarella",
-      "1 TL Oregano",
-      "2 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "große Zucchini"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Tomatensauce"
+      },
+      {
+        "quantity": 125,
+        "unit": "g",
+        "name": "Mozzarella"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 200 °C vorheizen.",
@@ -2612,13 +4865,41 @@
     "image": "recipe_66.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "200 g Champignons",
-      "1 EL Butter",
-      "2 EL Sahne",
-      "Schnittlauch",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Aubergine"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Frischkäse"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehackte Kräuter"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Champignons putzen und in Scheiben schneiden.",
@@ -2651,15 +4932,46 @@
     "image": "recipe_67.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rinderhackfleisch",
-      "1 Ei",
-      "2 große Salatblätter",
-      "2 Tomatenscheiben",
-      "2 Gurkenscheiben",
-      "1 TL Senf",
-      "1 TL Mayonnaise",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Blumenkohl"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenbrustfilets"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hackfleisch mit Ei, Salz und Pfeffer vermengen und 2 Patties formen.",
@@ -2692,13 +5004,41 @@
     "image": "recipe_68.jpg",
     "portions": 2,
     "ingredients": [
-      "1 große Aubergine",
-      "100 g Frischkäse",
-      "1 Knoblauchzehe",
-      "1 EL Olivenöl",
-      "1 EL gehackte Kräuter",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Aubergine"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Frischkäse"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehackte Kräuter"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Aubergine längs in dünne Scheiben schneiden und mit etwas Öl bestreichen.",
@@ -2731,14 +5071,46 @@
     "image": "recipe_69.jpg",
     "portions": 2,
     "ingredients": [
-      "1 kleiner Blumenkohl",
-      "2 Hähnchenbrustfilets",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 TL Paprikapulver",
-      "2 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Blumenkohl"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenbrustfilets"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Blumenkohl grob zerteilen und in der Küchenmaschine zu einer reisähnlichen Konsistenz zerkleinern.",
@@ -2771,13 +5143,41 @@
     "image": "recipe_70.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "50 ml Sahne",
-      "100 g Babyspinat",
-      "50 g geriebener Käse",
-      "1 EL Butter",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 50,
+        "unit": "ml",
+        "name": "Sahne"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Babyspinat"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "geriebener Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Eier mit der Sahne in einer Schüssel verquirlen, mit Salz und Pfeffer würzen.",
@@ -2811,13 +5211,41 @@
     "image": "recipe_71.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Dose Thunfisch",
-      "1 Avocado",
-      "1/2 rote Zwiebel",
-      "1 TL Zitronensaft",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Thunfisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Thunfisch abgießen, Avocado würfeln, Zwiebel fein hacken.",
@@ -2849,15 +5277,51 @@
     "image": "recipe_72.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Paprika",
-      "250 g Rinderhackfleisch",
-      "100 g Feta",
-      "1 kleine Zwiebel",
-      "1 EL Tomatenmark",
-      "1 TL Oregano",
-      "2 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Rinderhackfleisch"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Feta"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Paprika längs halbieren, entkernen und beiseitelegen.",
@@ -2890,12 +5354,36 @@
     "image": "recipe_73.jpg",
     "portions": 2,
     "ingredients": [
-      "3 Eier",
-      "50 g Frischkäse",
-      "1 EL Mandelmehl",
-      "1 TL Butter",
-      "1 TL Xylit (optional)",
-      "1/2 TL Zimt"
+      {
+        "quantity": 3,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Frischkäse"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Mandelmehl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Xylit"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Zimt"
+      }
     ],
     "instructions": [
       "1. Eier, Frischkäse, Mandelmehl und optional Xylit in einer Schüssel glatt rühren.",
@@ -2927,13 +5415,41 @@
     "image": "recipe_74.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Tomaten",
-      "125 g Mozzarella",
-      "2 EL Pesto (am besten selbstgemacht)",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer",
-      "Basilikum"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "große Tomaten"
+      },
+      {
+        "quantity": 125,
+        "unit": "g",
+        "name": "Mozzarella"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Pesto"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "frischer Basilikum"
+      }
     ],
     "instructions": [
       "1. Tomaten in Scheiben schneiden, Mozzarella abtropfen lassen und ebenfalls in Scheiben schneiden.",
@@ -2968,15 +5484,51 @@
     "image": "recipe_75.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Lachsfilet",
-      "1 Dose Kokosmilch",
-      "1 Zucchini",
-      "1 kleine Möhre",
-      "1 Frühlingszwiebel",
-      "1 TL rote Currypaste",
-      "1 TL Limettensaft",
-      "Salz",
-      "Koriander"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Lachsfilet"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Frühlingszwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "rote Currypaste"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Limettensaft"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "frischer Koriander"
+      }
     ],
     "instructions": [
       "1. Lachs in mundgerechte Würfel schneiden.",
@@ -3009,16 +5561,56 @@
     "image": "recipe_76.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rindergeschnetzeltes",
-      "1 rote Paprika",
-      "1 gelbe Paprika",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "100 ml Sahne",
-      "1 TL Paprikapulver",
-      "2 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rindergeschnetzeltes"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "gelbe Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Sahne"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fleisch in Streifen schneiden, falls nicht bereits geschnitten.",
@@ -3052,14 +5644,46 @@
     "image": "recipe_77.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Hähnchenbrust",
-      "1 Dose Kokosmilch",
-      "1 Zucchini",
-      "1 Karotte",
-      "1 TL rote Currypaste",
-      "1 TL Sojasauce",
-      "1 EL Öl",
-      "Salz"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 400,
+        "unit": "ml",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "rote Currypaste"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Sojasauce"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      }
     ],
     "instructions": [
       "1. Fleisch in Würfel schneiden, Gemüse in Streifen.",
@@ -3091,14 +5715,46 @@
     "image": "recipe_78.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Hähnchenbrustfilets",
-      "100 g TK-Spinat",
-      "50 g Frischkäse",
-      "50 g geriebener Käse",
-      "1 Knoblauchzehe",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenbrustfilet"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "TK-Spinat"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Frischkäse"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "geriebener Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Spinat auftauen und gut ausdrücken, mit Frischkäse und Knoblauch verrühren.",
@@ -3130,16 +5786,56 @@
     "image": "recipe_79.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rinderhack",
-      "1 Zucchini",
-      "1 Paprika",
-      "1 Zwiebel",
-      "1 Dose gehackte Tomaten",
-      "1 EL Tomatenmark",
-      "1 TL Oregano",
-      "2 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rinderhackfleisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "gehackte Tomaten (Dose)"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Gemüse klein schneiden, Zwiebel fein würfeln.",
@@ -3172,15 +5868,51 @@
     "image": "recipe_80.jpg",
     "portions": 2,
     "ingredients": [
-      "400 g Rindergulasch",
-      "2 Zwiebeln",
-      "2 Knoblauchzehen",
-      "1 EL Paprikapulver",
-      "1 EL Tomatenmark",
-      "250 ml Rinderbrühe",
-      "2 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Rindergulasch"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zwiebeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "Zehen",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 250,
+        "unit": "ml",
+        "name": "Rinderbrühe"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fleisch trocken tupfen, Zwiebeln und Knoblauch fein schneiden.",
@@ -3213,14 +5945,46 @@
     "image": "recipe_81.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zucchini",
-      "250 g Rinderhack",
-      "1 Ei",
-      "2 EL Parmesan",
-      "1 Knoblauchzehe",
-      "Salz",
-      "Pfeffer",
-      "Oregano"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Rinderhack"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Parmesan"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Oregano"
+      }
     ],
     "instructions": [
       "1. Zucchini längs in dünne Scheiben hobeln, leicht salzen.",
@@ -3253,12 +6017,36 @@
     "image": "recipe_82.jpg",
     "portions": 2,
     "ingredients": [
-      "8 Hähnchenflügel",
-      "2 EL Olivenöl",
-      "1 TL Paprikapulver",
-      "1 TL Knoblauchpulver",
-      "1 TL Salz",
-      "Pfeffer"
+      {
+        "quantity": 8,
+        "unit": "Stück",
+        "name": "Hähnchenflügel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Knoblauchpulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 200 °C vorheizen.",
@@ -3290,15 +6078,51 @@
     "image": "recipe_83.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rinderhack",
-      "1 Knoblauchzehe",
-      "1 TL Paprikapulver",
-      "1/2 TL Natron",
-      "1 kleine Zwiebel",
-      "2 EL Ajvar",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rinderhack"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Natron"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Ajvar"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hack mit gepresstem Knoblauch, Paprika, Natron, Salz und Pfeffer gut vermengen.",
@@ -3329,15 +6153,51 @@
     "image": "recipe_84.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Putenbrust",
-      "200 g Champignons",
-      "1 Zwiebel",
-      "150 ml Sahne",
-      "1 TL Senf",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Putenbrust"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Champignons"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 150,
+        "unit": "ml",
+        "name": "Sahne"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehackte Petersilie"
+      }
     ],
     "instructions": [
       "1. Putenbrust in Streifen schneiden, Champignons vierteln, Zwiebel fein hacken.",
@@ -3369,16 +6229,56 @@
     "image": "recipe_85.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rinderhack",
-      "1 Ei",
-      "1 EL Semmelbrösel",
-      "1 Zwiebel",
-      "1 Dose gehackte Tomaten",
-      "1 Knoblauchzehe",
-      "1 TL Oregano",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rinderhack"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Semmelbrösel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "gehackte Tomaten (Dose)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hackfleisch mit Ei, Semmelbrösel, Salz und Pfeffer vermengen.",
@@ -3409,12 +6309,36 @@
     "image": "recipe_86.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Schweinefilet",
-      "2 EL Kräuterbutter",
-      "1 TL Paprikapulver",
-      "Salz",
-      "Pfeffer",
-      "1 EL Öl"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Schweinefilet"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Kräuterbutter"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      }
     ],
     "instructions": [
       "1. Filet in Medaillons schneiden, salzen, pfeffern, mit Paprika würzen.",
@@ -3444,15 +6368,51 @@
     "image": "recipe_87.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g gemischtes Hackfleisch",
-      "1 Ei",
-      "1 EL Senf",
-      "1 TL Majoran",
-      "1 Zucchini",
-      "1 kleine Zwiebel",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "gemischtes Hackfleisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Majoran"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Hack mit Ei, Senf, Majoran, Salz und Pfeffer gut verkneten.",
@@ -3484,14 +6444,46 @@
     "image": "recipe_88.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Putenbrust",
-      "1 Paprika",
-      "1 Karotte",
-      "1 Frühlingszwiebel",
-      "1 TL Sesamöl",
-      "2 EL Sojasauce",
-      "1 TL Ingwer (frisch)",
-      "1 Knoblauchzehe"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Putenbrust"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Frühlingszwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Sesamöl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sojasauce"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "frischer Ingwer"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      }
     ],
     "instructions": [
       "1. Fleisch und Gemüse in dünne Streifen schneiden.",
@@ -3523,10 +6515,26 @@
     "image": "recipe_89.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Scheiben Leberkäse (à ca. 150 g)",
-      "2 Eier",
-      "1 TL Butter",
-      "Senf (optional)"
+      {
+        "quantity": 2,
+        "unit": "Scheiben",
+        "name": "Leberkäse (à ca. 150 g)"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Butter"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Senf (optional)"
+      }
     ],
     "instructions": [
       "1. Leberkäsescheiben in einer Pfanne ohne Öl bei mittlerer Hitze anbraten.",
@@ -3556,14 +6564,46 @@
     "image": "recipe_90.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Schweinenacken",
-      "1 Paprika",
-      "1 Zwiebel",
-      "2 EL Öl",
-      "1 TL Paprikapulver",
-      "Salz",
-      "Pfeffer",
-      "Holzspieße"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Schweinenacken"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Holzspieße"
+      }
     ],
     "instructions": [
       "1. Fleisch, Paprika und Zwiebel in mundgerechte Stücke schneiden.",
@@ -3595,14 +6635,46 @@
     "image": "recipe_91.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zucchini",
-      "1 reife Avocado",
-      "1 Knoblauchzehe",
-      "1 EL Zitronensaft",
-      "2 EL Olivenöl",
-      "1 Handvoll Basilikum",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "reife Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Basilikum"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zucchini mit einem Spiralschneider in feine Spaghetti schneiden.",
@@ -3637,16 +6709,56 @@
     "image": "recipe_92.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Karotte",
-      "1/2 Rote Bete",
-      "1/2 Gurke",
-      "1/2 Avocado",
-      "1 Handvoll Rotkohl",
-      "30 g Cashewkerne",
-      "1 EL Zitronensaft",
-      "50 ml Wasser",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Rote Bete"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Gurke"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Rotkohl"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Cashewkerne"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 50,
+        "unit": "ml",
+        "name": "Wasser"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Gemüse waschen und in feine Streifen oder Spiralen schneiden.",
@@ -3679,14 +6791,46 @@
     "image": "recipe_93.jpg",
     "portions": 2,
     "ingredients": [
-      "2 kleine Paprika",
-      "1/2 Avocado",
-      "2 EL Mandelmus",
-      "1 EL Zitronensaft",
-      "1 TL Senf (roh)",
-      "1 Handvoll Sprossen",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "kleine Paprika"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Mandelmus"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf (roh)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Sprossen"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Paprika halbieren, entkernen und kalt abspülen.",
@@ -3719,13 +6863,41 @@
     "image": "recipe_94.jpg",
     "portions": 2,
     "ingredients": [
-      "3 EL Chiasamen",
-      "200 ml Mandelmilch (roh)",
-      "1 EL Leinsamen",
-      "1 EL Kokosflocken",
-      "1 TL Zimt",
-      "1 Apfel",
-      "1 TL Agavendicksaft (roh)"
+      {
+        "quantity": 3,
+        "unit": "EL",
+        "name": "Chiasamen"
+      },
+      {
+        "quantity": 200,
+        "unit": "ml",
+        "name": "Mandelmilch (roh)"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Leinsamen"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Kokosflocken"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zimt"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Apfel"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Agavendicksaft (roh)"
+      }
     ],
     "instructions": [
       "1. Chia- und Leinsamen mit Mandelmilch in einer Schüssel verrühren.",
@@ -3759,13 +6931,41 @@
     "image": "recipe_95.jpg",
     "portions": 2,
     "ingredients": [
-      "1 große Zucchini",
-      "1 Handvoll Walnüsse",
-      "2 EL Zitronensaft",
-      "2 EL Olivenöl",
-      "1 TL grobes Salz",
-      "Pfeffer",
-      "Rucola"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "große Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Walnüsse"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "grobes Salz"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Rucola"
+      }
     ],
     "instructions": [
       "1. Zucchini mit dem Sparschäler in hauchdünne Scheiben schneiden.",
@@ -3799,15 +6999,51 @@
     "image": "recipe_96.jpg",
     "portions": 2,
     "ingredients": [
-      "4 große Salatblätter (z. B. Römersalat)",
-      "1 Karotte",
-      "1/2 Avocado",
-      "1/2 Paprika",
-      "2 EL Mandelmus",
-      "1 TL Zitronensaft",
-      "1 TL Wasser",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 4,
+        "unit": "Blätter",
+        "name": "Römersalat"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Mandelmus"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Wasser"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Mandelmus mit Zitronensaft, Wasser, Salz und Pfeffer zu einer streichfähigen Creme verrühren.",
@@ -3841,14 +7077,46 @@
     "image": "recipe_97.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Nori-Blätter (roh)",
-      "100 g Blumenkohl",
-      "30 g Cashewkerne",
-      "1/4 Avocado",
-      "1/4 Paprika",
-      "1 EL Zitronensaft",
-      "1 TL Tamari",
-      "Salz"
+      {
+        "quantity": 2,
+        "unit": "Blätter",
+        "name": "Nori (roh)"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Blumenkohl"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Cashewkerne"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Tamari"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      }
     ],
     "instructions": [
       "1. Blumenkohl in der Küchenmaschine fein mahlen, Cashewkerne separat zerkleinern und beides mischen.",
@@ -3883,13 +7151,41 @@
     "image": "recipe_98.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Fenchelknolle",
-      "1 Orange",
-      "1 Handvoll Walnüsse",
-      "1 EL Olivenöl",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Fenchelknolle"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Orange"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Walnüsse"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Fenchel in feine Scheiben schneiden oder hobeln.",
@@ -3923,13 +7219,41 @@
     "image": "recipe_99.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Karotten",
-      "1 Apfel",
-      "1 EL Sesam",
-      "1 TL Zitronensaft",
-      "1 EL Olivenöl",
-      "1 TL Honig (roh)",
-      "Salz"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Karotten"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Apfel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sesam"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Honig (roh)"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      }
     ],
     "instructions": [
       "1. Karotten und Apfel grob raspeln.",
@@ -3961,15 +7285,51 @@
     "image": "recipe_100.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Zucchini",
-      "1 Tomate",
-      "1/2 Paprika",
-      "30 g Cashews",
-      "1 TL Zitronensaft",
-      "1 TL Hefeflocken (roh)",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Cashews"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Hefeflocken (roh)"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Cashews in warmem Wasser 1 Stunde einweichen, dann mit Zitronensaft, Öl, Salz, Pfeffer und Hefeflocken zu einer Creme pürieren.",
@@ -4002,12 +7362,36 @@
     "image": "recipe_101.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Banane",
-      "1 EL roher Kakao",
-      "2 Datteln",
-      "1 EL Mandelmus",
-      "1 TL Vanille (roh)",
-      "1 TL Kokosöl"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Banane"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "roher Kakao"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Datteln"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Mandelmus"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Vanille (roh)"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kokosöl"
+      }
     ],
     "instructions": [
       "1. Banane in Stücke brechen, Datteln entsteinen.",
@@ -4040,13 +7424,41 @@
     "image": "recipe_102.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Avocado",
-      "1/2 Salatgurke",
-      "1 EL Zitronensaft",
-      "1 EL Olivenöl",
-      "1 TL Dill",
-      "1 Prise Salz",
-      "100 ml Wasser"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Salatgurke"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Dill"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Wasser"
+      }
     ],
     "instructions": [
       "1. Avocado und Gurke grob würfeln.",
@@ -4079,11 +7491,31 @@
     "image": "recipe_103.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Wassermelone",
-      "100 g veganer Rohkost-Feta (z. B. aus Cashew)",
-      "1 EL Limettensaft",
-      "1 EL Minzblätter",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Wassermelone"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "veganer Rohkost-Feta (z. B. aus Cashew)"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Limettensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Minzblätter"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Melone würfeln, veganen Feta zerbröseln.",
@@ -4116,11 +7548,31 @@
     "image": "recipe_104.jpg",
     "portions": 2,
     "ingredients": [
-      "6 Datteln",
-      "30 g Mandeln",
-      "1 EL roher Kakao",
-      "1 EL Kokosraspeln",
-      "1 TL Kokosöl"
+      {
+        "quantity": 6,
+        "unit": "Stück",
+        "name": "Datteln"
+      },
+      {
+        "quantity": 30,
+        "unit": "g",
+        "name": "Mandeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "roher Kakao"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Kokosraspeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kokosöl"
+      }
     ],
     "instructions": [
       "1. Datteln entsteinen, mit Mandeln und Kakao im Mixer fein zerkleinern.",
@@ -4154,13 +7606,41 @@
     "image": "recipe_105.jpg",
     "portions": 2,
     "ingredients": [
-      "4 EL zarte Haferflocken (gekeimt, roh)",
-      "1 Apfel",
-      "1 EL Rosinen",
-      "1 EL Nüsse",
-      "100 ml Mandelmilch (roh)",
-      "1 TL Zitronensaft",
-      "1 TL Honig (roh)"
+      {
+        "quantity": 4,
+        "unit": "EL",
+        "name": "zarte Haferflocken (gekeimt, roh)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Apfel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Rosinen"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Nüsse"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Mandelmilch (roh)"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Honig (roh)"
+      }
     ],
     "instructions": [
       "1. Apfel grob raspeln, sofort mit Zitronensaft vermengen.",
@@ -4191,16 +7671,56 @@
     "image": "recipe_106.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Paprika",
-      "300 g Rinderhack",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 TL Paprikapulver",
-      "1 EL Tomatenmark",
-      "100 ml Brühe",
-      "1 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rinderhack"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauchzehe"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 100,
+        "unit": "ml",
+        "name": "Brühe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Paprika oben aufschneiden, entkernen und beiseitestellen.",
@@ -4233,14 +7753,46 @@
     "image": "recipe_107.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Süßkartoffeln",
-      "2 Eier",
-      "100 g frischer Spinat",
-      "1 Zwiebel",
-      "2 EL Olivenöl",
-      "1 TL Kreuzkümmel",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Süßkartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "frischer Spinat"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kreuzkümmel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Süßkartoffeln schälen, würfeln und in Olivenöl anbraten.",
@@ -4272,13 +7824,41 @@
     "image": "recipe_108.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Lachsfilets (je 150 g)",
-      "1 Brokkoli",
-      "1 Zitrone",
-      "1 EL Olivenöl",
-      "1 TL Honig",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Lachsfilets (je 150 g)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Brokkoli"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zitrone"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Honig"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Brokkoli in Röschen teilen und blanchieren.",
@@ -4309,16 +7889,56 @@
     "image": "recipe_109.jpg",
     "portions": 2,
     "ingredients": [
-      "120 g Quinoa",
-      "1 Paprika",
-      "1 kleine Gurke",
-      "1 Möhre",
-      "2 EL Zitronensaft",
-      "2 EL Olivenöl",
-      "1 TL Senf",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 120,
+        "unit": "g",
+        "name": "Quinoa"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Gurke"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehackte Petersilie"
+      }
     ],
     "instructions": [
       "1. Quinoa abspülen, dann nach Packung kochen und abkühlen lassen.",
@@ -4351,13 +7971,41 @@
     "image": "recipe_110.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "1 Paprika",
-      "1 Tomate",
-      "1 TL Butter",
-      "Salz",
-      "Pfeffer",
-      "Schnittlauch"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Schnittlauch"
+      }
     ],
     "instructions": [
       "1. Gemüse klein würfeln, in Butter anschwitzen.",
@@ -4388,14 +8036,46 @@
     "image": "recipe_111.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Zucchini",
-      "1 Ei",
-      "1 EL Reismehl",
-      "Salz",
-      "Pfeffer",
-      "200 g Magerquark",
-      "Kräuter",
-      "1 EL Öl"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Reismehl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Magerquark"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Kräuter"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      }
     ],
     "instructions": [
       "1. Zucchini reiben, mit Salz bestreuen, 10 Min. ziehen lassen und ausdrücken.",
@@ -4427,15 +8107,51 @@
     "image": "recipe_112.jpg",
     "portions": 2,
     "ingredients": [
-      "1 große Aubergine",
-      "300 g Rinderhack",
-      "1 Zwiebel",
-      "1 Knoblauch",
-      "1 TL Paprika",
-      "1 EL Tomatenmark",
-      "2 EL Olivenöl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "große Aubergine"
+      },
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rinderhack"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Aubergine halbieren, aushöhlen und im Ofen 10 Min. vorgaren.",
@@ -4465,15 +8181,51 @@
     "image": "recipe_113.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g rote Linsen",
-      "2 Möhren",
-      "1 Zwiebel",
-      "1 Knoblauch",
-      "1 TL Kreuzkümmel",
-      "750 ml Gemüsebrühe",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "rote Linsen"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Möhren"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kreuzkümmel"
+      },
+      {
+        "quantity": 750,
+        "unit": "ml",
+        "name": "Gemüsebrühe"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Gemüse würfeln, Linsen abspülen.",
@@ -4506,15 +8258,51 @@
     "image": "recipe_114.jpg",
     "portions": 2,
     "ingredients": [
-      "100 g Reisnudeln",
-      "1 Karotte",
-      "1/2 Paprika",
-      "1 Frühlingszwiebel",
-      "1 EL Sesam",
-      "2 EL Sojasauce (glutenfrei)",
-      "1 EL Reisessig",
-      "1 TL Honig",
-      "1 TL Sesamöl"
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Reisnudeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Karotte"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Frühlingszwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sesam"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sojasauce (glutenfrei)"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Reisessig"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Honig"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Sesamöl"
+      }
     ],
     "instructions": [
       "1. Nudeln nach Anleitung garen und kalt abschrecken.",
@@ -4546,12 +8334,36 @@
     "image": "recipe_115.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Joghurt (z. B. Kokos)",
-      "1 Handvoll Beeren",
-      "1 EL Leinsamen",
-      "1 EL Mandeln",
-      "1 EL Honig (optional)",
-      "Zimt"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Joghurt (z. B. Kokos)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Handvoll",
+        "name": "Beeren"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Leinsamen"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Mandeln"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Honig"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Zimt"
+      }
     ],
     "instructions": [
       "1. Joghurt in Schale geben.",
@@ -4581,14 +8393,46 @@
     "image": "recipe_116.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Hähnchenbrustfilets",
-      "1 Zucchini",
-      "1 Paprika",
-      "1 rote Zwiebel",
-      "2 EL Olivenöl",
-      "1 TL Rosmarin",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenbrustfilet"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Rosmarin"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Ofen auf 200 °C vorheizen.",
@@ -4620,14 +8464,46 @@
     "image": "recipe_117.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Blumenkohl",
-      "1 Paprika",
-      "1 Möhre",
-      "1 Frühlingszwiebel",
-      "2 EL Öl",
-      "Sojasauce (glutenfrei)",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Blumenkohl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Frühlingszwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sojasauce (glutenfrei)"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Blumenkohl in der Küchenmaschine zu „Reis“ zerkleinern.",
@@ -4660,15 +8536,51 @@
     "image": "recipe_118.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Dose Kichererbsen",
-      "1 Dose Kokosmilch",
-      "1 Zwiebel",
-      "1 Knoblauch",
-      "1 TL Currypulver",
-      "1 TL Kurkuma",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Kichererbsen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Kokosmilch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Currypulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Kurkuma"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Zwiebel und Knoblauch fein hacken.",
@@ -4700,15 +8612,51 @@
     "image": "recipe_119.jpg",
     "portions": 2,
     "ingredients": [
-      "100 g Maismehl",
-      "1 Ei",
-      "150 ml Milch (oder Pflanzenmilch)",
-      "1 Prise Salz",
-      "1 TL Öl",
-      "1 Avocado",
-      "1 EL Zitronensaft",
-      "1 kleine Tomate",
-      "Pfeffer"
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Maismehl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 150,
+        "unit": "ml",
+        "name": "Milch (oder Pflanzenmilch)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Prise",
+        "name": "Salz"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Avocado"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "kleine Tomate"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Teig aus Mehl, Ei, Milch und Salz anrühren.",
@@ -4739,15 +8687,51 @@
     "image": "recipe_120.jpg",
     "portions": 2,
     "ingredients": [
-      "120 g Reis",
-      "200 g Tofu",
-      "1 Zucchini",
-      "1 Möhre",
-      "1 EL Sojasauce (glutenfrei)",
-      "1 TL Sesamöl",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 120,
+        "unit": "g",
+        "name": "Reis"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Tofu"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zucchini"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sojasauce (glutenfrei)"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Sesamöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Reis kochen.",
@@ -4779,13 +8763,41 @@
     "image": "recipe_121.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Spaghetti",
-      "100 g Speck",
-      "2 Eier",
-      "50 g Parmesan",
-      "1 Knoblauchzehe",
-      "Pfeffer",
-      "Salz"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Spaghetti"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Speck"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Parmesan"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      }
     ],
     "instructions": [
       "1. Spaghetti in Salzwasser al dente kochen.",
@@ -4817,13 +8829,41 @@
     "image": "recipe_122.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Hähnchenschenkel",
-      "400 g Kartoffeln",
-      "2 EL Olivenöl",
-      "1 TL Paprikapulver",
-      "1 TL Rosmarin",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Hähnchenschenkel"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Rosmarin"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 200 °C Umluft vorheizen.",
@@ -4854,13 +8894,41 @@
     "image": "recipe_123.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Eier",
-      "50 g Kochschinken",
-      "50 g geriebener Käse",
-      "1 TL Butter",
-      "Schnittlauch",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 4,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "Kochschinken"
+      },
+      {
+        "quantity": 50,
+        "unit": "g",
+        "name": "geriebener Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Schnittlauch"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Eier in einer Schüssel mit Salz und Pfeffer verquirlen.",
@@ -4891,15 +8959,51 @@
     "image": "recipe_124.jpg",
     "portions": 2,
     "ingredients": [
-      "1 Dose Thunfisch in Wasser",
-      "2 Eier",
-      "1/2 Salatgurke",
-      "1 Tomate",
-      "1/2 rote Zwiebel",
-      "2 EL Olivenöl",
-      "1 TL Zitronensaft",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Thunfisch in Wasser"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Salatgurke"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "rote Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Zitronensaft"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Eier hart kochen, abschrecken und schälen.",
@@ -4931,14 +9035,46 @@
     "image": "recipe_125.jpg",
     "portions": 2,
     "ingredients": [
-      "150 g Reis",
-      "250 g Hähnchenbrust",
-      "100 g Erbsen (TK)",
-      "1 Möhre",
-      "1 EL Sojasauce",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "Reis"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "Hähnchenbrust"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Erbsen (TK)"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Möhre"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Sojasauce"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Reis kochen und beiseite stellen.",
@@ -4969,14 +9105,46 @@
     "image": "recipe_126.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g festkochende Kartoffeln",
-      "3 Eier",
-      "100 g Speckwürfel",
-      "1 Zwiebel",
-      "1 EL Öl",
-      "Schnittlauch",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "festkochende Kartoffeln"
+      },
+      {
+        "quantity": 3,
+        "unit": "Stück",
+        "name": "Ei"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Speckwürfel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Schnittlauch"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Kartoffeln kochen, pellen und in Scheiben schneiden.",
@@ -5008,15 +9176,51 @@
     "image": "recipe_127.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Bratwürste",
-      "400 g Kartoffeln",
-      "2 EL Öl",
-      "2 EL Tomatenmark",
-      "1 TL Currypulver",
-      "1 TL Paprikapulver",
-      "1 TL Honig",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Bratwurst"
+      },
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Tomatenmark"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Currypulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Paprikapulver"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Honig"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Kartoffeln in Streifen schneiden, mit Öl, Salz und Paprikapulver vermengen.",
@@ -5048,15 +9252,51 @@
     "image": "recipe_128.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Penne",
-      "1 Dose Thunfisch",
-      "1 Dose gehackte Tomaten",
-      "1 Zwiebel",
-      "1 Knoblauchzehe",
-      "1 TL Oregano",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Penne"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "Thunfisch"
+      },
+      {
+        "quantity": 1,
+        "unit": "Dose",
+        "name": "gehackte Tomaten"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 1,
+        "unit": "Zehe",
+        "name": "Knoblauch"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Oregano"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Nudeln al dente kochen.",
@@ -5086,15 +9326,51 @@
     "image": "recipe_129.jpg",
     "portions": 2,
     "ingredients": [
-      "120 g grüne Linsen",
-      "1/2 Gurke",
-      "1 Tomate",
-      "100 g Schafskäse",
-      "1 EL Olivenöl",
-      "1 EL Balsamico",
-      "Petersilie",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 120,
+        "unit": "g",
+        "name": "grüne Linsen"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "Stück",
+        "name": "Gurke"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "Schafskäse"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Olivenöl"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Balsamico"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Petersilie"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Linsen garen und abkühlen lassen.",
@@ -5124,14 +9400,46 @@
     "image": "recipe_130.jpg",
     "portions": 2,
     "ingredients": [
-      "300 g Rindergeschnetzeltes",
-      "1 Paprika",
-      "1 Zwiebel",
-      "2 EL Sahne",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 300,
+        "unit": "g",
+        "name": "Rindergeschnetzeltes"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Zwiebel"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Sahne"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": null,
+        "unit": null,
+        "name": "Petersilie"
+      }
     ],
     "instructions": [
       "1. Fleisch mit Öl scharf anbraten.",
@@ -5161,13 +9469,41 @@
     "image": "recipe_131.jpg",
     "portions": 2,
     "ingredients": [
-      "2 große Tortilla-Wraps",
-      "100 g gekochter Schinken",
-      "80 g Käse",
-      "1 Tomate",
-      "1 TL Senf",
-      "Salatblätter",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "große Tortilla-Wraps"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "gekochter Schinken"
+      },
+      {
+        "quantity": 80,
+        "unit": "g",
+        "name": "Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Tomate"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 2,
+        "unit": "Blätter",
+        "name": "Salatblätter"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Wraps kurz erwärmen.",
@@ -5197,13 +9533,41 @@
     "image": "recipe_132.jpg",
     "portions": 2,
     "ingredients": [
-      "400 g gekochte Kartoffeln",
-      "2 Zwiebeln",
-      "2 Eier",
-      "1 EL Öl",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 400,
+        "unit": "g",
+        "name": "gekochte Kartoffeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Zwiebeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Eier"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Öl"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Petersilie"
+      }
     ],
     "instructions": [
       "1. Kartoffeln in Scheiben schneiden.",
@@ -5233,10 +9597,26 @@
     "image": "recipe_133.jpg",
     "portions": 2,
     "ingredients": [
-      "4 Scheiben Toastbrot",
-      "2 Scheiben Schinken",
-      "2 Scheiben Käse",
-      "1 TL Butter"
+      {
+        "quantity": 4,
+        "unit": "Scheiben",
+        "name": "Toastbrot"
+      },
+      {
+        "quantity": 2,
+        "unit": "Scheiben",
+        "name": "Schinken"
+      },
+      {
+        "quantity": 2,
+        "unit": "Scheiben",
+        "name": "Käse"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Butter"
+      }
     ],
     "instructions": [
       "1. Toastscheiben mit Butter bestreichen.",
@@ -5266,13 +9646,41 @@
     "image": "recipe_134.jpg",
     "portions": 2,
     "ingredients": [
-      "2 Lachsfilets",
-      "2 EL Semmelbrösel",
-      "1 EL Butter",
-      "1 TL Senf",
-      "Kräuter (z. B. Dill, Petersilie)",
-      "Salz",
-      "Pfeffer"
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Lachsfilets"
+      },
+      {
+        "quantity": 2,
+        "unit": "EL",
+        "name": "Semmelbrösel"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Butter"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehackte Kräuter (z. B. Dill, Petersilie)"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      }
     ],
     "instructions": [
       "1. Backofen auf 180 °C vorheizen.",
@@ -5302,14 +9710,46 @@
     "image": "recipe_135.jpg",
     "portions": 2,
     "ingredients": [
-      "200 g Nudeln",
-      "2 Wiener Würstchen",
-      "1 Gewürzgurke",
-      "1 EL Mayonnaise",
-      "1 TL Senf",
-      "Salz",
-      "Pfeffer",
-      "Petersilie"
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "Nudeln"
+      },
+      {
+        "quantity": 2,
+        "unit": "Stück",
+        "name": "Wiener Würstchen"
+      },
+      {
+        "quantity": 1,
+        "unit": "Stück",
+        "name": "Gewürzgurke"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "Mayonnaise"
+      },
+      {
+        "quantity": 1,
+        "unit": "TL",
+        "name": "Senf"
+      },
+      {
+        "quantity": 0.5,
+        "unit": "TL",
+        "name": "Salz"
+      },
+      {
+        "quantity": 0.25,
+        "unit": "TL",
+        "name": "Pfeffer"
+      },
+      {
+        "quantity": 1,
+        "unit": "EL",
+        "name": "gehackte Petersilie"
+      }
     ],
     "instructions": [
       "1. Nudeln kochen und abkühlen lassen.",
