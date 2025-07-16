@@ -123,7 +123,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   }
 
   String _formatDate(DateTime date) {
-    final localDate = date.toLocal();
+    final localDate = date.add(Duration(hours: 2));
     return '${localDate.day.toString().padLeft(2, '0')}.'
         '${localDate.month.toString().padLeft(2, '0')}.'
         '${localDate.year} '

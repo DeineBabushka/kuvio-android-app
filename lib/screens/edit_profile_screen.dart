@@ -124,150 +124,98 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDarkMode = theme.brightness == Brightness.dark;
-
-    final backgroundColor = theme.scaffoldBackgroundColor;
-    final containerColor = isDarkMode ? theme.cardColor : Colors.white;
-    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
-    final labelColor = isDarkMode ? Colors.white70 : const Color(0xFF122620);
-    final inputTextColor = isDarkMode ? Colors.white : Colors.black;
-    final buttonBackground =
-        isDarkMode ? theme.cardColor : const Color(0xFF122620);
-    final buttonTextColor =
-        isDarkMode ? theme.colorScheme.primary : Colors.white;
+    final backgroundColor = const Color(0xFF0D2B20);
+    final cardColor = const Color(0xFF2E6B4D);
+    final labelColor = Colors.white70;
+    final inputTextColor = Colors.white;
+    final iconColor = Colors.white;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text('Profil bearbeiten', style: TextStyle(color: textColor)),
+        title: const Text('Profil bearbeiten'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: iconColor),
+        centerTitle: true,
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: containerColor,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.grey[300],
-                        backgroundImage: AssetImage(
-                          _selectedProfileAsset ?? 'assets/character_1.png',
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: _openImagePickerDialog,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: containerColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.edit,
-                              size: 20,
-                              color: labelColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Profilinformationen',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: labelColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _usernameController,
-                  readOnly: true,
-                  style: TextStyle(color: inputTextColor),
-                  decoration: InputDecoration(
-                    labelText: 'Benutzername',
-                    labelStyle: TextStyle(color: labelColor),
-                    border: const OutlineInputBorder(),
-                    disabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+          child: Column(
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage(
+                      _selectedProfileAsset ?? 'assets/character_1.png',
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _bioController,
-                  style: TextStyle(color: inputTextColor),
-                  decoration: InputDecoration(
-                    labelText: 'Über mich',
-                    labelStyle: TextStyle(color: labelColor),
+                  Positioned(
+                    bottom: 0,
+                    right: MediaQuery.of(context).size.width / 2 - 50,
+                    child: GestureDetector(
+                      onTap: _openImagePickerDialog,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          size: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
-                  minLines: 1,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  dropdownColor: containerColor,
-                  value: _selectedKitchen,
-                  style: TextStyle(color: inputTextColor),
-                  items: _kitchenOptions
-                      .map((kitchen) => DropdownMenuItem<String>(
-                            value: kitchen,
-                            child: Text(kitchen),
-                          ))
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedKitchen = value ?? 'Nicht angegeben';
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Lieblingsküche',
-                    labelStyle: TextStyle(color: labelColor),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _dishController,
-                  style: TextStyle(color: inputTextColor),
-                  decoration: InputDecoration(
-                    labelText: 'Lieblingsgericht',
-                    labelStyle: TextStyle(color: labelColor),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton(
+                ],
+              ),
+              const SizedBox(height: 24),
+              buildEditableCard(
+                label: 'Benutzername',
+                controller: _usernameController,
+                readOnly: true,
+              ),
+              const SizedBox(height: 16),
+              buildEditableCard(
+                label: 'Über mich',
+                controller: _bioController,
+              ),
+              const SizedBox(height: 16),
+              buildDropdownCard(),
+              const SizedBox(height: 16),
+              buildEditableCard(
+                label: 'Lieblingsgericht',
+                controller: _dishController,
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
                   onPressed: _saveProfile,
+                  icon: const Icon(Icons.save),
+                  label: const Text('Speichern'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: buttonBackground,
-                    foregroundColor: buttonTextColor,
+                    backgroundColor: Colors.white,
+                    foregroundColor: backgroundColor,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  child: Text('Speichern',
-                      style: TextStyle(color: buttonTextColor)),
                 ),
-                const SizedBox(height: 16),
-                ElevatedButton(
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -276,16 +224,74 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     );
                   },
+                  icon: const Icon(Icons.lock),
+                  label: const Text('Passwort ändern'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  child: const Text('Passwort ändern'),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildEditableCard({
+    required String label,
+    required TextEditingController controller,
+    bool readOnly = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF2E6B4D),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: TextFormField(
+        controller: controller,
+        readOnly: readOnly,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(color: Colors.white70),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+
+  Widget buildDropdownCard() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF2E6B4D),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: DropdownButtonFormField<String>(
+        value: _selectedKitchen,
+        dropdownColor: const Color(0xFF2E6B4D),
+        style: const TextStyle(color: Colors.white),
+        iconEnabledColor: Colors.white,
+        decoration: const InputDecoration(
+          labelText: 'Lieblingsküche',
+          labelStyle: TextStyle(color: Colors.white70),
+          border: InputBorder.none,
+        ),
+        items: _kitchenOptions
+            .map((kitchen) => DropdownMenuItem<String>(
+                  value: kitchen,
+                  child: Text(kitchen),
+                ))
+            .toList(),
+        onChanged: (value) {
+          setState(() {
+            _selectedKitchen = value ?? 'Nicht angegeben';
+          });
+        },
       ),
     );
   }

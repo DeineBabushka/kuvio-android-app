@@ -5,6 +5,7 @@ import '../screens/login_screen.dart';
 import '../screens/account_screen.dart';
 import '../screens/filter_screen.dart';
 import '../screens/favorites_screen.dart';
+import '../screens/comment_screen.dart';
 
 class BottomNavWidget extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -42,7 +43,12 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
         break;
 
       case 2:
-        // TODO: Navigation zu Kommentarseite (Symeon)
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CommentScreen(allRecipes: widget.allRecipes),
+          ),
+        );        
         break;
 
       case 3:
