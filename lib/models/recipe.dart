@@ -30,20 +30,32 @@ class Recipe {
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(
-      id: json['id'] ?? '', // <-- wichtig!
-      title: json['title'],
-      image: json['image'],
-      portions: json['portions'],
-      ingredients: List<String>.from(json['ingredients']),
-      instructions: List<String>.from(json['instructions']),
-      dietTypes: List<String>.from(json['diet_types']),
-      categories: List<String>.from(json['categories']),
-      preparationTime: json['preparation_time'],
-      calories: json['nutrition']['calories'],
-      proteinG: json['nutrition']['protein_g'],
-      carbohydratesG: json['nutrition']['carbohydrates_g'],
-      fatG: json['nutrition']['fat_g'],
-    );
+  List<String> convertToStringList(dynamic input) {
+    if (input is List) {
+      return input.map((item) {
+        if (item is String) return item;
+        if (item is Map && item.containsKey('name')) return item['name'].toString();
+        return item.toString();
+      }).toList();
+    }
+    return [];
   }
+
+  return Recipe(
+    id: json['id'] ?? '',
+    title: json['title'] ?? '',
+    image: json['image'] ?? '',
+    portions: json['portions'] ?? 0,
+    ingredients: convertToStringList(json['ingredients']),
+    instructions: convertToStringList(json['instructions']),
+    dietTypes: convertToStringList(json['diet_types']),
+    categories: convertToStringList(json['categories']),
+    preparationTime: json['preparation_time'] ?? '',
+    calories: json['nutrition']?['calories'] ?? 0,
+    proteinG: json['nutrition']?['protein_g'] ?? 0,
+    carbohydratesG: json['nutrition']?['carbohydrates_g'] ?? 0,
+    fatG: json['nutrition']?['fat_g'] ?? 0,
+  );
+}
+
 }
