@@ -20,7 +20,7 @@ class IngredientList extends StatelessWidget {
     return Column(
       children: ingredients.map((ingredient) {
         final text =
-            '${ingredient.quantity?.toStringAsFixed(2) ?? ''} ${ingredient.unit ?? ''} ${ingredient.name}';
+            '${ingredient.quantity?.toStringAsFixed(2) ?? ''} ${ingredient.unit} ${ingredient.name}';
 
         return Card(
           color: cardColor,
