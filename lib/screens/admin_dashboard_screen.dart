@@ -7,10 +7,8 @@ class AdminDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     final backgroundColor = theme.scaffoldBackgroundColor;
-    final textColor = Colors.white;
     final cardTextColor = const Color(0xFF122620);
 
     final usersRef = FirebaseFirestore.instance.collection('users');
@@ -29,7 +27,8 @@ class AdminDashboardScreen extends StatelessWidget {
         stream: usersRef.snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(color: Colors.white));
+            return const Center(
+                child: CircularProgressIndicator(color: Colors.white));
           }
 
           final users = snapshot.data?.docs ?? [];
@@ -104,8 +103,7 @@ class AdminDashboardScreen extends StatelessWidget {
                                   child: const Text('Abbrechen'),
                                 ),
                                 TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, true),
+                                  onPressed: () => Navigator.pop(context, true),
                                   child: const Text('Löschen'),
                                 ),
                               ],

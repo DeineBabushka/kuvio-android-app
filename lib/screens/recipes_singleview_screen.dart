@@ -8,7 +8,7 @@ import '../services/shopping_list_service.dart';
 import '../widgets/ingredient_list.dart';
 import '../widgets/instruction_list.dart';
 import '../widgets/nutrition_card.dart';
-import '../comment_section.dart';
+import '../widgets/comment_section.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
@@ -102,6 +102,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final backgroundColor = theme.scaffoldBackgroundColor;
     final cardColor = const Color(0xFF2C2C2E);
+    final user = FirebaseAuth.instance.currentUser;
+    final isLoggedIn = user != null;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -192,19 +194,21 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   Share.share(shareText);
                 },
               ),
-              IconButton(
-                icon: Icon(
-                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: Colors.redAccent,
+              if (isLoggedIn)
+                IconButton(
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: Colors.redAccent,
+                  ),
+                  onPressed: _toggleFavorite,
                 ),
-                onPressed: _toggleFavorite,
-              ),
             ],
           ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: _buildRecipeContent(context, textColor, cardColor),
+              child: _buildRecipeContent(
+                  context, textColor, cardColor, isLoggedIn),
             ),
           ),
         ],
@@ -213,7 +217,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   Widget _buildRecipeContent(
-      BuildContext context, Color textColor, Color cardColor) {
+      BuildContext context, Color textColor, Color cardColor, bool isLoggedIn) {
     final scaledIngredients = _getScaledIngredients();
 
     return Column(
@@ -255,22 +259,23 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ingredients: scaledIngredients,
           textColor: textColor,
           cardColor: cardColor,
-          onAddToShoppingList: _addSingleToShoppingList,
+          onAddToShoppingList: isLoggedIn ? _addSingleToShoppingList : null,
         ),
         const SizedBox(height: 10),
-        Center(
-          child: ElevatedButton.icon(
-            onPressed: _addAllToShoppingList,
-            icon: const Icon(Icons.add_shopping_cart),
-            label: const Text('Alle Zutaten hinzufügen'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
+        if (isLoggedIn)
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: _addAllToShoppingList,
+              icon: const Icon(Icons.add_shopping_cart),
+              label: const Text('Alle Zutaten hinzufügen'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+              ),
             ),
           ),
-        ),
         const SizedBox(height: 20),
         Text('Zubereitung',
             style: TextStyle(
@@ -295,7 +300,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           cardColor: cardColor,
         ),
         const SizedBox(height: 20),
-        CommentSection(recipeId: widget.recipeId!),
+        if (isLoggedIn) CommentSection(recipeId: widget.recipeId!),
       ],
     );
   }
