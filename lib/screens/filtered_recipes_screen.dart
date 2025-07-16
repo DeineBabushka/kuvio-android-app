@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 import 'recipes_singleview_screen.dart';
-import '../widgets/bottom_nav.dart'; // ← wichtig!
+import '../widgets/bottom_nav.dart';
 
 class FilteredRecipesScreen extends StatelessWidget {
   final String selectedDiet;
@@ -131,7 +131,7 @@ class FilteredRecipesScreen extends StatelessWidget {
             ),
       bottomNavigationBar: BottomNavWidget(
         allRecipes: allRecipes,
-        currentIndex: 1, // "Suche"-Tab ist aktiv
+        currentIndex: 1,
       ),
     );
   }

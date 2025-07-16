@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:share_plus/share_plus.dart';
 import '../models/recipe.dart';
+import '../models/ingredient.dart';
+import '../services/favorite_service.dart';
+import '../services/shopping_list_service.dart';
+import '../widgets/ingredient_list.dart';
+import '../widgets/instruction_list.dart';
+import '../widgets/nutrition_card.dart';
 import '../comment_section.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
@@ -21,77 +26,74 @@ class RecipeDetailScreen extends StatefulWidget {
 
 class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   bool isFavorite = false;
+  int portionCount = 2;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => checkIfFavorite());
+    portionCount = widget.recipe.portions;
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadFavoriteStatus());
   }
 
-  Future<void> checkIfFavorite() async {
+  Future<void> _loadFavoriteStatus() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null || widget.recipeId == null) return;
+    final fav = await FavoriteService.isFavorite(user.uid, widget.recipeId!);
+    setState(() => isFavorite = fav);
+  }
+
+  Future<void> _toggleFavorite() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || widget.recipeId == null) return;
 
-    final userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .get();
+    final updated =
+        await FavoriteService.toggleFavorite(user.uid, widget.recipeId!);
+    setState(() => isFavorite = updated);
 
-    final List<dynamic> favorites = userDoc.data()?['favorites'] ?? [];
-
-    setState(() {
-      isFavorite = favorites.contains(widget.recipeId);
-    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+            updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt"),
+      ),
+    );
   }
 
-  Future<void> toggleFavorite() async {
+  List<Ingredient> _getScaledIngredients() {
+    final original = widget.recipe.portions;
+    final factor = portionCount / original;
+
+    return widget.recipe.ingredients
+        .map((e) => Ingredient(
+              quantity: e.quantity != null ? e.quantity! * factor : null,
+              unit: e.unit,
+              name: e.name,
+            ))
+        .toList();
+  }
+
+  Future<void> _addAllToShoppingList() async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null || widget.recipeId == null) return;
+    if (user == null) return;
 
-    final userDocRef =
-        FirebaseFirestore.instance.collection('users').doc(user.uid);
-    final favoritesCollection =
-        FirebaseFirestore.instance.collection('favorites');
+    final scaledIngredients = _getScaledIngredients();
+    await ShoppingListService.addIngredients(
+        user.uid, scaledIngredients, widget.recipeId!);
 
-    final userDoc = await userDocRef.get();
-    final List<dynamic> favorites = userDoc.data()?['favorites'] ?? [];
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Zutaten zur Einkaufsliste hinzugefügt")),
+    );
+  }
 
-    final isCurrentlyFavorite = favorites.contains(widget.recipeId);
+  Future<void> _addSingleToShoppingList(Ingredient ingredient) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
 
-    if (isCurrentlyFavorite) {
-      await userDocRef.update({
-        'favorites': FieldValue.arrayRemove([widget.recipeId]),
-      });
+    await ShoppingListService.addIngredients(
+        user.uid, [ingredient], widget.recipeId!);
 
-      final favSnapshot = await favoritesCollection
-          .where('userId', isEqualTo: user.uid)
-          .where('recipeId', isEqualTo: widget.recipeId)
-          .get();
-
-      for (var doc in favSnapshot.docs) {
-        await doc.reference.delete();
-      }
-
-      setState(() => isFavorite = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Aus Favoriten entfernt")),
-      );
-    } else {
-      await userDocRef.update({
-        'favorites': FieldValue.arrayUnion([widget.recipeId]),
-      });
-
-      await favoritesCollection.add({
-        'userId': user.uid,
-        'recipeId': widget.recipeId,
-        'addedAt': FieldValue.serverTimestamp(),
-      });
-
-      setState(() => isFavorite = true);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Zu Favoriten hinzugefügt")),
-      );
-    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("${ingredient.name} hinzugefügt")),
+    );
   }
 
   @override
@@ -116,7 +118,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 StretchMode.zoomBackground,
                 StretchMode.fadeTitle,
               ],
-              titlePadding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+              titlePadding:
+                  const EdgeInsets.only(left: 16, bottom: 16, right: 16),
               centerTitle: true,
               title: LayoutBuilder(
                 builder: (context, constraints) {
@@ -127,38 +130,27 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       opacity: animation,
                       child: child,
                     ),
-                    child: isCollapsed
-                        ? ConstrainedBox(
-                            key: const ValueKey('collapsed'),
-                            constraints: BoxConstraints(maxWidth: constraints.maxWidth - 140),
-                            child: Text(
-                              widget.recipe.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: false,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                shadows: [Shadow(blurRadius: 4, color: Colors.black)],
-                              ),
-                            ),
-                          )
-                        : ConstrainedBox(
-                            key: const ValueKey('expanded'),
-                            constraints: BoxConstraints(maxWidth: constraints.maxWidth - 32),
-                            child: Text(
-                              widget.recipe.title,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                shadows: [Shadow(blurRadius: 4, color: Colors.black)],
-                              ),
-                            ),
-                          ),
+                    child: ConstrainedBox(
+                      key: ValueKey(isCollapsed ? 'collapsed' : 'expanded'),
+                      constraints: BoxConstraints(
+                          maxWidth:
+                              constraints.maxWidth - (isCollapsed ? 140 : 32)),
+                      child: Text(
+                        widget.recipe.title,
+                        maxLines: isCollapsed ? 1 : null,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: !isCollapsed,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: isCollapsed ? 20 : 24,
+                          fontWeight: FontWeight.bold,
+                          shadows: const [
+                            Shadow(blurRadius: 4, color: Colors.black)
+                          ],
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
@@ -193,10 +185,10 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               IconButton(
                 icon: const Icon(Icons.share, color: Colors.white),
                 onPressed: () {
-                    final shareText = "🥗 ${widget.recipe.title}\n"
-                    "📋 Zutaten: ${widget.recipe.ingredients.join(', ')}\n"
-                    "📖 Zubereitung: ${widget.recipe.instructions.take(3).join('')}...\n"
-                    "✨ Gekocht mit der Kuvio App!";
+                  final shareText = "🥗 ${widget.recipe.title}\n"
+                      "📋 Zutaten: ${widget.recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
+                      "📖 Zubereitung: ${widget.recipe.instructions.take(3).join(' ')}...\n"
+                      "✨ Gekocht mit der Kuvio App!";
                   Share.share(shareText);
                 },
               ),
@@ -205,7 +197,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   isFavorite ? Icons.favorite : Icons.favorite_border,
                   color: Colors.redAccent,
                 ),
-                onPressed: toggleFavorite,
+                onPressed: _toggleFavorite,
               ),
             ],
           ),
@@ -220,77 +212,89 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     );
   }
 
-  Widget _buildRecipeContent(BuildContext context, Color textColor, Color cardColor) {
+  Widget _buildRecipeContent(
+      BuildContext context, Color textColor, Color cardColor) {
+    final scaledIngredients = _getScaledIngredients();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Portionen: ${widget.recipe.portions}', style: TextStyle(color: textColor, fontSize: 16)),
-            Text('Dauer: ${widget.recipe.preparationTime}', style: TextStyle(color: textColor, fontSize: 16)),
+            Row(
+              children: [
+                Text('Portionen: ',
+                    style: TextStyle(color: textColor, fontSize: 16)),
+                IconButton(
+                  onPressed: () => setState(() {
+                    if (portionCount > 1) portionCount--;
+                  }),
+                  icon: const Icon(Icons.remove_circle_outline),
+                  color: textColor,
+                ),
+                Text('$portionCount',
+                    style: TextStyle(color: textColor, fontSize: 16)),
+                IconButton(
+                  onPressed: () => setState(() => portionCount++),
+                  icon: const Icon(Icons.add_circle_outline),
+                  color: textColor,
+                ),
+              ],
+            ),
+            Text('Dauer: ${widget.recipe.preparationTime}',
+                style: TextStyle(color: textColor, fontSize: 16)),
           ],
         ),
         const SizedBox(height: 20),
-        Text('Zutaten', style: TextStyle(color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+        Text('Zutaten',
+            style: TextStyle(
+                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 10),
-        ...widget.recipe.ingredients.map((ingredient) => Card(
-              color: cardColor,
-              margin: const EdgeInsets.symmetric(vertical: 6),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              elevation: 1,
-              child: ListTile(
-                leading: const Icon(Icons.restaurant_menu, color: Colors.white),
-                title: Text(ingredient, style: TextStyle(fontSize: 16, color: textColor)),
-              ),
-            )),
-        const SizedBox(height: 20),
-        Text('Zubereitung', style: TextStyle(color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+        IngredientList(
+          ingredients: scaledIngredients,
+          textColor: textColor,
+          cardColor: cardColor,
+          onAddToShoppingList: _addSingleToShoppingList,
+        ),
         const SizedBox(height: 10),
-        ...widget.recipe.instructions.asMap().entries.map((entry) {
-          final index = entry.key + 1;
-          final rawStep = entry.value;
-          final step = rawStep.replaceFirst(RegExp(r'^\d+[\.\)]?\s*'), '');
-          return Card(
-            color: cardColor,
-            margin: const EdgeInsets.symmetric(vertical: 6),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            elevation: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 14,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Text('$index', style: const TextStyle(color: Colors.white, fontSize: 14)),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(child: Text(step, style: TextStyle(fontSize: 16, color: textColor))),
-                ],
-              ),
+        Center(
+          child: ElevatedButton.icon(
+            onPressed: _addAllToShoppingList,
+            icon: const Icon(Icons.add_shopping_cart),
+            label: const Text('Alle Zutaten hinzufügen'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
             ),
-          );
-        }),
+          ),
+        ),
         const SizedBox(height: 20),
-        Text('Nährwerte (pro Portion)', style: TextStyle(color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+        Text('Zubereitung',
+            style: TextStyle(
+                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 10),
-        ...[
-          "🔥 Kalorien: ${widget.recipe.calories} kcal",
-          "💪 Protein: ${widget.recipe.proteinG} g",
-          "🍞 Kohlenhydrate: ${widget.recipe.carbohydratesG} g",
-          "🧈 Fett: ${widget.recipe.fatG} g",
-        ].map((info) => Card(
-              color: cardColor,
-              margin: const EdgeInsets.symmetric(vertical: 6),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              elevation: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(info, style: TextStyle(fontSize: 16, color: textColor)),
-              ),
-            )),
+        InstructionList(
+          instructions: widget.recipe.instructions,
+          textColor: textColor,
+          cardColor: cardColor,
+        ),
+        const SizedBox(height: 20),
+        Text('Nährwerte (pro Portion)',
+            style: TextStyle(
+                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 10),
+        NutritionCard(
+          calories: widget.recipe.calories,
+          protein: widget.recipe.proteinG,
+          carbs: widget.recipe.carbohydratesG,
+          fat: widget.recipe.fatG,
+          textColor: textColor,
+          cardColor: cardColor,
+        ),
+        const SizedBox(height: 20),
         CommentSection(recipeId: widget.recipeId!),
       ],
     );

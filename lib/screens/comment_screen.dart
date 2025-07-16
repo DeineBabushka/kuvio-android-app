@@ -35,10 +35,22 @@ class _CommentScreenState extends State<CommentScreen> {
       for (var doc in commentSnapshot.docs) {
         final comment = Comment.fromMap(doc.data());
 
-        // Suche in den lokalen Rezepten
         final localMatch = widget.allRecipes.firstWhere(
           (r) => r.id == comment.recipeId,
-          orElse: () => Recipe(id: '', title: '', image: '', portions: 0, ingredients: [], instructions: [], dietTypes: [], categories: [], preparationTime: '', calories: 0, proteinG: 0, carbohydratesG: 0, fatG: 0),
+          orElse: () => Recipe(
+              id: '',
+              title: '',
+              image: '',
+              portions: 0,
+              ingredients: [],
+              instructions: [],
+              dietTypes: [],
+              categories: [],
+              preparationTime: '',
+              calories: 0,
+              proteinG: 0,
+              carbohydratesG: 0,
+              fatG: 0),
         );
 
         if (localMatch.id.isNotEmpty) {
@@ -46,7 +58,6 @@ class _CommentScreenState extends State<CommentScreen> {
           continue;
         }
 
-        // Fallback: Versuch aus Firestore (wenn lokal nicht vorhanden)
         final recipeSnapshot = await FirebaseFirestore.instance
             .collection('recipes')
             .where('id', isEqualTo: comment.recipeId)
@@ -72,9 +83,9 @@ class _CommentScreenState extends State<CommentScreen> {
   String _formatDate(DateTime date) {
     final localDate = date.add(const Duration(hours: 2));
     return '${localDate.day.toString().padLeft(2, '0')}.'
-           '${localDate.month.toString().padLeft(2, '0')}.'
-           '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:'
-           '${localDate.minute.toString().padLeft(2, '0')}';
+        '${localDate.month.toString().padLeft(2, '0')}.'
+        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:'
+        '${localDate.minute.toString().padLeft(2, '0')}';
   }
 
   @override

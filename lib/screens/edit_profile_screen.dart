@@ -125,9 +125,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = const Color(0xFF0D2B20);
-    final cardColor = const Color(0xFF2E6B4D);
-    final labelColor = Colors.white70;
-    final inputTextColor = Colors.white;
     final iconColor = Colors.white;
 
     return Scaffold(
