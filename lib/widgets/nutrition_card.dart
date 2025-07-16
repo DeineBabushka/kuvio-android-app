@@ -28,6 +28,7 @@ class NutritionCard extends StatelessWidget {
     ];
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: values
           .map((info) => Card(
                 color: cardColor,
@@ -37,8 +38,13 @@ class NutritionCard extends StatelessWidget {
                 elevation: 1,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text(info,
-                      style: TextStyle(fontSize: 16, color: textColor)),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      info,
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                  ),
                 ),
               ))
           .toList(),
