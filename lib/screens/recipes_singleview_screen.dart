@@ -13,11 +13,13 @@ import '../widgets/comment_section.dart';
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
   final String? recipeId;
+  final String heroTag;
 
   const RecipeDetailScreen({
     super.key,
     required this.recipe,
     required this.recipeId,
+    required this.heroTag,
   });
 
   @override
@@ -139,14 +141,14 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                               constraints.maxWidth - (isCollapsed ? 140 : 32)),
                       child: Text(
                         widget.recipe.title,
-                        maxLines: isCollapsed ? 1 : null,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: !isCollapsed,
+                        maxLines: 2,
+                        overflow: TextOverflow.fade,
+                        softWrap: true,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: isCollapsed ? 20 : 24,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           shadows: const [
                             Shadow(blurRadius: 4, color: Colors.black)
                           ],
@@ -159,9 +161,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset(
-                    'assets/${widget.recipe.image}',
-                    fit: BoxFit.cover,
+                  Hero(
+                    tag: widget.heroTag,
+                    child: Image.asset(
+                      'assets/${widget.recipe.image}',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -253,7 +258,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         const SizedBox(height: 20),
         Text('Zutaten',
             style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
         const SizedBox(height: 10),
         IngredientList(
           ingredients: scaledIngredients,
@@ -279,7 +284,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         const SizedBox(height: 20),
         Text('Zubereitung',
             style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
         const SizedBox(height: 10),
         InstructionList(
           instructions: widget.recipe.instructions,
@@ -287,9 +292,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           cardColor: cardColor,
         ),
         const SizedBox(height: 20),
-        Text('Nährwerte (pro Portion)',
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Nährwerte (pro Portion)',
             style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
+        ),
         const SizedBox(height: 10),
         NutritionCard(
           calories: widget.recipe.calories,

@@ -278,6 +278,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                     builder: (context) => RecipeDetailScreen(
                                       recipe: recipe,
                                       recipeId: recipe.id,
+                                      heroTag: 'fav-${recipe.id}',
                                     ),
                                   ),
                                 );

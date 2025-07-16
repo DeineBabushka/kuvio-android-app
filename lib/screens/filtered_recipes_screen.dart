@@ -39,16 +39,25 @@ class FilteredRecipesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Gefundene Rezepte',
-          style: TextStyle(color: textColor),
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+          ),
         ),
         backgroundColor: backgroundColor,
         iconTheme: IconThemeData(color: textColor),
+        elevation: 0,
       ),
       body: filteredRecipes.isEmpty
           ? Center(
               child: Text(
                 'Keine Rezepte gefunden!',
-                style: TextStyle(color: textColor, fontSize: 18),
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             )
           : ListView.builder(
@@ -56,6 +65,7 @@ class FilteredRecipesScreen extends StatelessWidget {
               itemCount: filteredRecipes.length,
               itemBuilder: (context, index) {
                 final recipe = filteredRecipes[index];
+                final heroTag = 'recipe-image-${recipe.id}';
 
                 return GestureDetector(
                   onTap: () {
@@ -65,6 +75,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                         builder: (context) => RecipeDetailScreen(
                           recipe: recipe,
                           recipeId: recipe.id,
+                          heroTag: heroTag, // <-- übergibt den Tag
                         ),
                       ),
                     );
@@ -86,8 +97,8 @@ class FilteredRecipesScreen extends StatelessWidget {
                           child: SizedBox(
                             width: 100,
                             height: 150,
-                            child: AspectRatio(
-                              aspectRatio: 2 / 3,
+                            child: Hero(
+                              tag: heroTag,
                               child: Image.asset(
                                 'assets/${recipe.image}',
                                 fit: BoxFit.cover,
@@ -107,7 +118,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                                   recipe.title,
                                   style: TextStyle(
                                     fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w700,
                                     color: titleColor,
                                   ),
                                 ),
@@ -116,6 +127,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                                   '${recipe.portions} Portionen • ${recipe.preparationTime}',
                                   style: TextStyle(
                                     fontSize: 14,
+                                    fontWeight: FontWeight.w400,
                                     color: subtitleColor,
                                   ),
                                 ),

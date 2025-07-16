@@ -119,6 +119,7 @@ class _CommentScreenState extends State<CommentScreen> {
                               builder: (_) => RecipeDetailScreen(
                                 recipe: cwr.recipe,
                                 recipeId: cwr.recipe.id,
+                                heroTag: 'comment-${cwr.recipe.id}',
                               ),
                             ),
                           );
