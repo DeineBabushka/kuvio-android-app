@@ -1792,7 +1792,7 @@
     "ingredients": [
       {
         "quantity": 1,
-        "unit": "groß",
+        "unit": "Stück",
         "name": "Süßkartoffel"
       },
       {
