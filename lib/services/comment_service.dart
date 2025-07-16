@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../models/comment.dart';
 
 class CommentService {
   final _db = FirebaseFirestore.instance;
@@ -26,10 +27,13 @@ class CommentService {
     return snapshot.docs.map((doc) {
       final data = doc.data();
       return Comment(
-        userID: data['userID'],
-        recipeID: data['recipeID'],
+        id: doc.id,
+        userId: data['userID'],
+        recipeId: data['recipeID'],
         text: data['comment'],
-        timestamp: (data['timestamp'] as Timestamp?)?.toDate() ?? DateTime.now(),
+        username: data['username'] ?? 'Unbekannt',
+        timestamp:
+            (data['timestamp'] as Timestamp?)?.toDate() ?? DateTime.now(),
       );
     }).toList();
   }

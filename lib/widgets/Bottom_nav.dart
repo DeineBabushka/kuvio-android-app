@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/recipe.dart';
 import '../screens/login_screen.dart';
 import '../screens/account_screen.dart';
-import '../screens/filter_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../screens/comment_screen.dart';
+import '../screens/shopping_list_screen.dart';
 
 class BottomNavWidget extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -23,9 +23,7 @@ class BottomNavWidget extends StatefulWidget {
 
 class _BottomNavWidgetState extends State<BottomNavWidget> {
   void _onItemTapped(int index) {
-    if (index == widget.currentIndex) return;
-
-    final user = FirebaseAuth.instance.currentUser; // <-- hier zentral
+    final user = FirebaseAuth.instance.currentUser;
 
     switch (index) {
       case 0:
@@ -39,7 +37,12 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
         break;
 
       case 1:
-        // TODO: Navigation zu Einkaufsliste (Valentin)
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const ShoppingListScreen(),
+          ),
+        );
         break;
 
       case 2:
@@ -48,7 +51,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
           MaterialPageRoute(
             builder: (_) => CommentScreen(allRecipes: widget.allRecipes),
           ),
-        );        
+        );
         break;
 
       case 3:

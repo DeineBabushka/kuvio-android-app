@@ -99,7 +99,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                   context,
                   MaterialPageRoute(builder: (_) => const AccountScreen()),
                 );
-                await _loadUserData(); // Aktualisiere nach Rückkehr
+                await _loadUserData();
               },
               tileColor: tileColor,
             ),
