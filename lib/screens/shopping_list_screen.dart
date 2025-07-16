@@ -11,9 +11,14 @@ class ShoppingListScreen extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {
-      return const Scaffold(
-        body: Center(
-            child: Text('Bitte einloggen, um die Einkaufsliste zu sehen.')),
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Einkaufsliste'),
+          leading: BackButton(),
+        ),
+        body: const Center(
+          child: Text('Bitte einloggen, um die Einkaufsliste zu sehen.'),
+        ),
       );
     }
 
