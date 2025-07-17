@@ -264,7 +264,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ingredients: scaledIngredients,
           textColor: textColor,
           cardColor: cardColor,
-          onAddToShoppingList: isLoggedIn ? _addSingleToShoppingList : null,
+          onAddToShoppingList: (ingredient) =>
+              _addSingleToShoppingList(ingredient),
         ),
         const SizedBox(height: 10),
         if (isLoggedIn)
