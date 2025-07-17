@@ -10,6 +10,7 @@ import 'package:kuvio/screens/login_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // HINZUGEFÜGT
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +18,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // 🟢 Firestore Offline-Modus aktivieren
+  FirebaseFirestore.instance.settings = const Settings(
+    persistenceEnabled: true,
+  );
 
+  // Fehler-Logging
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   runZonedGuarded(
     () {
