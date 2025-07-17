@@ -8,6 +8,8 @@ import '../screens/favorites_screen.dart';
 import '../models/recipe.dart';
 import '../theme_provider.dart';
 import '../screens/admin_dashboard_screen.dart';
+import '../screens/shopping_list_screen.dart';
+import '../screens/comment_screen.dart';
 
 class HamburgerDrawer extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -116,20 +118,48 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 ),
               ),
               tileColor: tileColor,
-            ),if (userData!['isAdmin'] == true)
-  _buildTile(
-    context,
-    icon: Icons.admin_panel_settings,
-    title: "Admin-Dashboard",
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const AdminDashboardScreen()),
-      );
-    },
-    tileColor: tileColor,
-  ),
-
+            ),
+            _buildTile(
+              context,
+              icon: Icons.shopping_cart,
+              title: "Einkaufsliste",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
+                );
+              },
+              tileColor: tileColor,
+            ),
+            _buildTile(
+              context,
+              icon: Icons.comment,
+              title: "Kommentare",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        CommentScreen(allRecipes: widget.allRecipes),
+                  ),
+                );
+              },
+              tileColor: tileColor,
+            ),
+            if (userData!['isAdmin'] == true)
+              _buildTile(
+                context,
+                icon: Icons.admin_panel_settings,
+                title: "Admin-Dashboard",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const AdminDashboardScreen()),
+                  );
+                },
+                tileColor: tileColor,
+              ),
             const SizedBox(height: 24),
             Text("ANPASSUNG", style: sectionStyle),
             const SizedBox(height: 12),
