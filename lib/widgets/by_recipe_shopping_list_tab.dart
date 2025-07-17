@@ -62,7 +62,6 @@ class ByRecipeShoppingListTab extends StatelessWidget {
           future: _loadRecipeTitles(grouped.keys),
           builder: (context, titleSnapshot) {
             final recipeTitles = titleSnapshot.data ?? {};
-            print("📄 Rezepttitel-Mapping: $recipeTitles");
 
             return ListView(
               children: grouped.entries.map((entry) {
@@ -94,42 +93,25 @@ class ByRecipeShoppingListTab extends StatelessWidget {
   Future<Map<String, String>> _loadRecipeTitles(Iterable<String> ids) async {
     final Map<String, String> titles = {};
 
-    if (ids.contains('Unbekannt')) {
-      titles['Unbekannt'] = 'Unbekanntes Rezept';
-    }
-
-    final realIds = ids.where((id) => id != 'Unbekannt').toList();
-    if (realIds.isEmpty) return titles;
-
-    final chunks = <List<String>>[];
-    for (var i = 0; i < realIds.length; i += 10) {
-      chunks.add(realIds.sublist(i, (i + 10).clamp(0, realIds.length)));
-    }
-
-    for (final chunk in chunks) {
-      print("🔍 Suche in Firestore nach Rezepten mit ID-Feldern: $chunk");
-
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('recipes')
-          .where('id', whereIn: chunk)
-          .get();
-
-      for (final doc in querySnapshot.docs) {
-        final data = doc.data();
-        final id = data['id'];
-        final title = data['title'];
-        print("✅ Gefunden: $id → $title");
-        if (id != null && title != null) {
-          titles[id] = title;
-        }
+    for (final id in ids) {
+      if (id == 'Unbekannt') {
+        titles[id] = 'Unbekanntes Rezept';
+        continue;
       }
-    }
 
-    for (final id in realIds) {
-      titles.putIfAbsent(id, () {
-        print("⚠️ Kein Titel gefunden für ID $id, verwende Fallback.");
-        return id;
-      });
+      try {
+        final doc = await FirebaseFirestore.instance
+            .collection('recipes')
+            .doc(id)
+            .get();
+
+        final data = doc.data();
+        titles[id] = data != null && data['title'] != null
+            ? data['title'] as String
+            : 'Rezept ohne Titel';
+      } catch (e) {
+        titles[id] = 'Fehler beim Laden';
+      }
     }
 
     return titles;
