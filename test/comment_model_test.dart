@@ -2,6 +2,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/models/comment.dart';
 
+class FakeDocumentSnapshot implements DocumentSnapshot<Map<String, dynamic>> {
+  final String _id;
+  final Map<String, dynamic> _data;
+
+  FakeDocumentSnapshot(this._id, this._data);
+
+  @override
+  String get id => _id;
+
+  @override
+  Map<String, dynamic>? data([GetOptions? options]) => _data;
+
+  @override
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   test('Comment model roundtrip: toMap -> fromFirestore', () {
     final now = DateTime.now();
@@ -15,8 +31,8 @@ void main() {
     );
 
     final map = comment.toMap();
-    
-    final fakeDoc = _FakeDocumentSnapshot('abc123', {
+
+    final fakeDoc = FakeDocumentSnapshot('abc123', {
       'userId': 'user001',
       'username': 'Max Mustermann',
       'recipeId': 'recipe123',
@@ -33,17 +49,4 @@ void main() {
     expect(recreated.text, comment.text);
     expect(recreated.timestamp.toIso8601String(), now.toIso8601String());
   });
-}
-
-class _FakeDocumentSnapshot extends Fake implements DocumentSnapshot {
-  final String _id;
-  final Map<String, dynamic> _data;
-
-  _FakeDocumentSnapshot(this._id, this._data);
-
-  @override
-  String get id => _id;
-
-  @override
-  Map<String, dynamic> data() => _data;
 }
