@@ -32,8 +32,7 @@ class _CommentSectionState extends State<CommentSection> {
         .get();
 
     setState(() {
-      _comments =
-          snapshot.docs.map((doc) => Comment.fromMap(doc.data())).toList();
+      _comments = snapshot.docs.map((doc) => Comment.fromFirestore(doc)).toList();
       _loading = false;
     });
   }

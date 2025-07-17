@@ -33,24 +33,25 @@ class _CommentScreenState extends State<CommentScreen> {
       final List<CommentWithRecipe> loaded = [];
 
       for (var doc in commentSnapshot.docs) {
-        final comment = Comment.fromMap(doc.data());
+        final comment = Comment.fromFirestore(doc); // 🔧 <-- angepasst
 
         final localMatch = widget.allRecipes.firstWhere(
           (r) => r.id == comment.recipeId,
           orElse: () => Recipe(
-              id: '',
-              title: '',
-              image: '',
-              portions: 0,
-              ingredients: [],
-              instructions: [],
-              dietTypes: [],
-              categories: [],
-              preparationTime: '',
-              calories: 0,
-              proteinG: 0,
-              carbohydratesG: 0,
-              fatG: 0),
+            id: '',
+            title: '',
+            image: '',
+            portions: 0,
+            ingredients: [],
+            instructions: [],
+            dietTypes: [],
+            categories: [],
+            preparationTime: '',
+            calories: 0,
+            proteinG: 0,
+            carbohydratesG: 0,
+            fatG: 0,
+          ),
         );
 
         if (localMatch.id.isNotEmpty) {
@@ -60,12 +61,11 @@ class _CommentScreenState extends State<CommentScreen> {
 
         final recipeSnapshot = await FirebaseFirestore.instance
             .collection('recipes')
-            .where('id', isEqualTo: comment.recipeId)
-            .limit(1)
+            .doc(comment.recipeId)
             .get();
 
-        if (recipeSnapshot.docs.isNotEmpty) {
-          final recipe = Recipe.fromJson(recipeSnapshot.docs.first.data());
+        if (recipeSnapshot.exists) {
+          final recipe = Recipe.fromFirestore(recipeSnapshot);
           loaded.add(CommentWithRecipe(comment: comment, recipe: recipe));
         }
       }
@@ -82,9 +82,9 @@ class _CommentScreenState extends State<CommentScreen> {
 
   String _formatDate(DateTime date) {
     final localDate = date.add(const Duration(hours: 2));
-    return '${localDate.day.toString().padLeft(2, '0')}.'
-        '${localDate.month.toString().padLeft(2, '0')}.'
-        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:'
+    return '${localDate.day.toString().padLeft(2, '0')}.' 
+        '${localDate.month.toString().padLeft(2, '0')}.' 
+        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:' 
         '${localDate.minute.toString().padLeft(2, '0')}';
   }
 

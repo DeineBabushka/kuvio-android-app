@@ -1,22 +1,38 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
-import 'theme_provider.dart';
+import 'package:kuvio/theme_provider.dart';
 import 'package:kuvio/screens/start_screen.dart';
 import 'package:kuvio/screens/admin_dashboard_screen.dart';
 import 'package:kuvio/screens/login_screen.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const KuvioApp(),
-    ),
+  // Fehler aus dem Flutter-Framework an Crashlytics senden
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  // Fehler außerhalb des Flutter-Kontexts (z. B. async) an Crashlytics senden
+  runZonedGuarded(
+    () {
+      runApp(
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
+          child: const KuvioApp(),
+        ),
+      );
+    },
+    (error, stackTrace) {
+      FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    },
   );
 }
 
@@ -26,18 +42,22 @@ class KuvioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final analytics = FirebaseAnalytics.instance;
 
     return MaterialApp(
       title: 'Kuvio Kochapp',
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
       theme: themeProvider.isDarkMode
           ? ThemeData(
               scaffoldBackgroundColor: const Color(0xFF1a1a1a),
               fontFamily: 'Roboto',
               textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Color(0xFFFFFFFF)),
-                bodyLarge: TextStyle(color: Color(0xFFFFFFFF)),
-                titleLarge: TextStyle(color: Color(0xFFFFFFFF)),
+                bodyMedium: TextStyle(color: Colors.white),
+                bodyLarge: TextStyle(color: Colors.white),
+                titleLarge: TextStyle(color: Colors.white),
               ),
               appBarTheme: const AppBarTheme(
                 backgroundColor: Color(0xFF1a1a1a),
@@ -58,8 +78,7 @@ class KuvioApp extends StatelessWidget {
                 seedColor: Color(0xFF959595),
                 brightness: Brightness.dark,
               ).copyWith(
-                primary: Color(0xFFFFFFFF),
-                onPrimary: Color(0xFFFFFFFF),
+                primary: Colors.white,
               ),
               useMaterial3: true,
             )
@@ -67,8 +86,8 @@ class KuvioApp extends StatelessWidget {
               scaffoldBackgroundColor: const Color(0xFF122620),
               fontFamily: 'Roboto',
               textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Color(0xFFFFFFFF)),
-                bodyLarge: TextStyle(color: Color(0xFFFFFFFF)),
+                bodyMedium: TextStyle(color: Colors.white),
+                bodyLarge: TextStyle(color: Colors.white),
                 titleLarge: TextStyle(color: Color(0xFF122620)),
               ),
               appBarTheme: const AppBarTheme(

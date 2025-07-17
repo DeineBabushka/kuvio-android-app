@@ -1,6 +1,5 @@
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:kuvio/models/recipe.dart';
 import 'package:kuvio/widgets/hamburger_menu.dart';
 
@@ -18,16 +17,15 @@ class _RecipePageState extends State<RecipePage> {
   @override
   void initState() {
     super.initState();
-    loadRecipe();
+    loadRecipesFromFirestore();
   }
 
-  Future<void> loadRecipe() async {
-    final jsonString = await rootBundle.loadString('assets/recipe.json');
-    final List<dynamic> jsonList = jsonDecode(jsonString);
+  Future<void> loadRecipesFromFirestore() async {
+    final snapshot = await FirebaseFirestore.instance.collection('recipes').get();
 
-    // Mappe jsonList zu Recipe-Objekten
-    final List<Recipe> recipes =
-        jsonList.map<Recipe>((item) => Recipe.fromJson(item)).toList();
+    final recipes = snapshot.docs.map((doc) {
+      return Recipe.fromFirestore(doc);
+    }).toList();
 
     setState(() {
       recipe = recipes.isNotEmpty ? recipes[0] : null;
@@ -58,8 +56,8 @@ class _RecipePageState extends State<RecipePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (recipe!.image.isNotEmpty)
-              Image.asset(
-                'assets/${recipe!.image}',
+              Image.network(
+                recipe!.image,
                 fit: BoxFit.cover,
                 errorBuilder: (ctx, error, stack) => const Text(
                   "Bild nicht gefunden",
@@ -75,7 +73,7 @@ class _RecipePageState extends State<RecipePage> {
             Text('Zutaten:', style: _titleStyle()),
             const SizedBox(height: 8),
             for (final ingredient in recipe!.ingredients)
-              Text('• $ingredient', style: _textStyle()),
+              Text('• ${ingredient.quantity ?? ''} ${ingredient.unit} ${ingredient.name}', style: _textStyle()),
             const SizedBox(height: 16),
             Text('Anleitung:', style: _titleStyle()),
             const SizedBox(height: 8),
@@ -84,17 +82,11 @@ class _RecipePageState extends State<RecipePage> {
             const SizedBox(height: 16),
             Text('Ernährungsform:', style: _titleStyle()),
             const SizedBox(height: 8),
-            Text(
-              recipe!.dietTypes.join(', '),
-              style: _textStyle(),
-            ),
+            Text(recipe!.dietTypes.join(', '), style: _textStyle()),
             const SizedBox(height: 16),
             Text('Kategorien:', style: _titleStyle()),
             const SizedBox(height: 8),
-            Text(
-              recipe!.categories.join(', '),
-              style: _textStyle(),
-            ),
+            Text(recipe!.categories.join(', '), style: _textStyle()),
             const SizedBox(height: 16),
             Text('Nährwerte (pro Portion):', style: _titleStyle()),
             const SizedBox(height: 8),

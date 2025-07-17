@@ -73,13 +73,62 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                   margin: const EdgeInsets.all(8),
                   child: ExpansionTile(
                     title: Text('Rezept: $title'),
-                    children: items.map((item) {
-                      return ListTile(
-                        title: Text(
-                          '${item['quantity']} ${item['unit']} ${item['name']}',
+                    children: [
+                      ...items.map((item) {
+                        return ListTile(
+                          title: Text(
+                            '${item['quantity']} ${item['unit']} ${item['name']}',
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.redAccent),
+                            onPressed: () async {
+                              final docsToDelete = docs.where((doc) {
+                                final data = doc.data() as Map<String, dynamic>;
+                                return data['fromRecipeId'] == recipeId &&
+                                    data['name'] == item['name'] &&
+                                    data['unit'] == item['unit'];
+                              });
+
+                              for (var doc in docsToDelete) {
+                                await doc.reference.delete();
+                              }
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("${item['name']} gelöscht")),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: Center(
+                          child: TextButton.icon(
+                            onPressed: () async {
+                              final docsToDelete = docs.where((doc) {
+                                final data = doc.data() as Map<String, dynamic>;
+                                return data['fromRecipeId'] == recipeId;
+                              });
+
+                              final batch = FirebaseFirestore.instance.batch();
+                              for (var doc in docsToDelete) {
+                                batch.delete(doc.reference);
+                              }
+                              await batch.commit();
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Zutaten für '$title' gelöscht")),
+                              );
+                            },
+                            icon: const Icon(Icons.delete_forever, color: Colors.redAccent),
+                            label: const Text(
+                              "Rezept aus Einkaufsliste entfernen",
+                              style: TextStyle(color: Colors.redAccent),
+                            ),
+                          ),
                         ),
-                      );
-                    }).toList(),
+                      ),
+                    ],
                   ),
                 );
               }).toList(),

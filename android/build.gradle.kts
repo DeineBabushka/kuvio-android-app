@@ -4,7 +4,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        // Google Services Plugin für Firebase (z. B. Auth, Analytics)
         classpath("com.google.gms:google-services:4.4.2")
+
+        // Crashlytics Gradle Plugin
+        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.1")
     }
 }
 
@@ -29,8 +33,4 @@ subprojects {
 
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
-}
-
-plugins {
-    id("com.google.gms.google-services") version "4.4.2" apply false
 }
