@@ -9,15 +9,15 @@ class Ingredient {
     required this.name,
   });
 
-  factory Ingredient.fromJson(Map<String, dynamic> json) {
+  factory Ingredient.fromMap(Map<String, dynamic> map) {
     return Ingredient(
-      quantity: (json['quantity'] as num?)?.toDouble(),
-      unit: json['unit'] ?? '',
-      name: json['name'] ?? '',
+      quantity: (map['quantity'] as num?)?.toDouble(),
+      unit: map['unit'] ?? '',
+      name: map['name'] ?? '',
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'quantity': quantity,
       'unit': unit,

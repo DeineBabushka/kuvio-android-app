@@ -19,7 +19,6 @@ class Comment {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'userId': userId,
       'username': username,
       'recipeId': recipeId,
@@ -28,32 +27,15 @@ class Comment {
     };
   }
 
-  factory Comment.fromMap(Map<String, dynamic> map) {
+  factory Comment.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return Comment(
-      id: map['id'] ?? '',
-      userId: map['userId'] ?? '',
-      username: map['username'] ?? '',
-      recipeId: map['recipeId'] ?? '',
-      text: map['text'] ?? '',
-      timestamp: (map['timestamp'] as Timestamp).toDate(),
-    );
-  }
-
-  Comment copyWith({
-    String? id,
-    String? userId,
-    String? username,
-    String? recipeId,
-    String? text,
-    DateTime? timestamp,
-  }) {
-    return Comment(
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      username: username ?? this.username,
-      recipeId: recipeId ?? this.recipeId,
-      text: text ?? this.text,
-      timestamp: timestamp ?? this.timestamp,
+      id: doc.id,
+      userId: data['userId'] ?? '',
+      username: data['username'] ?? '',
+      recipeId: data['recipeId'] ?? '',
+      text: data['text'] ?? '',
+      timestamp: (data['timestamp'] as Timestamp).toDate(),
     );
   }
 }

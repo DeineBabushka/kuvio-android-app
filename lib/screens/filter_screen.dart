@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/models/recipe.dart';
 import 'package:kuvio/screens/filtered_recipes_screen.dart';
 import 'package:kuvio/widgets/hamburger_menu.dart';
@@ -25,12 +24,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
   }
 
   Future<void> loadRecipes() async {
-    final String jsonString = await rootBundle.loadString('assets/recipe.json');
-    final List<dynamic> jsonData = json.decode(jsonString);
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection('recipes').get();
 
     setState(() {
-      allRecipesList =
-          jsonData.map<Recipe>((item) => Recipe.fromJson(item)).toList();
+      allRecipesList = querySnapshot.docs
+          .map((doc) => Recipe.fromFirestore(doc))
+          .toList();
       isLoading = false;
     });
   }
@@ -85,8 +85,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
                 children: [
                   _buildFilterCircle(
                       'assets/rohkost_icon.png', 'Rohkost', filterTextColor),
-                  _buildFilterCircle('assets/gluten_free_icon.png',
-                      'Glutenfrei', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/gluten_free_icon.png', 'Glutenfrei', filterTextColor),
                   _buildFilterCircle(
                       'assets/fish_icon.png', 'Fisch', filterTextColor),
                   _buildFilterCircle(
@@ -99,8 +99,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
                 children: [
                   _buildFilterCircle(
                       'assets/proteins_icon.png', 'Fleisch', filterTextColor),
-                  _buildFilterCircle('assets/vegetarian_icon.png',
-                      'Vegetarisch', filterTextColor),
+                  _buildFilterCircle(
+                      'assets/vegetarian_icon.png', 'Vegetarisch', filterTextColor),
                   _buildFilterCircle(
                       'assets/alles_icon.png', 'Omnivor', filterTextColor),
                   _buildFilterCircle(

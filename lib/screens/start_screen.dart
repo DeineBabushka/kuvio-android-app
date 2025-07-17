@@ -7,6 +7,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF122620),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -26,14 +27,14 @@ class StartScreen extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.7),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Entdecke leckere Rezepte zum Nachkochen. Egal ob Anfänger oder Küchenprofi – mit Kuvio wird Kochen einfach, kreativ und lecker!',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-            const SizedBox(height: 150),
+            const SizedBox(height: 100),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -46,8 +47,7 @@ class StartScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF122620),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

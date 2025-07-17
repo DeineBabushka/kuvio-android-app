@@ -57,52 +57,89 @@ class GroupedShoppingListTab extends StatelessWidget {
           }
         }
 
-        return ListView(
-          children: groupedItems.values.map((item) {
-            final name = item['name'];
-            final unit = item['unit'];
-            final quantity = item['quantity'];
+        return Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: groupedItems.values.map((item) {
+                  final name = item['name'];
+                  final unit = item['unit'];
+                  final quantity = item['quantity'];
 
-            bool isChecked = false;
+                  bool isChecked = false;
 
-            return StatefulBuilder(
-              builder: (context, setState) => CheckboxListTile(
-                value: isChecked,
-                onChanged: (val) => setState(() => isChecked = val ?? false),
-                title: Text(
-                  '$quantity $unit $name',
-                  style: TextStyle(
-                    color: Colors.white,
-                    decoration: isChecked
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none,
+                  return StatefulBuilder(
+                    builder: (context, setState) => CheckboxListTile(
+                      value: isChecked,
+                      onChanged: (val) =>
+                          setState(() => isChecked = val ?? false),
+                      title: Text(
+                        '$quantity $unit $name',
+                        style: TextStyle(
+                          color: Colors.white,
+                          decoration: isChecked
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                        ),
+                      ),
+                      secondary: IconButton(
+                        icon:
+                            const Icon(Icons.delete, color: Colors.redAccent),
+                        onPressed: () async {
+                          final matchingDocs = docs.where((doc) {
+                            final data = doc.data() as Map<String, dynamic>;
+                            return data['name'] == name &&
+                                data['unit'] == unit;
+                          });
+
+                          for (var doc in matchingDocs) {
+                            await doc.reference.delete();
+                          }
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Zutat(en) entfernt")),
+                          );
+                        },
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 4),
+                      activeColor: Colors.greenAccent,
+                      checkColor: Colors.black,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  final batch = FirebaseFirestore.instance.batch();
+                  for (var doc in docs) {
+                    batch.delete(doc.reference);
+                  }
+                  await batch.commit();
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text("Gesamte Einkaufsliste gelöscht")),
+                  );
+                },
+                icon: const Icon(Icons.delete_forever),
+                label: const Text("Alle Zutaten löschen"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                secondary: IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.redAccent),
-                  onPressed: () async {
-                    final matchingDocs = docs.where((doc) {
-                      final data = doc.data() as Map<String, dynamic>;
-                      return data['name'] == name && data['unit'] == unit;
-                    });
-
-                    for (var doc in matchingDocs) {
-                      await doc.reference.delete();
-                    }
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Zutat(en) entfernt")),
-                    );
-                  },
-                ),
-                controlAffinity: ListTileControlAffinity.leading,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                activeColor: Colors.greenAccent,
-                checkColor: Colors.black,
               ),
-            );
-          }).toList(),
+            ),
+          ],
         );
       },
     );

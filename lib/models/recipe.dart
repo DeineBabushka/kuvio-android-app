@@ -1,4 +1,5 @@
 import 'ingredient.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Recipe {
   final String id;
@@ -31,40 +32,33 @@ class Recipe {
     required this.fatG,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json) {
-    List<String> convertToStringList(dynamic input) {
-      if (input is List) {
-        return input.map((item) => item.toString()).toList();
-      }
-      return [];
-    }
-
+  factory Recipe.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return Recipe(
-      id: json['id'] ?? '',
-      title: json['title'] ?? '',
-      image: json['image'] ?? '',
-      portions: json['portions'] ?? 0,
-      ingredients: (json['ingredients'] as List<dynamic>)
-          .map((item) => Ingredient.fromJson(item))
+      id: doc.id,
+      title: data['title'] ?? '',
+      image: data['image'] ?? '',
+      portions: data['portions'] ?? 0,
+      ingredients: (data['ingredients'] as List<dynamic>)
+          .map((item) => Ingredient.fromMap(item))
           .toList(),
-      instructions: convertToStringList(json['instructions']),
-      dietTypes: convertToStringList(json['diet_types']),
-      categories: convertToStringList(json['categories']),
-      preparationTime: json['preparation_time'] ?? '',
-      calories: json['nutrition']?['calories'] ?? 0,
-      proteinG: json['nutrition']?['protein_g'] ?? 0,
-      carbohydratesG: json['nutrition']?['carbohydrates_g'] ?? 0,
-      fatG: json['nutrition']?['fat_g'] ?? 0,
+      instructions: List<String>.from(data['instructions'] ?? []),
+      dietTypes: List<String>.from(data['diet_types'] ?? []),
+      categories: List<String>.from(data['categories'] ?? []),
+      preparationTime: data['preparation_time'] ?? '',
+      calories: data['nutrition']?['calories'] ?? 0,
+      proteinG: data['nutrition']?['protein_g'] ?? 0,
+      carbohydratesG: data['nutrition']?['carbohydrates_g'] ?? 0,
+      fatG: data['nutrition']?['fat_g'] ?? 0,
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'title': title,
       'image': image,
       'portions': portions,
-      'ingredients': ingredients.map((i) => i.toJson()).toList(),
+      'ingredients': ingredients.map((i) => i.toMap()).toList(),
       'instructions': instructions,
       'diet_types': dietTypes,
       'categories': categories,

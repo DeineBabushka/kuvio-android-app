@@ -77,6 +77,21 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  String _getFirebaseErrorMessage(String code) {
+    switch (code) {
+      case 'user-not-found':
+        return '❌ Kein Benutzer mit dieser E-Mail gefunden.';
+      case 'wrong-password':
+        return '❌ Falsches Passwort.';
+      case 'invalid-email':
+        return '❌ Ungültige E-Mail-Adresse.';
+      case 'user-disabled':
+        return '❌ Dieser Account wurde deaktiviert.';
+      default:
+        return '❌ Anmeldung fehlgeschlagen. Bitte überprüfe deine Eingaben.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -198,9 +213,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
 
                                   Navigator.pop(context);
+                                } on FirebaseAuthException catch (e) {
+                                  final message = _getFirebaseErrorMessage(e.code);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(message)),
+                                  );
                                 } catch (e) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Fehler: $e')),
+                                    const SnackBar(
+                                        content: Text('Unbekannter Fehler')),
                                   );
                                 }
                               },
