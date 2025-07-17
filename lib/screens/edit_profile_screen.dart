@@ -147,35 +147,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           key: _formKey,
           child: Column(
             children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage(
-                      _selectedProfileAsset ?? 'assets/character_1.png',
+              Center(
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage(
+                        _selectedProfileAsset ?? 'assets/character_1.png',
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: MediaQuery.of(context).size.width / 2 - 50,
-                    child: GestureDetector(
-                      onTap: _openImagePickerDialog,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.edit,
-                          size: 18,
-                          color: Colors.black,
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: _openImagePickerDialog,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.edit,
+                            size: 18,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 24),
               buildEditableCard(

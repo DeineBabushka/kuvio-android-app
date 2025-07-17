@@ -301,9 +301,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                         width: 100,
                                         height: 150,
                                         child: recipe.image.isNotEmpty
-                                            ? Image.asset(
-                                                'assets/${recipe.image}',
-                                                fit: BoxFit.cover,
+                                            ? Hero(
+                                                tag: 'fav-${recipe.id}',
+                                                child: Image.asset(
+                                                  'assets/${recipe.image}',
+                                                  fit: BoxFit.cover,
+                                                ),
                                               )
                                             : const SizedBox(),
                                       ),
