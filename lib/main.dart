@@ -17,10 +17,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Fehler aus dem Flutter-Framework an Crashlytics senden
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  // Fehler außerhalb des Flutter-Kontexts (z. B. async) an Crashlytics senden
+
   runZonedGuarded(
     () {
       runApp(
