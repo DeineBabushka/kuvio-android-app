@@ -75,17 +75,18 @@ class _CommentScreenState extends State<CommentScreen> {
         isLoading = false;
       });
     } catch (e) {
-      print('❌ Fehler beim Laden der Kommentare: $e');
+      // Fehlerhandling (kein print in Production)
+      debugPrint('Fehler beim Laden der Kommentare: $e');
       setState(() => isLoading = false);
     }
   }
 
   String _formatDate(DateTime date) {
     final localDate = date.add(const Duration(hours: 2));
-    return '${localDate.day.toString().padLeft(2, '0')}.'
-        '${localDate.month.toString().padLeft(2, '0')}.'
-        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:'
-        '${localDate.minute.toString().padLeft(2, '0')}';
+    return '${localDate.day.toString().padLeft(2, '0')}.' // DD.
+        '${localDate.month.toString().padLeft(2, '0')}.' // MM.
+        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:' // YYYY HH:
+        '${localDate.minute.toString().padLeft(2, '0')}'; // mm
   }
 
   @override
@@ -162,8 +163,9 @@ class _CommentScreenState extends State<CommentScreen> {
                               Text(
                                 _formatDate(cwr.comment.timestamp),
                                 style: TextStyle(
-                                    fontSize: 12,
-                                    color: textColor.withOpacity(0.6)),
+                                  fontSize: 12,
+                                  color: textColor.withAlpha(153), // 0.6 * 255
+                                ),
                               ),
                             ],
                           ),

@@ -40,7 +40,9 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   Future<void> _loadFavoriteStatus() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || widget.recipeId == null) return;
+
     final fav = await FavoriteService.isFavorite(user.uid, widget.recipeId!);
+    if (!mounted) return;
     setState(() => isFavorite = fav);
   }
 
@@ -50,20 +52,22 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
     final updated =
         await FavoriteService.toggleFavorite(user.uid, widget.recipeId!);
+    if (!mounted) return;
+
     setState(() => isFavorite = updated);
 
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-            updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt"),
+          updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
+        ),
       ),
     );
   }
 
   List<Ingredient> _getScaledIngredients() {
-    final original = widget.recipe.portions;
-    final factor = portionCount / original;
-
+    final factor = portionCount / widget.recipe.portions;
     return widget.recipe.ingredients
         .map((e) => Ingredient(
               quantity: e.quantity != null ? e.quantity! * factor : null,
@@ -75,12 +79,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Future<void> _addAllToShoppingList() async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
+    if (user == null || widget.recipeId == null) return;
 
-    final scaledIngredients = _getScaledIngredients();
+    final scaled = _getScaledIngredients();
     await ShoppingListService.addIngredients(
-        user.uid, scaledIngredients, widget.recipeId!);
+        user.uid, scaled, widget.recipeId!);
 
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Zutaten zur Einkaufsliste hinzugefügt")),
     );
@@ -88,11 +93,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Future<void> _addSingleToShoppingList(Ingredient ingredient) async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
+    if (user == null || widget.recipeId == null) return;
 
     await ShoppingListService.addIngredients(
         user.uid, [ingredient], widget.recipeId!);
 
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text("${ingredient.name} hinzugefügt")),
     );
@@ -104,111 +110,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final backgroundColor = theme.scaffoldBackgroundColor;
     final cardColor = const Color(0xFF2C2C2E);
-    final user = FirebaseAuth.instance.currentUser;
-    final isLoggedIn = user != null;
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 400,
-            pinned: true,
-            stretch: true,
-            backgroundColor: backgroundColor,
-            flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.parallax,
-              stretchModes: const [
-                StretchMode.zoomBackground,
-                StretchMode.fadeTitle,
-              ],
-              titlePadding:
-                  const EdgeInsets.only(left: 16, bottom: 16, right: 16),
-              centerTitle: true,
-              title: LayoutBuilder(
-                builder: (context, constraints) {
-                  final isCollapsed = constraints.maxHeight < 140;
-                  return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    transitionBuilder: (child, animation) => FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    ),
-                    child: ConstrainedBox(
-                      key: ValueKey(isCollapsed ? 'collapsed' : 'expanded'),
-                      constraints: BoxConstraints(
-                          maxWidth:
-                              constraints.maxWidth - (isCollapsed ? 140 : 12)),
-                      child: Text(
-                        widget.recipe.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.fade,
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: isCollapsed ? 20 : 24,
-                          fontWeight: FontWeight.w700,
-                          shadows: const [
-                            Shadow(blurRadius: 4, color: Colors.black)
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              background: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Hero(
-                    tag: widget.heroTag,
-                    child: Image.asset(
-                      'assets/${widget.recipe.image}',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.6),
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.6),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.white),
-                onPressed: () {
-                  final shareText = "🥗 ${widget.recipe.title}\n"
-                      "📋 Zutaten: ${widget.recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
-                      "📖 Zubereitung: ${widget.recipe.instructions.take(3).join(' ')}...\n"
-                      "✨ Gekocht mit der Kuvio App!";
-                  Share.share(shareText);
-                },
-              ),
-              if (isLoggedIn)
-                IconButton(
-                  icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.redAccent,
-                  ),
-                  onPressed: _toggleFavorite,
-                ),
-            ],
-          ),
+          _buildSliverAppBar(backgroundColor, isLoggedIn),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -218,6 +126,94 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildSliverAppBar(Color backgroundColor, bool isLoggedIn) {
+    return SliverAppBar(
+      expandedHeight: 400,
+      pinned: true,
+      stretch: true,
+      backgroundColor: backgroundColor,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.parallax,
+        stretchModes: const [StretchMode.zoomBackground, StretchMode.fadeTitle],
+        titlePadding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+        centerTitle: true,
+        title: LayoutBuilder(
+          builder: (context, constraints) {
+            final isCollapsed = constraints.maxHeight < 140;
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: ConstrainedBox(
+                key: ValueKey(isCollapsed ? 'collapsed' : 'expanded'),
+                constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth - (isCollapsed ? 140 : 12)),
+                child: Text(
+                  widget.recipe.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.fade,
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: isCollapsed ? 20 : 24,
+                    fontWeight: FontWeight.w700,
+                    shadows: const [Shadow(blurRadius: 4, color: Colors.black)],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        background: Stack(
+          fit: StackFit.expand,
+          children: [
+            Hero(
+              tag: widget.heroTag,
+              child: Image.asset('assets/${widget.recipe.image}',
+                  fit: BoxFit.cover),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withAlpha(153),
+                    Colors.transparent,
+                    Colors.black.withAlpha(153),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.share, color: Colors.white),
+          onPressed: () {
+            final shareText = "🥗 ${widget.recipe.title}\n"
+                "📋 Zutaten: ${widget.recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
+                "📖 Zubereitung: ${widget.recipe.instructions.take(3).join(' ')}...\n"
+                "✨ Gekocht mit der Kuvio App!";
+            Share.share(shareText);
+          },
+        ),
+        if (isLoggedIn)
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: Colors.redAccent,
+            ),
+            onPressed: _toggleFavorite,
+          ),
+      ],
     );
   }
 
@@ -236,9 +232,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 Text('Portionen: ',
                     style: TextStyle(color: textColor, fontSize: 16)),
                 IconButton(
-                  onPressed: () => setState(() {
-                    if (portionCount > 1) portionCount--;
-                  }),
+                  onPressed: () => setState(() =>
+                      portionCount = (portionCount > 1) ? portionCount - 1 : 1),
                   icon: const Icon(Icons.remove_circle_outline),
                   color: textColor,
                 ),
@@ -264,8 +259,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ingredients: scaledIngredients,
           textColor: textColor,
           cardColor: cardColor,
-          onAddToShoppingList: (ingredient) =>
-              _addSingleToShoppingList(ingredient),
+          onAddToShoppingList: _addSingleToShoppingList,
         ),
         const SizedBox(height: 10),
         if (isLoggedIn)
@@ -293,12 +287,9 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           cardColor: cardColor,
         ),
         const SizedBox(height: 20),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Nährwerte (pro Portion)',
-              style: TextStyle(
-                  color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
-        ),
+        Text('Nährwerte (pro Portion)',
+            style: TextStyle(
+                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
         const SizedBox(height: 10),
         NutritionCard(
           calories: widget.recipe.calories,

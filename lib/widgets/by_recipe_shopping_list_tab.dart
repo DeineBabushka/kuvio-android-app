@@ -59,7 +59,7 @@ class ByRecipeShoppingListTab extends StatelessWidget {
         }
 
         return FutureBuilder<Map<String, String>>(
-          future: _loadRecipeTitles(grouped.keys),
+          future: _loadRecipeTitles(grouped.keys, context),
           builder: (context, titleSnapshot) {
             final recipeTitles = titleSnapshot.data ?? {};
 
@@ -80,7 +80,8 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                             '${item['quantity']} ${item['unit']} ${item['name']}',
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.redAccent),
+                            icon: const Icon(Icons.delete,
+                                color: Colors.redAccent),
                             onPressed: () async {
                               final docsToDelete = docs.where((doc) {
                                 final data = doc.data() as Map<String, dynamic>;
@@ -93,8 +94,10 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                                 await doc.reference.delete();
                               }
 
+                              if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("${item['name']} gelöscht")),
+                                SnackBar(
+                                    content: Text("${item['name']} gelöscht")),
                               );
                             },
                           ),
@@ -116,11 +119,15 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               }
                               await batch.commit();
 
+                              if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Zutaten für '$title' gelöscht")),
+                                SnackBar(
+                                    content:
+                                        Text("Zutaten für '$title' gelöscht")),
                               );
                             },
-                            icon: const Icon(Icons.delete_forever, color: Colors.redAccent),
+                            icon: const Icon(Icons.delete_forever,
+                                color: Colors.redAccent),
                             label: const Text(
                               "Rezept aus Einkaufsliste entfernen",
                               style: TextStyle(color: Colors.redAccent),
@@ -139,7 +146,10 @@ class ByRecipeShoppingListTab extends StatelessWidget {
     );
   }
 
-  Future<Map<String, String>> _loadRecipeTitles(Iterable<String> ids) async {
+  Future<Map<String, String>> _loadRecipeTitles(
+    Iterable<String> ids,
+    BuildContext context,
+  ) async {
     final Map<String, String> titles = {};
 
     for (final id in ids) {
@@ -159,6 +169,7 @@ class ByRecipeShoppingListTab extends StatelessWidget {
             ? data['title'] as String
             : 'Rezept ohne Titel';
       } catch (e) {
+        if (!context.mounted) continue;
         titles[id] = 'Fehler beim Laden';
       }
     }

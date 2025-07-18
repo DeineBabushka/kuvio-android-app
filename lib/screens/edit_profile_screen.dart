@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../services/user_service.dart';
 import 'change_password_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -15,6 +14,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _usernameController = TextEditingController();
   final _bioController = TextEditingController();
   final _dishController = TextEditingController();
+  final _userService = UserService();
 
   String _selectedKitchen = 'Nicht angegeben';
   String? _selectedProfileAsset;
@@ -39,52 +39,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
-      final data = doc.data();
-      if (data != null) {
-        setState(() {
-          _usernameController.text = data['username'] ?? '';
-          _bioController.text = data['bio'] ?? '';
-          _dishController.text = data['favdish'] ?? '';
-          _selectedKitchen = data['kitchen'] ?? 'Nicht angegeben';
-          _selectedProfileAsset = data['profileImage'];
-        });
-      }
+    final data = await _userService.loadUserData();
+    if (data != null) {
+      setState(() {
+        _usernameController.text = data['username'] ?? '';
+        _bioController.text = data['bio'] ?? '';
+        _dishController.text = data['favdish'] ?? '';
+        _selectedKitchen = data['kitchen'] ?? 'Nicht angegeben';
+        _selectedProfileAsset = data['profileImage'];
+      });
     }
   }
 
   Future<void> _saveProfile() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .update({
-        'bio': _bioController.text.trim(),
-        'kitchen': _selectedKitchen,
-        'favdish': _dishController.text.trim(),
-        'profileImage': _selectedProfileAsset,
-      });
+    await _userService.updateProfile(
+      bio: _bioController.text,
+      kitchen: _selectedKitchen,
+      favdish: _dishController.text,
+      profileImage: _selectedProfileAsset,
+    );
 
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Color(0xFF2E6B4D),
-          content: Text(
-            'Profil aktualisiert',
-            style: TextStyle(color: Colors.white),
-          ),
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Color(0xFF2E6B4D),
+        content: Text(
+          'Profil aktualisiert',
+          style: TextStyle(color: Colors.white),
         ),
-      );
-      Navigator.pop(context);
-    }
+      ),
+    );
+    Navigator.pop(context);
   }
 
   void _openImagePickerDialog() {

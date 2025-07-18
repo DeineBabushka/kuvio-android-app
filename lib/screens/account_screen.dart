@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kuvio/services/user_service.dart';
 import 'edit_profile_screen.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -11,6 +11,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  final UserService _userService = UserService();
   Map<String, dynamic>? userData;
   bool isLoading = true;
 
@@ -21,31 +22,131 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
-      setState(() {
-        userData = doc.data();
-        isLoading = false;
-      });
-    }
+    final data = await _userService.loadUserData();
+    if (!mounted) return;
+    setState(() {
+      userData = data;
+      isLoading = false;
+    });
   }
 
-  void _navigateToEditProfile() async {
+  Future<void> _navigateToEditProfile() async {
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const EditProfileScreen()),
     );
-    _loadUserData();
+    if (mounted) _loadUserData();
+  }
+
+  void _showDeleteConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Konto wirklich löschen?',
+              style: TextStyle(color: Colors.black)),
+          content: const Text(
+              'Dieser Vorgang kann nicht rückgängig gemacht werden.',
+              style: TextStyle(color: Colors.black)),
+          actions: [
+            TextButton(
+              child: const Text('Abbrechen'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Löschen', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteAccount();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteAccount() async {
+    final password = await _askForPassword();
+    if (password == null) return;
+
+    try {
+      await _userService.deleteUserAndData(password);
+      if (!mounted) return;
+      Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Fehler beim Löschen: $e')),
+      );
+    }
+  }
+
+  Future<String?> _askForPassword() async {
+    final controller = TextEditingController();
+    String? result;
+
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 24,
+            right: 24,
+            top: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Passwort bestätigen',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16),
+              TextField(
+                controller: controller,
+                obscureText: true,
+                style: const TextStyle(color: Colors.black),
+                decoration: const InputDecoration(
+                  labelText: 'Passwort',
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: Colors.black),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    child: const Text('Abbrechen'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    child: const Text('Bestätigen'),
+                    onPressed: () {
+                      result = controller.text;
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        );
+      },
+    );
+
+    return result;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final backgroundColor = theme.scaffoldBackgroundColor;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final sectionStyle = TextStyle(
@@ -96,7 +197,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(height: 4),
                             Text(
                               FirebaseAuth.instance.currentUser?.email ?? '',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, color: Colors.white60),
                             ),
                           ],
@@ -120,9 +221,6 @@ class _AccountScreenState extends State<AccountScreen> {
                             "Profil bearbeiten",
                             style:
                                 TextStyle(color: Colors.white70, fontSize: 18),
-                          ),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.white70,
                           ),
                         ),
                       ),
@@ -180,144 +278,5 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       child: Text(text, style: const TextStyle(fontSize: 16)),
     );
-  }
-
-  void _showDeleteConfirmationDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Konto wirklich löschen?',
-              style: TextStyle(color: Colors.black)),
-          content: const Text(
-              'Dieser Vorgang kann nicht rückgängig gemacht werden.',
-              style: TextStyle(color: Colors.black)),
-          actions: [
-            TextButton(
-              child: const Text('Abbrechen'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            TextButton(
-              child: const Text('Löschen', style: TextStyle(color: Colors.red)),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _deleteAccount();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _deleteAccount() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
-
-    final password = await _askForPassword();
-    if (password == null) return;
-
-    try {
-      final cred =
-          EmailAuthProvider.credential(email: user.email!, password: password);
-      await user.reauthenticateWithCredential(cred);
-
-      final uid = user.uid;
-      final firestore = FirebaseFirestore.instance;
-
-      final commentQuery = await firestore
-          .collection('comments')
-          .where('userId', isEqualTo: uid)
-          .get();
-      for (final doc in commentQuery.docs) {
-        await doc.reference.delete();
-      }
-
-      final favoritesQuery = await firestore
-          .collection('favorites')
-          .where('userId', isEqualTo: uid)
-          .get();
-      for (final doc in favoritesQuery.docs) {
-        await doc.reference.delete();
-      }
-
-      final shoppingDoc = firestore.collection('shopping_list').doc(uid);
-      final items = await shoppingDoc.collection('items').get();
-      for (final item in items.docs) {
-        await item.reference.delete();
-      }
-      await shoppingDoc.delete();
-
-      await firestore.collection('users').doc(uid).delete();
-
-      await user.delete();
-
-      if (!mounted) return;
-      Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
-    } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Fehler beim Löschen: $e')));
-    }
-  }
-
-  Future<String?> _askForPassword() async {
-    final controller = TextEditingController();
-    String? result;
-
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: 24,
-            right: 24,
-            top: 24,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Passwort bestätigen',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 16),
-              TextField(
-                controller: controller,
-                obscureText: true,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  labelText: 'Passwort',
-                  border: OutlineInputBorder(),
-                  labelStyle: TextStyle(color: Colors.black),
-                ),
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    child: const Text('Abbrechen'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  const SizedBox(width: 8),
-                  ElevatedButton(
-                    child: const Text('Bestätigen'),
-                    onPressed: () {
-                      result = controller.text;
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        );
-      },
-    );
-
-    return result;
   }
 }

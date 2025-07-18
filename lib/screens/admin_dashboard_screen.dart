@@ -7,7 +7,6 @@ class AdminDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final backgroundColor = theme.scaffoldBackgroundColor;
     final cardTextColor = const Color(0xFF122620);
 
@@ -28,7 +27,8 @@ class AdminDashboardScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-                child: CircularProgressIndicator(color: Colors.white));
+              child: CircularProgressIndicator(color: Colors.white),
+            );
           }
 
           final users = snapshot.data?.docs ?? [];
@@ -63,7 +63,9 @@ class AdminDashboardScreen extends StatelessWidget {
                   ),
                   subtitle: Text(
                     isAdmin ? 'Admin' : 'Benutzer',
-                    style: TextStyle(color: cardTextColor.withOpacity(0.8)),
+                    style: TextStyle(
+                      color: cardTextColor.withAlpha(204), // 204 ≈ 0.8 * 255
+                    ),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -74,15 +76,17 @@ class AdminDashboardScreen extends StatelessWidget {
                           await usersRef
                               .doc(userDoc.id)
                               .update({'isAdmin': value});
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Adminstatus von "$username" geändert.',
-                                style: const TextStyle(color: Colors.white),
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Adminstatus von "$username" geändert.',
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: const Color(0xFF2E6B4D),
                               ),
-                              backgroundColor: const Color(0xFF2E6B4D),
-                            ),
-                          );
+                            );
+                          }
                         },
                       ),
                       IconButton(
@@ -109,17 +113,20 @@ class AdminDashboardScreen extends StatelessWidget {
                               ],
                             ),
                           );
+
                           if (confirm == true) {
                             await usersRef.doc(userDoc.id).delete();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Benutzer "$username" wurde gelöscht.',
-                                  style: const TextStyle(color: Colors.white),
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Benutzer "$username" wurde gelöscht.',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: Colors.red,
                                 ),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
+                              );
+                            }
                           }
                         },
                       ),

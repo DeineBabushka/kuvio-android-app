@@ -1,27 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class FavoritesService {
-  final _db = FirebaseFirestore.instance;
-  final _auth = FirebaseAuth.instance;
+class FavoriteService {
+  static final _db = FirebaseFirestore.instance;
 
-  Future<void> addFavorite(String recipeID) async {
-    final userID = _auth.currentUser!.uid;
-
+  static Future<void> addFavorite(String userId, String recipeId) async {
     await _db.collection('favorites').add({
-      'userID': userID,
-      'recipeID': recipeID,
+      'userId': userId,
+      'recipeId': recipeId,
       'addedAt': FieldValue.serverTimestamp(),
     });
   }
 
-  Future<void> removeFavorite(String recipeID) async {
-    final userID = _auth.currentUser!.uid;
-
+  static Future<void> removeFavorite(String userId, String recipeId) async {
     final snapshot = await _db
         .collection('favorites')
-        .where('userID', isEqualTo: userID)
-        .where('recipeID', isEqualTo: recipeID)
+        .where('userId', isEqualTo: userId)
+        .where('recipeId', isEqualTo: recipeId)
         .get();
 
     for (var doc in snapshot.docs) {
@@ -29,14 +23,33 @@ class FavoritesService {
     }
   }
 
-  Future<List<String>> getFavoriteRecipeIDs() async {
-    final userID = _auth.currentUser!.uid;
-
+  static Future<bool> isFavorite(String userId, String recipeId) async {
     final snapshot = await _db
         .collection('favorites')
-        .where('userID', isEqualTo: userID)
+        .where('userId', isEqualTo: userId)
+        .where('recipeId', isEqualTo: recipeId)
         .get();
 
-    return snapshot.docs.map((doc) => doc['recipeID'] as String).toList();
+    return snapshot.docs.isNotEmpty;
+  }
+
+  static Future<bool> toggleFavorite(String userId, String recipeId) async {
+    final isFav = await isFavorite(userId, recipeId);
+    if (isFav) {
+      await removeFavorite(userId, recipeId);
+      return false;
+    } else {
+      await addFavorite(userId, recipeId);
+      return true;
+    }
+  }
+
+  static Future<List<String>> getFavoriteRecipeIds(String userId) async {
+    final snapshot = await _db
+        .collection('favorites')
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return snapshot.docs.map((doc) => doc['recipeId'] as String).toList();
   }
 }
