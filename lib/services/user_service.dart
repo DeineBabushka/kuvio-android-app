@@ -5,16 +5,17 @@ class UserService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<Map<String, dynamic>?> loadUserData() async {
+  Future<DocumentSnapshot?> loadUserData() async {
     final user = _auth.currentUser;
     if (user == null) return null;
 
     final doc = await _firestore.collection('users').doc(user.uid).get();
-    return doc.data();
+    return doc.exists ? doc : null;
   }
 
   Future<Map<String, dynamic>?> loadEditableUserData() async {
-    return await loadUserData();
+    final doc = await loadUserData();
+    return doc?.data() as Map<String, dynamic>?;
   }
 
   Future<Map<String, dynamic>?> fetchCurrentUserData() async {

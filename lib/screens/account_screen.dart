@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/services/user_service.dart';
+import 'package:kuvio/services/dialog_service.dart'; // <-- NEU
 import 'edit_profile_screen.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/info_card_tile.dart';
@@ -25,20 +26,13 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final data = await _userService.loadUserData();
+    final doc = await _userService.loadUserData();
     if (!mounted) return;
 
-    if (data != null && data.containsKey('id')) {
-      setState(() {
-        appUser = AppUser.fromMap(data['id'], data);
-        isLoading = false;
-      });
-    } else {
-      setState(() {
-        appUser = null;
-        isLoading = false;
-      });
-    }
+    setState(() {
+      appUser = doc != null && doc.exists ? AppUser.fromSnapshot(doc) : null;
+      isLoading = false;
+    });
   }
 
   Future<void> _navigateToEditProfile() async {
@@ -49,36 +43,8 @@ class _AccountScreenState extends State<AccountScreen> {
     if (mounted) _loadUserData();
   }
 
-  void _showDeleteConfirmationDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Konto wirklich löschen?',
-              style: TextStyle(color: Colors.black)),
-          content: const Text(
-              'Dieser Vorgang kann nicht rückgängig gemacht werden.',
-              style: TextStyle(color: Colors.black)),
-          actions: [
-            TextButton(
-              child: const Text('Abbrechen'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            TextButton(
-              child: const Text('Löschen', style: TextStyle(color: Colors.red)),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _deleteAccount();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Future<void> _deleteAccount() async {
-    final password = await _askForPassword();
+    final password = await DialogService.askForPassword(context);
     if (password == null) return;
 
     try {
@@ -93,82 +59,19 @@ class _AccountScreenState extends State<AccountScreen> {
     }
   }
 
-  Future<String?> _askForPassword() async {
-    final controller = TextEditingController();
-    String? result;
-
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: 24,
-            right: 24,
-            top: 24,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Passwort bestätigen',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 16),
-              TextField(
-                controller: controller,
-                obscureText: true,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  labelText: 'Passwort',
-                  border: OutlineInputBorder(),
-                  labelStyle: TextStyle(color: Colors.black),
-                ),
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    child: const Text('Abbrechen'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  const SizedBox(width: 8),
-                  ElevatedButton(
-                    child: const Text('Bestätigen'),
-                    onPressed: () {
-                      result = controller.text;
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        );
-      },
-    );
-
-    return result;
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final backgroundColor = theme.scaffoldBackgroundColor;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final sectionStyle = const TextStyle(
       color: Colors.white70,
       fontWeight: FontWeight.bold,
       fontSize: 16,
     );
-    final cardColor = const Color(0xFF2E6B4D);
+    const cardColor = Color(0xFF2E6B4D);
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Profil', style: TextStyle(color: textColor)),
         backgroundColor: Colors.transparent,
@@ -230,7 +133,12 @@ class _AccountScreenState extends State<AccountScreen> {
                       Center(
                         child: ConfirmButton(
                           text: "Konto löschen",
-                          onPressed: _showDeleteConfirmationDialog,
+                          onPressed: () async {
+                            final confirm =
+                                await DialogService.confirmAccountDeletion(
+                                    context);
+                            if (confirm) _deleteAccount();
+                          },
                           bgColor: Colors.red,
                           textColor: Colors.white,
                         ),

@@ -43,9 +43,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final data = await _userService.loadUserData();
-    if (data != null) {
-      final user = AppUser.fromMap(data['id'] ?? 'unknown', data);
+    final doc = await _userService.loadUserData();
+    if (doc != null && doc.exists) {
+      final user = AppUser.fromSnapshot(doc);
 
       setState(() {
         _usernameController.text = user.username;
