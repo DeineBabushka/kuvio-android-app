@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../../services/user_service.dart';
+import '../../widgets/password_input_field.dart';
+import '../../widgets/password_input_decoration_helper.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -13,63 +15,28 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _currentPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
-
   bool _isLoading = false;
 
-  Future<void> _changePassword() async {
+  Future<void> _handlePasswordChange() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null || user.email == null) return;
-
     setState(() => _isLoading = true);
+    final result = await UserService().changePassword(
+      currentPassword: _currentPasswordController.text.trim(),
+      newPassword: _newPasswordController.text.trim(),
+    );
 
-    try {
-      final cred = EmailAuthProvider.credential(
-        email: user.email!,
-        password: _currentPasswordController.text.trim(),
-      );
-      await user.reauthenticateWithCredential(cred);
-      await user.updatePassword(_newPasswordController.text.trim());
+    if (!mounted) return;
 
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text('Passwort erfolgreich geändert.'),
-        ),
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'wrong-password':
-          errorMessage = 'Das aktuelle Passwort ist falsch.';
-          break;
-        case 'requires-recent-login':
-          errorMessage =
-              'Bitte melde dich erneut an, um dein Passwort zu ändern.';
-          break;
-        case 'user-mismatch':
-          errorMessage =
-              'Anmeldedaten stimmen nicht mit dem aktuellen Nutzer überein.';
-          break;
-        case 'invalid-credential':
-          errorMessage = 'Das aktuelle Passwort ist falsch.';
-          break;
-        default:
-          errorMessage = 'Fehler beim Ändern des Passworts.';
-      }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: result == null ? Colors.green : Colors.red,
+        content: Text(result ?? 'Passwort erfolgreich geändert.'),
+      ),
+    );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(errorMessage),
-        ),
-      );
-    } finally {
-      setState(() => _isLoading = false);
-    }
+    if (result == null) Navigator.pop(context);
+    setState(() => _isLoading = false);
   }
 
   @override
@@ -78,27 +45,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     final isDark = theme.brightness == Brightness.dark;
     final inputColor = isDark ? Colors.white : Colors.black;
     final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
-    final fillColor = isDark ? Colors.grey[850] : Colors.white;
-
-    InputDecoration inputDecoration(String label, String hint) {
-      return InputDecoration(
-        labelText: label,
-        hintText: hint,
-        labelStyle: TextStyle(color: labelColor),
-        hintStyle: TextStyle(color: labelColor.withAlpha(153)), // 0.6 * 255
-        filled: true,
-        fillColor: fillColor,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: labelColor.withAlpha(128)), // 0.5 * 255
-          borderRadius: BorderRadius.circular(8),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: theme.colorScheme.primary),
-          borderRadius: BorderRadius.circular(8),
-        ),
-      );
-    }
+    final fillColor = isDark ? Colors.grey[850]! : Colors.white;
 
     return Scaffold(
       appBar: AppBar(
@@ -112,30 +59,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
+              PasswordInputField(
                 controller: _currentPasswordController,
-                obscureText: true,
-                style: TextStyle(color: inputColor),
-                decoration: inputDecoration(
-                  'Aktuelles Passwort',
-                  'Gib dein aktuelles Passwort ein',
-                ),
+                label: 'Aktuelles Passwort',
+                hint: 'Gib dein aktuelles Passwort ein',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Bitte aktuelles Passwort eingeben';
                   }
                   return null;
                 },
+                textColor: inputColor,
+                decoration: buildPasswordInputDecoration(
+                  label: 'Aktuelles Passwort',
+                  hint: 'Gib dein aktuelles Passwort ein',
+                  labelColor: labelColor,
+                  fillColor: fillColor,
+                  focusColor: theme.colorScheme.primary,
+                ),
               ),
               const SizedBox(height: 16),
-              TextFormField(
+              PasswordInputField(
                 controller: _newPasswordController,
-                obscureText: true,
-                style: TextStyle(color: inputColor),
-                decoration: inputDecoration(
-                  'Neues Passwort',
-                  'Mindestens 6 Zeichen',
-                ),
+                label: 'Neues Passwort',
+                hint: 'Mindestens 6 Zeichen',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Bitte neues Passwort eingeben';
@@ -145,28 +92,40 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   }
                   return null;
                 },
+                textColor: inputColor,
+                decoration: buildPasswordInputDecoration(
+                  label: 'Neues Passwort',
+                  hint: 'Mindestens 6 Zeichen',
+                  labelColor: labelColor,
+                  fillColor: fillColor,
+                  focusColor: theme.colorScheme.primary,
+                ),
               ),
               const SizedBox(height: 16),
-              TextFormField(
+              PasswordInputField(
                 controller: _repeatPasswordController,
-                obscureText: true,
-                style: TextStyle(color: inputColor),
-                decoration: inputDecoration(
-                  'Passwort wiederholen',
-                  'Wiederhole das neue Passwort',
-                ),
+                label: 'Passwort wiederholen',
+                hint: 'Wiederhole das neue Passwort',
                 validator: (value) {
                   if (value != _newPasswordController.text) {
                     return 'Passwörter stimmen nicht überein';
                   }
                   return null;
                 },
+                textColor: inputColor,
+                decoration: buildPasswordInputDecoration(
+                  label: 'Passwort wiederholen',
+                  hint: 'Wiederhole das neue Passwort',
+                  labelColor: labelColor,
+                  fillColor: fillColor,
+                  focusColor: theme.colorScheme.primary,
+                ),
               ),
               const SizedBox(height: 32),
               _isLoading
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
-                      onPressed: _changePassword,
+                      onPressed: _handlePasswordChange,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                         foregroundColor: Colors.white,

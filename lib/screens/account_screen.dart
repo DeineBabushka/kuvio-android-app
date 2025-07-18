@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/services/user_service.dart';
 import 'edit_profile_screen.dart';
+import '../widgets/profile_header.dart';
+import '../widgets/info_card_tile.dart';
+import '../widgets/confirm_button.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -149,7 +151,7 @@ class _AccountScreenState extends State<AccountScreen> {
     final theme = Theme.of(context);
     final backgroundColor = theme.scaffoldBackgroundColor;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
-    final sectionStyle = TextStyle(
+    final sectionStyle = const TextStyle(
       color: Colors.white70,
       fontWeight: FontWeight.bold,
       fontSize: 16,
@@ -177,41 +179,32 @@ class _AccountScreenState extends State<AccountScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                  userData!['profileImage'] ??
-                                      'assets/character_1.png'),
-                              backgroundColor: Colors.transparent,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              userData!['username'] ?? 'Unbekannt',
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: textColor),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              FirebaseAuth.instance.currentUser?.email ?? '',
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white60),
-                            ),
-                          ],
+                        child: ProfileHeader(
+                          username: userData!['username'] ?? 'Unbekannt',
+                          profileImage: userData!['profileImage'],
                         ),
                       ),
                       const SizedBox(height: 32),
                       Text("DEIN KONTO", style: sectionStyle),
                       const SizedBox(height: 12),
-                      _buildCardTile(
-                          "Über mich", userData!['bio'], textColor, cardColor),
-                      _buildCardTile("Lieblingsküche", userData!['kitchen'],
-                          textColor, cardColor),
-                      _buildCardTile("Lieblingsgericht", userData!['favdish'],
-                          textColor, cardColor),
+                      InfoCardTile(
+                        label: "Über mich",
+                        value: userData!['bio'],
+                        textColor: textColor,
+                        tileColor: cardColor,
+                      ),
+                      InfoCardTile(
+                        label: "Lieblingsküche",
+                        value: userData!['kitchen'],
+                        textColor: textColor,
+                        tileColor: cardColor,
+                      ),
+                      InfoCardTile(
+                        label: "Lieblingsgericht",
+                        value: userData!['favdish'],
+                        textColor: textColor,
+                        tileColor: cardColor,
+                      ),
                       const SizedBox(height: 10),
                       Center(
                         child: TextButton.icon(
@@ -226,11 +219,11 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       const SizedBox(height: 60),
                       Center(
-                        child: _buildActionButton(
-                          "Konto löschen",
-                          _showDeleteConfirmationDialog,
-                          Colors.red,
-                          Colors.white,
+                        child: ConfirmButton(
+                          text: "Konto löschen",
+                          onPressed: _showDeleteConfirmationDialog,
+                          bgColor: Colors.red,
+                          textColor: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -244,39 +237,6 @@ class _AccountScreenState extends State<AccountScreen> {
                     ],
                   ),
                 ),
-    );
-  }
-
-  Widget _buildCardTile(
-      String label, String? value, Color textColor, Color tileColor) {
-    return Card(
-      color: tileColor,
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        title: Text(label,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            )),
-        subtitle: Text(value?.isNotEmpty == true ? value! : 'Nicht angegeben',
-            style: TextStyle(color: textColor, fontSize: 16)),
-      ),
-    );
-  }
-
-  Widget _buildActionButton(
-      String text, VoidCallback onPressed, Color bgColor, Color textColor) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: bgColor,
-        foregroundColor: textColor,
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      ),
-      child: Text(text, style: const TextStyle(fontSize: 16)),
     );
   }
 }

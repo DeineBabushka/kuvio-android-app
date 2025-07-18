@@ -7,22 +7,15 @@ import '../screens/favorites_screen.dart';
 import '../screens/comment_screen.dart';
 import '../screens/shopping_list_screen.dart';
 
-class BottomNavWidget extends StatefulWidget {
+class BottomNavWidget extends StatelessWidget {
   final List<Recipe> allRecipes;
-  final int currentIndex;
 
   const BottomNavWidget({
     super.key,
     required this.allRecipes,
-    required this.currentIndex,
   });
 
-  @override
-  State<BottomNavWidget> createState() => _BottomNavWidgetState();
-}
-
-class _BottomNavWidgetState extends State<BottomNavWidget> {
-  void _onItemTapped(int index) {
+  void _onItemTapped(BuildContext context, int index) {
     final user = FirebaseAuth.instance.currentUser;
 
     Widget destination;
@@ -33,15 +26,18 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
             user == null ? const LoginScreen() : const AccountScreen();
         break;
       case 1:
-        destination = const ShoppingListScreen();
+        destination =
+            user == null ? const LoginScreen() : const ShoppingListScreen();
         break;
       case 2:
-        destination = CommentScreen(allRecipes: widget.allRecipes);
+        destination = user == null
+            ? const LoginScreen()
+            : CommentScreen(allRecipes: allRecipes);
         break;
       case 3:
         destination = user == null
             ? const LoginScreen()
-            : FavoritesScreen(allRecipes: widget.allRecipes);
+            : FavoritesScreen(allRecipes: allRecipes);
         break;
       default:
         return;
@@ -57,11 +53,10 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: const Color(0xFF122620),
-      currentIndex: widget.currentIndex,
-      selectedItemColor: const Color(0xFF6FC38D),
-      unselectedItemColor: Colors.white70,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
-      onTap: _onItemTapped,
+      onTap: (index) => _onItemTapped(context, index),
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

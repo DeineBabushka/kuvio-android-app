@@ -5,7 +5,6 @@ class UserService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  /// Lädt alle Benutzerdaten aus der `users`-Collection.
   Future<Map<String, dynamic>?> loadUserData() async {
     final user = _auth.currentUser;
     if (user == null) return null;
@@ -14,12 +13,18 @@ class UserService {
     return doc.data();
   }
 
-  /// Lädt Profildaten für die Bearbeitungsansicht (EditProfileScreen).
   Future<Map<String, dynamic>?> loadEditableUserData() async {
-    return await loadUserData(); // gleiche Logik, evtl. später erweiterbar
+    return await loadUserData();
   }
 
-  /// Aktualisiert das Profil des Benutzers in Firestore.
+  Future<Map<String, dynamic>?> fetchCurrentUserData() async {
+    final user = _auth.currentUser;
+    if (user == null) return null;
+
+    final doc = await _firestore.collection('users').doc(user.uid).get();
+    return doc.data();
+  }
+
   Future<void> updateProfile({
     required String bio,
     required String kitchen,
@@ -37,20 +42,18 @@ class UserService {
     });
   }
 
-  /// Löscht das Auth-Konto + alle zugehörigen Firestore-Daten des Benutzers.
   Future<void> deleteUserAndData(String password) async {
     final user = _auth.currentUser;
-    if (user == null) return;
+    if (user == null || user.email == null) return;
 
-    // Re-Authentifizierung
     final cred = EmailAuthProvider.credential(
       email: user.email!,
       password: password,
     );
     await user.reauthenticateWithCredential(cred);
+
     final uid = user.uid;
 
-    // Kommentare löschen
     final comments = await _firestore
         .collection('comments')
         .where('userId', isEqualTo: uid)
@@ -75,7 +78,61 @@ class UserService {
     await shoppingListRef.delete();
 
     await _firestore.collection('users').doc(uid).delete();
-
     await user.delete();
+  }
+
+  Future<String?> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final user = _auth.currentUser;
+    if (user == null || user.email == null) {
+      return 'Kein Benutzer angemeldet.';
+    }
+
+    try {
+      final cred = EmailAuthProvider.credential(
+        email: user.email!,
+        password: currentPassword,
+      );
+      await user.reauthenticateWithCredential(cred);
+      await user.updatePassword(newPassword);
+      return null;
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'wrong-password':
+        case 'invalid-credential':
+          return 'Das aktuelle Passwort ist falsch.';
+        case 'requires-recent-login':
+          return 'Bitte melde dich erneut an, um dein Passwort zu ändern.';
+        case 'user-mismatch':
+          return 'Anmeldedaten stimmen nicht mit dem aktuellen Nutzer überein.';
+        default:
+          return 'Fehler beim Ändern des Passworts.';
+      }
+    }
+  }
+
+  Future<UserCredential> loginWithEmail(String email, String password) {
+    return _auth.signInWithEmailAndPassword(
+      email: email.trim(),
+      password: password.trim(),
+    );
+  }
+
+  Future<bool> isAdmin(String uid) async {
+    final doc = await _firestore.collection('users').doc(uid).get();
+    return doc.data()?['isAdmin'] ?? false;
+  }
+
+  String getErrorMessage(String code) {
+    switch (code) {
+      case 'user-not-found':
+      case 'wrong-password':
+      case 'invalid-credential':
+        return 'E-mail Adresse oder Passwort falsch.';
+      default:
+        return 'Unbekannter Fehler beim Login.';
+    }
   }
 }

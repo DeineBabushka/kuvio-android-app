@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
+import '../services/profile_service.dart';
 import 'change_password_screen.dart';
+import 'filter_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -15,6 +17,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _bioController = TextEditingController();
   final _dishController = TextEditingController();
   final _userService = UserService();
+  final _profileService = ProfileService();
 
   String _selectedKitchen = 'Nicht angegeben';
   String? _selectedProfileAsset;
@@ -62,6 +65,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
 
     if (!mounted) return;
+
+    // 🔁 Weiterleitung zu RecipesScreen
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const RecipesScreen()),
+      (route) => false, // ← entfernt alle vorherigen Routen
+    );
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Color(0xFF2E6B4D),
@@ -71,48 +82,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
     );
-    Navigator.pop(context);
   }
 
-  void _openImagePickerDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Profilbild auswählen'),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: 9,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemBuilder: (context, index) {
-                final assetName = 'assets/character_${index + 1}.png';
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _selectedProfileAsset = assetName;
-                    });
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset(assetName),
-                );
-              },
-            ),
-          ),
-        );
-      },
+  Future<void> _selectProfileImage() async {
+    final selected = await _profileService.openImagePickerDialog(
+      context,
+      _selectedProfileAsset,
     );
+    if (selected != null) {
+      setState(() => _selectedProfileAsset = selected);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = const Color(0xFF0D2B20);
-    final iconColor = Colors.white;
+    const backgroundColor = Color(0xFF0D2B20);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -120,7 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         title: const Text('Profil bearbeiten'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: iconColor),
+        iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
         titleTextStyle: const TextStyle(
           color: Colors.white,
@@ -147,7 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       bottom: 0,
                       right: 0,
                       child: GestureDetector(
-                        onTap: _openImagePickerDialog,
+                        onTap: _selectProfileImage,
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: const BoxDecoration(
@@ -184,39 +168,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 controller: _dishController,
               ),
               const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: _saveProfile,
-                  icon: const Icon(Icons.save),
-                  label: const Text('Speichern'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: backgroundColor,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                ),
+              buildButton(
+                icon: Icons.save,
+                text: 'Speichern',
+                background: Colors.white,
+                foreground: backgroundColor,
+                onPressed: _saveProfile,
               ),
               const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ChangePasswordScreen(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.lock),
-                  label: const Text('Passwort ändern'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                ),
+              buildButton(
+                icon: Icons.lock,
+                text: 'Passwort ändern',
+                background: Colors.redAccent,
+                foreground: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ChangePasswordScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -277,6 +249,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _selectedKitchen = value ?? 'Nicht angegeben';
           });
         },
+      ),
+    );
+  }
+
+  Widget buildButton({
+    required IconData icon,
+    required String text,
+    required Color background,
+    required Color foreground,
+    required VoidCallback onPressed,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon),
+        label: Text(text),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: background,
+          foregroundColor: foreground,
+          padding: const EdgeInsets.symmetric(vertical: 14),
+        ),
       ),
     );
   }

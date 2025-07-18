@@ -75,7 +75,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                         builder: (context) => RecipeDetailScreen(
                           recipe: recipe,
                           recipeId: recipe.id,
-                          heroTag: heroTag, // <-- übergibt den Tag
+                          heroTag: heroTag,
                         ),
                       ),
                     );
@@ -143,7 +143,6 @@ class FilteredRecipesScreen extends StatelessWidget {
             ),
       bottomNavigationBar: BottomNavWidget(
         allRecipes: allRecipes,
-        currentIndex: 1,
       ),
     );
   }
