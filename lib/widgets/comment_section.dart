@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/comment.dart';
+import '../services/comment_service.dart';
 
 class CommentSection extends StatefulWidget {
   final String recipeId;
@@ -25,14 +24,9 @@ class _CommentSectionState extends State<CommentSection> {
   }
 
   Future<void> _loadComments() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection('comments')
-        .where('recipeId', isEqualTo: widget.recipeId)
-        .orderBy('timestamp', descending: true)
-        .get();
-
+    final comments = await CommentService.getCommentsForRecipe(widget.recipeId);
     setState(() {
-      _comments = snapshot.docs.map((doc) => Comment.fromFirestore(doc)).toList();
+      _comments = comments;
       _loading = false;
     });
   }
@@ -41,35 +35,20 @@ class _CommentSectionState extends State<CommentSection> {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
 
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
+    try {
+      await CommentService.submitComment(
+        recipeId: widget.recipeId,
+        text: text,
+      );
+
+      _controller.clear();
+      _loadComments();
+    } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('❌ Du musst eingeloggt sein.')),
       );
-      return;
     }
-
-    final userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .get();
-
-    final newComment = Comment(
-      id: const Uuid().v4(),
-      userId: user.uid,
-      username: userDoc.data()?['username'] ?? 'Unbekannt',
-      recipeId: widget.recipeId,
-      text: text,
-      timestamp: DateTime.now(),
-    );
-
-    await FirebaseFirestore.instance
-        .collection('comments')
-        .doc(newComment.id)
-        .set(newComment.toMap());
-
-    _controller.clear();
-    _loadComments();
   }
 
   @override
@@ -85,29 +64,43 @@ class _CommentSectionState extends State<CommentSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 30),
-        Divider(color: textColor.withOpacity(0.5)),
-        Text('Kommentare',
-            style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+        Divider(color: textColor.withAlpha((0.5 * 255).toInt())),
+        Text(
+          'Kommentare',
+          style: TextStyle(
+            color: textColor,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(height: 10),
         if (_loading)
           const CircularProgressIndicator()
         else if (_comments.isEmpty)
-          Text("Keine Kommentare vorhanden.",
-              style: TextStyle(color: textColor))
+          Text(
+            "Keine Kommentare vorhanden.",
+            style: TextStyle(color: textColor),
+          )
         else
           ..._comments.map((comment) {
             final ts = comment.timestamp.add(const Duration(hours: 2));
             return ListTile(
               tileColor: cardColor,
-              title: Text(comment.username, style: TextStyle(color: textColor)),
-              subtitle: Text(comment.text,
-                  style: TextStyle(color: textColor.withOpacity(0.7))),
+              title: Text(
+                comment.username,
+                style: TextStyle(color: textColor),
+              ),
+              subtitle: Text(
+                comment.text,
+                style:
+                    TextStyle(color: textColor.withAlpha((0.7 * 255).toInt())),
+              ),
               trailing: Text(
                 '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – '
                 '${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
-                style:
-                    TextStyle(color: textColor.withOpacity(0.5), fontSize: 12),
+                style: TextStyle(
+                    color: textColor.withAlpha((0.5 * 255).toInt()),
+                    fontSize: 12),
               ),
             );
           }),
@@ -120,7 +113,8 @@ class _CommentSectionState extends State<CommentSection> {
                 style: TextStyle(color: textColor),
                 decoration: InputDecoration(
                   hintText: 'Kommentar schreiben...',
-                  hintStyle: TextStyle(color: textColor.withOpacity(0.5)),
+                  hintStyle: TextStyle(
+                      color: textColor.withAlpha((0.5 * 255).toInt())),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: textColor),
                   ),
@@ -130,7 +124,7 @@ class _CommentSectionState extends State<CommentSection> {
             IconButton(
               icon: Icon(Icons.send, color: textColor),
               onPressed: _submitComment,
-            )
+            ),
           ],
         ),
       ],

@@ -6,12 +6,14 @@ class IngredientList extends StatelessWidget {
   final Color textColor;
   final Color cardColor;
   final void Function(Ingredient)? onAddToShoppingList;
+  final bool isLoggedIn;
 
   const IngredientList({
     super.key,
     required this.ingredients,
     required this.textColor,
     required this.cardColor,
+    required this.isLoggedIn,
     this.onAddToShoppingList,
   });
 
@@ -27,9 +29,11 @@ class IngredientList extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 4),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: ListTile(
-            title: Text(text.trim(),
-                style: TextStyle(color: textColor, fontSize: 16)),
-            trailing: onAddToShoppingList != null
+            title: Text(
+              text.trim(),
+              style: TextStyle(color: textColor, fontSize: 16),
+            ),
+            trailing: (isLoggedIn && onAddToShoppingList != null)
                 ? IconButton(
                     icon: const Icon(Icons.add_shopping_cart),
                     color: textColor,

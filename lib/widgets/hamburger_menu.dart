@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import '../screens/account_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/favorites_screen.dart';
-import '../models/recipe.dart';
-import '../theme_provider.dart';
 import '../screens/admin_dashboard_screen.dart';
 import '../screens/shopping_list_screen.dart';
 import '../screens/comment_screen.dart';
+import '../models/recipe.dart';
+import '../theme_provider.dart';
+import '../widgets/drawer_tile.dart';
+import '../widgets/drawer_tile_with_switch.dart';
+import '../widgets/drawer_profile_header.dart';
+import '../services/user_service.dart';
+import '../services/auth_service.dart';
 
 class HamburgerDrawer extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -30,14 +34,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
   }
 
   Future<void> _loadUserData() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
+    final data = await UserService().fetchCurrentUserData();
+    if (mounted) {
       setState(() {
-        userData = doc.data();
+        userData = data;
       });
     }
   }
@@ -56,45 +56,15 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
         padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
         children: [
           if (isLoggedIn && userData != null) ...[
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage(
-                    userData!['profileImage'] ?? 'assets/character_1.png',
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        userData!['username'] ?? 'Unbekannt',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        userData!['bio']?.isNotEmpty == true
-                            ? userData!['bio']
-                            : 'Keine Beschreibung',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+            DrawerProfileHeader(
+              username: userData!['username'] ?? 'Unbekannt',
+              bio: userData!['bio'],
+              profileImage: userData!['profileImage'],
             ),
             const SizedBox(height: 32),
             Text("ALLGEMEIN", style: sectionStyle),
             const SizedBox(height: 12),
-            _buildTile(
-              context,
+            DrawerTile(
               icon: Icons.person,
               title: "Konto",
               onTap: () async {
@@ -106,8 +76,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               },
               tileColor: tileColor,
             ),
-            _buildTile(
-              context,
+            DrawerTile(
               icon: Icons.favorite,
               title: "Favoriten",
               onTap: () => Navigator.push(
@@ -119,52 +88,41 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               ),
               tileColor: tileColor,
             ),
-            _buildTile(
-              context,
+            DrawerTile(
               icon: Icons.shopping_cart,
               title: "Einkaufsliste",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
-                );
-              },
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
+              ),
               tileColor: tileColor,
             ),
-            _buildTile(
-              context,
+            DrawerTile(
               icon: Icons.comment,
               title: "Kommentare",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        CommentScreen(allRecipes: widget.allRecipes),
-                  ),
-                );
-              },
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CommentScreen(allRecipes: widget.allRecipes),
+                ),
+              ),
               tileColor: tileColor,
             ),
             if (userData!['isAdmin'] == true)
-              _buildTile(
-                context,
+              DrawerTile(
                 icon: Icons.admin_panel_settings,
                 title: "Admin-Dashboard",
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => const AdminDashboardScreen()),
-                  );
-                },
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const AdminDashboardScreen()),
+                ),
                 tileColor: tileColor,
               ),
             const SizedBox(height: 24),
             Text("ANPASSUNG", style: sectionStyle),
             const SizedBox(height: 12),
-            _buildTileWithSwitch(
-              context,
+            DrawerTileWithSwitch(
               icon: Icons.dark_mode,
               title: "Darkmode",
               value: Provider.of<ThemeProvider>(context).isDarkMode,
@@ -178,17 +136,11 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             const SizedBox(height: 24),
             Text("KONTO", style: sectionStyle),
             const SizedBox(height: 12),
-            _buildTile(
-              context,
+            DrawerTile(
               icon: Icons.logout,
               title: "Abmelden",
               onTap: () async {
-                Navigator.pop(context);
-                await FirebaseAuth.instance.signOut();
-                if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Du wurdest abgemeldet.")),
-                );
+                await AuthService().signOutUser(context);
               },
               tileColor: tileColor,
             ),
@@ -207,8 +159,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             const SizedBox(height: 32),
             Text("KONTO", style: sectionStyle),
             const SizedBox(height: 12),
-            _buildTile(
-              context,
+            DrawerTile(
               icon: Icons.login,
               title: "Anmelden / Registrieren",
               onTap: () {
@@ -223,8 +174,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             const SizedBox(height: 24),
             Text("ANPASSUNG", style: sectionStyle),
             const SizedBox(height: 12),
-            _buildTileWithSwitch(
-              context,
+            DrawerTileWithSwitch(
               icon: Icons.dark_mode,
               title: "Darkmode",
               value: Provider.of<ThemeProvider>(context).isDarkMode,
@@ -237,54 +187,6 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
           ]
         ],
-      ),
-    );
-  }
-
-  Widget _buildTile(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-    required Color tileColor,
-  }) {
-    return Card(
-      color: tileColor,
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.white),
-        title: Text(title, style: const TextStyle(color: Colors.white)),
-        trailing:
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-        onTap: onTap,
-      ),
-    );
-  }
-
-  Widget _buildTileWithSwitch(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-    required Color tileColor,
-  }) {
-    return Card(
-      color: tileColor,
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.white),
-        title: Text(title, style: const TextStyle(color: Colors.white)),
-        trailing: Switch(
-          value: value,
-          onChanged: onChanged,
-          activeColor: Colors.white,
-          inactiveThumbColor: Colors.white54,
-          inactiveTrackColor: Colors.white24,
-        ),
-        onTap: () => onChanged(!value),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
+import '../models/recipe_filter.dart';
 import 'recipes_singleview_screen.dart';
 import '../widgets/bottom_nav.dart';
 
@@ -29,10 +30,10 @@ class FilteredRecipesScreen extends StatelessWidget {
         ? theme.textTheme.bodyMedium?.color ?? Colors.white70
         : Colors.black87;
 
-    final List<Recipe> filteredRecipes = allRecipes.where((recipe) {
-      return recipe.dietTypes.contains(selectedDiet) &&
-          recipe.categories.contains(selectedCategory);
-    }).toList();
+    final filteredRecipes = RecipeFilter(
+      selectedDiet: selectedDiet,
+      selectedCategory: selectedCategory,
+    ).apply(allRecipes);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -75,7 +76,7 @@ class FilteredRecipesScreen extends StatelessWidget {
                         builder: (context) => RecipeDetailScreen(
                           recipe: recipe,
                           recipeId: recipe.id,
-                          heroTag: heroTag, // <-- übergibt den Tag
+                          heroTag: heroTag,
                         ),
                       ),
                     );
@@ -143,7 +144,6 @@ class FilteredRecipesScreen extends StatelessWidget {
             ),
       bottomNavigationBar: BottomNavWidget(
         allRecipes: allRecipes,
-        currentIndex: 1,
       ),
     );
   }

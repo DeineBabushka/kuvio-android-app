@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:share_plus/share_plus.dart';
 import '../models/recipe.dart';
 import '../models/ingredient.dart';
 import '../services/favorite_service.dart';
 import '../services/shopping_list_service.dart';
+import '../services/recipe_detail_service.dart';
 import '../widgets/ingredient_list.dart';
 import '../widgets/instruction_list.dart';
 import '../widgets/nutrition_card.dart';
 import '../widgets/comment_section.dart';
+import '../widgets/portion_selector.dart';
+import '../widgets/favorite_share_actions.dart';
+import '../widgets/add_all_ingredients_button.dart';
+import '../utils/snackbar_helper.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
@@ -57,51 +61,33 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     setState(() => isFavorite = updated);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
-        ),
-      ),
+    SnackbarHelper.showMessage(
+      context,
+      updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
     );
   }
 
-  List<Ingredient> _getScaledIngredients() {
-    final factor = portionCount / widget.recipe.portions;
-    return widget.recipe.ingredients
-        .map((e) => Ingredient(
-              quantity: e.quantity != null ? e.quantity! * factor : null,
-              unit: e.unit,
-              name: e.name,
-            ))
-        .toList();
-  }
-
-  Future<void> _addAllToShoppingList() async {
+  Future<void> _addAllToShoppingList(List<Ingredient> scaled) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || widget.recipeId == null) return;
 
-    final scaled = _getScaledIngredients();
     await ShoppingListService.addIngredients(
         user.uid, scaled, widget.recipeId!);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Zutaten zur Einkaufsliste hinzugefügt")),
-    );
+    SnackbarHelper.showMessage(
+        context, "Zutaten zur Einkaufsliste hinzugefügt");
   }
 
   Future<void> _addSingleToShoppingList(Ingredient ingredient) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || widget.recipeId == null) return;
 
-    await ShoppingListService.addIngredients(
-        user.uid, [ingredient], widget.recipeId!);
+    await ShoppingListService.addSingleIngredient(
+        user.uid, ingredient, widget.recipeId!);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("${ingredient.name} hinzugefügt")),
-    );
+    SnackbarHelper.showMessage(context, "${ingredient.name} hinzugefügt");
   }
 
   @override
@@ -112,6 +98,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     final cardColor = const Color(0xFF2C2C2E);
     final isLoggedIn = FirebaseAuth.instance.currentUser != null;
 
+    final scaledIngredients = RecipeDetailService.getScaledIngredients(
+      widget.recipe.ingredients,
+      widget.recipe.portions,
+      portionCount,
+    );
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: CustomScrollView(
@@ -121,7 +113,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: _buildRecipeContent(
-                  context, textColor, cardColor, isLoggedIn),
+                context,
+                textColor,
+                cardColor,
+                isLoggedIn,
+                scaledIngredients,
+              ),
             ),
           ),
         ],
@@ -130,6 +127,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   Widget _buildSliverAppBar(Color backgroundColor, bool isLoggedIn) {
+    final shareText = "🥗 ${widget.recipe.title}\n"
+        "📋 Zutaten: ${widget.recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
+        "📖 Zubereitung: ${widget.recipe.instructions.take(3).join(' ')}...\n"
+        "✨ Gekocht mit der Kuvio App!";
+
     return SliverAppBar(
       expandedHeight: 400,
       pinned: true,
@@ -195,56 +197,36 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         onPressed: () => Navigator.pop(context),
       ),
       actions: [
-        IconButton(
-          icon: const Icon(Icons.share, color: Colors.white),
-          onPressed: () {
-            final shareText = "🥗 ${widget.recipe.title}\n"
-                "📋 Zutaten: ${widget.recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
-                "📖 Zubereitung: ${widget.recipe.instructions.take(3).join(' ')}...\n"
-                "✨ Gekocht mit der Kuvio App!";
-            Share.share(shareText);
-          },
+        FavoriteShareActions(
+          title: widget.recipe.title,
+          shareText: shareText,
+          isFavorite: isFavorite,
+          isLoggedIn: isLoggedIn,
+          onToggleFavorite: _toggleFavorite,
         ),
-        if (isLoggedIn)
-          IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: Colors.redAccent,
-            ),
-            onPressed: _toggleFavorite,
-          ),
       ],
     );
   }
 
   Widget _buildRecipeContent(
-      BuildContext context, Color textColor, Color cardColor, bool isLoggedIn) {
-    final scaledIngredients = _getScaledIngredients();
-
+    BuildContext context,
+    Color textColor,
+    Color cardColor,
+    bool isLoggedIn,
+    List<Ingredient> scaledIngredients,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Text('Portionen: ',
-                    style: TextStyle(color: textColor, fontSize: 16)),
-                IconButton(
-                  onPressed: () => setState(() =>
-                      portionCount = (portionCount > 1) ? portionCount - 1 : 1),
-                  icon: const Icon(Icons.remove_circle_outline),
-                  color: textColor,
-                ),
-                Text('$portionCount',
-                    style: TextStyle(color: textColor, fontSize: 16)),
-                IconButton(
-                  onPressed: () => setState(() => portionCount++),
-                  icon: const Icon(Icons.add_circle_outline),
-                  color: textColor,
-                ),
-              ],
+            PortionSelector(
+              portionCount: portionCount,
+              onDecrement: () => setState(() =>
+                  portionCount = (portionCount > 1) ? portionCount - 1 : 1),
+              onIncrement: () => setState(() => portionCount++),
+              textColor: textColor,
             ),
             Text('Dauer: ${widget.recipe.preparationTime}',
                 style: TextStyle(color: textColor, fontSize: 16)),
@@ -259,22 +241,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ingredients: scaledIngredients,
           textColor: textColor,
           cardColor: cardColor,
+          isLoggedIn: isLoggedIn,
           onAddToShoppingList: _addSingleToShoppingList,
         ),
         const SizedBox(height: 10),
         if (isLoggedIn)
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: _addAllToShoppingList,
-              icon: const Icon(Icons.add_shopping_cart),
-              label: const Text('Alle Zutaten hinzufügen'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-              ),
-            ),
+          AddAllIngredientsButton(
+            onPressed: () => _addAllToShoppingList(scaledIngredients),
           ),
         const SizedBox(height: 20),
         Text('Zubereitung',

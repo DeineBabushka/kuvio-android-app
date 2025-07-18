@@ -1,55 +1,89 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/recipe.dart';
+
+class FavoriteItem {
+  final Recipe recipe;
+  final DateTime addedAt;
+
+  FavoriteItem({required this.recipe, required this.addedAt});
+}
 
 class FavoriteService {
-  static Future<bool> isFavorite(String uid, String recipeId) async {
-    final userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(uid).get();
-    final List<dynamic> favorites = userDoc.data()?['favorites'] ?? [];
-    return favorites.contains(recipeId);
+  static final _db = FirebaseFirestore.instance;
+
+  static Future<bool> isFavorite(String userId, String recipeId) async {
+    final snapshot = await _db
+        .collection('favorites')
+        .where('userId', isEqualTo: userId)
+        .where('recipeId', isEqualTo: recipeId)
+        .get();
+
+    return snapshot.docs.isNotEmpty;
   }
 
-  static Future<void> addFavorite(String uid, String recipeId) async {
-    final userDocRef = FirebaseFirestore.instance.collection('users').doc(uid);
-    final favoritesCollection =
-        FirebaseFirestore.instance.collection('favorites');
-
-    await userDocRef.update({
-      'favorites': FieldValue.arrayUnion([recipeId]),
-    });
-
-    await favoritesCollection.add({
-      'userId': uid,
+  static Future<void> addFavorite(String userId, String recipeId) async {
+    await _db.collection('favorites').add({
+      'userId': userId,
       'recipeId': recipeId,
       'addedAt': FieldValue.serverTimestamp(),
     });
   }
 
-  static Future<void> removeFavorite(String uid, String recipeId) async {
-    final userDocRef = FirebaseFirestore.instance.collection('users').doc(uid);
-    final favoritesCollection =
-        FirebaseFirestore.instance.collection('favorites');
-
-    await userDocRef.update({
-      'favorites': FieldValue.arrayRemove([recipeId]),
-    });
-
-    final favSnapshot = await favoritesCollection
-        .where('userId', isEqualTo: uid)
+  static Future<void> removeFavorite(String userId, String recipeId) async {
+    final snapshot = await _db
+        .collection('favorites')
+        .where('userId', isEqualTo: userId)
         .where('recipeId', isEqualTo: recipeId)
         .get();
 
-    for (var doc in favSnapshot.docs) {
+    for (var doc in snapshot.docs) {
       await doc.reference.delete();
     }
   }
 
-  static Future<bool> toggleFavorite(String uid, String recipeId) async {
-    final isFav = await isFavorite(uid, recipeId);
+  static Future<bool> toggleFavorite(String userId, String recipeId) async {
+    final isFav = await isFavorite(userId, recipeId);
     if (isFav) {
-      await removeFavorite(uid, recipeId);
+      await removeFavorite(userId, recipeId);
+      return false;
     } else {
-      await addFavorite(uid, recipeId);
+      await addFavorite(userId, recipeId);
+      return true;
     }
-    return !isFav;
+  }
+
+  static Future<List<FavoriteItem>> loadFavoritesWithRecipes(
+      String userId, List<Recipe> allRecipes) async {
+    final snapshot = await _db
+        .collection('favorites')
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return snapshot.docs.map((doc) {
+      final recipeId = doc['recipeId'] as String;
+      final addedAt =
+          (doc['addedAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+
+      final recipe = allRecipes.firstWhere(
+        (r) => r.id == recipeId,
+        orElse: () => Recipe(
+          id: '',
+          title: 'Unbekanntes Rezept',
+          image: '',
+          portions: 0,
+          ingredients: [],
+          instructions: [],
+          dietTypes: [],
+          categories: [],
+          preparationTime: '',
+          calories: 0,
+          proteinG: 0,
+          carbohydratesG: 0,
+          fatG: 0,
+        ),
+      );
+
+      return FavoriteItem(recipe: recipe, addedAt: addedAt);
+    }).toList();
   }
 }

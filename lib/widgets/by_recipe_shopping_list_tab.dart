@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../services/grouped_shopping_list_service.dart';
+import '../models/shopping_list_item.dart';
 
 class ByRecipeShoppingListTab extends StatelessWidget {
   const ByRecipeShoppingListTab({super.key});
@@ -14,59 +16,31 @@ class ByRecipeShoppingListTab extends StatelessWidget {
       );
     }
 
-    final itemsRef = FirebaseFirestore.instance
-        .collection('shopping_list')
-        .doc(user.uid)
-        .collection('items')
-        .orderBy('addedAt');
-
     return StreamBuilder<QuerySnapshot>(
-      stream: itemsRef.snapshots(),
+      stream: GroupedShoppingListService.getUserShoppingItemsStream(user.uid),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
 
         final docs = snapshot.data!.docs;
-
         if (docs.isEmpty) {
           return const Center(child: Text('Einkaufsliste ist leer'));
         }
 
-        final Map<String, Map<String, Map<String, dynamic>>> grouped = {};
-
-        for (var doc in docs) {
-          final data = doc.data() as Map<String, dynamic>;
-          final recipeId = data['fromRecipeId'] ?? 'Unbekannt';
-          final name = data['name'];
-          final unit = data['unit'];
-          final quantity = (data['quantity'] as num?)?.toDouble() ?? 0.0;
-
-          if (name == null || unit == null) continue;
-
-          final key = '$name|$unit';
-
-          grouped.putIfAbsent(recipeId, () => {});
-          if (grouped[recipeId]!.containsKey(key)) {
-            grouped[recipeId]![key]!['quantity'] += quantity;
-          } else {
-            grouped[recipeId]![key] = {
-              'name': name,
-              'unit': unit,
-              'quantity': quantity,
-            };
-          }
-        }
+        final grouped = GroupedShoppingListService.groupItemsByRecipe(docs);
 
         return FutureBuilder<Map<String, String>>(
-          future: _loadRecipeTitles(grouped.keys, context),
+          future: GroupedShoppingListService.loadRecipeTitles(grouped.keys),
           builder: (context, titleSnapshot) {
             final recipeTitles = titleSnapshot.data ?? {};
 
             return ListView(
               children: grouped.entries.map((entry) {
                 final recipeId = entry.key;
-                final items = entry.value.values.toList();
+                final items = entry.value.values
+                    .map((e) => ShoppingListItem.fromMap(e))
+                    .toList();
                 final title = recipeTitles[recipeId] ?? recipeId;
 
                 return Card(
@@ -77,27 +51,23 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                       ...items.map((item) {
                         return ListTile(
                           title: Text(
-                            '${item['quantity']} ${item['unit']} ${item['name']}',
-                          ),
+                              '${item.quantity} ${item.unit} ${item.name}'),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
                             onPressed: () async {
-                              final docsToDelete = docs.where((doc) {
-                                final data = doc.data() as Map<String, dynamic>;
-                                return data['fromRecipeId'] == recipeId &&
-                                    data['name'] == item['name'] &&
-                                    data['unit'] == item['unit'];
-                              });
-
-                              for (var doc in docsToDelete) {
-                                await doc.reference.delete();
-                              }
+                              await GroupedShoppingListService.deleteSingleItem(
+                                docs,
+                                recipeId,
+                                item.name,
+                                item.unit,
+                              );
 
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                    content: Text("${item['name']} gelöscht")),
+                                  content: Text("${item.name} gelöscht"),
+                                ),
                               );
                             },
                           ),
@@ -108,22 +78,15 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                         child: Center(
                           child: TextButton.icon(
                             onPressed: () async {
-                              final docsToDelete = docs.where((doc) {
-                                final data = doc.data() as Map<String, dynamic>;
-                                return data['fromRecipeId'] == recipeId;
-                              });
-
-                              final batch = FirebaseFirestore.instance.batch();
-                              for (var doc in docsToDelete) {
-                                batch.delete(doc.reference);
-                              }
-                              await batch.commit();
+                              await GroupedShoppingListService
+                                  .deleteItemsForRecipe(docs, recipeId);
 
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                    content:
-                                        Text("Zutaten für '$title' gelöscht")),
+                                  content:
+                                      Text("Zutaten für '$title' gelöscht"),
+                                ),
                               );
                             },
                             icon: const Icon(Icons.delete_forever,
@@ -144,36 +107,5 @@ class ByRecipeShoppingListTab extends StatelessWidget {
         );
       },
     );
-  }
-
-  Future<Map<String, String>> _loadRecipeTitles(
-    Iterable<String> ids,
-    BuildContext context,
-  ) async {
-    final Map<String, String> titles = {};
-
-    for (final id in ids) {
-      if (id == 'Unbekannt') {
-        titles[id] = 'Unbekanntes Rezept';
-        continue;
-      }
-
-      try {
-        final doc = await FirebaseFirestore.instance
-            .collection('recipes')
-            .doc(id)
-            .get();
-
-        final data = doc.data();
-        titles[id] = data != null && data['title'] != null
-            ? data['title'] as String
-            : 'Rezept ohne Titel';
-      } catch (e) {
-        if (!context.mounted) continue;
-        titles[id] = 'Fehler beim Laden';
-      }
-    }
-
-    return titles;
   }
 }

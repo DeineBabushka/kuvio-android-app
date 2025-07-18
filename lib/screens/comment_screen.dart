@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/comment.dart';
+import '../models/formatted_comment.dart';
 import '../models/recipe.dart';
+import '../services/comment_service.dart';
 import 'recipes_singleview_screen.dart';
 
 class CommentScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class CommentScreen extends StatefulWidget {
 }
 
 class _CommentScreenState extends State<CommentScreen> {
-  List<CommentWithRecipe> commentData = [];
+  List<FormattedComment> commentData = [];
   bool isLoading = true;
 
   @override
@@ -25,68 +25,18 @@ class _CommentScreenState extends State<CommentScreen> {
 
   Future<void> loadCommentsAndRecipes() async {
     try {
-      final commentSnapshot = await FirebaseFirestore.instance
-          .collection('comments')
-          .orderBy('timestamp', descending: true)
-          .get();
-
-      final List<CommentWithRecipe> loaded = [];
-
-      for (var doc in commentSnapshot.docs) {
-        final comment = Comment.fromFirestore(doc);
-
-        final localMatch = widget.allRecipes.firstWhere(
-          (r) => r.id == comment.recipeId,
-          orElse: () => Recipe(
-            id: '',
-            title: '',
-            image: '',
-            portions: 0,
-            ingredients: [],
-            instructions: [],
-            dietTypes: [],
-            categories: [],
-            preparationTime: '',
-            calories: 0,
-            proteinG: 0,
-            carbohydratesG: 0,
-            fatG: 0,
-          ),
-        );
-
-        if (localMatch.id.isNotEmpty) {
-          loaded.add(CommentWithRecipe(comment: comment, recipe: localMatch));
-          continue;
-        }
-
-        final recipeSnapshot = await FirebaseFirestore.instance
-            .collection('recipes')
-            .doc(comment.recipeId)
-            .get();
-
-        if (recipeSnapshot.exists) {
-          final recipe = Recipe.fromFirestore(recipeSnapshot);
-          loaded.add(CommentWithRecipe(comment: comment, recipe: recipe));
-        }
-      }
-
+      final loaded =
+          await CommentService.getAllCommentsWithRecipes(widget.allRecipes);
+      final formatted =
+          loaded.map((cwr) => FormattedComment.fromCWR(cwr)).toList();
       setState(() {
-        commentData = loaded;
+        commentData = formatted;
         isLoading = false;
       });
     } catch (e) {
-      // Fehlerhandling (kein print in Production)
       debugPrint('Fehler beim Laden der Kommentare: $e');
       setState(() => isLoading = false);
     }
-  }
-
-  String _formatDate(DateTime date) {
-    final localDate = date.add(const Duration(hours: 2));
-    return '${localDate.day.toString().padLeft(2, '0')}.' // DD.
-        '${localDate.month.toString().padLeft(2, '0')}.' // MM.
-        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:' // YYYY HH:
-        '${localDate.minute.toString().padLeft(2, '0')}'; // mm
   }
 
   @override
@@ -110,7 +60,8 @@ class _CommentScreenState extends State<CommentScreen> {
                   padding: const EdgeInsets.all(16),
                   itemCount: commentData.length,
                   itemBuilder: (context, index) {
-                    final cwr = commentData[index];
+                    final fc = commentData[index];
+                    final cwr = fc.data;
                     return GestureDetector(
                       onTap: () {
                         if (cwr.recipe.id.isNotEmpty) {
@@ -149,7 +100,9 @@ class _CommentScreenState extends State<CommentScreen> {
                                 ? cwr.recipe.title
                                 : 'Unbekanntes Rezept',
                             style: TextStyle(
-                                color: textColor, fontWeight: FontWeight.bold),
+                              color: textColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,10 +114,10 @@ class _CommentScreenState extends State<CommentScreen> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                _formatDate(cwr.comment.timestamp),
+                                fc.formattedDate,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: textColor.withAlpha(153), // 0.6 * 255
+                                  color: textColor.withAlpha(153),
                                 ),
                               ),
                             ],
@@ -177,11 +130,4 @@ class _CommentScreenState extends State<CommentScreen> {
                 ),
     );
   }
-}
-
-class CommentWithRecipe {
-  final Comment comment;
-  final Recipe recipe;
-
-  CommentWithRecipe({required this.comment, required this.recipe});
 }

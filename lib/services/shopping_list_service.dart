@@ -19,4 +19,9 @@ class ShoppingListService {
       });
     }
   }
+
+  static Future<void> addSingleIngredient(
+      String uid, Ingredient ingredient, String recipeId) async {
+    await addIngredients(uid, [ingredient], recipeId);
+  }
 }

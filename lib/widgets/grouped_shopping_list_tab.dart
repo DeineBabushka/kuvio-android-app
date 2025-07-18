@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../models/shopping_list_item.dart';
 
 class GroupedShoppingListTab extends StatelessWidget {
   const GroupedShoppingListTab({super.key});
@@ -34,26 +35,21 @@ class GroupedShoppingListTab extends StatelessWidget {
           return const Center(child: Text('Einkaufsliste ist leer'));
         }
 
-        final Map<String, Map<String, dynamic>> groupedItems = {};
+        final Map<String, ShoppingListItem> groupedItems = {};
 
         for (var doc in docs) {
-          final data = doc.data() as Map<String, dynamic>;
-          final name = data['name'];
-          final unit = data['unit'];
-          final quantity = (data['quantity'] as num?)?.toDouble() ?? 0.0;
-
-          if (name == null || unit == null) continue;
-
-          final key = '$name|$unit';
+          final item =
+              ShoppingListItem.fromMap(doc.data() as Map<String, dynamic>);
+          final key = item.key;
 
           if (groupedItems.containsKey(key)) {
-            groupedItems[key]!['quantity'] += quantity;
+            groupedItems[key] = ShoppingListItem(
+              name: item.name,
+              unit: item.unit,
+              quantity: groupedItems[key]!.quantity + item.quantity,
+            );
           } else {
-            groupedItems[key] = {
-              'name': name,
-              'unit': unit,
-              'quantity': quantity,
-            };
+            groupedItems[key] = item;
           }
         }
 
@@ -62,10 +58,6 @@ class GroupedShoppingListTab extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: groupedItems.values.map((item) {
-                  final name = item['name'];
-                  final unit = item['unit'];
-                  final quantity = item['quantity'];
-
                   bool isChecked = false;
 
                   return StatefulBuilder(
@@ -74,7 +66,7 @@ class GroupedShoppingListTab extends StatelessWidget {
                       onChanged: (val) =>
                           setState(() => isChecked = val ?? false),
                       title: Text(
-                        '$quantity $unit $name',
+                        '${item.quantity} ${item.unit} ${item.name}',
                         style: TextStyle(
                           color: Colors.white,
                           decoration: isChecked
@@ -87,7 +79,8 @@ class GroupedShoppingListTab extends StatelessWidget {
                         onPressed: () async {
                           final matchingDocs = docs.where((doc) {
                             final data = doc.data() as Map<String, dynamic>;
-                            return data['name'] == name && data['unit'] == unit;
+                            return data['name'] == item.name &&
+                                data['unit'] == item.unit;
                           });
 
                           for (var doc in matchingDocs) {

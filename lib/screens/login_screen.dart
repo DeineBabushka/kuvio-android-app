@@ -3,6 +3,9 @@ import 'register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../services/user_service.dart';
+import '../widgets/login_form_card.dart';
+import '../models/google_user_data.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,9 +15,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  final UserService _userService = UserService();
 
   Future<void> _signInWithGoogle() async {
     try {
@@ -39,16 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
       final doc = await userRef.get();
 
       if (!doc.exists) {
-        await userRef.set({
-          'username': user.displayName ?? 'Google Nutzer',
-          'email': user.email,
-          'createdAt': Timestamp.now(),
-          'bio': '',
-          'kitchen': 'Nicht angegeben',
-          'favdish': '',
-          'isAdmin': false,
-          'favorites': [],
-        });
+        final googleUserData = GoogleUserData.fromFirebaseUser(user);
+        await userRef.set(googleUserData.toMap());
         debugPrint('Neuer Google-Nutzer in Firestore angelegt.');
       }
 
@@ -59,30 +55,61 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (!mounted) return;
 
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Color(0xFF2E6B4D),
-            content: Text(
-              'Erfolgreich mit Google eingeloggt',
-              style: TextStyle(color: Colors.white),
-            ),
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Color(0xFF2E6B4D),
+          content: Text(
+            'Erfolgreich mit Google eingeloggt',
+            style: TextStyle(color: Colors.white),
           ),
-        );
-        Navigator.pop(context);
-      }
+        ),
+      );
+      Navigator.pop(context);
     } catch (e) {
       if (!mounted) return;
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Google-Login fehlgeschlagen: $e')),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google-Login fehlgeschlagen: $e')),
+      );
     }
   }
 
-  String _getFirebaseErrorMessage(String code) {
-    return 'E-mail Adresse oder Passwort falsch.';
+  Future<void> _handleLogin() async {
+    try {
+      final credential = await _userService.loginWithEmail(
+        _emailController.text,
+        _passwordController.text,
+      );
+
+      final user = credential.user;
+      if (user == null) return;
+
+      final isAdmin = await _userService.isAdmin(user.uid);
+      debugPrint('Angemeldeter Benutzer ist Admin: $isAdmin');
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Color(0xFF2E6B4D),
+          content: Text(
+            'Erfolgreich eingeloggt',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      final message = _userService.getErrorMessage(e.code);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unbekannter Fehler')),
+      );
+    }
   }
 
   @override
@@ -91,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final isDark = theme.brightness == Brightness.dark;
 
     final backgroundColor = theme.scaffoldBackgroundColor;
-    final cardColor = isDark ? Colors.grey[900] : Colors.white;
+    final cardColor = isDark ? Colors.grey[900]! : Colors.white;
     final textColor = isDark ? Colors.white : Colors.black;
     final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
     final headingColor = isDark ? Colors.white : const Color(0xFF122620);
@@ -120,170 +147,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          color: cardColor,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Anmelden',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: headingColor,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            TextField(
-                              controller: _emailController,
-                              style: TextStyle(color: textColor),
-                              decoration: InputDecoration(
-                                labelText: 'Email-Adresse',
-                                labelStyle: TextStyle(color: labelColor),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            TextField(
-                              controller: _passwordController,
-                              style: TextStyle(color: textColor),
-                              obscureText: _obscurePassword,
-                              decoration: InputDecoration(
-                                labelText: 'Passwort',
-                                labelStyle: TextStyle(color: labelColor),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscurePassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: iconColor,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscurePassword = !_obscurePassword;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 24),
-                            ElevatedButton(
-                              onPressed: () async {
-                                try {
-                                  final credential = await FirebaseAuth.instance
-                                      .signInWithEmailAndPassword(
-                                    email: _emailController.text.trim(),
-                                    password: _passwordController.text.trim(),
-                                  );
-
-                                  final user = credential.user;
-                                  if (user == null) return;
-
-                                  final doc = await FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(user.uid)
-                                      .get();
-
-                                  final isAdmin =
-                                      doc.data()?['isAdmin'] ?? false;
-
-                                  debugPrint(
-                                      'Angemeldeter Benutzer ist Admin: $isAdmin');
-
-                                  if (!mounted) return;
-
-                                  if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        backgroundColor: Color(0xFF2E6B4D),
-                                        content: Text(
-                                          'Erfolgreich eingeloggt',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    );
-                                    Navigator.pop(context);
-                                  }
-                                } on FirebaseAuthException catch (e) {
-                                  if (!mounted) return;
-                                  if (context.mounted) {
-                                    final message =
-                                        _getFirebaseErrorMessage(e.code);
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: Text(message),
-                                    ));
-                                  }
-                                } catch (e) {
-                                  if (!mounted) return;
-                                  if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text('Unbekannter Fehler')),
-                                    );
-                                  }
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: buttonBackground,
-                                foregroundColor: buttonTextColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              child: Text(
-                                'Einloggen',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: buttonTextColor,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            ElevatedButton.icon(
-                              onPressed: _signInWithGoogle,
-                              icon: const Icon(Icons.login),
-                              label: const Text('Mit Google anmelden'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.redAccent,
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen(),
-                                  ),
-                                );
-                              },
-                              child: RichText(
-                                text: TextSpan(
-                                  text: 'Noch kein Konto? ',
-                                  style: TextStyle(color: textColor),
-                                  children: [
-                                    TextSpan(
-                                      text: 'Registrieren',
-                                      style: TextStyle(
-                                        color: textColor,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      LoginFormCard(
+                        emailController: _emailController,
+                        passwordController: _passwordController,
+                        obscurePassword: _obscurePassword,
+                        onTogglePasswordVisibility: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        onLogin: _handleLogin,
+                        onGoogleLogin: _signInWithGoogle,
+                        onNavigateToRegister: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const RegisterScreen()),
+                          );
+                        },
+                        cardColor: cardColor,
+                        textColor: textColor,
+                        labelColor: labelColor,
+                        headingColor: headingColor,
+                        iconColor: iconColor,
+                        buttonBackground: buttonBackground,
+                        buttonTextColor: buttonTextColor,
                       ),
                       const SizedBox(height: 32),
                     ],
