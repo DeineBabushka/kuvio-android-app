@@ -20,6 +20,17 @@ class _RecipesScreenState extends State<RecipesScreen> {
 
   final FavoritesFilter filterOptions = FavoritesFilter();
 
+  final Map<String, String> dietTypeToAssetName = {
+    'Rohkost': 'rohkost_icon.png',
+    'Glutenfrei': 'gluten_free_icon.png',
+    'Fisch': 'fish_icon.png',
+    'Keto': 'keto_icon.png',
+    'Fleisch': 'proteins_icon.png',
+    'Vegetarisch': 'vegetarian_icon.png',
+    'Omnivor': 'alles_icon.png',
+    'Vegan': 'vegan_icon.png',
+  };
+
   @override
   void initState() {
     super.initState();
@@ -155,7 +166,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     children: [
                       for (var diet in filterOptions.availableDietTypes)
                         _buildFilterCircle(
-                          'assets/${diet.toLowerCase().replaceAll("ä", "ae").replaceAll("ö", "oe").replaceAll("ü", "ue").replaceAll("ß", "ss").replaceAll(" ", "_")}_icon.png',
+                          'assets/${isDark ? dietTypeToAssetName[diet]!.replaceAll('.png', '_dark.png') : dietTypeToAssetName[diet]!}',
                           diet,
                           filterTextColor,
                         ),
