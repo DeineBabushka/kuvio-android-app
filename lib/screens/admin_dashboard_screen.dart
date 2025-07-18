@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kuvio/models/app_user.dart';
 import 'package:kuvio/services/admin_service.dart';
 import 'package:kuvio/widgets/user_card_tile.dart';
 
@@ -46,8 +47,9 @@ class AdminDashboardScreen extends StatelessWidget {
             itemCount: users.length,
             itemBuilder: (context, index) {
               final userDoc = users[index];
+              final user = AppUser.fromSnapshot(userDoc);
               return UserCardTile(
-                userDoc: userDoc,
+                user: user,
                 cardTextColor: cardTextColor,
               );
             },

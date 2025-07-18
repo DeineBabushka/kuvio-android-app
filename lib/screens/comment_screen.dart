@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/comment_with_recipe.dart';
+import '../models/formatted_comment.dart';
 import '../models/recipe.dart';
 import '../services/comment_service.dart';
 import 'recipes_singleview_screen.dart';
@@ -14,7 +14,7 @@ class CommentScreen extends StatefulWidget {
 }
 
 class _CommentScreenState extends State<CommentScreen> {
-  List<CommentWithRecipe> commentData = [];
+  List<FormattedComment> commentData = [];
   bool isLoading = true;
 
   @override
@@ -27,23 +27,16 @@ class _CommentScreenState extends State<CommentScreen> {
     try {
       final loaded =
           await CommentService.getAllCommentsWithRecipes(widget.allRecipes);
+      final formatted =
+          loaded.map((cwr) => FormattedComment.fromCWR(cwr)).toList();
       setState(() {
-        commentData = loaded;
+        commentData = formatted;
         isLoading = false;
       });
     } catch (e) {
       debugPrint('Fehler beim Laden der Kommentare: $e');
       setState(() => isLoading = false);
     }
-  }
-
-  String _formatDate(DateTime date) {
-    final localDate = date.add(const Duration(hours: 2));
-    return '${localDate.day.toString().padLeft(2, '0')}.'
-        '${localDate.month.toString().padLeft(2, '0')}.'
-        '${localDate.year} '
-        '${localDate.hour.toString().padLeft(2, '0')}:'
-        '${localDate.minute.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -67,7 +60,8 @@ class _CommentScreenState extends State<CommentScreen> {
                   padding: const EdgeInsets.all(16),
                   itemCount: commentData.length,
                   itemBuilder: (context, index) {
-                    final cwr = commentData[index];
+                    final fc = commentData[index];
+                    final cwr = fc.data;
                     return GestureDetector(
                       onTap: () {
                         if (cwr.recipe.id.isNotEmpty) {
@@ -120,7 +114,7 @@ class _CommentScreenState extends State<CommentScreen> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                _formatDate(cwr.comment.timestamp),
+                                fc.formattedDate,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: textColor.withAlpha(153),

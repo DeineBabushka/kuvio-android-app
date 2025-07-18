@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import '../screens/edit_profile_screen.dart';
 import '../widgets/register_form_card.dart';
+import '../models/register_user_data.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -11,13 +12,14 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  final _authService = AuthService();
+
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   bool _obscurePassword = true;
-  final _formKey = GlobalKey<FormState>();
 
   void _toggleObscurePassword() {
     setState(() => _obscurePassword = !_obscurePassword);
@@ -25,30 +27,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _register() async {
     if (_formKey.currentState!.validate()) {
+      final userData = RegisterUserData(
+        username: _usernameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
       try {
         final userCredential = await _authService.registerUser(
-          email: _emailController.text,
-          password: _passwordController.text,
+          email: userData.email,
+          password: userData.password,
         );
 
-        if (!context.mounted) return;
+        if (!mounted) return;
 
         await _authService.saveInitialUserData(
           uid: userCredential.user!.uid,
-          username: _usernameController.text,
-          email: _emailController.text,
+          username: userData.username,
+          email: userData.email,
         );
 
-        if (!context.mounted) return;
+        if (!mounted) return;
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (_) => const EditProfileScreen(),
-          ),
+          MaterialPageRoute(builder: (_) => const EditProfileScreen()),
         );
       } catch (e) {
-        if (!context.mounted) return;
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Fehler: $e')),
         );

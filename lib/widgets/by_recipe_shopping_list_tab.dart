@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/grouped_shopping_list_service.dart';
+import '../models/shopping_list_item.dart';
 
 class ByRecipeShoppingListTab extends StatelessWidget {
   const ByRecipeShoppingListTab({super.key});
@@ -37,7 +38,9 @@ class ByRecipeShoppingListTab extends StatelessWidget {
             return ListView(
               children: grouped.entries.map((entry) {
                 final recipeId = entry.key;
-                final items = entry.value.values.toList();
+                final items = entry.value.values
+                    .map((e) => ShoppingListItem.fromMap(e))
+                    .toList();
                 final title = recipeTitles[recipeId] ?? recipeId;
 
                 return Card(
@@ -48,7 +51,7 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                       ...items.map((item) {
                         return ListTile(
                           title: Text(
-                              '${item['quantity']} ${item['unit']} ${item['name']}'),
+                              '${item.quantity} ${item.unit} ${item.name}'),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
@@ -56,14 +59,14 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               await GroupedShoppingListService.deleteSingleItem(
                                 docs,
                                 recipeId,
-                                item['name'],
-                                item['unit'],
+                                item.name,
+                                item.unit,
                               );
 
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("${item['name']} gelöscht"),
+                                  content: Text("${item.name} gelöscht"),
                                 ),
                               );
                             },

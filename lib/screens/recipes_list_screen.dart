@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/models/recipe.dart';
 import 'package:kuvio/widgets/hamburger_menu.dart';
+import 'package:kuvio/models/recipe_list_item.dart';
 
 class RecipesListScreen extends StatelessWidget {
   final List<Recipe> allRecipes;
@@ -34,16 +35,17 @@ class RecipesListScreen extends StatelessWidget {
                   itemCount: allRecipes.length,
                   itemBuilder: (context, index) {
                     final recipe = allRecipes[index];
+                    final item = RecipeListItem(
+                      title: recipe.title,
+                      imageUrl: 'assets/${recipe.image}',
+                      iconUrl: 'assets/sample_icon.png',
+                      category: recipe.categories.isNotEmpty
+                          ? recipe.categories[0]
+                          : '',
+                    );
                     return Column(
                       children: [
-                        _buildRecipeRow(
-                          recipe.title,
-                          'assets/${recipe.image}',
-                          'assets/sample_icon.png',
-                          recipe.categories.isNotEmpty
-                              ? recipe.categories[0]
-                              : '',
-                        ),
+                        _buildRecipeRow(item),
                         const Divider(
                           color: Colors.grey,
                           thickness: 1,
@@ -64,18 +66,13 @@ class RecipesListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRecipeRow(
-    String title,
-    String imageUrl,
-    String iconUrl,
-    String category,
-  ) {
+  Widget _buildRecipeRow(RecipeListItem item) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: ListTile(
         contentPadding: const EdgeInsets.all(8.0),
         leading: Image.asset(
-          imageUrl,
+          item.imageUrl,
           width: 60,
           height: 60,
           fit: BoxFit.cover,
@@ -83,13 +80,13 @@ class RecipesListScreen extends StatelessWidget {
               const Icon(Icons.broken_image, size: 60),
         ),
         title: Text(
-          title,
+          item.title,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         subtitle: Row(
           children: [
             Image.asset(
-              iconUrl,
+              item.iconUrl,
               width: 20,
               height: 20,
               fit: BoxFit.cover,
@@ -98,7 +95,7 @@ class RecipesListScreen extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              category,
+              item.category,
               style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],

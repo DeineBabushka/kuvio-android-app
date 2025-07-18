@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/recipe.dart';
+import '../models/favorites_filter.dart';
 import '../services/favorite_service.dart';
 import 'recipes_singleview_screen.dart';
 
@@ -18,30 +19,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   bool isLoading = true;
 
   final searchController = TextEditingController();
-  String searchQuery = '';
-  String? selectedCategory;
-  String? selectedDietType;
-
-  final categories = [
-    "Vorspeise",
-    "Hauptgericht",
-    "Dessert",
-    "Beilage",
-    "Snack",
-    "Frühstück",
-    "Kalorienarm"
-  ];
-
-  final dietTypes = [
-    'Rohkost',
-    'Glutenfrei',
-    'Fisch',
-    'Keto',
-    'Fleisch',
-    'Vegetarisch',
-    'Omnivor',
-    'Vegan'
-  ];
+  FavoritesFilter filter = FavoritesFilter();
 
   @override
   void initState() {
@@ -76,15 +54,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   }
 
   List<FavoriteItem> _filteredFavorites() {
-    return favoriteRecipes.where((f) {
-      final recipe = f.recipe;
-      final matchesSearch = recipe.title.toLowerCase().contains(searchQuery);
-      final matchesCategory = selectedCategory == null ||
-          recipe.categories.contains(selectedCategory);
-      final matchesDiet = selectedDietType == null ||
-          recipe.dietTypes.contains(selectedDietType);
-      return matchesSearch && matchesCategory && matchesDiet;
-    }).toList();
+    return favoriteRecipes
+        .where((f) => filter.matchesRecipe(f.recipe))
+        .toList();
   }
 
   String _formatDate(DateTime date) {
@@ -118,8 +90,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   padding: const EdgeInsets.all(16),
                   child: TextField(
                     controller: searchController,
-                    onChanged: (val) =>
-                        setState(() => searchQuery = val.toLowerCase()),
+                    onChanged: (val) => setState(() => filter =
+                        filter.copyWith(searchQuery: val.toLowerCase())),
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'Suche nach Rezepten...',
@@ -140,18 +112,24 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                          child: _buildDropdown(
-                              categories,
-                              selectedCategory,
-                              'Kategorie',
-                              (val) => setState(() => selectedCategory = val))),
+                        child: _buildDropdown(
+                          filter.availableCategories,
+                          filter.category,
+                          'Kategorie',
+                          (val) => setState(
+                              () => filter = filter.copyWith(category: val)),
+                        ),
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
-                          child: _buildDropdown(
-                              dietTypes,
-                              selectedDietType,
-                              'Ernährungsform',
-                              (val) => setState(() => selectedDietType = val))),
+                        child: _buildDropdown(
+                          filter.availableDietTypes,
+                          filter.dietType,
+                          'Ernährungsform',
+                          (val) => setState(
+                              () => filter = filter.copyWith(dietType: val)),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -189,8 +167,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                   children: [
                                     ClipRRect(
                                       borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(16),
-                                          bottomLeft: Radius.circular(16)),
+                                        topLeft: Radius.circular(16),
+                                        bottomLeft: Radius.circular(16),
+                                      ),
                                       child: SizedBox(
                                         width: 100,
                                         height: 150,

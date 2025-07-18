@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
 import '../services/profile_service.dart';
+import '../models/app_user.dart';
 import 'change_password_screen.dart';
 import 'filter_screen.dart';
 
@@ -44,12 +45,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Future<void> _loadUserData() async {
     final data = await _userService.loadUserData();
     if (data != null) {
+      final user = AppUser.fromMap(data['id'] ?? 'unknown', data);
+
       setState(() {
-        _usernameController.text = data['username'] ?? '';
-        _bioController.text = data['bio'] ?? '';
-        _dishController.text = data['favdish'] ?? '';
-        _selectedKitchen = data['kitchen'] ?? 'Nicht angegeben';
-        _selectedProfileAsset = data['profileImage'];
+        _usernameController.text = user.username;
+        _bioController.text = user.bio ?? '';
+        _dishController.text = user.favoriteDish ?? '';
+        _selectedKitchen = user.favoriteKitchen ?? 'Nicht angegeben';
+        _selectedProfileAsset = user.profileImage;
       });
     }
   }
@@ -66,11 +69,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     if (!mounted) return;
 
-    // 🔁 Weiterleitung zu RecipesScreen
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => const RecipesScreen()),
-      (route) => false, // ← entfernt alle vorherigen Routen
+      (route) => false,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(

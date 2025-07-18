@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kuvio/models/app_user.dart';
 import 'package:kuvio/services/admin_service.dart';
 
 class UserCardTile extends StatelessWidget {
-  final DocumentSnapshot userDoc;
+  final AppUser user;
   final Color cardTextColor;
 
   const UserCardTile({
     super.key,
-    required this.userDoc,
+    required this.user,
     required this.cardTextColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    final userData = userDoc.data() as Map<String, dynamic>;
-    final username = userData['username'] ?? 'Unbekannt';
-    final isAdmin = userData['isAdmin'] == true;
-
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       color: Colors.white,
       child: ListTile(
         title: Text(
-          username,
+          user.username,
           style: TextStyle(
             color: cardTextColor,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
-          isAdmin ? 'Admin' : 'Benutzer',
+          user.isAdmin ? 'Admin' : 'Benutzer',
           style: TextStyle(
             color: cardTextColor.withAlpha(204),
           ),
@@ -39,14 +35,14 @@ class UserCardTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Switch(
-              value: isAdmin,
+              value: user.isAdmin,
               onChanged: (value) async {
-                await AdminService.setAdminStatus(userDoc.id, value);
+                await AdminService.setAdminStatus(user.id, value);
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        'Adminstatus von "$username" geändert.',
+                        'Adminstatus von "${user.username}" geändert.',
                         style: const TextStyle(color: Colors.white),
                       ),
                       backgroundColor: const Color(0xFF2E6B4D),
@@ -63,7 +59,7 @@ class UserCardTile extends StatelessWidget {
                   builder: (context) => AlertDialog(
                     title: const Text('Benutzer löschen'),
                     content: Text(
-                      'Willst du "$username" wirklich löschen?',
+                      'Willst du "${user.username}" wirklich löschen?',
                       style: const TextStyle(color: Colors.black),
                     ),
                     actions: [
@@ -80,12 +76,12 @@ class UserCardTile extends StatelessWidget {
                 );
 
                 if (confirm == true) {
-                  await AdminService.deleteUser(userDoc.id);
+                  await AdminService.deleteUser(user.id);
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Benutzer "$username" wurde gelöscht.',
+                          'Benutzer "${user.username}" wurde gelöscht.',
                           style: const TextStyle(color: Colors.white),
                         ),
                         backgroundColor: Colors.red,

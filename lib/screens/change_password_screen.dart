@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../services/user_service.dart';
 import '../../widgets/password_input_field.dart';
 import '../../widgets/password_input_decoration_helper.dart';
+import '../../models/password_change_data.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -20,10 +21,17 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Future<void> _handlePasswordChange() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() => _isLoading = true);
-    final result = await UserService().changePassword(
+    final data = PasswordChangeData(
       currentPassword: _currentPasswordController.text.trim(),
       newPassword: _newPasswordController.text.trim(),
+      repeatPassword: _repeatPasswordController.text.trim(),
+    );
+
+    setState(() => _isLoading = true);
+
+    final result = await UserService().changePassword(
+      currentPassword: data.currentPassword,
+      newPassword: data.newPassword,
     );
 
     if (!mounted) return;

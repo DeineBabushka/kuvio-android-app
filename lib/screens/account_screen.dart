@@ -4,6 +4,7 @@ import 'edit_profile_screen.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/info_card_tile.dart';
 import '../widgets/confirm_button.dart';
+import '../models/app_user.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -14,7 +15,7 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final UserService _userService = UserService();
-  Map<String, dynamic>? userData;
+  AppUser? appUser;
   bool isLoading = true;
 
   @override
@@ -26,10 +27,18 @@ class _AccountScreenState extends State<AccountScreen> {
   Future<void> _loadUserData() async {
     final data = await _userService.loadUserData();
     if (!mounted) return;
-    setState(() {
-      userData = data;
-      isLoading = false;
-    });
+
+    if (data != null && data.containsKey('id')) {
+      setState(() {
+        appUser = AppUser.fromMap(data['id'], data);
+        isLoading = false;
+      });
+    } else {
+      setState(() {
+        appUser = null;
+        isLoading = false;
+      });
+    }
   }
 
   Future<void> _navigateToEditProfile() async {
@@ -168,7 +177,7 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator(color: textColor))
-          : userData == null
+          : appUser == null
               ? Center(
                   child: Text('Keine Daten gefunden',
                       style: TextStyle(color: textColor)))
@@ -180,8 +189,8 @@ class _AccountScreenState extends State<AccountScreen> {
                     children: [
                       Center(
                         child: ProfileHeader(
-                          username: userData!['username'] ?? 'Unbekannt',
-                          profileImage: userData!['profileImage'],
+                          username: appUser!.username,
+                          profileImage: appUser!.profileImage,
                         ),
                       ),
                       const SizedBox(height: 32),
@@ -189,19 +198,19 @@ class _AccountScreenState extends State<AccountScreen> {
                       const SizedBox(height: 12),
                       InfoCardTile(
                         label: "Über mich",
-                        value: userData!['bio'],
+                        value: appUser!.bio,
                         textColor: textColor,
                         tileColor: cardColor,
                       ),
                       InfoCardTile(
                         label: "Lieblingsküche",
-                        value: userData!['kitchen'],
+                        value: appUser!.favoriteKitchen,
                         textColor: textColor,
                         tileColor: cardColor,
                       ),
                       InfoCardTile(
                         label: "Lieblingsgericht",
-                        value: userData!['favdish'],
+                        value: appUser!.favoriteDish,
                         textColor: textColor,
                         tileColor: cardColor,
                       ),

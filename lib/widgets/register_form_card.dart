@@ -74,10 +74,13 @@ class RegisterFormCard extends StatelessWidget {
                 labelStyle: TextStyle(color: labelColor),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) return 'E-Mail eingeben';
+                if (value == null || value.isEmpty) {
+                  return 'E-Mail eingeben';
+                }
                 final emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$');
-                if (!emailRegex.hasMatch(value))
+                if (!emailRegex.hasMatch(value)) {
                   return 'Ungültige E-Mail-Adresse';
+                }
                 return null;
               },
             ),

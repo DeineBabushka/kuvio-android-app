@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/models/recipe.dart';
+import 'package:kuvio/models/favorites_filter.dart';
 import 'package:kuvio/screens/filtered_recipes_screen.dart';
 import 'package:kuvio/widgets/hamburger_menu.dart';
 import 'package:kuvio/services/recipe_service.dart';
@@ -16,6 +17,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
   String? selectedCategory;
   List<Recipe> allRecipesList = [];
   bool isLoading = true;
+
+  final FavoritesFilter filterOptions = FavoritesFilter();
 
   @override
   void initState() {
@@ -150,22 +153,12 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     runSpacing: 20,
                     alignment: WrapAlignment.center,
                     children: [
-                      _buildFilterCircle('assets/rohkost_icon.png', 'Rohkost',
-                          filterTextColor),
-                      _buildFilterCircle('assets/gluten_free_icon.png',
-                          'Glutenfrei', filterTextColor),
-                      _buildFilterCircle(
-                          'assets/fish_icon.png', 'Fisch', filterTextColor),
-                      _buildFilterCircle(
-                          'assets/keto_icon.png', 'Keto', filterTextColor),
-                      _buildFilterCircle('assets/proteins_icon.png', 'Fleisch',
-                          filterTextColor),
-                      _buildFilterCircle('assets/vegetarian_icon.png',
-                          'Vegetarisch', filterTextColor),
-                      _buildFilterCircle(
-                          'assets/alles_icon.png', 'Omnivor', filterTextColor),
-                      _buildFilterCircle(
-                          'assets/vegan_icon.png', 'Vegan', filterTextColor),
+                      for (var diet in filterOptions.availableDietTypes)
+                        _buildFilterCircle(
+                          'assets/${diet.toLowerCase().replaceAll("ä", "ae").replaceAll("ö", "oe").replaceAll("ü", "ue").replaceAll("ß", "ss").replaceAll(" ", "_")}_icon.png',
+                          diet,
+                          filterTextColor,
+                        ),
                     ],
                   ),
                   const SizedBox(height: 30),
@@ -181,13 +174,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     spacing: 20,
                     runSpacing: 20,
                     children: [
-                      _buildCategoryFilter("Vorspeise", buttonTextColor),
-                      _buildCategoryFilter("Hauptgericht", buttonTextColor),
-                      _buildCategoryFilter("Dessert", buttonTextColor),
-                      _buildCategoryFilter("Beilage", buttonTextColor),
-                      _buildCategoryFilter("Snack", buttonTextColor),
-                      _buildCategoryFilter("Frühstück", buttonTextColor),
-                      _buildCategoryFilter("Kalorienarm", buttonTextColor),
+                      for (var category in filterOptions.availableCategories)
+                        _buildCategoryFilter(category, buttonTextColor),
                     ],
                   ),
                   const SizedBox(height: 40),

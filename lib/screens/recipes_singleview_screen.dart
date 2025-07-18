@@ -12,6 +12,7 @@ import '../widgets/comment_section.dart';
 import '../widgets/portion_selector.dart';
 import '../widgets/favorite_share_actions.dart';
 import '../widgets/add_all_ingredients_button.dart';
+import '../utils/snackbar_helper.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
@@ -60,12 +61,9 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     setState(() => isFavorite = updated);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
-        ),
-      ),
+    SnackbarHelper.showMessage(
+      context,
+      updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
     );
   }
 
@@ -77,9 +75,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         user.uid, scaled, widget.recipeId!);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Zutaten zur Einkaufsliste hinzugefügt")),
-    );
+    SnackbarHelper.showMessage(
+        context, "Zutaten zur Einkaufsliste hinzugefügt");
   }
 
   Future<void> _addSingleToShoppingList(Ingredient ingredient) async {
@@ -90,9 +87,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         user.uid, ingredient, widget.recipeId!);
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("${ingredient.name} hinzugefügt")),
-    );
+    SnackbarHelper.showMessage(context, "${ingredient.name} hinzugefügt");
   }
 
   @override

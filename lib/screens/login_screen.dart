@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../services/user_service.dart';
-import '../widgets/login_form_card.dart'; // Neues Widget importieren
+import '../widgets/login_form_card.dart';
+import '../models/google_user_data.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,16 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
       final doc = await userRef.get();
 
       if (!doc.exists) {
-        await userRef.set({
-          'username': user.displayName ?? 'Google Nutzer',
-          'email': user.email,
-          'createdAt': Timestamp.now(),
-          'bio': '',
-          'kitchen': 'Nicht angegeben',
-          'favdish': '',
-          'isAdmin': false,
-          'favorites': [],
-        });
+        final googleUserData = GoogleUserData.fromFirebaseUser(user);
+        await userRef.set(googleUserData.toMap());
         debugPrint('Neuer Google-Nutzer in Firestore angelegt.');
       }
 
