@@ -221,14 +221,35 @@ class _AccountScreenState extends State<AccountScreen> {
       final cred =
           EmailAuthProvider.credential(email: user.email!, password: password);
       await user.reauthenticateWithCredential(cred);
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .delete();
-      await FirebaseFirestore.instance
+
+      final uid = user.uid;
+      final firestore = FirebaseFirestore.instance;
+
+      final commentQuery = await firestore
+          .collection('comments')
+          .where('userId', isEqualTo: uid)
+          .get();
+      for (final doc in commentQuery.docs) {
+        await doc.reference.delete();
+      }
+
+      final favoritesQuery = await firestore
           .collection('favorites')
-          .doc(user.uid)
-          .delete();
+          .where('userId', isEqualTo: uid)
+          .get();
+      for (final doc in favoritesQuery.docs) {
+        await doc.reference.delete();
+      }
+
+      final shoppingDoc = firestore.collection('shopping_list').doc(uid);
+      final items = await shoppingDoc.collection('items').get();
+      for (final item in items.docs) {
+        await item.reference.delete();
+      }
+      await shoppingDoc.delete();
+
+      await firestore.collection('users').doc(uid).delete();
+
       await user.delete();
 
       if (!mounted) return;

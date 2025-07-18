@@ -33,7 +33,7 @@ class _CommentScreenState extends State<CommentScreen> {
       final List<CommentWithRecipe> loaded = [];
 
       for (var doc in commentSnapshot.docs) {
-        final comment = Comment.fromFirestore(doc); // 🔧 <-- angepasst
+        final comment = Comment.fromFirestore(doc);
 
         final localMatch = widget.allRecipes.firstWhere(
           (r) => r.id == comment.recipeId,
@@ -82,9 +82,9 @@ class _CommentScreenState extends State<CommentScreen> {
 
   String _formatDate(DateTime date) {
     final localDate = date.add(const Duration(hours: 2));
-    return '${localDate.day.toString().padLeft(2, '0')}.' 
-        '${localDate.month.toString().padLeft(2, '0')}.' 
-        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:' 
+    return '${localDate.day.toString().padLeft(2, '0')}.'
+        '${localDate.month.toString().padLeft(2, '0')}.'
+        '${localDate.year} ${localDate.hour.toString().padLeft(2, '0')}:'
         '${localDate.minute.toString().padLeft(2, '0')}';
   }
 
