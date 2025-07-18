@@ -8,6 +8,7 @@ class LoginFormCard extends StatelessWidget {
   final VoidCallback onLogin;
   final VoidCallback onGoogleLogin;
   final VoidCallback onNavigateToRegister;
+  final VoidCallback onForgotPassword;
   final Color cardColor;
   final Color textColor;
   final Color labelColor;
@@ -25,6 +26,7 @@ class LoginFormCard extends StatelessWidget {
     required this.onLogin,
     required this.onGoogleLogin,
     required this.onNavigateToRegister,
+    required this.onForgotPassword,
     required this.cardColor,
     required this.textColor,
     required this.labelColor,
@@ -79,7 +81,25 @@ class LoginFormCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              onPressed: onForgotPassword,
+              style: TextButton.styleFrom(padding: EdgeInsets.zero),
+              child: const Text(
+                'Passwort vergessen?',
+                style: TextStyle(
+                  color: Color(0xFF122620),
+                  fontSize: 15,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Color(0xFF122620),
+                  decorationThickness: 2.0,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
           ElevatedButton(
             onPressed: onLogin,
             style: ElevatedButton.styleFrom(
