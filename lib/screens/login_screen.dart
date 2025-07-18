@@ -78,18 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   String _getFirebaseErrorMessage(String code) {
-    switch (code) {
-      case 'user-not-found':
-        return '❌ Kein Benutzer mit dieser E-Mail gefunden.';
-      case 'wrong-password':
-        return '❌ Falsches Passwort.';
-      case 'invalid-email':
-        return '❌ Ungültige E-Mail-Adresse.';
-      case 'user-disabled':
-        return '❌ Dieser Account wurde deaktiviert.';
-      default:
-        return '❌ Anmeldung fehlgeschlagen. Bitte überprüfe deine Eingaben.';
-    }
+        return 'E-mail Adresse oder Passwort falsch.';    
   }
 
   @override
