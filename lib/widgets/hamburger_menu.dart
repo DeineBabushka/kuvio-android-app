@@ -185,6 +185,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               onTap: () async {
                 Navigator.pop(context);
                 await FirebaseAuth.instance.signOut();
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Du wurdest abgemeldet.")),
                 );

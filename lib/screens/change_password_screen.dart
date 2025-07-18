@@ -85,12 +85,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         labelText: label,
         hintText: hint,
         labelStyle: TextStyle(color: labelColor),
-        hintStyle: TextStyle(color: labelColor.withOpacity(0.6)),
+        hintStyle: TextStyle(color: labelColor.withAlpha(153)), // 0.6 * 255
         filled: true,
         fillColor: fillColor,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: labelColor.withOpacity(0.5)),
+          borderSide: BorderSide(color: labelColor.withAlpha(128)), // 0.5 * 255
           borderRadius: BorderRadius.circular(8),
         ),
         focusedBorder: OutlineInputBorder(

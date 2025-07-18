@@ -83,19 +83,18 @@ class GroupedShoppingListTab extends StatelessWidget {
                         ),
                       ),
                       secondary: IconButton(
-                        icon:
-                            const Icon(Icons.delete, color: Colors.redAccent),
+                        icon: const Icon(Icons.delete, color: Colors.redAccent),
                         onPressed: () async {
                           final matchingDocs = docs.where((doc) {
                             final data = doc.data() as Map<String, dynamic>;
-                            return data['name'] == name &&
-                                data['unit'] == unit;
+                            return data['name'] == name && data['unit'] == unit;
                           });
 
                           for (var doc in matchingDocs) {
                             await doc.reference.delete();
                           }
 
+                          if (!context.mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Zutat(en) entfernt")),
                           );
@@ -121,6 +120,7 @@ class GroupedShoppingListTab extends StatelessWidget {
                   }
                   await batch.commit();
 
+                  if (!context.mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                         content: Text("Gesamte Einkaufsliste gelöscht")),

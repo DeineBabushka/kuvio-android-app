@@ -49,36 +49,40 @@ class _LoginScreenState extends State<LoginScreen> {
           'isAdmin': false,
           'favorites': [],
         });
-        print('Neuer Google-Nutzer in Firestore angelegt.');
+        debugPrint('Neuer Google-Nutzer in Firestore angelegt.');
       }
 
       final userData = (await userRef.get()).data();
       final isAdmin = userData?['isAdmin'] ?? false;
 
-      print('Angemeldeter Google-Nutzer ist Admin: $isAdmin');
+      debugPrint('Angemeldeter Google-Nutzer ist Admin: $isAdmin');
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Color(0xFF2E6B4D),
-          content: Text(
-            'Erfolgreich mit Google eingeloggt',
-            style: TextStyle(color: Colors.white),
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Color(0xFF2E6B4D),
+            content: Text(
+              'Erfolgreich mit Google eingeloggt',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-        ),
-      );
-
-      Navigator.pop(context);
+        );
+        Navigator.pop(context);
+      }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Google-Login fehlgeschlagen: $e')),
-      );
+      if (!mounted) return;
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Google-Login fehlgeschlagen: $e')),
+        );
+      }
     }
   }
 
   String _getFirebaseErrorMessage(String code) {
-        return 'E-mail Adresse oder Passwort falsch.';    
+    return 'E-mail Adresse oder Passwort falsch.';
   }
 
   @override
@@ -186,32 +190,41 @@ class _LoginScreenState extends State<LoginScreen> {
                                   final isAdmin =
                                       doc.data()?['isAdmin'] ?? false;
 
-                                  print(
+                                  debugPrint(
                                       'Angemeldeter Benutzer ist Admin: $isAdmin');
 
                                   if (!mounted) return;
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      backgroundColor: Color(0xFF2E6B4D),
-                                      content: Text(
-                                        'Erfolgreich eingeloggt',
-                                        style: TextStyle(color: Colors.white),
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        backgroundColor: Color(0xFF2E6B4D),
+                                        content: Text(
+                                          'Erfolgreich eingeloggt',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
-                                    ),
-                                  );
-
-                                  Navigator.pop(context);
+                                    );
+                                    Navigator.pop(context);
+                                  }
                                 } on FirebaseAuthException catch (e) {
-                                  final message = _getFirebaseErrorMessage(e.code);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(message)),
-                                  );
+                                  if (!mounted) return;
+                                  if (context.mounted) {
+                                    final message =
+                                        _getFirebaseErrorMessage(e.code);
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(message),
+                                    ));
+                                  }
                                 } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Unbekannter Fehler')),
-                                  );
+                                  if (!mounted) return;
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Unbekannter Fehler')),
+                                    );
+                                  }
                                 }
                               },
                               style: ElevatedButton.styleFrom(

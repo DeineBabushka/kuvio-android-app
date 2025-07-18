@@ -28,7 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final cardColor = isDark ? Colors.grey[900] : Colors.white;
     final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
     final fieldTextColor = isDark ? Colors.white : Colors.black;
-    final buttonBackground = isDark ? theme.colorScheme.primary : const Color(0xFF122620);
+    final buttonBackground =
+        isDark ? theme.colorScheme.primary : const Color(0xFF122620);
     final buttonTextColor = isDark ? Colors.black : Colors.white;
 
     return Scaffold(
@@ -147,6 +148,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             _passwordController.text.trim(),
                                       );
 
+                                      if (!context.mounted) return;
+
                                       await FirebaseFirestore.instance
                                           .collection('users')
                                           .doc(userCredential.user!.uid)
@@ -162,19 +165,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         'favorites': [],
                                       });
 
-                                      if (!mounted) return;
+                                      if (!context.mounted) return;
 
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) =>
-                                                const EditProfileScreen()),
+                                          builder: (_) =>
+                                              const EditProfileScreen(),
+                                        ),
                                       );
                                     } catch (e) {
-                                      if (!mounted) return;
+                                      if (!context.mounted) return;
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        SnackBar(content: Text('Fehler: $e')),
+                                        SnackBar(
+                                          content: Text('Fehler: $e'),
+                                        ),
                                       );
                                     }
                                   }
@@ -183,14 +189,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   backgroundColor: buttonBackground,
                                   foregroundColor: buttonTextColor,
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 32, vertical: 14),
+                                    horizontal: 32,
+                                    vertical: 14,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
-                                child: Text('Registrieren',
-                                    style:
-                                        TextStyle(color: buttonTextColor)),
+                                child: Text(
+                                  'Registrieren',
+                                  style: TextStyle(color: buttonTextColor),
+                                ),
                               ),
                             ],
                           ),

@@ -25,46 +25,32 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
   void _onItemTapped(int index) {
     final user = FirebaseAuth.instance.currentUser;
 
+    Widget destination;
+
     switch (index) {
       case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) =>
-                user == null ? const LoginScreen() : const AccountScreen(),
-          ),
-        );
+        destination =
+            user == null ? const LoginScreen() : const AccountScreen();
         break;
-
       case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const ShoppingListScreen(),
-          ),
-        );
+        destination = const ShoppingListScreen();
         break;
-
       case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => CommentScreen(allRecipes: widget.allRecipes),
-          ),
-        );
+        destination = CommentScreen(allRecipes: widget.allRecipes);
         break;
-
       case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => user == null
-                ? const LoginScreen()
-                : FavoritesScreen(allRecipes: widget.allRecipes),
-          ),
-        );
+        destination = user == null
+            ? const LoginScreen()
+            : FavoritesScreen(allRecipes: widget.allRecipes);
         break;
+      default:
+        return;
     }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => destination),
+    );
   }
 
   @override

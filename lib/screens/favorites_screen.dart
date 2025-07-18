@@ -105,7 +105,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         isLoading = false;
       });
     } catch (e) {
-      print('Fehler beim Laden der Favoriten: $e');
+      debugPrint('Fehler beim Laden der Favoriten: $e');
       setState(() => isLoading = false);
     }
   }
@@ -123,12 +123,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   }
 
   String _formatDate(DateTime date) {
-    final localDate = date.add(Duration(hours: 2));
-    return '${localDate.day.toString().padLeft(2, '0')}.'
-        '${localDate.month.toString().padLeft(2, '0')}.'
+    final localDate = date.add(const Duration(hours: 2));
+    return '${localDate.day.toString().padLeft(2, '0')}.' // DD.
+        '${localDate.month.toString().padLeft(2, '0')}.' // MM.
         '${localDate.year} '
-        '${localDate.hour.toString().padLeft(2, '0')}:'
-        '${localDate.minute.toString().padLeft(2, '0')}';
+        '${localDate.hour.toString().padLeft(2, '0')}:' // HH:
+        '${localDate.minute.toString().padLeft(2, '0')}'; // mm
   }
 
   @override
