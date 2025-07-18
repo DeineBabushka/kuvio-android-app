@@ -138,7 +138,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       key: ValueKey(isCollapsed ? 'collapsed' : 'expanded'),
                       constraints: BoxConstraints(
                           maxWidth:
-                              constraints.maxWidth - (isCollapsed ? 140 : 32)),
+                              constraints.maxWidth - (isCollapsed ? 140 : 12)),
                       child: Text(
                         widget.recipe.title,
                         maxLines: 2,
@@ -296,8 +296,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text('Nährwerte (pro Portion)',
-            style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
+              style: TextStyle(
+                  color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
         ),
         const SizedBox(height: 10),
         NutritionCard(
