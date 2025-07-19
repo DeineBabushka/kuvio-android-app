@@ -70,6 +70,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         onGoogleLogin: () =>
                             _loginActions.signInWithGoogle(context),
                         onNavigateToRegister: () => navigateToRegister(context),
+                        onForgotPassword: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Passwort vergessen gedrückt'),
+                            ),
+                          );
+                        },
                         cardColor: colors.cardColor,
                         textColor: colors.textColor,
                         labelColor: colors.labelColor,
