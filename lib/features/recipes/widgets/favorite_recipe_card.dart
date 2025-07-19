@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../utils/format_utils.dart';
 import '../utils/favorites_navigation.dart';
+import '../services/favorites_controller.dart';
+import 'delete_favorite_icon.dart';
 import '../services/favorite_service.dart';
 
 class FavoriteRecipeCard extends StatelessWidget {
@@ -9,6 +12,8 @@ class FavoriteRecipeCard extends StatelessWidget {
   final Color textColor;
   final Color subtitleColor;
   final Color timestampColor;
+  final FavoritesController controller;
+  final VoidCallback onUpdate;
 
   const FavoriteRecipeCard({
     super.key,
@@ -17,6 +22,8 @@ class FavoriteRecipeCard extends StatelessWidget {
     required this.textColor,
     required this.subtitleColor,
     required this.timestampColor,
+    required this.controller,
+    required this.onUpdate,
   });
 
   @override
@@ -56,10 +63,8 @@ class FavoriteRecipeCard extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 8,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,22 +79,34 @@ class FavoriteRecipeCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       '${r.portions} Portionen • ${r.preparationTime}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: subtitleColor,
-                      ),
+                      style: TextStyle(fontSize: 14, color: subtitleColor),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Hinzugefügt am: ${formatDate(item.addedAt)}',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: timestampColor,
-                      ),
+                      style: TextStyle(fontSize: 12, color: timestampColor),
                     ),
                   ],
                 ),
               ),
+            ),
+            DeleteFavoriteIcon(
+              onDelete: () async {
+                final user = FirebaseAuth.instance.currentUser;
+                if (user != null) {
+                  await controller.removeFavorite(
+                    userId: user.uid,
+                    recipeId: r.id,
+                    onUpdate: onUpdate,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Favorit entfernt'),
+                      backgroundColor: Colors.redAccent,
+                    ),
+                  );
+                }
+              },
             ),
           ],
         ),

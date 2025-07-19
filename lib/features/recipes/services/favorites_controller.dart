@@ -29,6 +29,16 @@ class FavoritesController {
     }
   }
 
+  Future<void> removeFavorite({
+    required String userId,
+    required String recipeId,
+    required VoidCallback onUpdate,
+  }) async {
+    await FavoriteService.removeFavorite(userId, recipeId);
+    allFavorites.removeWhere((item) => item.recipe.id == recipeId);
+    onUpdate();
+  }
+
   List<FavoriteItem> filteredFavorites() {
     return allFavorites.where((f) => filter.matchesRecipe(f.recipe)).toList();
   }
