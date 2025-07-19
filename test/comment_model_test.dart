@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kuvio/models/comment.dart';
+import 'package:kuvio/features/comments/models/comment.dart';
 
 void main() {
   test('Comment model roundtrip: toMap -> manuelle Rekonstruktion', () {
