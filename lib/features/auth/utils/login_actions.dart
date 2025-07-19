@@ -14,11 +14,26 @@ class LoginActions {
     required TextEditingController emailController,
     required TextEditingController passwordController,
   }) async {
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    if (email.isEmpty) {
+      _showError(context, 'Bitte gib deine E-Mail-Adresse ein.');
+      return;
+    }
+
+    if (!email.contains('@')) {
+      _showError(context, 'Bitte gib eine gültige E-Mail-Adresse ein.');
+      return;
+    }
+
+    if (password.isEmpty) {
+      _showError(context, 'Bitte gib dein Passwort ein.');
+      return;
+    }
+
     try {
-      final credential = await _userService.loginWithEmail(
-        emailController.text,
-        passwordController.text,
-      );
+      final credential = await _userService.loginWithEmail(email, password);
 
       final user = credential.user;
       if (user == null) return;
@@ -39,17 +54,27 @@ class LoginActions {
         Navigator.pop(context);
       }
     } on FirebaseAuthException catch (e) {
-      if (context.mounted) {
-        final message = _userService.getErrorMessage(e.code);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
+      if (!context.mounted) return;
+
+      String message;
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'Diese E-Mail-Adresse ist nicht registriert.';
+          break;
+        case 'wrong-password':
+          message = 'Falsches Passwort.';
+          break;
+        case 'invalid-email':
+          message = 'Ungültige E-Mail-Adresse.';
+          break;
+        default:
+          message = 'Anmeldung fehlgeschlagen. (${e.message})';
       }
+
+      _showError(context, message);
     } catch (_) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Unbekannter Fehler')),
-        );
+        _showError(context, 'Unbekannter Fehler ist aufgetreten.');
       }
     }
   }
@@ -75,5 +100,14 @@ class LoginActions {
       ),
     );
     Navigator.pop(context);
+  }
+
+  void _showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: const Color(0xFF1C3C32),
+      ),
+    );
   }
 }
