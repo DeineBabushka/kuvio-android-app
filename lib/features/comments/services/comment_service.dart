@@ -20,10 +20,18 @@ class CommentService {
     return snapshot.docs.map(Comment.fromFirestore).toList();
   }
 
+  static Future<void> deleteComment(String commentId) async {
+    await _db.collection('comments').doc(commentId).delete();
+  }
+
   static Future<List<CommentWithRecipe>> getAllCommentsWithRecipes(
       List<Recipe> allRecipes) async {
+    final user = _auth.currentUser;
+    if (user == null) return [];
+
     final commentSnapshot = await _db
         .collection('comments')
+        .where('userId', isEqualTo: user.uid)
         .orderBy('timestamp', descending: true)
         .get();
 

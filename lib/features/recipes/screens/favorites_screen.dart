@@ -61,7 +61,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   child: controller.filteredFavorites().isEmpty
                       ? const Center(
                           child: Text(
-                            'Keine passenden Favoriten gefunden.',
+                            'Keine Favoriten vorhanden.',
                             style: TextStyle(color: Colors.white),
                           ),
                         )
@@ -76,6 +76,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               textColor: textColor,
                               subtitleColor: subtitleColor,
                               timestampColor: timestampColor,
+                              controller: controller,
+                              onUpdate: () => setState(() {}),
                             );
                           },
                         ),

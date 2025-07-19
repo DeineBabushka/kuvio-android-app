@@ -5,6 +5,7 @@ import '../widgets/login_form_card.dart';
 import '../utils/login_colors.dart';
 import '../utils/login_actions.dart';
 import '../utils/login_navigation.dart';
+import '../utils/login_forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -70,13 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onGoogleLogin: () =>
                             _loginActions.signInWithGoogle(context),
                         onNavigateToRegister: () => navigateToRegister(context),
-                        onForgotPassword: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Passwort vergessen gedrückt'),
-                            ),
-                          );
-                        },
+                        onForgotPassword: () =>
+                            showForgotPasswordDialog(context),
                         cardColor: colors.cardColor,
                         textColor: colors.textColor,
                         labelColor: colors.labelColor,
