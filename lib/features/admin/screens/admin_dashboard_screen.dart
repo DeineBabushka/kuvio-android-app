@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/admin/services/admin_service.dart';
 import 'package:kuvio/shared/utils/constants.dart';
-import 'package:kuvio/features/admin/widgets/custom_app_bar.dart';
-import 'package:kuvio/features/admin/widgets/user_list.dart';
+import 'package:kuvio/features/admin/widgets/admin_app_bar.dart';
+import 'package:kuvio/features/admin/widgets/admin_list.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});

@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 import 'package:kuvio/features/comments/models/comment.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/comments/models/comment_with_recipe.dart';
-import 'package:kuvio/features/comments/models/formatted_comment.dart';
+import 'package:kuvio/features/comments/models/comment_formatted.dart';
 
 class CommentService {
   static final _db = FirebaseFirestore.instance;

@@ -5,7 +5,7 @@ import 'package:kuvio/features/auth/widgets/login_form_card.dart';
 import 'package:kuvio/features/auth/utils/login_colors.dart';
 import 'package:kuvio/features/auth/utils/login_actions.dart';
 import 'package:kuvio/features/auth/utils/login_navigation.dart';
-import 'package:kuvio/features/auth/utils/login_forgot_password.dart';
+import 'package:kuvio/features/auth/utils/forgot_password_utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
