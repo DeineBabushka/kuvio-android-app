@@ -31,6 +31,8 @@ class RecipeDetailController {
     if (user == null || recipeId == null) return false;
 
     final updated = await FavoriteService.toggleFavorite(user.uid, recipeId!);
+    if (!context.mounted) return updated;
+
     SnackbarHelper.showMessage(
       context,
       updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
@@ -51,8 +53,12 @@ class RecipeDetailController {
     if (user == null || recipeId == null) return;
 
     await ShoppingListService.addIngredients(user.uid, ingredients, recipeId!);
+    if (!context.mounted) return;
+
     SnackbarHelper.showMessage(
-        context, "Zutaten zur Einkaufsliste hinzugefügt");
+      context,
+      "Zutaten zur Einkaufsliste hinzugefügt",
+    );
   }
 
   Future<void> addSingleToShoppingList(Ingredient ingredient) async {
@@ -60,7 +66,15 @@ class RecipeDetailController {
     if (user == null || recipeId == null) return;
 
     await ShoppingListService.addSingleIngredient(
-        user.uid, ingredient, recipeId!);
-    SnackbarHelper.showMessage(context, "${ingredient.name} hinzugefügt");
+      user.uid,
+      ingredient,
+      recipeId!,
+    );
+    if (!context.mounted) return;
+
+    SnackbarHelper.showMessage(
+      context,
+      "${ingredient.name} hinzugefügt",
+    );
   }
 }
