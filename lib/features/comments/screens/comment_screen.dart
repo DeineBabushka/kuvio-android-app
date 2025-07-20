@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../recipes/models/recipe.dart';
-import '../models/formatted_comment.dart';
-import '../services/comment_service.dart';
-import '../widgets/comment_list.dart';
-import '../widgets/empty_comment_placeholder.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/comments/models/formatted_comment.dart';
+import 'package:kuvio/features/comments/services/comment_service.dart';
+import 'package:kuvio/features/comments/widgets/comment_list.dart';
+import 'package:kuvio/features/comments/widgets/empty_comment_placeholder.dart';
 
 class CommentScreen extends StatefulWidget {
   const CommentScreen({super.key});

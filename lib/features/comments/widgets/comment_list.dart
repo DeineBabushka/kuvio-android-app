@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/formatted_comment.dart';
-import 'comment_card.dart';
+import 'package:kuvio/features/comments/models/formatted_comment.dart';
+import 'package:kuvio/features/comments/widgets/comment_card.dart';
 
 class CommentList extends StatelessWidget {
   final List<FormattedComment> comments;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/recipe.dart';
-import '../services/recipe_detail_controller.dart';
-import '../widgets/recipe_detail_body.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/services/recipe_detail_controller.dart';
+import 'package:kuvio/features/recipes/widgets/recipe_detail_body.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;

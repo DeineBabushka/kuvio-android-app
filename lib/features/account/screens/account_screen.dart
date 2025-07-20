@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/app_user.dart';
-import '../services/user_service.dart';
-import '../utils/user_loader.dart';
-import '../widgets/account_app_bar.dart';
-import '../widgets/account_body.dart';
-import '../widgets/empty_or_loading.dart';
-import 'edit_profile_screen.dart';
+import 'package:kuvio/features/account/models/app_user.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/features/account/utils/user_loader.dart';
+import 'package:kuvio/features/account/widgets/account_app_bar.dart';
+import 'package:kuvio/features/account/widgets/account_body.dart';
+import 'package:kuvio/features/account/widgets/empty_or_loading.dart';
+import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});

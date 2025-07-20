@@ -1,5 +1,5 @@
-import '../services/user_service.dart';
-import '../models/app_user.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/features/account/models/app_user.dart';
 
 class UserLoader {
   final UserService userService;

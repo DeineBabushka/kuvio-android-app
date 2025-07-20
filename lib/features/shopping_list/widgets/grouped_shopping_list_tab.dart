@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/shopping_list_item.dart';
+import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
 
 class GroupedShoppingListTab extends StatelessWidget {
   const GroupedShoppingListTab({super.key});

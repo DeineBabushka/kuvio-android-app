@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/ingredient.dart';
-import '../models/recipe.dart';
-import 'favorite_service.dart';
-import '../../shopping_list/services/shopping_list_service.dart';
-import 'recipe_detail_service.dart';
-import '../utils/snackbar_helper.dart';
+import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/services/favorite_service.dart';
+import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';
+import 'package:kuvio/features/recipes/services/recipe_detail_service.dart';
+import 'package:kuvio/features/recipes/utils/snackbar_helper.dart';
 
 class RecipeDetailController {
   final BuildContext context;

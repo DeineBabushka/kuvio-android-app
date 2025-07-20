@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/constants.dart';
+import 'package:kuvio/shared/utils/constants.dart';
 
 class EditableCard extends StatelessWidget {
   final String label;

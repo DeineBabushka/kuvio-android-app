@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/recipe.dart';
-import '../services/recipe_detail_controller.dart';
-import 'recipe_detail_content.dart';
-import 'recipe_sliver_appbar.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/services/recipe_detail_controller.dart';
+import 'package:kuvio/features/recipes/widgets/recipe_detail_content.dart';
+import 'package:kuvio/features/recipes/widgets/recipe_sliver_appbar.dart';
 
 class RecipeDetailBody extends StatelessWidget {
   final Recipe recipe;

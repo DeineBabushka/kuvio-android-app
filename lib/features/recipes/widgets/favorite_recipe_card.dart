@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../utils/format_utils.dart';
-import '../utils/favorites_navigation.dart';
-import '../services/favorites_controller.dart';
-import 'delete_favorite_icon.dart';
-import '../services/favorite_service.dart';
+import 'package:kuvio/features/recipes/utils/format_utils.dart';
+import 'package:kuvio/features/recipes/utils/favorites_navigation.dart';
+import 'package:kuvio/features/recipes/services/favorites_controller.dart';
+import 'package:kuvio/features/recipes/widgets/delete_favorite_icon.dart';
+import 'package:kuvio/features/recipes/services/favorite_service.dart';
 
 class FavoriteRecipeCard extends StatelessWidget {
   final FavoriteItem item;

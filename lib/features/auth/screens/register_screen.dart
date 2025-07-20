@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart';
-import '../widgets/register_form_card.dart';
-import '../models/register_user_data.dart';
-import '../../account/screens/edit_profile_screen.dart';
+import 'package:kuvio/features/auth/services/auth_service.dart';
+import 'package:kuvio/features/auth/widgets/register_form_card.dart';
+import 'package:kuvio/features/auth/models/register_user_data.dart';
+import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

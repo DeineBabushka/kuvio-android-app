@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/favorites_filter.dart';
-import 'filter_dropdown.dart';
+import 'package:kuvio/features/recipes/models/favorites_filter.dart';
+import 'package:kuvio/features/recipes/widgets/filter_dropdown.dart';
 
 class FavoritesFilterBar extends StatelessWidget {
   final TextEditingController searchController;
