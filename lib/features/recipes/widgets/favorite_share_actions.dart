@@ -23,7 +23,12 @@ class FavoriteShareActions extends StatelessWidget {
       children: [
         IconButton(
           icon: const Icon(Icons.share, color: Colors.white),
-          onPressed: () => Share.share(shareText),
+          onPressed: () => SharePlus.instance.share(
+            ShareParams(
+              text: shareText,
+              subject: title,
+            ),
+          ),
         ),
         if (isLoggedIn)
           IconButton(
