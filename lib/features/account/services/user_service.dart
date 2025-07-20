@@ -15,17 +15,6 @@ class UserService {
     );
   }
 
-  String getErrorMessage(String code) {
-    switch (code) {
-      case 'user-not-found':
-      case 'wrong-password':
-      case 'invalid-credential':
-        return 'E-Mail-Adresse oder Passwort falsch.';
-      default:
-        return 'Unbekannter Fehler beim Login.';
-    }
-  }
-
   Future<DocumentSnapshot?> loadUserData() async {
     final user = _auth.currentUser;
     if (user == null) return null;
@@ -102,28 +91,6 @@ class UserService {
           return 'Fehler beim Ändern des Passworts.';
       }
     }
-  }
-
-  Future<String?> changePasswordAndShowResult({
-    required BuildContext context,
-    required String currentPassword,
-    required String newPassword,
-  }) async {
-    final result = await changePassword(
-      currentPassword: currentPassword,
-      newPassword: newPassword,
-    );
-
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: result == null ? Colors.green : Colors.red,
-          content: Text(result ?? 'Passwort erfolgreich geändert.'),
-        ),
-      );
-    }
-
-    return result;
   }
 
   Future<void> deleteUserAndData(String password) async {
