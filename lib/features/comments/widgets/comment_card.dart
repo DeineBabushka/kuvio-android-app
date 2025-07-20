@@ -121,6 +121,8 @@ class _CommentCardState extends State<CommentCard> {
 
     setState(() => isDeleted = true);
 
+    if (!context.mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Kommentar gelöscht'),

@@ -9,14 +9,13 @@ class GoogleAuthService {
 
   Future<({bool isAdmin, String? error})> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) return (isAdmin: false, error: null);
+      final googleUser = await GoogleSignIn.instance.authenticate();
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final googleAuth = GoogleSignInAuthentication(
+        idToken: googleUser.id,
+      );
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 

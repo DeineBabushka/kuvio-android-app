@@ -99,6 +99,9 @@ class FavoriteRecipeCard extends StatelessWidget {
                     recipeId: r.id,
                     onUpdate: onUpdate,
                   );
+
+                  if (!context.mounted) return;
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Favorit entfernt'),
