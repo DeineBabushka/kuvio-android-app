@@ -30,9 +30,8 @@ class BottomNavWidget extends StatelessWidget {
             user == null ? const LoginScreen() : const ShoppingListScreen();
         break;
       case 2:
-        destination = user == null
-            ? const LoginScreen()
-            : CommentScreen(allRecipes: allRecipes);
+        destination =
+            user == null ? const LoginScreen() : const CommentScreen();
         break;
       case 3:
         destination = user == null

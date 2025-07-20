@@ -30,6 +30,7 @@ class AuthService {
       'favdish': '',
       'isAdmin': false,
       'favorites': [],
+      'profileImage': 'assets/character_9.png',
     });
   }
 

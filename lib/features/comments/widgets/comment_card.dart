@@ -46,17 +46,7 @@ class _CommentCardState extends State<CommentCard> {
           borderRadius: BorderRadius.circular(12),
         ),
         child: ListTile(
-          leading: cwr.recipe.image.isNotEmpty
-              ? ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/${cwr.recipe.image}',
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              : const Icon(Icons.image_not_supported, size: 40),
+          leading: _buildRecipeImage(cwr.recipe.image),
           title: Text(
             cwr.recipe.title.isNotEmpty
                 ? cwr.recipe.title
@@ -130,6 +120,36 @@ class _CommentCardState extends State<CommentCard> {
           contentPadding: const EdgeInsets.all(12),
         ),
       ),
+    );
+  }
+
+  Widget _buildRecipeImage(String imageUrl) {
+    if (imageUrl.isEmpty) {
+      return const Icon(Icons.image, size: 40);
+    }
+
+    final isNetworkImage = imageUrl.contains('http');
+    final assetPath = 'assets/$imageUrl';
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: isNetworkImage
+          ? Image.network(
+              imageUrl,
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) =>
+                  const Icon(Icons.image_not_supported, size: 40),
+            )
+          : Image.asset(
+              assetPath,
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) =>
+                  const Icon(Icons.image_not_supported, size: 40),
+            ),
     );
   }
 }
