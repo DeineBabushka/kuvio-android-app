@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/auth/services/google_auth_service.dart';
 import 'package:kuvio/features/auth/widgets/login_form_card.dart';
 import 'package:kuvio/features/auth/utils/login_colors.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/widgets/ingredient_list.dart';
 import 'package:kuvio/features/recipes/widgets/instruction_list.dart';

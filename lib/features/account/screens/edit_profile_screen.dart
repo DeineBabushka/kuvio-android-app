@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kuvio/features/account/services/edit_profile_controller.dart';
 import 'package:kuvio/shared/utils/navigation_utils.dart';
 import 'package:kuvio/features/recipes/utils/snackbar_utils.dart';
-import 'package:kuvio/shared/widgets/profile_avatar.dart';
+import 'package:kuvio/features/recipes/widgets/profile_avatar.dart';
 import 'package:kuvio/features/account/widgets/edit_profile_form.dart';
-import 'package:kuvio/shared/widgets/transparent_app_bar.dart';
+import 'package:kuvio/features/account/widgets/transparent_app_bar.dart';
 import 'package:kuvio/features/account/widgets/screen_wrapper.dart';
 
 class EditProfileScreen extends StatefulWidget {

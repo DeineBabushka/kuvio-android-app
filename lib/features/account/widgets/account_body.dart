@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/models/app_user.dart';
+import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/shared/widgets/profile_header.dart';
 import 'package:kuvio/features/account/widgets/account_user_info.dart';
 import 'package:kuvio/features/account/widgets/account_delete_section.dart';
-import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/shared/services/user_service.dart';
 
 class AccountBody extends StatelessWidget {
   final AppUser appUser;

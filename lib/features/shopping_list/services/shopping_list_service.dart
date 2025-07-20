@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/shared/models/ingredient.dart';
 
 class ShoppingListService {
   static final _db = FirebaseFirestore.instance;

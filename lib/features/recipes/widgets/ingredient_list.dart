@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/shared/models/ingredient.dart';
 
 class IngredientList extends StatelessWidget {
   final List<Ingredient> ingredients;

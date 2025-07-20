@@ -12,7 +12,7 @@ import 'package:kuvio/shared/services/theme_provider.dart';
 import 'package:kuvio/shared/widgets/drawer_tile.dart';
 import 'package:kuvio/shared/widgets/drawer_tile_with_switch.dart';
 import 'package:kuvio/shared/widgets/drawer_profile_header.dart';
-import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/auth/services/auth_service.dart';
 
 class HamburgerDrawer extends StatefulWidget {

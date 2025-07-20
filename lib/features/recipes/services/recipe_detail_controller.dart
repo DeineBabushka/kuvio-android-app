@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/services/favorite_service.dart';
 import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/features/recipes/models/favorites_filter.dart';
+import 'package:kuvio/shared/models/favorites_filter.dart';
 import 'package:kuvio/features/recipes/services/favorite_service.dart';
 
 class FavoritesController {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kuvio/features/account/models/app_user.dart';
+import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/admin/widgets/user_card_tile.dart';
 
 class UserList extends StatelessWidget {
