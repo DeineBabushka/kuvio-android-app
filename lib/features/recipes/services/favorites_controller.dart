@@ -21,7 +21,6 @@ class FavoritesController {
       final loaded =
           await FavoriteService.loadFavoritesWithRecipes(user.uid, allRecipes);
       allFavorites = loaded;
-    } catch (e) {
     } finally {
       isLoading = false;
       onUpdate();
