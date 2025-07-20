@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/models/app_user.dart';
+import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/account/services/dialog_service.dart';
 
 class UserService {

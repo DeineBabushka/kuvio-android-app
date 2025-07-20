@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/services/user_service.dart';
-import 'package:kuvio/shared/widgets/confirm_button.dart';
+import 'package:kuvio/shared/services/user_service.dart';
+import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';
 
 class AccountDeleteSection extends StatelessWidget {

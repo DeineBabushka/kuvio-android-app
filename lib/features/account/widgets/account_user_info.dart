@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/models/app_user.dart';
-import 'package:kuvio/shared/widgets/info_card_tile.dart';
+import 'package:kuvio/shared/models/app_user.dart';
+import 'package:kuvio/features/account/widgets/info_card_tile.dart';
 import 'package:kuvio/features/account/widgets/edit_profile_button.dart';
 import 'package:kuvio/features/account/widgets/section_title.dart';
 

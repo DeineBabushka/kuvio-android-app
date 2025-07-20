@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/change_password_button.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:kuvio/features/account/widgets/password_input_fields.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/models/app_user.dart';
+import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/admin/services/admin_service.dart';
 import 'package:kuvio/shared/utils/constants.dart';
 import 'package:kuvio/features/admin/widgets/user_delete_dialog.dart';

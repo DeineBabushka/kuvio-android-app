@@ -1,4 +1,4 @@
-import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Recipe {
