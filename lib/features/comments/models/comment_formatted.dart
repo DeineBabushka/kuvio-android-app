@@ -1,5 +1,5 @@
 import 'package:kuvio/features/comments/models/comment_with_recipe.dart';
-import 'package:kuvio/features/comments/utils/date_formatter.dart';
+import 'package:kuvio/features/comments/utils/comment_date_formatter.dart';
 
 class FormattedComment {
   final String formattedDate;

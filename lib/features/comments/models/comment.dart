@@ -7,8 +7,7 @@ class Comment {
   final String recipeId;
   final String text;
   final DateTime timestamp;
-  final String profileImage; // neu
-
+  final String profileImage;
   Comment({
     required this.id,
     required this.userId,

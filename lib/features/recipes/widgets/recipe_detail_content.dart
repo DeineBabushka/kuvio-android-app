@@ -5,7 +5,7 @@ import 'package:kuvio/features/recipes/widgets/ingredient_list.dart';
 import 'package:kuvio/features/recipes/widgets/instruction_list.dart';
 import 'package:kuvio/features/recipes/widgets/nutrition_card.dart';
 import 'package:kuvio/features/recipes/widgets/portion_selector.dart';
-import 'package:kuvio/features/recipes/widgets/add_all_ingredients_button.dart';
+import 'package:kuvio/features/recipes/widgets/ingredient_add_all_button.dart';
 import 'package:kuvio/features/comments/widgets/comment_section.dart';
 
 class RecipeDetailContent extends StatelessWidget {

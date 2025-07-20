@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/shared/services/user_service.dart';
-import 'package:kuvio/features/account/utils/user_loader.dart';
+import 'package:kuvio/features/account/utils/account_user_loader.dart';
 import 'package:kuvio/features/account/widgets/account_app_bar.dart';
 import 'package:kuvio/features/account/widgets/account_body.dart';
 import 'package:kuvio/features/account/widgets/empty_or_loading.dart';

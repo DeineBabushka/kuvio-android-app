@@ -4,9 +4,9 @@ import 'package:kuvio/features/recipes/services/recipe_service.dart';
 import 'package:kuvio/features/recipes/screens/filtered_recipes_screen.dart';
 import 'package:kuvio/features/recipes/widgets/hamburger_menu.dart';
 import 'package:kuvio/features/recipes/widgets/filter_title_text.dart';
-import 'package:kuvio/features/recipes/widgets/diet_filter_wrap.dart';
+import 'package:kuvio/features/recipes/widgets/filter_diet_wrap.dart';
 import 'package:kuvio/features/recipes/widgets/category_filter_wrap.dart';
-import 'package:kuvio/features/recipes/widgets/show_recipes_button.dart';
+import 'package:kuvio/features/recipes/widgets/recipe_show_button.dart';
 import 'package:kuvio/features/recipes/widgets/loading_indicator.dart';
 
 class RecipesScreen extends StatefulWidget {

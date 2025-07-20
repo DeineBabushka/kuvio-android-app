@@ -22,7 +22,6 @@ class FavoritesController {
           await FavoriteService.loadFavoritesWithRecipes(user.uid, allRecipes);
       allFavorites = loaded;
     } catch (e) {
-      debugPrint('Fehler beim Laden: $e');
     } finally {
       isLoading = false;
       onUpdate();

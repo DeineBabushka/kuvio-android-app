@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/features/comments/models/formatted_comment.dart';
+import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/features/comments/widgets/comment_list.dart';
-import 'package:kuvio/features/comments/widgets/empty_comment_placeholder.dart';
+import 'package:kuvio/features/comments/widgets/comment_empty_placeholder.dart';
 
 class CommentScreen extends StatefulWidget {
   const CommentScreen({super.key});
@@ -30,11 +30,8 @@ class _CommentScreenState extends State<CommentScreen> {
       final allRecipes =
           recipeDocs.docs.map((doc) => Recipe.fromFirestore(doc)).toList();
 
-      debugPrint('Rezepte geladen: ${allRecipes.length}');
-
       final commentPairs =
           await CommentService.getAllCommentsWithRecipes(allRecipes);
-      debugPrint('Kommentare mit Rezept gefunden: ${commentPairs.length}');
 
       final formatted = commentPairs.map(FormattedComment.fromCWR).toList();
 
@@ -43,7 +40,6 @@ class _CommentScreenState extends State<CommentScreen> {
         isLoading = false;
       });
     } catch (e) {
-      debugPrint('Fehler beim Laden der Kommentare: $e');
       setState(() => isLoading = false);
     }
   }

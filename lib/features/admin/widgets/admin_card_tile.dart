@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/admin/services/admin_service.dart';
 import 'package:kuvio/shared/utils/constants.dart';
-import 'package:kuvio/features/admin/widgets/user_delete_dialog.dart';
+import 'package:kuvio/features/admin/widgets/admin_delete_dialog.dart';
 
 class UserCardTile extends StatelessWidget {
   final AppUser user;
