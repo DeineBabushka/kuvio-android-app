@@ -73,52 +73,58 @@ class _CommentCardState extends State<CommentCard> {
           ),
           trailing: IconButton(
             icon: const Icon(Icons.delete, color: Colors.redAccent),
-            onPressed: () async {
-              final confirmed = await showDialog<bool>(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      title: const Text(
-                        'Kommentar löschen?',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      content: const Text(
-                        'Möchtest du diesen Kommentar wirklich entfernen?',
-                        style: TextStyle(color: Colors.black87),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, false),
-                          child: const Text('Abbrechen',
-                              style: TextStyle(color: Colors.green)),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, true),
-                          child: const Text('Löschen',
-                              style: TextStyle(color: Colors.redAccent)),
-                        ),
-                      ],
-                    ),
-                  ) ??
-                  false;
-
-              if (confirmed) {
-                await CommentService.deleteComment(cwr.comment.id);
-                setState(() => isDeleted = true);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Kommentar gelöscht'),
-                    backgroundColor: Colors.redAccent,
-                  ),
-                );
-              }
-            },
+            onPressed: () => _confirmAndDelete(context),
           ),
           contentPadding: const EdgeInsets.all(12),
         ),
+      ),
+    );
+  }
+
+  Future<void> _confirmAndDelete(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+          context: context,
+          builder: (_) => AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: const Text(
+              'Kommentar löschen?',
+              style: TextStyle(color: Colors.black),
+            ),
+            content: const Text(
+              'Möchtest du diesen Kommentar wirklich entfernen?',
+              style: TextStyle(color: Colors.black87),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Abbrechen',
+                    style: TextStyle(color: Colors.green)),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('Löschen',
+                    style: TextStyle(color: Colors.redAccent)),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+
+    if (!confirmed) return;
+
+    await CommentService.deleteComment(widget.comment.data.comment.id);
+
+    if (!mounted) return;
+
+    setState(() => isDeleted = true);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Kommentar gelöscht'),
+        backgroundColor: Colors.redAccent,
       ),
     );
   }

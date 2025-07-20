@@ -24,16 +24,34 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
 
     setState(() => _isLoading = true);
 
-    final result = await UserService().changePasswordAndShowResult(
-      context: context,
+    final result = await UserService().changePassword(
       currentPassword: _currentPasswordController.text.trim(),
       newPassword: _newPasswordController.text.trim(),
     );
 
-    if (result == null && mounted) {
+    if (!mounted) return;
+
+    final messenger = ScaffoldMessenger.of(context);
+
+    if (result == null) {
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text('Passwort erfolgreich geändert.'),
+          backgroundColor: Colors.green,
+        ),
+      );
       await FirebaseAuth.instance.signOut();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const LoginScreen()),
+        );
+      }
+    } else {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(result),
+          backgroundColor: Colors.red,
+        ),
       );
     }
 

@@ -34,44 +34,27 @@ class LoginActions {
 
     try {
       final credential = await _userService.loginWithEmail(email, password);
-
       final user = credential.user;
       if (user == null) return;
 
-      final isAdmin = await _userService.isAdmin(user.uid);
-      debugPrint('Angemeldeter Benutzer ist Admin: $isAdmin');
+      await _userService.isAdmin(user.uid);
 
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Color(0xFF2E6B4D),
-            content: Text(
-              'Erfolgreich eingeloggt',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-        Navigator.pop(context);
-      }
-    } on FirebaseAuthException catch (e) {
       if (!context.mounted) return;
 
-      String message;
-      switch (e.code) {
-        case 'user-not-found':
-          message = 'Diese E-Mail-Adresse ist nicht registriert.';
-          break;
-        case 'wrong-password':
-          message = 'Falsches Passwort.';
-          break;
-        case 'invalid-email':
-          message = 'Ungültige E-Mail-Adresse.';
-          break;
-        default:
-          message = 'Anmeldung fehlgeschlagen. (${e.message})';
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Color(0xFF2E6B4D),
+          content: Text(
+            'Erfolgreich eingeloggt',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException {
+      if (context.mounted) {
+        _showError(context, 'E-Mail oder Passwort ist falsch.');
       }
-
-      _showError(context, message);
     } catch (_) {
       if (context.mounted) {
         _showError(context, 'Unbekannter Fehler ist aufgetreten.');
@@ -84,9 +67,7 @@ class LoginActions {
     if (!context.mounted) return;
 
     if (result.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Google-Login fehlgeschlagen: ${result.error}')),
-      );
+      _showError(context, 'Google-Login fehlgeschlagen: ${result.error}');
       return;
     }
 
