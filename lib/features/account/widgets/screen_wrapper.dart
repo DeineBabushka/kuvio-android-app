@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../shared/utils/constants.dart';
+import 'package:kuvio/shared/utils/constants.dart';
 
 class ScreenWrapper extends StatelessWidget {
   final Widget child;

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import '../../features/account/screens/account_screen.dart';
-import '../../features/auth/screens/login_screen.dart';
-import '../../features/recipes/screens/favorites_screen.dart';
-import '../../features/admin/screens/admin_dashboard_screen.dart';
-import '../../features/shopping_list/screens/shopping_list_screen.dart';
-import '../../features/comments/screens/comment_screen.dart';
-import '../../features/recipes/models/recipe.dart';
-import '../services/theme_provider.dart';
-import 'drawer_tile.dart';
-import 'drawer_tile_with_switch.dart';
-import 'drawer_profile_header.dart';
-import '../../features/account/services/user_service.dart';
-import '../../features/auth/services/auth_service.dart';
+import 'package:kuvio/features/account/screens/account_screen.dart';
+import 'package:kuvio/features/auth/screens/login_screen.dart';
+import 'package:kuvio/features/recipes/screens/favorites_screen.dart';
+import 'package:kuvio/features/admin/screens/admin_dashboard_screen.dart';
+import 'package:kuvio/features/shopping_list/screens/shopping_list_screen.dart';
+import 'package:kuvio/features/comments/screens/comment_screen.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/shared/services/theme_provider.dart';
+import 'package:kuvio/shared/widgets/drawer_tile.dart';
+import 'package:kuvio/shared/widgets/drawer_tile_with_switch.dart';
+import 'package:kuvio/shared/widgets/drawer_profile_header.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/features/auth/services/auth_service.dart';
 
 class HamburgerDrawer extends StatefulWidget {
   final List<Recipe> allRecipes;

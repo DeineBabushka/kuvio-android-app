@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'password_input_field.dart';
-import 'password_input_decoration_helper.dart';
-import 'password_validators.dart';
+import 'package:kuvio/features/account/widgets/password_input_field.dart';
+import 'package:kuvio/features/account/widgets/password_input_decoration_helper.dart';
+import 'package:kuvio/features/account/widgets/password_validators.dart';
 
 class PasswordInputFields {
   static Widget buildCurrentPasswordField({

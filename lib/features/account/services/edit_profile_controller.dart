@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'user_service.dart';
-import 'profile_service.dart';
-import '../models/app_user.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/features/account/services/profile_service.dart';
+import 'package:kuvio/features/account/models/app_user.dart';
 
 class EditProfileController {
   final formKey = GlobalKey<FormState>();

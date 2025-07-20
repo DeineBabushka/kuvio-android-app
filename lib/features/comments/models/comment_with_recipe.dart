@@ -1,5 +1,5 @@
-import 'comment.dart';
-import '../../recipes/models/recipe.dart';
+import 'package:kuvio/features/comments/models/comment.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
 
 class CommentWithRecipe {
   final Comment comment;

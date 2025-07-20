@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/comment.dart';
-import '../services/comment_service.dart';
+import 'package:kuvio/features/comments/models/comment.dart';
+import 'package:kuvio/features/comments/services/comment_service.dart';
 
 class CommentSection extends StatefulWidget {
   final String recipeId;

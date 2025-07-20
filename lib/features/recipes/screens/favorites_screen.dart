@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/recipe.dart';
-import '../services/favorites_controller.dart';
-import '../widgets/favorites_filter_bar.dart';
-import '../widgets/favorite_recipe_card.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/services/favorites_controller.dart';
+import 'package:kuvio/features/recipes/widgets/favorites_filter_bar.dart';
+import 'package:kuvio/features/recipes/widgets/favorite_recipe_card.dart';
 
 class FavoritesScreen extends StatefulWidget {
   final List<Recipe> allRecipes;

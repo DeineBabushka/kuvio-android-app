@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../account/services/user_service.dart';
-import '../services/google_auth_service.dart';
-import '../widgets/login_form_card.dart';
-import '../utils/login_colors.dart';
-import '../utils/login_actions.dart';
-import '../utils/login_navigation.dart';
-import '../utils/login_forgot_password.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/features/auth/services/google_auth_service.dart';
+import 'package:kuvio/features/auth/widgets/login_form_card.dart';
+import 'package:kuvio/features/auth/utils/login_colors.dart';
+import 'package:kuvio/features/auth/utils/login_actions.dart';
+import 'package:kuvio/features/auth/utils/login_navigation.dart';
+import 'package:kuvio/features/auth/utils/login_forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

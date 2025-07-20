@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../features/recipes/models/recipe.dart';
-import '../../features/auth/screens/login_screen.dart';
-import '../../features/account/screens/account_screen.dart';
-import '../../features/recipes/screens/favorites_screen.dart';
-import '../../features/comments/screens/comment_screen.dart';
-import '../../features/shopping_list/screens/shopping_list_screen.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/auth/screens/login_screen.dart';
+import 'package:kuvio/features/account/screens/account_screen.dart';
+import 'package:kuvio/features/recipes/screens/favorites_screen.dart';
+import 'package:kuvio/features/comments/screens/comment_screen.dart';
+import 'package:kuvio/features/shopping_list/screens/shopping_list_screen.dart';
 
 class BottomNavWidget extends StatelessWidget {
   final List<Recipe> allRecipes;

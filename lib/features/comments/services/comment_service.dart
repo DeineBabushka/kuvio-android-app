@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
-import '../models/comment.dart';
-import '../../recipes/models/recipe.dart';
-import '../models/comment_with_recipe.dart';
-import '../models/formatted_comment.dart';
+import 'package:kuvio/features/comments/models/comment.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/comments/models/comment_with_recipe.dart';
+import 'package:kuvio/features/comments/models/formatted_comment.dart';
 
 class CommentService {
   static final _db = FirebaseFirestore.instance;

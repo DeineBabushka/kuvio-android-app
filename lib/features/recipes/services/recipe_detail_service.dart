@@ -1,4 +1,4 @@
-import '../models/ingredient.dart';
+import 'package:kuvio/features/recipes/models/ingredient.dart';
 
 class RecipeDetailService {
   static List<Ingredient> getScaledIngredients(

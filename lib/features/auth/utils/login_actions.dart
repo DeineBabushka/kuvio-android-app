@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../services/google_auth_service.dart';
-import '../../account/services/user_service.dart';
+import 'package:kuvio/features/auth/services/google_auth_service.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
 
 class LoginActions {
   final UserService _userService;

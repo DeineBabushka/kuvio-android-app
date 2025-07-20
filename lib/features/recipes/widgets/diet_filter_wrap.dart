@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'diet_filter_circle.dart';
-import '../utils/diet_icon_helper.dart';
-import '../models/favorites_filter.dart';
+import 'package:kuvio/features/recipes/widgets/diet_filter_circle.dart';
+import 'package:kuvio/features/recipes/utils/diet_icon_helper.dart';
+import 'package:kuvio/features/recipes/models/favorites_filter.dart';
 
 class DietFilterWrap extends StatelessWidget {
   final String? selectedDiet;

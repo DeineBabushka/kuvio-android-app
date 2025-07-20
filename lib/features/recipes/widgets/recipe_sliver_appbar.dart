@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/recipe.dart';
-import 'favorite_share_actions.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/widgets/favorite_share_actions.dart';
 
 class RecipeSliverAppBar extends StatelessWidget {
   final Recipe recipe;

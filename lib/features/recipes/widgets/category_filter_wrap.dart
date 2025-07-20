@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'category_filter_chip.dart';
-import '../models/favorites_filter.dart';
+import 'package:kuvio/features/recipes/widgets/category_filter_chip.dart';
+import 'package:kuvio/features/recipes/models/favorites_filter.dart';
 
 class CategoryFilterWrap extends StatelessWidget {
   final String? selectedCategory;

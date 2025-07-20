@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/app_user.dart';
-import '../../../shared/widgets/info_card_tile.dart';
-import 'edit_profile_button.dart';
-import 'section_title.dart';
+import 'package:kuvio/features/account/models/app_user.dart';
+import 'package:kuvio/shared/widgets/info_card_tile.dart';
+import 'package:kuvio/features/account/widgets/edit_profile_button.dart';
+import 'package:kuvio/features/account/widgets/section_title.dart';
 
 class AccountUserInfo extends StatelessWidget {
   final AppUser appUser;

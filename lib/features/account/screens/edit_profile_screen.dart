@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../services/edit_profile_controller.dart';
-import '../../../shared/utils/navigation_utils.dart';
-import '../../recipes/utils/snackbar_utils.dart';
-import '../../../shared/widgets/profile_avatar.dart';
-import '../widgets/edit_profile_form.dart';
-import '../../../shared/widgets/transparent_app_bar.dart';
-import '../widgets/screen_wrapper.dart';
+import 'package:kuvio/features/account/services/edit_profile_controller.dart';
+import 'package:kuvio/shared/utils/navigation_utils.dart';
+import 'package:kuvio/features/recipes/utils/snackbar_utils.dart';
+import 'package:kuvio/shared/widgets/profile_avatar.dart';
+import 'package:kuvio/features/account/widgets/edit_profile_form.dart';
+import 'package:kuvio/shared/widgets/transparent_app_bar.dart';
+import 'package:kuvio/features/account/widgets/screen_wrapper.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

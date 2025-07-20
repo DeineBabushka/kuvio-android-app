@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/recipe.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
 
 class FavoriteItem {
   final Recipe recipe;

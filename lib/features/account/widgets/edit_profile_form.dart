@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../shared/utils/constants.dart';
-import '../../../shared/widgets/editable_card.dart';
-import 'kitchen_dropdown_card.dart';
-import '../../../shared/widgets/form_button.dart';
+import 'package:kuvio/shared/utils/constants.dart';
+import 'package:kuvio/shared/widgets/editable_card.dart';
+import 'package:kuvio/features/account/widgets/kitchen_dropdown_card.dart';
+import 'package:kuvio/shared/widgets/form_button.dart';
 
 class EditProfileForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;

@@ -1,4 +1,4 @@
-import 'recipe.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
 
 class FavoriteRecipe {
   final Recipe recipe;

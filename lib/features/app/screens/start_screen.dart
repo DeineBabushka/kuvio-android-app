@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../recipes/screens/filter_screen.dart';
+import 'package:kuvio/features/recipes/screens/filter_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});

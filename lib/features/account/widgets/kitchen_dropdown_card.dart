@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/kitchen_options.dart';
-import '../../../shared/utils/constants.dart';
+import 'package:kuvio/features/account/utils/kitchen_options.dart';
+import 'package:kuvio/shared/utils/constants.dart';
 
 class KitchenDropdownCard extends StatelessWidget {
   final String selectedKitchen;

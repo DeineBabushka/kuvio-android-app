@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../services/user_service.dart';
-import '../widgets/change_password_button.dart';
-import '../../auth/screens/login_screen.dart';
-import 'password_input_fields.dart';
+import 'package:kuvio/features/account/services/user_service.dart';
+import 'package:kuvio/features/account/widgets/change_password_button.dart';
+import 'package:kuvio/features/auth/screens/login_screen.dart';
+import 'package:kuvio/features/account/widgets/password_input_fields.dart';
 
 class ChangePasswordForm extends StatefulWidget {
   const ChangePasswordForm({super.key});

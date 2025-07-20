@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/recipe.dart';
-import '../models/recipe_filter.dart';
-import '../../../shared/widgets/bottom_nav.dart';
-import '../widgets/recipe_card.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/models/recipe_filter.dart';
+import 'package:kuvio/shared/widgets/bottom_nav.dart';
+import 'package:kuvio/features/recipes/widgets/recipe_card.dart';
 
 class FilteredRecipesScreen extends StatefulWidget {
   final String selectedDiet;

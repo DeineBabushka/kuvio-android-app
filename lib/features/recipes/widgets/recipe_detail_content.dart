@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../models/ingredient.dart';
-import '../models/recipe.dart';
-import 'ingredient_list.dart';
-import 'instruction_list.dart';
-import 'nutrition_card.dart';
-import 'portion_selector.dart';
-import 'add_all_ingredients_button.dart';
-import '../../comments/widgets/comment_section.dart';
+import 'package:kuvio/features/recipes/models/ingredient.dart';
+import 'package:kuvio/features/recipes/models/recipe.dart';
+import 'package:kuvio/features/recipes/widgets/ingredient_list.dart';
+import 'package:kuvio/features/recipes/widgets/instruction_list.dart';
+import 'package:kuvio/features/recipes/widgets/nutrition_card.dart';
+import 'package:kuvio/features/recipes/widgets/portion_selector.dart';
+import 'package:kuvio/features/recipes/widgets/add_all_ingredients_button.dart';
+import 'package:kuvio/features/comments/widgets/comment_section.dart';
 
 class RecipeDetailContent extends StatelessWidget {
   final Recipe recipe;
