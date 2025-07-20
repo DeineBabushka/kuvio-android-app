@@ -13,6 +13,7 @@ void main() {
       recipeId: 'recipe123',
       text: 'Tolles Rezept!',
       timestamp: now,
+      profileImage: 'character_3.png',
     );
 
     final map = original.toMap();
@@ -24,6 +25,7 @@ void main() {
       recipeId: map['recipeId'] as String,
       text: map['text'] as String,
       timestamp: (map['timestamp'] as Timestamp).toDate(),
+      profileImage: 'character_3.png', // gleiche Angabe wie oben
     );
 
     expect(recreated.id, original.id);
@@ -32,5 +34,6 @@ void main() {
     expect(recreated.recipeId, original.recipeId);
     expect(recreated.text, original.text);
     expect(recreated.timestamp.toIso8601String(), now.toIso8601String());
+    expect(recreated.profileImage, original.profileImage);
   });
 }

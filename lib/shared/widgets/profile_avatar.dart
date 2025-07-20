@@ -12,12 +12,17 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String resolvedAsset =
+        assetPath != null && !assetPath!.startsWith('assets/')
+            ? 'assets/$assetPath'
+            : (assetPath ?? 'assets/character_1.png');
+
     return Center(
       child: Stack(
         children: [
           CircleAvatar(
             radius: 50,
-            backgroundImage: AssetImage(assetPath ?? 'assets/character_1.png'),
+            backgroundImage: AssetImage(resolvedAsset),
           ),
           Positioned(
             bottom: 0,

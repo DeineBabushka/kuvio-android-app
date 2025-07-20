@@ -24,7 +24,9 @@ class _CommentSectionState extends State<CommentSection> {
   }
 
   Future<void> _loadComments() async {
-    final comments = await CommentService.getCommentsForRecipe(widget.recipeId);
+    final comments = await CommentService.getCommentsForRecipeWithProfileImages(
+      widget.recipeId,
+    );
     setState(() {
       _comments = comments;
       _loading = false;
@@ -40,10 +42,9 @@ class _CommentSectionState extends State<CommentSection> {
         recipeId: widget.recipeId,
         text: text,
       );
-
       _controller.clear();
       _loadComments();
-    } catch (e) {
+    } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('❌ Du musst eingeloggt sein.')),
@@ -64,7 +65,7 @@ class _CommentSectionState extends State<CommentSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 30),
-        Divider(color: textColor.withAlpha((0.5 * 255).toInt())),
+        Divider(color: textColor.withAlpha(127)),
         Text(
           'Kommentare',
           style: TextStyle(
@@ -77,30 +78,25 @@ class _CommentSectionState extends State<CommentSection> {
         if (_loading)
           const CircularProgressIndicator()
         else if (_comments.isEmpty)
-          Text(
-            "Keine Kommentare vorhanden.",
-            style: TextStyle(color: textColor),
-          )
+          Text("Keine Kommentare vorhanden.",
+              style: TextStyle(color: textColor))
         else
           ..._comments.map((comment) {
             final ts = comment.timestamp.add(const Duration(hours: 2));
             return ListTile(
               tileColor: cardColor,
-              title: Text(
-                comment.username,
-                style: TextStyle(color: textColor),
-              ),
+              leading: _buildProfileImage(comment.profileImage),
+              title: Text(comment.username, style: TextStyle(color: textColor)),
               subtitle: Text(
                 comment.text,
-                style:
-                    TextStyle(color: textColor.withAlpha((0.7 * 255).toInt())),
+                style: TextStyle(color: textColor.withAlpha(179)),
               ),
               trailing: Text(
-                '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – '
-                '${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
+                '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – ${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
                 style: TextStyle(
-                    color: textColor.withAlpha((0.5 * 255).toInt()),
-                    fontSize: 12),
+                  color: textColor.withAlpha(127),
+                  fontSize: 12,
+                ),
               ),
             );
           }),
@@ -113,8 +109,7 @@ class _CommentSectionState extends State<CommentSection> {
                 style: TextStyle(color: textColor),
                 decoration: InputDecoration(
                   hintText: 'Kommentar schreiben...',
-                  hintStyle: TextStyle(
-                      color: textColor.withAlpha((0.5 * 255).toInt())),
+                  hintStyle: TextStyle(color: textColor.withAlpha(127)),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: textColor),
                   ),
@@ -128,6 +123,31 @@ class _CommentSectionState extends State<CommentSection> {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildProfileImage(String imagePath) {
+    if (imagePath.isEmpty) {
+      return const CircleAvatar(
+        radius: 20,
+        backgroundColor: Colors.grey,
+        child: Icon(Icons.person, color: Colors.white),
+      );
+    }
+
+    return CircleAvatar(
+      radius: 20,
+      backgroundColor: Colors.transparent,
+      child: ClipOval(
+        child: Image.asset(
+          imagePath,
+          width: 40,
+          height: 40,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) =>
+              const Icon(Icons.error, color: Colors.red),
+        ),
+      ),
     );
   }
 }

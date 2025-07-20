@@ -4,7 +4,7 @@ import '../models/recipe_filter.dart';
 import '../../../shared/widgets/bottom_nav.dart';
 import '../widgets/recipe_card.dart';
 
-class FilteredRecipesScreen extends StatelessWidget {
+class FilteredRecipesScreen extends StatefulWidget {
   final String selectedDiet;
   final String selectedCategory;
   final List<Recipe> allRecipes;
@@ -15,6 +15,36 @@ class FilteredRecipesScreen extends StatelessWidget {
     required this.selectedCategory,
     required this.allRecipes,
   });
+
+  @override
+  State<FilteredRecipesScreen> createState() => _FilteredRecipesScreenState();
+}
+
+class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
+  late RecipeFilter filter;
+  final TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    filter = RecipeFilter(
+      selectedDiet: widget.selectedDiet,
+      selectedCategory: widget.selectedCategory,
+    );
+    searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      filter = filter.copyWith(searchQuery: searchController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +60,7 @@ class FilteredRecipesScreen extends StatelessWidget {
         ? theme.textTheme.bodyMedium?.color ?? Colors.white70
         : Colors.black87;
 
-    final filteredRecipes = RecipeFilter(
-      selectedDiet: selectedDiet,
-      selectedCategory: selectedCategory,
-    ).apply(allRecipes);
+    final filteredRecipes = filter.apply(widget.allRecipes);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -50,32 +77,57 @@ class FilteredRecipesScreen extends StatelessWidget {
         iconTheme: IconThemeData(color: textColor),
         elevation: 0,
       ),
-      body: filteredRecipes.isEmpty
-          ? Center(
-              child: Text(
-                'Keine Rezepte gefunden!',
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+            child: TextField(
+              controller: searchController,
+              style: TextStyle(color: textColor),
+              decoration: InputDecoration(
+                hintText: 'Nach Rezeptnamen suchen...',
+                hintStyle: TextStyle(color: textColor.withAlpha(150)),
+                prefixIcon: Icon(Icons.search, color: textColor),
+                filled: true,
+                fillColor: isDarkMode ? Colors.white10 : Colors.black12,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
                 ),
               ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: filteredRecipes.length,
-              itemBuilder: (context, index) {
-                final recipe = filteredRecipes[index];
-                return RecipeCard(
-                  recipe: recipe,
-                  cardBackground: cardBackground,
-                  titleColor: titleColor,
-                  subtitleColor: subtitleColor,
-                );
-              },
             ),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: filteredRecipes.isEmpty
+                ? Center(
+                    child: Text(
+                      'Keine Rezepte gefunden!',
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: filteredRecipes.length,
+                    itemBuilder: (context, index) {
+                      final recipe = filteredRecipes[index];
+                      return RecipeCard(
+                        recipe: recipe,
+                        cardBackground: cardBackground,
+                        titleColor: titleColor,
+                        subtitleColor: subtitleColor,
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavWidget(
-        allRecipes: allRecipes,
+        allRecipes: widget.allRecipes,
       ),
     );
   }

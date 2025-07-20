@@ -103,7 +103,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => CommentScreen(allRecipes: widget.allRecipes),
+                  builder: (_) => const CommentScreen(),
                 ),
               ),
               tileColor: tileColor,

@@ -7,6 +7,7 @@ class Comment {
   final String recipeId;
   final String text;
   final DateTime timestamp;
+  final String profileImage; // neu
 
   Comment({
     required this.id,
@@ -15,6 +16,7 @@ class Comment {
     required this.recipeId,
     required this.text,
     required this.timestamp,
+    required this.profileImage,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +29,8 @@ class Comment {
     };
   }
 
-  factory Comment.fromFirestore(DocumentSnapshot doc) {
+  factory Comment.fromFirestore(DocumentSnapshot doc,
+      {String profileImage = ''}) {
     final data = doc.data() as Map<String, dynamic>;
     return Comment(
       id: doc.id,
@@ -36,6 +39,7 @@ class Comment {
       recipeId: data['recipeId'] ?? '',
       text: data['text'] ?? '',
       timestamp: (data['timestamp'] as Timestamp).toDate(),
+      profileImage: profileImage,
     );
   }
 }

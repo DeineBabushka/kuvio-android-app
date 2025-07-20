@@ -4,7 +4,7 @@ import '../services/user_service.dart';
 import '../utils/user_loader.dart';
 import '../widgets/account_app_bar.dart';
 import '../widgets/account_body.dart';
-import '../../../shared/widgets/empty_or_loading.dart';
+import '../widgets/empty_or_loading.dart';
 import 'edit_profile_screen.dart';
 
 class AccountScreen extends StatefulWidget {

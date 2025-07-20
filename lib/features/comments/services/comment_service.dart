@@ -17,7 +17,34 @@ class CommentService {
         .orderBy('timestamp', descending: true)
         .get();
 
-    return snapshot.docs.map(Comment.fromFirestore).toList();
+    return snapshot.docs.map((doc) => Comment.fromFirestore(doc)).toList();
+  }
+
+  static Future<List<Comment>> getCommentsForRecipeWithProfileImages(
+      String recipeId) async {
+    final snapshot = await _db
+        .collection('comments')
+        .where('recipeId', isEqualTo: recipeId)
+        .orderBy('timestamp', descending: true)
+        .get();
+
+    final List<Comment> comments = [];
+
+    for (final doc in snapshot.docs) {
+      final data = doc.data();
+      final userId = data['userId'] ?? '';
+      String profileImage = '';
+
+      try {
+        final userDoc = await _db.collection('users').doc(userId).get();
+        profileImage = userDoc.data()?['profileImage'] ?? '';
+      } catch (_) {}
+
+      final comment = Comment.fromFirestore(doc, profileImage: profileImage);
+      comments.add(comment);
+    }
+
+    return comments;
   }
 
   static Future<void> deleteComment(String commentId) async {
@@ -32,17 +59,24 @@ class CommentService {
     final commentSnapshot = await _db
         .collection('comments')
         .where('userId', isEqualTo: user.uid)
-        .orderBy('timestamp', descending: true)
         .get();
 
     final List<CommentWithRecipe> result = [];
 
     for (final doc in commentSnapshot.docs) {
-      final comment = Comment.fromFirestore(doc);
+      final data = doc.data();
+      final userId = data['userId'] ?? '';
+      String profileImage = '';
+
+      try {
+        final userDoc = await _db.collection('users').doc(userId).get();
+        profileImage = userDoc.data()?['profileImage'] ?? '';
+      } catch (_) {}
+
+      final comment = Comment.fromFirestore(doc, profileImage: profileImage);
 
       final localMatches =
           allRecipes.where((r) => r.id == comment.recipeId).toList();
-
       if (localMatches.isNotEmpty) {
         result
             .add(CommentWithRecipe(comment: comment, recipe: localMatches[0]));
@@ -83,6 +117,7 @@ class CommentService {
       recipeId: recipeId,
       text: text.trim(),
       timestamp: DateTime.now(),
+      profileImage: userDoc.data()?['profileImage'] ?? '',
     );
 
     await _db.collection('comments').doc(comment.id).set(comment.toMap());
