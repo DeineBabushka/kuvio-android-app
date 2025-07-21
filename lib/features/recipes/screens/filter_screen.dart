@@ -8,6 +8,7 @@ import 'package:kuvio/features/recipes/widgets/filter_diet_wrap.dart';
 import 'package:kuvio/features/recipes/widgets/category_filter_wrap.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_show_button.dart';
 import 'package:kuvio/features/recipes/widgets/loading_indicator.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipesScreen extends StatefulWidget {
   const RecipesScreen({super.key});
@@ -34,6 +35,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
   }
 
   void _handleShowRecipes() {
+    final loc = AppLocalizations.of(context);
     if (selectedDiet != null && selectedCategory != null) {
       Navigator.push(
         context,
@@ -47,14 +49,19 @@ class _RecipesScreenState extends State<RecipesScreen> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Bitte wähle Ernährungstyp und Kategorie')),
+        SnackBar(
+          content: Text(
+            loc?.selectDietAndCategory ??
+                'Bitte wähle Ernährungstyp und Kategorie',
+          ),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final btnColor = isDark ? Colors.white : const Color(0xFF122620);
@@ -77,7 +84,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FilterTitleText(
-              text: "Was möchtest du heute kochen?",
+              text: loc?.whatToCook ?? "Was möchtest du heute kochen?",
               fontSize: isWide ? 28 : 24,
               color: theme.colorScheme.onPrimary,
             ),
@@ -89,7 +96,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
             ),
             const SizedBox(height: 30),
             FilterTitleText(
-              text: "Wähle die Gerichtskategorie:",
+              text: loc?.selectCategory ?? "Wähle die Gerichtskategorie:",
               fontSize: 20,
               color: theme.textTheme.bodyLarge?.color ?? Colors.white,
             ),

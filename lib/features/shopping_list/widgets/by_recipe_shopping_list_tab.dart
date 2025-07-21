@@ -3,16 +3,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/features/shopping_list/services/grouped_shopping_list_service.dart';
 import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class ByRecipeShoppingListTab extends StatelessWidget {
   const ByRecipeShoppingListTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final user = FirebaseAuth.instance.currentUser;
+
     if (user == null) {
-      return const Center(
-        child: Text('Bitte einloggen, um die Einkaufsliste zu sehen.'),
+      return Center(
+        child: Text(loc.loginToViewShoppingList),
       );
     }
 
@@ -25,7 +28,7 @@ class ByRecipeShoppingListTab extends StatelessWidget {
 
         final docs = snapshot.data!.docs;
         if (docs.isEmpty) {
-          return const Center(child: Text('Einkaufsliste ist leer'));
+          return Center(child: Text(loc.shoppingListEmpty));
         }
 
         final grouped = GroupedShoppingListService.groupItemsByRecipe(docs);
@@ -46,7 +49,7 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                 return Card(
                   margin: const EdgeInsets.all(8),
                   child: ExpansionTile(
-                    title: Text('Rezept: $title'),
+                    title: Text('${loc.recipe}: $title'),
                     children: [
                       ...items.map((item) {
                         return ListTile(
@@ -66,7 +69,9 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("${item.name} gelöscht"),
+                                  content: Text(
+                                    loc.itemDeleted(item.name),
+                                  ),
                                 ),
                               );
                             },
@@ -84,16 +89,17 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content:
-                                      Text("Zutaten für '$title' gelöscht"),
+                                  content: Text(
+                                    loc.recipeItemsDeleted(title),
+                                  ),
                                 ),
                               );
                             },
                             icon: const Icon(Icons.delete_forever,
                                 color: Colors.redAccent),
-                            label: const Text(
-                              "Rezept aus Einkaufsliste entfernen",
-                              style: TextStyle(color: Colors.redAccent),
+                            label: Text(
+                              loc.removeRecipeFromShoppingList,
+                              style: const TextStyle(color: Colors.redAccent),
                             ),
                           ),
                         ),

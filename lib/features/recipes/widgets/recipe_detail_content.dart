@@ -7,6 +7,7 @@ import 'package:kuvio/features/recipes/widgets/nutrition_card.dart';
 import 'package:kuvio/features/recipes/widgets/portion_selector.dart';
 import 'package:kuvio/features/recipes/widgets/ingredient_add_all_button.dart';
 import 'package:kuvio/features/comments/widgets/comment_section.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipeDetailContent extends StatelessWidget {
   final Recipe recipe;
@@ -34,6 +35,8 @@ class RecipeDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -47,14 +50,18 @@ class RecipeDetailContent extends StatelessWidget {
               onIncrement: () => onPortionChange(portionCount + 1),
               textColor: textColor,
             ),
-            Text('Dauer: ${recipe.preparationTime}',
-                style: TextStyle(color: textColor, fontSize: 16)),
+            Text(
+              '${loc?.durationLabel ?? 'Dauer'}: ${recipe.preparationTime}',
+              style: TextStyle(color: textColor, fontSize: 16),
+            ),
           ],
         ),
         const SizedBox(height: 20),
-        Text('Zutaten',
-            style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
+        Text(
+          loc?.ingredientsLabel ?? 'Zutaten',
+          style: TextStyle(
+              color: textColor, fontSize: 22, fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 10),
         IngredientList(
           ingredients: scaledIngredients,
@@ -66,9 +73,11 @@ class RecipeDetailContent extends StatelessWidget {
         const SizedBox(height: 10),
         if (isLoggedIn) AddAllIngredientsButton(onPressed: onAddAll),
         const SizedBox(height: 20),
-        Text('Zubereitung',
-            style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
+        Text(
+          loc?.instructionsLabel ?? 'Zubereitung',
+          style: TextStyle(
+              color: textColor, fontSize: 22, fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 10),
         InstructionList(
           instructions: recipe.instructions,
@@ -76,9 +85,11 @@ class RecipeDetailContent extends StatelessWidget {
           cardColor: cardColor,
         ),
         const SizedBox(height: 20),
-        Text('Nährwerte (pro Portion)',
-            style: TextStyle(
-                color: textColor, fontSize: 22, fontWeight: FontWeight.w700)),
+        Text(
+          loc?.nutritionPerPortionLabel ?? 'Nährwerte (pro Portion)',
+          style: TextStyle(
+              color: textColor, fontSize: 22, fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 10),
         NutritionCard(
           calories: recipe.calories,

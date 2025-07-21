@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/comments/models/comment.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class CommentSection extends StatefulWidget {
   final String recipeId;
@@ -46,8 +47,11 @@ class _CommentSectionState extends State<CommentSection> {
       _loadComments();
     } catch (_) {
       if (!mounted) return;
+      final loc = AppLocalizations.of(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('❌ Du musst eingeloggt sein.')),
+        SnackBar(
+            content:
+                Text(loc?.commentLoginError ?? '❌ Du musst eingeloggt sein.')),
       );
     }
   }
@@ -57,6 +61,7 @@ class _CommentSectionState extends State<CommentSection> {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return const SizedBox.shrink();
 
+    final loc = AppLocalizations.of(context);
     final textColor =
         Theme.of(context).textTheme.bodyLarge?.color ?? Colors.white;
     final cardColor = const Color(0xFF2C2C2E);
@@ -67,7 +72,7 @@ class _CommentSectionState extends State<CommentSection> {
         const SizedBox(height: 30),
         Divider(color: textColor.withAlpha(127)),
         Text(
-          'Kommentare',
+          loc?.commentsTitle ?? 'Kommentare',
           style: TextStyle(
             color: textColor,
             fontSize: 22,
@@ -78,7 +83,7 @@ class _CommentSectionState extends State<CommentSection> {
         if (_loading)
           const CircularProgressIndicator()
         else if (_comments.isEmpty)
-          Text("Keine Kommentare vorhanden.",
+          Text(loc?.noComments ?? "Keine Kommentare vorhanden.",
               style: TextStyle(color: textColor))
         else
           ..._comments.map((comment) {
@@ -108,7 +113,7 @@ class _CommentSectionState extends State<CommentSection> {
                 controller: _controller,
                 style: TextStyle(color: textColor),
                 decoration: InputDecoration(
-                  hintText: 'Kommentar schreiben...',
+                  hintText: loc?.commentHint ?? 'Kommentar schreiben...',
                   hintStyle: TextStyle(color: textColor.withAlpha(127)),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: textColor),

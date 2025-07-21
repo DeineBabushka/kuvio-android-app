@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class LoginFormCard extends StatelessWidget {
   final TextEditingController emailController;
@@ -38,6 +39,8 @@ class LoginFormCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -48,7 +51,7 @@ class LoginFormCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Anmelden',
+            loc.loginTitle,
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -60,7 +63,7 @@ class LoginFormCard extends StatelessWidget {
             controller: emailController,
             style: TextStyle(color: textColor),
             decoration: InputDecoration(
-              labelText: 'Email-Adresse',
+              labelText: loc.loginEmailLabel,
               labelStyle: TextStyle(color: labelColor),
             ),
           ),
@@ -70,7 +73,7 @@ class LoginFormCard extends StatelessWidget {
             style: TextStyle(color: textColor),
             obscureText: obscurePassword,
             decoration: InputDecoration(
-              labelText: 'Passwort',
+              labelText: loc.loginPasswordLabel,
               labelStyle: TextStyle(color: labelColor),
               suffixIcon: IconButton(
                 icon: Icon(
@@ -87,9 +90,9 @@ class LoginFormCard extends StatelessWidget {
             child: TextButton(
               onPressed: onForgotPassword,
               style: TextButton.styleFrom(padding: EdgeInsets.zero),
-              child: const Text(
-                'Passwort vergessen?',
-                style: TextStyle(
+              child: Text(
+                loc.loginForgotPassword,
+                style: const TextStyle(
                   color: Color(0xFF122620),
                   fontSize: 15,
                   decoration: TextDecoration.underline,
@@ -110,7 +113,7 @@ class LoginFormCard extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Einloggen',
+              loc.loginButton,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: buttonTextColor,
@@ -121,7 +124,7 @@ class LoginFormCard extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: onGoogleLogin,
             icon: const Icon(Icons.login),
-            label: const Text('Mit Google anmelden'),
+            label: Text(loc.loginGoogle),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
               foregroundColor: Colors.white,
@@ -135,11 +138,11 @@ class LoginFormCard extends StatelessWidget {
             onTap: onNavigateToRegister,
             child: RichText(
               text: TextSpan(
-                text: 'Noch kein Konto? ',
+                text: loc.loginNoAccount,
                 style: TextStyle(color: textColor),
                 children: [
                   TextSpan(
-                    text: 'Registrieren',
+                    text: loc.loginRegisterNow,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: textColor,

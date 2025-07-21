@@ -6,6 +6,7 @@ import 'package:kuvio/features/recipes/services/favorite_service.dart';
 import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';
 import 'package:kuvio/features/recipes/services/recipe_detail_service.dart';
 import 'package:kuvio/features/recipes/utils/snackbar_helper.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipeDetailController {
   final BuildContext context;
@@ -33,9 +34,12 @@ class RecipeDetailController {
     final updated = await FavoriteService.toggleFavorite(user.uid, recipeId!);
     if (!context.mounted) return updated;
 
+    final loc = AppLocalizations.of(context);
     SnackbarHelper.showMessage(
       context,
-      updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
+      updated
+          ? (loc?.addedToFavorites ?? "Zu Favoriten hinzugefügt")
+          : (loc?.removedFromFavorites ?? "Aus Favoriten entfernt"),
     );
     return updated;
   }
@@ -55,9 +59,10 @@ class RecipeDetailController {
     await ShoppingListService.addIngredients(user.uid, ingredients, recipeId!);
     if (!context.mounted) return;
 
+    final loc = AppLocalizations.of(context);
     SnackbarHelper.showMessage(
       context,
-      "Zutaten zur Einkaufsliste hinzugefügt",
+      loc?.addedAllToShoppingList ?? "Zutaten zur Einkaufsliste hinzugefügt",
     );
   }
 
@@ -72,9 +77,11 @@ class RecipeDetailController {
     );
     if (!context.mounted) return;
 
+    final loc = AppLocalizations.of(context);
     SnackbarHelper.showMessage(
       context,
-      "${ingredient.name} hinzugefügt",
+      loc?.addedSingleToShoppingList(ingredient.name) ??
+          "${ingredient.name} hinzugefügt",
     );
   }
 }

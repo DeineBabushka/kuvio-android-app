@@ -3,6 +3,7 @@ import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/models/recipe_filter.dart';
 import 'package:kuvio/features/recipes/widgets/bottom_nav.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_card.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class FilteredRecipesScreen extends StatefulWidget {
   final String selectedDiet;
@@ -48,6 +49,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
 
@@ -66,7 +68,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text(
-          'Gefundene Rezepte',
+          loc?.filteredRecipesTitle ?? 'Gefundene Rezepte',
           style: TextStyle(
             color: textColor,
             fontWeight: FontWeight.w600,
@@ -85,7 +87,8 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
               controller: searchController,
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                hintText: 'Nach Rezeptnamen suchen...',
+                hintText:
+                    loc?.searchRecipeByNameHint ?? 'Nach Rezeptnamen suchen...',
                 hintStyle: TextStyle(color: textColor.withAlpha(150)),
                 prefixIcon: Icon(Icons.search, color: textColor),
                 filled: true,
@@ -102,7 +105,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
             child: filteredRecipes.isEmpty
                 ? Center(
                     child: Text(
-                      'Keine Rezepte gefunden!',
+                      loc?.noRecipesFound ?? 'Keine Rezepte gefunden!',
                       style: TextStyle(
                         color: textColor,
                         fontSize: 18,

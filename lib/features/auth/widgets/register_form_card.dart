@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RegisterFormCard extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -34,6 +35,8 @@ class RegisterFormCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Form(
       key: formKey,
       child: Container(
@@ -46,7 +49,7 @@ class RegisterFormCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Konto erstellen',
+              loc.registerLabel,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -58,29 +61,24 @@ class RegisterFormCard extends StatelessWidget {
               controller: usernameController,
               style: TextStyle(color: fieldTextColor),
               decoration: InputDecoration(
-                labelText: 'Benutzername',
+                labelText: loc.usernameLabel,
                 labelStyle: TextStyle(color: labelColor),
               ),
-              validator: (value) => value == null || value.isEmpty
-                  ? 'Benutzername eingeben'
-                  : null,
+              validator: (value) =>
+                  value == null || value.isEmpty ? loc.usernameError : null,
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: emailController,
               style: TextStyle(color: fieldTextColor),
               decoration: InputDecoration(
-                labelText: 'E-Mail',
+                labelText: loc.emailLabel,
                 labelStyle: TextStyle(color: labelColor),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'E-Mail eingeben';
-                }
+                if (value == null || value.isEmpty) return loc.emailEmptyError;
                 final emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$');
-                if (!emailRegex.hasMatch(value)) {
-                  return 'Ungültige E-Mail-Adresse';
-                }
+                if (!emailRegex.hasMatch(value)) return loc.emailInvalidError;
                 return null;
               },
             ),
@@ -90,7 +88,7 @@ class RegisterFormCard extends StatelessWidget {
               style: TextStyle(color: fieldTextColor),
               obscureText: obscurePassword,
               decoration: InputDecoration(
-                labelText: 'Passwort',
+                labelText: loc.passwordLabel,
                 labelStyle: TextStyle(color: labelColor),
                 suffixIcon: IconButton(
                   icon: Icon(
@@ -101,7 +99,7 @@ class RegisterFormCard extends StatelessWidget {
                 ),
               ),
               validator: (value) =>
-                  value == null || value.isEmpty ? 'Passwort eingeben' : null,
+                  value == null || value.isEmpty ? loc.passwordError : null,
             ),
             const SizedBox(height: 24),
             ElevatedButton(
@@ -116,7 +114,7 @@ class RegisterFormCard extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Registrieren',
+                loc.registerLabel,
                 style: TextStyle(color: buttonTextColor),
               ),
             ),

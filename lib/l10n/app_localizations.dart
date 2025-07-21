@@ -136,6 +136,83 @@ abstract class AppLocalizations {
   String get searchRecipesHint;
   String get categoryLabel;
   String get dietTypeLabel;
+  String get showRecipesButton;
+
+  String get navAccount;
+  String get navShoppingList;
+  String get navComments;
+  String get navFavorites;
+
+  String get filteredRecipesTitle;
+  String get searchRecipeByNameHint;
+  String get noRecipesFound;
+  String get myCommentsTitle;
+
+  String get portionsLabel;
+
+  String get ingredientsLabel;
+  String get instructionsLabel;
+  String get cookedWithKuvio;
+
+  String get durationLabel;
+  String get nutritionPerPortionLabel;
+  String get addAllIngredients;
+
+  String get nutritionCalories;
+  String get nutritionProtein;
+  String get nutritionCarbs;
+  String get nutritionFat;
+
+  String get commentsTitle;
+  String get noComments;
+  String get commentHint;
+  String get commentLoginError;
+
+  String get addedToFavorites;
+  String get removedFromFavorites;
+  String get addedAllToShoppingList;
+  String addedSingleToShoppingList(String name);
+
+  String get tabAllItems;
+  String get tabByRecipe;
+  String get loginToViewShoppingList;
+
+  String get recipe;
+  String get shoppingListEmpty;
+  String get removeRecipeFromShoppingList;
+  String itemDeleted(String itemName);
+  String recipeItemsDeleted(String recipeTitle);
+
+  String get deleteAllIngredients;
+  String get shoppingListCleared;
+
+  String get loginTitle;
+  String get loginEmailLabel;
+  String get loginPasswordLabel;
+  String get loginForgotPassword;
+  String get loginButton;
+  String get loginGoogle;
+  String get loginNoAccount;
+  String get loginRegisterNow;
+  String get loginErrorMissingEmail;
+  String get loginErrorInvalidEmail;
+  String get loginErrorMissingPassword;
+  String get loginErrorWrongCredentials;
+  String get loginErrorUnknown;
+  String get loginErrorGoogleFailed;
+  String get loginSuccess;
+  String get loginGoogleSuccess;
+  String get googleLoginCancelled;
+  String get googleLoginNoUser;
+  String get googleLoginFailed;
+  String get registerLabel;
+  String get usernameLabel;
+  String get usernameError;
+  String get emailLabel;
+  String get emailEmptyError;
+  String get emailInvalidError;
+  String get passwordLabel;
+  String get passwordError;
 }
 
 class _AppLocalizationsDelegate

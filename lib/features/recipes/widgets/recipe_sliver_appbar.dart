@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_share_actions.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipeSliverAppBar extends StatelessWidget {
   final Recipe recipe;
@@ -20,11 +21,13 @@ class RecipeSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+
     final shareText = "🥗 ${recipe.title}\n"
-        "📋 Zutaten: ${recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
-        "📖 Zubereitung: ${recipe.instructions.take(3).join(' ')}...\n"
-        "✨ Gekocht mit der Kuvio App!";
+        "📋 ${loc?.ingredientsLabel ?? 'Zutaten'}: ${recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
+        "📖 ${loc?.instructionsLabel ?? 'Zubereitung'}: ${recipe.instructions.take(3).join(' ')}...\n"
+        "✨ ${loc?.cookedWithKuvio ?? 'Gekocht mit der Kuvio App!'}";
 
     return SliverAppBar(
       expandedHeight: 400,

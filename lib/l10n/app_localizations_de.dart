@@ -98,4 +98,75 @@ class AppLocalizationsDe extends AppLocalizations {
   String get searchRecipesHint => 'Suche nach Rezepten...';
   String get dietTypeLabel => 'Ernährungsform';
   String get categoryLabel => 'Kategorie';
+  String get showRecipesButton => 'Zeige mir Rezepte';
+  String get navAccount => 'Konto';
+  String get navShoppingList => 'Einkaufsliste';
+  String get navComments => 'Kommentare';
+  String get navFavorites => 'Favoriten';
+  String get filteredRecipesTitle => 'Gefundene Rezepte';
+  String get searchRecipeByNameHint => 'Nach Rezeptnamen suchen...';
+  String get noRecipesFound => 'Keine Rezepte gefunden!';
+  String get myCommentsTitle => 'Meine Kommentare';
+  String get portionsLabel => 'Portionen';
+  String get ingredientsLabel => 'Zutaten';
+  String get instructionsLabel => 'Zubereitung';
+  String get cookedWithKuvio => 'Gekocht mit der Kuvio App!';
+  String get durationLabel => 'Dauer';
+  String get nutritionPerPortionLabel => 'Nährwerte (pro Portion)';
+  String get addAllIngredients => 'Alle Zutaten hinzufügen';
+  String get nutritionCalories => 'Kalorien';
+  String get nutritionProtein => 'Protein';
+  String get nutritionCarbs => 'Kohlenhydrate';
+  String get nutritionFat => 'Fett';
+  String get commentsTitle => 'Kommentare';
+  String get noComments => 'Keine Kommentare vorhanden.';
+  String get commentHint => 'Kommentar schreiben...';
+  String get commentLoginError => '❌ Du musst eingeloggt sein.';
+  String get addedToFavorites => 'Zu Favoriten hinzugefügt';
+  String get removedFromFavorites => 'Aus Favoriten entfernt';
+  String get addedAllToShoppingList => 'Zutaten zur Einkaufsliste hinzugefügt';
+  String addedSingleToShoppingList(String name) => '$name hinzugefügt';
+  String get tabAllItems => 'Gesamtliste';
+  String get tabByRecipe => 'Nach Rezept';
+  String get loginToViewShoppingList =>
+      'Bitte einloggen, um die Einkaufsliste zu sehen.';
+  String get recipe => 'Rezept';
+  String get shoppingListEmpty => 'Einkaufsliste ist leer';
+  String get removeRecipeFromShoppingList =>
+      'Rezept aus Einkaufsliste entfernen';
+  String itemDeleted(String itemName) => '$itemName gelöscht';
+  String recipeItemsDeleted(String recipeTitle) =>
+      "Zutaten für '$recipeTitle' gelöscht";
+  String get deleteAllIngredients => 'Alle Zutaten löschen';
+  String get shoppingListCleared => 'Gesamte Einkaufsliste gelöscht';
+  String get loginTitle => 'Anmelden';
+  String get loginEmailLabel => 'E-Mail-Adresse';
+  String get loginPasswordLabel => 'Passwort';
+  String get loginForgotPassword => 'Passwort vergessen?';
+  String get loginButton => 'Einloggen';
+  String get loginGoogle => 'Mit Google anmelden';
+  String get loginNoAccount => 'Noch kein Konto? ';
+  String get loginRegisterNow => 'Registrieren';
+  @override
+  String get loginErrorMissingEmail => 'Bitte gib deine E-Mail-Adresse ein.';
+  @override
+  String get loginErrorInvalidEmail =>
+      'Bitte gib eine gültige E-Mail-Adresse ein.';
+  String get loginErrorMissingPassword => 'Bitte gib dein Passwort ein.';
+  String get loginErrorWrongCredentials => 'E-Mail oder Passwort ist falsch.';
+  String get loginErrorUnknown => 'Unbekannter Fehler ist aufgetreten.';
+  String get loginErrorGoogleFailed => 'Google-Login fehlgeschlagen';
+  String get loginSuccess => 'Erfolgreich eingeloggt';
+  String get loginGoogleSuccess => 'Erfolgreich mit Google eingeloggt';
+  String get googleLoginCancelled => 'Anmeldung abgebrochen.';
+  String get googleLoginNoUser => 'Kein Benutzer vorhanden.';
+  String get googleLoginFailed => 'Google-Login fehlgeschlagen: {error}';
+  String get registerLabel => 'Registrieren';
+  String get usernameLabel => 'Benutzername';
+  String get usernameError => 'Bitte gib einen Benutzernamen ein.';
+  String get emailLabel => 'E-Mail';
+  String get emailEmptyError => 'Bitte gib eine E-Mail-Adresse ein.';
+  String get emailInvalidError => 'Ungültige E-Mail-Adresse.';
+  String get passwordLabel => 'Passwort';
+  String get passwordError => 'Bitte gib ein Passwort ein.';
 }
