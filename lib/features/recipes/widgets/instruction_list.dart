@@ -15,14 +15,21 @@ class InstructionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: instructions.asMap().entries.map((entry) {
         final index = entry.key + 1;
-        final step = entry.value.replaceFirst(RegExp(r'^\d+[\.\)]?\s*'), '');
+        final stepRaw = entry.value.trim();
+
+        // Entfernt führende Nummern wie "1. ", "2)", "3:" usw.
+        final stepCleaned =
+            stepRaw.replaceFirst(RegExp(r'^\d+[\.\)\:]\s*'), '');
+
         return Card(
           color: cardColor,
           margin: const EdgeInsets.symmetric(vertical: 6),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           elevation: 1,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -32,14 +39,25 @@ class InstructionList extends StatelessWidget {
                 CircleAvatar(
                   radius: 14,
                   backgroundColor: Theme.of(context).primaryColor,
-                  child: Text('$index',
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 14)),
+                  child: Text(
+                    '$index',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                    child: Text(step,
-                        style: TextStyle(fontSize: 16, color: textColor))),
+                  child: Text(
+                    stepCleaned,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: textColor,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

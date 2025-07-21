@@ -13,36 +13,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/l10n/l10n.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
+  runZonedGuarded(() async {
+    // ⚠️ Alles innerhalb dieser Zone
+    WidgetsFlutterBinding.ensureInitialized();
 
-  FirebaseFirestore.instance.settings = const Settings(
-    persistenceEnabled: true,
-  );
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: true,
+    );
 
-  runZonedGuarded(
-    () {
-      FlutterError.onError = (FlutterErrorDetails details) {
-        debugPrint('❗ FLUTTER ERROR: ${details.exception}');
-        debugPrintStack(stackTrace: details.stack);
-        FirebaseCrashlytics.instance.recordFlutterFatalError(details);
-      };
-      runApp(
-        ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
-          child: const KuvioApp(),
-        ),
-      );
-    },
-    (error, stackTrace) {
-      FirebaseCrashlytics.instance.recordError(error, stackTrace);
-    },
-  );
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    runApp(
+      ChangeNotifierProvider(
+        create: (_) => ThemeProvider(),
+        child: const KuvioApp(),
+      ),
+    );
+  }, (error, stackTrace) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
 }
 
 class KuvioApp extends StatefulWidget {
@@ -80,65 +74,7 @@ class _KuvioAppState extends State<KuvioApp> {
       locale: _locale,
       supportedLocales: L10n.all,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      theme: themeProvider.isDarkMode
-          ? ThemeData(
-              scaffoldBackgroundColor: const Color(0xFF1a1a1a),
-              fontFamily: 'Roboto',
-              textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Colors.white),
-                bodyLarge: TextStyle(color: Colors.white),
-                titleLarge: TextStyle(color: Colors.white),
-              ),
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFF1a1a1a),
-                iconTheme: IconThemeData(color: Colors.white),
-                titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF0E1415),
-                  foregroundColor: Color(0xFF2E6B4D),
-                ),
-              ),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Color(0xFF959595),
-                brightness: Brightness.dark,
-              ).copyWith(primary: Colors.white),
-              useMaterial3: true,
-            )
-          : ThemeData(
-              scaffoldBackgroundColor: const Color(0xFF122620),
-              fontFamily: 'Roboto',
-              textTheme: const TextTheme(
-                bodyMedium: TextStyle(color: Colors.white),
-                bodyLarge: TextStyle(color: Colors.white),
-                titleLarge: TextStyle(color: Color(0xFF122620)),
-              ),
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFF122620),
-                iconTheme: IconThemeData(color: Colors.white),
-                titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Color(0xFF2E6B4D),
-                ),
-              ),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Color(0xFF122620),
-                brightness: Brightness.light,
-              ).copyWith(primary: Color(0xFF2E6B4D)),
-              useMaterial3: true,
-            ),
+      theme: themeProvider.isDarkMode ? _darkTheme : _lightTheme,
       routes: {
         '/login': (context) => const LoginScreen(),
         '/admin': (context) => const AdminDashboardScreen(),
@@ -147,3 +83,65 @@ class _KuvioAppState extends State<KuvioApp> {
     );
   }
 }
+
+// 🎨 Dark Theme
+final _darkTheme = ThemeData(
+  scaffoldBackgroundColor: const Color(0xFF1a1a1a),
+  fontFamily: 'Roboto',
+  textTheme: const TextTheme(
+    bodyMedium: TextStyle(color: Colors.white),
+    bodyLarge: TextStyle(color: Colors.white),
+    titleLarge: TextStyle(color: Colors.white),
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF1a1a1a),
+    iconTheme: IconThemeData(color: Colors.white),
+    titleTextStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color(0xFF0E1415),
+      foregroundColor: Color(0xFF2E6B4D),
+    ),
+  ),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Color(0xFF959595),
+    brightness: Brightness.dark,
+  ).copyWith(primary: Colors.white),
+  useMaterial3: true,
+);
+
+// 🎨 Light Theme
+final _lightTheme = ThemeData(
+  scaffoldBackgroundColor: const Color(0xFF122620),
+  fontFamily: 'Roboto',
+  textTheme: const TextTheme(
+    bodyMedium: TextStyle(color: Colors.white),
+    bodyLarge: TextStyle(color: Colors.white),
+    titleLarge: TextStyle(color: Color(0xFF122620)),
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF122620),
+    iconTheme: IconThemeData(color: Colors.white),
+    titleTextStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white,
+      foregroundColor: Color(0xFF2E6B4D),
+    ),
+  ),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Color(0xFF122620),
+    brightness: Brightness.light,
+  ).copyWith(primary: Color(0xFF2E6B4D)),
+  useMaterial3: true,
+);

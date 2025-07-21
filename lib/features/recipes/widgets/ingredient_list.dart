@@ -21,8 +21,9 @@ class IngredientList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: ingredients.map((ingredient) {
-        final text =
-            '${ingredient.quantity?.toStringAsFixed(2) ?? ''} ${ingredient.unit} ${ingredient.name}';
+        final text = ingredient.quantity != null
+            ? '${ingredient.quantity!.toStringAsFixed(2)} ${ingredient.unit} ${ingredient.name}'
+            : '${ingredient.unit} ${ingredient.name}';
 
         return Card(
           color: cardColor,

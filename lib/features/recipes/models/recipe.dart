@@ -34,18 +34,32 @@ class Recipe {
 
   factory Recipe.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+
+    final titleData = data['title'];
+    final instructionsData = data['instructions'];
+    final dietTypesData = data['diet_types'];
+    final categoriesData = data['categories'];
+    final prepTimeData = data['preparation_time'];
+
     return Recipe(
       id: doc.id,
-      title: data['title'] ?? '',
+      title: titleData is Map ? titleData['de'] ?? '' : titleData ?? '',
       image: data['image'] ?? '',
       portions: data['portions'] ?? 0,
       ingredients: (data['ingredients'] as List<dynamic>)
           .map((item) => Ingredient.fromMap(item))
           .toList(),
-      instructions: List<String>.from(data['instructions'] ?? []),
-      dietTypes: List<String>.from(data['diet_types'] ?? []),
-      categories: List<String>.from(data['categories'] ?? []),
-      preparationTime: data['preparation_time'] ?? '',
+      instructions: instructionsData is Map
+          ? List<String>.from(instructionsData['de'] ?? [])
+          : [],
+      dietTypes: dietTypesData is Map
+          ? List<String>.from(dietTypesData['de'] ?? [])
+          : [],
+      categories: categoriesData is Map
+          ? List<String>.from(categoriesData['de'] ?? [])
+          : [],
+      preparationTime:
+          prepTimeData is Map ? prepTimeData['de'] ?? '' : prepTimeData ?? '',
       calories: data['nutrition']?['calories'] ?? 0,
       proteinG: data['nutrition']?['protein_g'] ?? 0,
       carbohydratesG: data['nutrition']?['carbohydrates_g'] ?? 0,
