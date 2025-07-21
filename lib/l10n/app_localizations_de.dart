@@ -1,0 +1,96 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+class AppLocalizationsDe extends AppLocalizations {
+  AppLocalizationsDe([String locale = 'de']) : super(locale);
+
+  @override
+  String get welcomeTitle => 'Willkommen bei Kuvio!';
+  String get welcomeSubtitle =>
+      'Entdecke leckere Rezepte zum Nachkochen. Egal ob Anfänger oder Küchenprofi – mit Kuvio wird Kochen einfach, kreativ und lecker!';
+  String get letsGo => 'Los geht’s';
+  String get general => 'Allgemein';
+  String get account => 'Konto';
+  String get favorites => 'Favoriten';
+  String get shoppingList => 'Einkaufsliste';
+  String get comments => 'Kommentare';
+  String get adminDashboard => 'Adminbereich';
+  String get customization => 'Anpassung';
+  String get darkMode => 'Dunkelmodus';
+  String get language => 'Sprache';
+  String get settings => 'Einstellungen';
+  String get logout => 'Abmelden';
+  String get notLoggedIn => 'Nicht eingeloggt';
+  String get loginRegister => 'Login / Registrieren';
+  String get loading => 'Lade...';
+  String get noUserDataFound => 'Keine Benutzerdaten gefunden';
+  String get accountSectionTitle => 'DEIN KONTO';
+  String get accountBio => 'Über mich';
+  String get accountFavoriteKitchen => 'Lieblingsküche';
+  String get accountFavoriteDish => 'Lieblingsgericht';
+  String get deleteAccount => 'Konto löschen';
+  String get deleteAccountHint =>
+      'Wenn du dein Konto löscht, werden all deine\nBenutzerdaten und dein Zugang unwiderruflich gelöscht.';
+  String get editProfile => 'Profil bearbeiten';
+  String get errorWrongPassword => 'Das aktuelle Passwort ist falsch.';
+  String get errorRequiresRecentLogin =>
+      'Bitte melde dich erneut an, um dein Passwort zu ändern.';
+  String get errorUserMismatch =>
+      'Anmeldedaten stimmen nicht mit dem aktuellen Nutzer überein.';
+  String get errorChangePassword => 'Fehler beim Ändern des Passworts.';
+  String get errorDeleteAccount => 'Fehler beim Löschen:';
+  String get noUserLoggedIn => 'Kein Benutzer angemeldet.';
+  String get confirmPasswordTitle => 'Passwort bestätigen';
+  String get password => 'Passwort';
+  String get cancel => 'Abbrechen';
+  String get confirm => 'Bestätigen';
+  String get deleteAccountTitle => 'Konto wirklich löschen?';
+  String get deleteAccountWarning =>
+      'Dieser Vorgang kann nicht rückgängig gemacht werden.';
+  String get delete => 'Löschen';
+  String get changePassword => 'Passwort ändern';
+  String get passwordChanged => 'Passwort erfolgreich geändert.';
+  String get currentPassword => 'Aktuelles Passwort';
+  String get enterCurrentPassword => 'Bitte aktuelles Passwort eingeben';
+  String get newPassword => 'Neues Passwort';
+  String get enterNewPassword => 'Bitte neues Passwort eingeben';
+  String get passwordHint => 'Mindestens 6 Zeichen';
+  String get repeatPassword => 'Passwort wiederholen';
+  String get repeatPasswordHint => 'Wiederhole das neue Passwort';
+  String get passwordsDontMatch => 'Passwörter stimmen nicht überein';
+  String get profileUpdated => 'Profil aktualisiert';
+  String get notSpecified => 'Nicht angegeben';
+  String get kitchenItalian => 'Italienisch';
+  String get kitchenChinese => 'Chinesisch';
+  String get kitchenIndian => 'Indisch';
+  String get kitchenMexican => 'Mexikanisch';
+  String get kitchenJapanese => 'Japanisch';
+  String get kitchenGerman => 'Deutsch';
+  String get kitchenTurkish => 'Türkisch';
+  String get kitchenVegan => 'Vegan';
+  String get kitchenVegetarian => 'Vegetarisch';
+  String get whatToCook => 'Was möchtest du heute kochen?';
+  String get selectCategory => 'Wähle die Gerichtskategorie:';
+  String get selectDietAndCategory => 'Bitte wähle Ernährungstyp und Kategorie';
+  String get categoryStarter => 'Vorspeise';
+  String get categoryMain => 'Hauptgericht';
+  String get categoryDessert => 'Dessert';
+  String get categorySide => 'Beilage';
+  String get categorySnack => 'Snack';
+  String get categoryBreakfast => 'Frühstück';
+  String get categoryLowCalorie => 'Kalorienarm';
+  String get dietRaw => 'Rohkost';
+  String get dietGlutenFree => 'Glutenfrei';
+  String get dietFish => 'Fisch';
+  String get dietKeto => 'Keto';
+  String get dietMeat => 'Fleisch';
+  String get dietVegetarian => 'Vegetarisch';
+  String get dietOmnivore => 'Omnivor';
+  String get dietVegan => 'Vegan';
+  String get searchHint => 'Suche nach Rezepten...';
+  String get filterLabelCategory => 'Kategorie';
+  String get filterLabelDiet => 'Ernährungsform';
+}

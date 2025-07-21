@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/account/utils/kitchen_options.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/shared/utils/constants.dart';
 
 class KitchenDropdownCard extends StatelessWidget {
@@ -19,23 +19,24 @@ class KitchenDropdownCard extends StatelessWidget {
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: DropdownButtonFormField<String>(
-        value: selectedKitchen,
+        value: selectedKitchen == 'not_set' ? null : selectedKitchen,
+        decoration: InputDecoration(
+          labelText: context.loc.accountFavoriteKitchen,
+          border: InputBorder.none,
+          isDense: true,
+          labelStyle: const TextStyle(color: Colors.white),
+        ),
+        icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
         dropdownColor: AppColors.cardColor,
         style: const TextStyle(color: Colors.white),
-        iconEnabledColor: Colors.white,
-        decoration: const InputDecoration(
-          labelText: 'Lieblingsküche',
-          labelStyle: TextStyle(color: Colors.white70),
-          border: InputBorder.none,
-        ),
-        items: kitchenOptions
-            .map((kitchen) => DropdownMenuItem<String>(
-                  value: kitchen,
-                  child: Text(kitchen),
-                ))
-            .toList(),
+        items: kitchenInternalToKey.entries.map((entry) {
+          return DropdownMenuItem<String>(
+            value: entry.key,
+            child: Text(context.loc.getString(entry.value)),
+          );
+        }).toList(),
         onChanged: onChanged,
       ),
     );

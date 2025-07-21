@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/features/account/screens/account_screen.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:kuvio/features/recipes/screens/favorites_screen.dart';
@@ -14,6 +15,7 @@ import 'package:kuvio/shared/widgets/drawer_tile_with_switch.dart';
 import 'package:kuvio/shared/widgets/drawer_profile_header.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/auth/services/auth_service.dart';
+import 'package:kuvio/shared/widgets/language_dialog.dart';
 
 class HamburgerDrawer extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -62,11 +64,11 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               profileImage: userData!['profileImage'],
             ),
             const SizedBox(height: 32),
-            Text("ALLGEMEIN", style: sectionStyle),
+            Text(context.loc.general, style: sectionStyle),
             const SizedBox(height: 12),
             DrawerTile(
               icon: Icons.person,
-              title: "Konto",
+              title: context.loc.account,
               onTap: () async {
                 await Navigator.push(
                   context,
@@ -78,7 +80,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
             DrawerTile(
               icon: Icons.favorite,
-              title: "Favoriten",
+              title: context.loc.favorites,
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -90,7 +92,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
             DrawerTile(
               icon: Icons.shopping_cart,
-              title: "Einkaufsliste",
+              title: context.loc.shoppingList,
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
@@ -99,7 +101,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
             DrawerTile(
               icon: Icons.comment,
-              title: "Kommentare",
+              title: context.loc.comments,
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -111,7 +113,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             if (userData!['isAdmin'] == true)
               DrawerTile(
                 icon: Icons.admin_panel_settings,
-                title: "Admin-Dashboard",
+                title: context.loc.adminDashboard,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -119,49 +121,61 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 ),
                 tileColor: tileColor,
               ),
-            const SizedBox(height: 24),
-            Text("ANPASSUNG", style: sectionStyle),
-            const SizedBox(height: 12),
-            DrawerTileWithSwitch(
-              icon: Icons.dark_mode,
-              title: "Darkmode",
-              value: Provider.of<ThemeProvider>(context).isDarkMode,
-              onChanged: (value) {
-                final themeProvider =
-                    Provider.of<ThemeProvider>(context, listen: false);
-                themeProvider.toggleTheme();
-              },
-              tileColor: tileColor,
-            ),
-            const SizedBox(height: 24),
-            Text("KONTO", style: sectionStyle),
-            const SizedBox(height: 12),
-            DrawerTile(
-              icon: Icons.logout,
-              title: "Abmelden",
-              onTap: () async {
-                await AuthService().signOutUser(context);
-              },
-              tileColor: tileColor,
-            ),
           ] else ...[
             const Center(
               child:
                   Icon(Icons.person_outline, color: Colors.white70, size: 48),
             ),
             const SizedBox(height: 3),
-            const Center(
+            Center(
               child: Text(
-                'Nicht angemeldet',
-                style: TextStyle(color: Colors.white70, fontSize: 16),
+                context.loc.notLoggedIn,
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
             ),
             const SizedBox(height: 32),
-            Text("KONTO", style: sectionStyle),
-            const SizedBox(height: 12),
+          ],
+          const SizedBox(height: 24),
+          Text(context.loc.customization, style: sectionStyle),
+          const SizedBox(height: 12),
+          DrawerTileWithSwitch(
+            icon: Icons.dark_mode,
+            title: context.loc.darkMode,
+            value: Provider.of<ThemeProvider>(context).isDarkMode,
+            onChanged: (value) {
+              final themeProvider =
+                  Provider.of<ThemeProvider>(context, listen: false);
+              themeProvider.toggleTheme();
+            },
+            tileColor: tileColor,
+          ),
+          DrawerTile(
+            icon: Icons.language,
+            title: context.loc.language,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) => const LanguageDialog(),
+              );
+            },
+            tileColor: tileColor,
+          ),
+          const SizedBox(height: 24),
+          Text(context.loc.settings, style: sectionStyle),
+          const SizedBox(height: 12),
+          if (isLoggedIn)
+            DrawerTile(
+              icon: Icons.logout,
+              title: context.loc.logout,
+              onTap: () async {
+                await AuthService().signOutUser(context);
+              },
+              tileColor: tileColor,
+            )
+          else
             DrawerTile(
               icon: Icons.login,
-              title: "Anmelden / Registrieren",
+              title: context.loc.loginRegister,
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -171,21 +185,6 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               },
               tileColor: tileColor,
             ),
-            const SizedBox(height: 24),
-            Text("ANPASSUNG", style: sectionStyle),
-            const SizedBox(height: 12),
-            DrawerTileWithSwitch(
-              icon: Icons.dark_mode,
-              title: "Darkmode",
-              value: Provider.of<ThemeProvider>(context).isDarkMode,
-              onChanged: (value) {
-                final themeProvider =
-                    Provider.of<ThemeProvider>(context, listen: false);
-                themeProvider.toggleTheme();
-              },
-              tileColor: tileColor,
-            ),
-          ]
         ],
       ),
     );

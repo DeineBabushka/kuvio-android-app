@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class AccountDeleteHint extends StatelessWidget {
   const AccountDeleteHint({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Wenn du dein Konto löscht, werden all deine\nBenutzerdaten und dein Zugang unwiderruflich gelöscht.",
+    return Text(
+      context.loc.deleteAccountHint,
       textAlign: TextAlign.center,
-      style: TextStyle(color: Colors.white60, fontSize: 13),
+      style: const TextStyle(color: Colors.white60, fontSize: 13),
     );
   }
 }

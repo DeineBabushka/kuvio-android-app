@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class InfoCardTile extends StatelessWidget {
   final String label;
@@ -21,14 +22,18 @@ class InfoCardTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        title: Text(label,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            )),
-        subtitle: Text(value?.isNotEmpty == true ? value! : 'Nicht angegeben',
-            style: TextStyle(color: textColor, fontSize: 16)),
+        title: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+        subtitle: Text(
+          value?.isNotEmpty == true ? value! : context.loc.notSpecified,
+          style: TextStyle(color: textColor, fontSize: 16),
+        ),
       ),
     );
   }

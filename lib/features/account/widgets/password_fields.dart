@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuvio/features/account/widgets/password_field.dart';
 import 'package:kuvio/features/account/widgets/password_decorator.dart';
 import 'package:kuvio/features/account/widgets/password_validators.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class PasswordInputFields {
   static Widget buildCurrentPasswordField({
@@ -11,19 +12,23 @@ class PasswordInputFields {
     required Color fillColor,
     required Color focusColor,
   }) {
-    return PasswordInputField(
-      controller: controller,
-      label: 'Aktuelles Passwort',
-      hint: 'Gib dein aktuelles Passwort ein',
-      validator: validateCurrentPassword,
-      textColor: inputColor,
-      decoration: buildPasswordInputDecoration(
-        label: 'Aktuelles Passwort',
-        hint: 'Gib dein aktuelles Passwort ein',
-        labelColor: labelColor,
-        fillColor: fillColor,
-        focusColor: focusColor,
-      ),
+    return Builder(
+      builder: (context) {
+        return PasswordInputField(
+          controller: controller,
+          label: context.loc.currentPassword,
+          hint: context.loc.enterCurrentPassword,
+          validator: (value) => validateCurrentPassword(value, context),
+          textColor: inputColor,
+          decoration: buildPasswordInputDecoration(
+            label: context.loc.currentPassword,
+            hint: context.loc.enterCurrentPassword,
+            labelColor: labelColor,
+            fillColor: fillColor,
+            focusColor: focusColor,
+          ),
+        );
+      },
     );
   }
 
@@ -34,19 +39,23 @@ class PasswordInputFields {
     required Color fillColor,
     required Color focusColor,
   }) {
-    return PasswordInputField(
-      controller: controller,
-      label: 'Neues Passwort',
-      hint: 'Mindestens 6 Zeichen',
-      validator: validateNewPassword,
-      textColor: inputColor,
-      decoration: buildPasswordInputDecoration(
-        label: 'Neues Passwort',
-        hint: 'Mindestens 6 Zeichen',
-        labelColor: labelColor,
-        fillColor: fillColor,
-        focusColor: focusColor,
-      ),
+    return Builder(
+      builder: (context) {
+        return PasswordInputField(
+          controller: controller,
+          label: context.loc.newPassword,
+          hint: context.loc.passwordHint,
+          validator: (value) => validateNewPassword(value, context),
+          textColor: inputColor,
+          decoration: buildPasswordInputDecoration(
+            label: context.loc.newPassword,
+            hint: context.loc.passwordHint,
+            labelColor: labelColor,
+            fillColor: fillColor,
+            focusColor: focusColor,
+          ),
+        );
+      },
     );
   }
 
@@ -58,21 +67,24 @@ class PasswordInputFields {
     required Color fillColor,
     required Color focusColor,
   }) {
-    return PasswordInputField(
-      controller: controller,
-      label: 'Passwort wiederholen',
-      hint: 'Wiederhole das neue Passwort',
-      validator: (value) {
-        return validateRepeatPassword(value, newPasswordController.text);
+    return Builder(
+      builder: (context) {
+        return PasswordInputField(
+          controller: controller,
+          label: context.loc.repeatPassword,
+          hint: context.loc.repeatPasswordHint,
+          validator: (value) => validateRepeatPassword(
+              value, newPasswordController.text, context),
+          textColor: inputColor,
+          decoration: buildPasswordInputDecoration(
+            label: context.loc.repeatPassword,
+            hint: context.loc.repeatPasswordHint,
+            labelColor: labelColor,
+            fillColor: fillColor,
+            focusColor: focusColor,
+          ),
+        );
       },
-      textColor: inputColor,
-      decoration: buildPasswordInputDecoration(
-        label: 'Passwort wiederholen',
-        hint: 'Wiederhole das neue Passwort',
-        labelColor: labelColor,
-        fillColor: fillColor,
-        focusColor: focusColor,
-      ),
     );
   }
 }

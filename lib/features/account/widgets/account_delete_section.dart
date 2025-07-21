@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';
@@ -18,7 +19,7 @@ class AccountDeleteSection extends StatelessWidget {
     return Column(
       children: [
         ConfirmButton(
-          text: "Konto löschen",
+          text: context.loc.deleteAccount,
           onPressed: () async {
             final success =
                 await userService.deleteAccountWithConfirmation(contextRef);

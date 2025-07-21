@@ -10,6 +10,8 @@ import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/l10n/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +27,11 @@ void main() async {
 
   runZonedGuarded(
     () {
+      FlutterError.onError = (FlutterErrorDetails details) {
+        debugPrint('❗ FLUTTER ERROR: ${details.exception}');
+        debugPrintStack(stackTrace: details.stack);
+        FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+      };
       runApp(
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
@@ -38,8 +45,26 @@ void main() async {
   );
 }
 
-class KuvioApp extends StatelessWidget {
+class KuvioApp extends StatefulWidget {
   const KuvioApp({super.key});
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    final state = context.findAncestorStateOfType<_KuvioAppState>();
+    state?.setLocale(newLocale);
+  }
+
+  @override
+  State<KuvioApp> createState() => _KuvioAppState();
+}
+
+class _KuvioAppState extends State<KuvioApp> {
+  Locale _locale = const Locale('de');
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +77,9 @@ class KuvioApp extends StatelessWidget {
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
+      locale: _locale,
+      supportedLocales: L10n.all,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: themeProvider.isDarkMode
           ? ThemeData(
               scaffoldBackgroundColor: const Color(0xFF1a1a1a),
@@ -79,9 +107,7 @@ class KuvioApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(
                 seedColor: Color(0xFF959595),
                 brightness: Brightness.dark,
-              ).copyWith(
-                primary: Colors.white,
-              ),
+              ).copyWith(primary: Colors.white),
               useMaterial3: true,
             )
           : ThemeData(
@@ -110,9 +136,7 @@ class KuvioApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(
                 seedColor: Color(0xFF122620),
                 brightness: Brightness.light,
-              ).copyWith(
-                primary: Color(0xFF2E6B4D),
-              ),
+              ).copyWith(primary: Color(0xFF2E6B4D)),
               useMaterial3: true,
             ),
       routes: {

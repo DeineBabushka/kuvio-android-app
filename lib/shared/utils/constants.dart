@@ -7,3 +7,16 @@ class AppColors {
   static const cardText = Color(0xFF122620);
   static const snackSuccess = Color(0xFF2E6B4D);
 }
+
+const Map<String, String> kitchenInternalToKey = {
+  'not_set': 'notSpecified',
+  'italian': 'kitchenItalian',
+  'chinese': 'kitchenChinese',
+  'indian': 'kitchenIndian',
+  'mexican': 'kitchenMexican',
+  'japanese': 'kitchenJapanese',
+  'german': 'kitchenGerman',
+  'turkish': 'kitchenTurkish',
+  'vegan': 'kitchenVegan',
+  'vegetarian': 'kitchenVegetarian',
+};

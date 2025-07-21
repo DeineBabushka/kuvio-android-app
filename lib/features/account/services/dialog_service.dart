@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class DialogService {
   static Future<String?> askForPassword(BuildContext context) async {
@@ -22,17 +23,18 @@ class DialogService {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Passwort bestätigen',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                context.loc.confirmPasswordTitle,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: controller,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Passwort',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: context.loc.password,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
@@ -40,12 +42,12 @@ class DialogService {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: const Text('Abbrechen'),
+                    child: Text(context.loc.cancel),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    child: const Text('Bestätigen'),
+                    child: Text(context.loc.confirm),
                     onPressed: () {
                       result = controller.text;
                       Navigator.of(context).pop();
@@ -68,20 +70,18 @@ class DialogService {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text('Konto wirklich löschen?'),
-              content: const Text(
-                'Dieser Vorgang kann nicht rückgängig gemacht werden.',
-              ),
+              title: Text(context.loc.deleteAccountTitle),
+              content: Text(context.loc.deleteAccountWarning),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text('Abbrechen'),
+                  child: Text(context.loc.cancel),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text(
-                    'Löschen',
-                    style: TextStyle(color: Colors.red),
+                  child: Text(
+                    context.loc.delete,
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
               ],
