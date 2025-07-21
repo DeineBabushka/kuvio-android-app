@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/shared/models/favorites_filter.dart';
 import 'package:kuvio/features/recipes/widgets/filter_dropdown.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class FavoritesFilterBar extends StatelessWidget {
   final TextEditingController searchController;
@@ -16,6 +17,52 @@ class FavoritesFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
+    String localizeCategory(String key) {
+      switch (key) {
+        case 'Vorspeise':
+          return loc?.categoryStarter ?? key;
+        case 'Hauptgericht':
+          return loc?.categoryMain ?? key;
+        case 'Dessert':
+          return loc?.categoryDessert ?? key;
+        case 'Beilage':
+          return loc?.categorySide ?? key;
+        case 'Snack':
+          return loc?.categorySnack ?? key;
+        case 'Frühstück':
+          return loc?.categoryBreakfast ?? key;
+        case 'Kalorienarm':
+          return loc?.categoryLowCalorie ?? key;
+        default:
+          return key;
+      }
+    }
+
+    String localizeDiet(String key) {
+      switch (key) {
+        case 'Rohkost':
+          return loc?.dietRaw ?? key;
+        case 'Glutenfrei':
+          return loc?.dietGlutenFree ?? key;
+        case 'Fisch':
+          return loc?.dietFish ?? key;
+        case 'Keto':
+          return loc?.dietKeto ?? key;
+        case 'Fleisch':
+          return loc?.dietMeat ?? key;
+        case 'Vegetarisch':
+          return loc?.dietVegetarian ?? key;
+        case 'Omnivor':
+          return loc?.dietOmnivore ?? key;
+        case 'Vegan':
+          return loc?.dietVegan ?? key;
+        default:
+          return key;
+      }
+    }
+
     return Column(
       children: [
         Padding(
@@ -27,7 +74,7 @@ class FavoritesFilterBar extends StatelessWidget {
             ),
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: 'Suche nach Rezepten...',
+              hintText: loc?.searchRecipesHint ?? 'Suche nach Rezepten...',
               hintStyle: const TextStyle(color: Colors.white70),
               filled: true,
               fillColor: Colors.white10,
@@ -47,10 +94,10 @@ class FavoritesFilterBar extends StatelessWidget {
                 child: FilterDropdown(
                   items: filter.availableCategories,
                   selected: filter.category,
-                  label: 'Kategorie',
-                  onChanged: (val) => onFilterChanged(
-                    filter.copyWith(category: val),
-                  ),
+                  label: loc?.categoryLabel ?? 'Kategorie',
+                  onChanged: (val) =>
+                      onFilterChanged(filter.copyWith(category: val)),
+                  itemToString: localizeCategory,
                 ),
               ),
               const SizedBox(width: 8),
@@ -58,10 +105,10 @@ class FavoritesFilterBar extends StatelessWidget {
                 child: FilterDropdown(
                   items: filter.availableDietTypes,
                   selected: filter.dietType,
-                  label: 'Ernährungsform',
-                  onChanged: (val) => onFilterChanged(
-                    filter.copyWith(dietType: val),
-                  ),
+                  label: loc?.dietTypeLabel ?? 'Ernährungsform',
+                  onChanged: (val) =>
+                      onFilterChanged(filter.copyWith(dietType: val)),
+                  itemToString: localizeDiet,
                 ),
               ),
             ],

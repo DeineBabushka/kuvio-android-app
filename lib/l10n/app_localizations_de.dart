@@ -93,4 +93,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get searchHint => 'Suche nach Rezepten...';
   String get filterLabelCategory => 'Kategorie';
   String get filterLabelDiet => 'Ernährungsform';
+  String get favoritesTitle => 'Meine Favoriten';
+  String get noFavoritesFound => 'Keine Favoriten vorhanden.';
+  String get searchRecipesHint => 'Suche nach Rezepten...';
+  String get dietTypeLabel => 'Ernährungsform';
+  String get categoryLabel => 'Kategorie';
 }

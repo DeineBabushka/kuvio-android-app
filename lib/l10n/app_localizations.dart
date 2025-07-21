@@ -130,6 +130,12 @@ abstract class AppLocalizations {
     };
     return map[key] ?? key;
   }
+
+  String get favoritesTitle;
+  String get noFavoritesFound;
+  String get searchRecipesHint;
+  String get categoryLabel;
+  String get dietTypeLabel;
 }
 
 class _AppLocalizationsDelegate
