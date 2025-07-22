@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:kuvio/shared/utils/block_if_offline.dart'; // <<< WICHTIG: import hinzufügen!
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class FavoriteShareActions extends StatelessWidget {
   final String title;
@@ -25,7 +25,7 @@ class FavoriteShareActions extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.share, color: Colors.white),
           onPressed: () {
-            if (blockIfOffline(context)) return; // <<< Offline blocken
+            if (blockIfOffline(context)) return;
             SharePlus.instance.share(
               ShareParams(
                 text: shareText,

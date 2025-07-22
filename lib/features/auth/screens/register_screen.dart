@@ -52,7 +52,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       if (!mounted) return;
 
-      // Snackbar anzeigen
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(loc.registrationSuccess),
@@ -60,7 +59,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       );
 
-      // Snackbar zeigen lassen, dann weiter
       await Future.delayed(const Duration(seconds: 2));
 
       if (!mounted) return;

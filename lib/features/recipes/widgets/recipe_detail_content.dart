@@ -43,7 +43,6 @@ class RecipeDetailContent extends StatelessWidget {
     final instructions = recipe.instructions[lang] ?? [];
     final prepTime = recipe.preparationTime[lang] ?? '';
 
-    // ↓ online-status aus Provider holen
     final isOnline = context.watch<ConnectivityProvider>().isOnline;
 
     return Column(
@@ -118,8 +117,6 @@ class RecipeDetailContent extends StatelessWidget {
           cardColor: cardColor,
         ),
         const SizedBox(height: 20),
-
-        // ↓ nur wenn online + eingeloggt
         if (isLoggedIn && isOnline) CommentSection(recipeId: recipe.id),
       ],
     );

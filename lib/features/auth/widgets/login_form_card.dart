@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
-import 'package:kuvio/shared/utils/block_if_offline.dart'; // ✅ importiert
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class LoginFormCard extends StatelessWidget {
   final TextEditingController emailController;
@@ -89,7 +89,7 @@ class LoginFormCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
-              onPressed: onForgotPassword, // ❗ bleibt immer verfügbar
+              onPressed: onForgotPassword,
               style: TextButton.styleFrom(padding: EdgeInsets.zero),
               child: Text(
                 loc.loginForgotPassword,

@@ -74,7 +74,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         onPortionChange: (newCount) => setState(() => portionCount = newCount),
         onToggleFavorite: () async {
           if (!isOnline) {
-            // Optional: blockIfOffline(context); // Nur wenn du willst
             return;
           }
           final updated = await controller.toggleFavorite();

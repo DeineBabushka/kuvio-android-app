@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/comments/models/comment.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
-// import 'package:kuvio/shared/utils/block_if_offline.dart';   // ❌ weg damit
 
 class CommentSection extends StatefulWidget {
   final String recipeId;
@@ -38,7 +37,7 @@ class _CommentSectionState extends State<CommentSection> {
       });
     } catch (_) {
       if (!mounted) return;
-      // optional: UI ohne Dialog anpassen
+
       setState(() {
         _offlineBlocked = true;
         _loading = false;

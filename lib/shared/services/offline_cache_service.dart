@@ -8,7 +8,6 @@ class OfflineCacheService {
     final user = FirebaseAuth.instance.currentUser;
 
     try {
-      // Rezepte immer vorwärmen
       await fs
           .collection('recipes')
           .get(const GetOptions(source: Source.server));
@@ -21,7 +20,6 @@ class OfflineCacheService {
       final uid = user.uid;
 
       await Future.wait([
-        // Shopping List
         fs
             .collection('shopping_list')
             .doc(uid)

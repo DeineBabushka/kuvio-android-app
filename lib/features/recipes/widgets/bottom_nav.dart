@@ -20,7 +20,6 @@ class BottomNavWidget extends StatelessWidget {
   void _onItemTapped(BuildContext context, int index) {
     final user = FirebaseAuth.instance.currentUser;
 
-    // Blockiere Account, Kommentare, Favoriten bei Offline
     final requiresOnline = {0, 2, 3};
     if (requiresOnline.contains(index) && blockIfOffline(context)) return;
 
