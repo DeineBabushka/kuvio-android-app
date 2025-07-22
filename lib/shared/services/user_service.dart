@@ -133,12 +133,16 @@ class UserService {
     await user.delete();
   }
 
-  Future<bool> deleteAccountWithConfirmation(BuildContext context) async {
+  Future<bool> deleteAccountWithConfirmation({
+    required BuildContext context,
+    required VoidCallback onSuccess,
+  }) async {
     final password = await DialogService.askForPassword(context);
     if (password == null || !context.mounted) return false;
 
     try {
       await deleteUserAndData(password);
+      onSuccess();
       return true;
     } catch (e) {
       if (context.mounted) {

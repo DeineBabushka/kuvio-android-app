@@ -59,8 +59,7 @@ class DietFilterWrap extends StatelessWidget {
       itemBuilder: (context, index) {
         final diet = diets[index];
         return DietFilterCircle(
-          assetPath:
-              'assets/${isDark ? dietTypeToAssetName[diet]!.replaceAll('.png', '_dark.png') : dietTypeToAssetName[diet]!}',
+          assetPath: 'assets/${dietTypeToAssetName[diet]!}',
           label: localizeDiet(diet, loc),
           isSelected: selectedDiet == diet,
           textColor: textColor,
