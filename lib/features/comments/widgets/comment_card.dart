@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/screens/recipes_singleview_screen.dart';
 import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class CommentCard extends StatefulWidget {
   final FormattedComment comment;
@@ -20,12 +21,13 @@ class _CommentCardState extends State<CommentCard> {
     if (isDeleted) return const SizedBox.shrink();
 
     final theme = Theme.of(context);
+    final loc = AppLocalizations.of(context)!;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
     final cardColor = const Color(0xFF2C2C2E);
     final cwr = widget.comment.data;
 
     final lang = Localizations.localeOf(context).languageCode;
-    final recipeTitle = cwr.recipe.title[lang] ?? 'Unbekanntes Rezept';
+    final recipeTitle = cwr.recipe.title[lang] ?? loc.unknownRecipeTitle;
 
     return GestureDetector(
       onTap: () {
@@ -51,7 +53,7 @@ class _CommentCardState extends State<CommentCard> {
         child: ListTile(
           leading: _buildRecipeImage(cwr.recipe.image),
           title: Text(
-            recipeTitle.isNotEmpty ? recipeTitle : 'Unbekanntes Rezept',
+            recipeTitle,
             style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.bold,
@@ -83,6 +85,8 @@ class _CommentCardState extends State<CommentCard> {
   }
 
   Future<void> _confirmAndDelete(BuildContext context) async {
+    final loc = AppLocalizations.of(context)!;
+
     final confirmed = await showDialog<bool>(
           context: context,
           builder: (_) => AlertDialog(
@@ -90,24 +94,24 @@ class _CommentCardState extends State<CommentCard> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            title: const Text(
-              'Kommentar löschen?',
-              style: TextStyle(color: Colors.black),
+            title: Text(
+              loc.deleteCommentTitle,
+              style: const TextStyle(color: Colors.black),
             ),
-            content: const Text(
-              'Möchtest du diesen Kommentar wirklich entfernen?',
-              style: TextStyle(color: Colors.black87),
+            content: Text(
+              loc.deleteCommentText,
+              style: const TextStyle(color: Colors.black87),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text('Abbrechen',
-                    style: TextStyle(color: Colors.green)),
+                child: Text(loc.cancel,
+                    style: const TextStyle(color: Colors.green)),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: const Text('Löschen',
-                    style: TextStyle(color: Colors.redAccent)),
+                child: Text(loc.delete,
+                    style: const TextStyle(color: Colors.redAccent)),
               ),
             ],
           ),
@@ -125,8 +129,8 @@ class _CommentCardState extends State<CommentCard> {
     if (!context.mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Kommentar gelöscht'),
+      SnackBar(
+        content: Text(loc.commentDeleted),
         backgroundColor: Colors.redAccent,
       ),
     );

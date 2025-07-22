@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class DeleteFavoriteIcon extends StatelessWidget {
   final VoidCallback onDelete;
@@ -7,6 +8,8 @@ class DeleteFavoriteIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return IconButton(
       icon: const Icon(Icons.delete, color: Colors.redAccent),
       onPressed: () async {
@@ -17,27 +20,27 @@ class DeleteFavoriteIcon extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                title: const Text(
-                  'Favorit löschen?',
-                  style: TextStyle(color: Colors.black),
+                title: Text(
+                  loc.deleteFavoriteTitle,
+                  style: const TextStyle(color: Colors.black),
                 ),
-                content: const Text(
-                  'Möchtest du diesen Favoriten wirklich entfernen?',
-                  style: TextStyle(color: Colors.black87),
+                content: Text(
+                  loc.deleteFavoriteText,
+                  style: const TextStyle(color: Colors.black87),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context, false),
-                    child: const Text(
-                      'Abbrechen',
-                      style: TextStyle(color: Colors.green),
+                    child: Text(
+                      loc.cancel,
+                      style: const TextStyle(color: Colors.green),
                     ),
                   ),
                   TextButton(
                     onPressed: () => Navigator.pop(context, true),
-                    child: const Text(
-                      'Löschen',
-                      style: TextStyle(color: Colors.redAccent),
+                    child: Text(
+                      loc.delete,
+                      style: const TextStyle(color: Colors.redAccent),
                     ),
                   ),
                 ],

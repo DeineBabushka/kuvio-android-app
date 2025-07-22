@@ -3,6 +3,7 @@ import 'package:kuvio/features/auth/services/auth_service.dart';
 import 'package:kuvio/features/auth/widgets/register_form_card.dart';
 import 'package:kuvio/features/auth/models/register_user_data.dart';
 import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -25,39 +26,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
       setState(() => _obscurePassword = !_obscurePassword);
 
   Future<void> _register() async {
-    if (_formKey.currentState!.validate()) {
-      final userData = RegisterUserData(
-        username: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text,
+    if (!_formKey.currentState!.validate()) return;
+
+    final userData = RegisterUserData(
+      username: _usernameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    try {
+      final userCredential = await _authService.registerUser(
+        email: userData.email,
+        password: userData.password,
       );
 
-      try {
-        final userCredential = await _authService.registerUser(
-          email: userData.email,
-          password: userData.password,
-        );
+      if (!mounted) return;
+      final loc = AppLocalizations.of(context)!;
 
-        if (!mounted) return;
+      await _authService.saveInitialUserData(
+        uid: userCredential.user!.uid,
+        username: userData.username,
+        email: userData.email,
+        kitchenPlaceholder: loc.notSpecified,
+      );
 
-        await _authService.saveInitialUserData(
-          uid: userCredential.user!.uid,
-          username: userData.username,
-          email: userData.email,
-        );
+      if (!mounted) return;
 
-        if (!mounted) return;
+      // Snackbar anzeigen
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(loc.registrationSuccess),
+          duration: const Duration(seconds: 2),
+        ),
+      );
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const EditProfileScreen()),
-        );
-      } catch (e) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Fehler: $e')),
-        );
-      }
+      // Snackbar zeigen lassen, dann weiter
+      await Future.delayed(const Duration(seconds: 2));
+
+      if (!mounted) return;
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      final loc = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${loc.registrationFailed}: $e')),
+      );
     }
   }
 
@@ -71,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: theme.iconTheme.color),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {

@@ -43,15 +43,21 @@ class EditProfileController {
       dishController.text = user.favoriteDish ?? '';
       selectedProfileAsset = user.profileImage;
 
-      final localized = user.favoriteKitchen;
-      selectedKitchen = localized == null || localized.trim().isEmpty
-          ? defaultKitchen
-          : kitchenInternalToKey.entries
-              .firstWhere(
-                (e) => context.loc.getString(e.value) == localized,
-                orElse: () => const MapEntry('not_set', 'notSpecified'),
-              )
-              .key;
+      final localized = user.favoriteKitchen?.trim().toLowerCase();
+
+      if (localized == null ||
+          localized.isEmpty ||
+          localized == 'nicht angegeben' ||
+          localized == 'not specified') {
+        selectedKitchen = 'not_set';
+      } else {
+        selectedKitchen = kitchenInternalToKey.entries
+            .firstWhere(
+              (e) => context.loc.getString(e.value).toLowerCase() == localized,
+              orElse: () => const MapEntry('not_set', 'notSpecified'),
+            )
+            .key;
+      }
 
       onUpdate();
     }

@@ -213,6 +213,25 @@ abstract class AppLocalizations {
   String get emailInvalidError;
   String get passwordLabel;
   String get passwordError;
+
+  String get unknownRecipeTitle;
+  String get deleteCommentTitle;
+  String get deleteCommentText;
+  String get commentDeleted;
+
+  String get deleteFavoriteTitle;
+  String get deleteFavoriteText;
+
+  String get deleteUserTitle;
+  String get deleteUserText;
+
+  String get logoutSuccess;
+
+  String get registrationFailed;
+  String get registrationSuccess;
+
+  String get accountDeletedSuccess;
+  String get deletionFailed;
 }
 
 class _AppLocalizationsDelegate

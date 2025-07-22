@@ -169,4 +169,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get emailInvalidError => 'Ungültige E-Mail-Adresse.';
   String get passwordLabel => 'Passwort';
   String get passwordError => 'Bitte gib ein Passwort ein.';
+  String get unknownRecipeTitle => 'Unbekanntes Rezept';
+  String get deleteCommentTitle => 'Kommentar löschen?';
+  String get deleteCommentText =>
+      'Möchtest du diesen Kommentar wirklich entfernen?';
+  String get commentDeleted => 'Kommentar gelöscht';
+  String get deleteFavoriteTitle => 'Favorit löschen?';
+  String get deleteFavoriteText =>
+      'Möchtest du diesen Favoriten wirklich entfernen?';
+  String get deleteUserTitle => 'Benutzer löschen';
+  String get deleteUserText => 'Willst du "{username}" wirklich löschen?';
+  String get logoutSuccess => 'Du wurdest abgemeldet.';
+  String get registrationFailed => 'Registrierung fehlgeschlagen';
+  String get registrationSuccess => 'Registrierung erfolgreich!';
+  String get accountDeletedSuccess => 'Dein Account wurde gelöscht.';
+  String get deletionFailed => 'Löschen fehlgeschlagen';
 }
