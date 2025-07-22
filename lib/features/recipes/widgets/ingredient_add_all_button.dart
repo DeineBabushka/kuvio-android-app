@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class AddAllIngredientsButton extends StatelessWidget {
   final void Function() onPressed;
@@ -10,11 +11,13 @@ class AddAllIngredientsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
     return Center(
       child: ElevatedButton.icon(
         onPressed: onPressed,
         icon: const Icon(Icons.add_shopping_cart),
-        label: const Text('Alle Zutaten hinzufügen'),
+        label: Text(loc?.addAllIngredients ?? 'Alle Zutaten hinzufügen'),
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.white,

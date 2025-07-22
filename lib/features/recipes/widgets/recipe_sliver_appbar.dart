@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_share_actions.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipeSliverAppBar extends StatelessWidget {
   final Recipe recipe;
@@ -8,6 +9,7 @@ class RecipeSliverAppBar extends StatelessWidget {
   final bool isFavorite;
   final bool isLoggedIn;
   final VoidCallback onToggleFavorite;
+  final String lang;
 
   const RecipeSliverAppBar({
     super.key,
@@ -16,15 +18,24 @@ class RecipeSliverAppBar extends StatelessWidget {
     required this.isFavorite,
     required this.isLoggedIn,
     required this.onToggleFavorite,
+    required this.lang,
   });
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    final shareText = "🥗 ${recipe.title}\n"
-        "📋 Zutaten: ${recipe.ingredients.map((e) => "${e.quantity} ${e.unit} ${e.name}").join(', ')}\n"
-        "📖 Zubereitung: ${recipe.instructions.take(3).join(' ')}...\n"
-        "✨ Gekocht mit der Kuvio App!";
+
+    final recipeTitle = recipe.title[lang] ?? '';
+    final instructions = recipe.instructions[lang] ?? [];
+    final ingredients = recipe.ingredients
+        .map((e) => "${e.quantity} ${e.unit[lang] ?? ''} ${e.name[lang] ?? ''}")
+        .join(', ');
+
+    final shareText = "🥗 $recipeTitle\n"
+        "📋 ${loc?.ingredientsLabel ?? 'Zutaten'}: $ingredients\n"
+        "📖 ${loc?.instructionsLabel ?? 'Zubereitung'}: ${instructions.take(3).join(' ')}...\n"
+        "✨ ${loc?.cookedWithKuvio ?? 'Gekocht mit der Kuvio App!'}";
 
     return SliverAppBar(
       expandedHeight: 400,
@@ -44,9 +55,10 @@ class RecipeSliverAppBar extends StatelessWidget {
               child: ConstrainedBox(
                 key: ValueKey(isCollapsed ? 'collapsed' : 'expanded'),
                 constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth - (isCollapsed ? 140 : 12)),
+                  maxWidth: constraints.maxWidth - (isCollapsed ? 140 : 12),
+                ),
                 child: Text(
-                  recipe.title,
+                  recipeTitle,
                   maxLines: 2,
                   overflow: TextOverflow.fade,
                   softWrap: true,
@@ -91,7 +103,7 @@ class RecipeSliverAppBar extends StatelessWidget {
       ),
       actions: [
         FavoriteShareActions(
-          title: recipe.title,
+          title: recipeTitle,
           shareText: shareText,
           isFavorite: isFavorite,
           isLoggedIn: isLoggedIn,

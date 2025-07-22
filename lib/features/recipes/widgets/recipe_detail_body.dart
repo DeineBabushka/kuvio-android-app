@@ -28,6 +28,7 @@ class RecipeDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
     final textColor =
         Theme.of(context).textTheme.bodyLarge?.color ?? Colors.white;
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
@@ -44,6 +45,7 @@ class RecipeDetailBody extends StatelessWidget {
             isFavorite: isFavorite,
             isLoggedIn: isLoggedIn,
             onToggleFavorite: onToggleFavorite,
+            lang: lang,
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -56,8 +58,10 @@ class RecipeDetailBody extends StatelessWidget {
                 scaledIngredients: scaled,
                 portionCount: portionCount,
                 onPortionChange: onPortionChange,
-                onAddAll: () => controller.addAllToShoppingList(scaled),
-                onAddSingle: controller.addSingleToShoppingList,
+                onAddAll: () => controller.addAllToShoppingList(scaled, lang),
+                onAddSingle: (context, ingredient) => controller
+                    .addSingleToShoppingList(context, ingredient, lang),
+                lang: lang,
               ),
             ),
           ),

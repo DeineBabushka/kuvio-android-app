@@ -3,6 +3,7 @@ import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/models/recipe_filter.dart';
 import 'package:kuvio/features/recipes/widgets/bottom_nav.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_card.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class FilteredRecipesScreen extends StatefulWidget {
   final String selectedDiet;
@@ -46,8 +47,109 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
     super.dispose();
   }
 
+  String localizeDiet(String key, AppLocalizations loc) {
+    switch (key) {
+      case 'raw':
+        return loc.dietRaw;
+      case 'gluten_free':
+        return loc.dietGlutenFree;
+      case 'fish':
+        return loc.dietFish;
+      case 'keto':
+        return loc.dietKeto;
+      case 'meat':
+        return loc.dietMeat;
+      case 'vegetarian':
+        return loc.dietVegetarian;
+      case 'omnivore':
+        return loc.dietOmnivore;
+      case 'vegan':
+        return loc.dietVegan;
+      default:
+        return key;
+    }
+  }
+
+  String localizeCategory(String key, AppLocalizations loc) {
+    switch (key) {
+      case 'starter':
+        return loc.categoryStarter;
+      case 'main':
+        return loc.categoryMain;
+      case 'dessert':
+        return loc.categoryDessert;
+      case 'side':
+        return loc.categorySide;
+      case 'snack':
+        return loc.categorySnack;
+      case 'breakfast':
+        return loc.categoryBreakfast;
+      case 'lowcal':
+        return loc.categoryLowCalorie;
+      default:
+        return key;
+    }
+  }
+
+  String convertDietLabelToKey(String label) {
+    switch (label.toLowerCase()) {
+      case 'roh':
+      case 'raw':
+        return 'raw';
+      case 'glutenfrei':
+      case 'gluten free':
+        return 'gluten_free';
+      case 'fisch':
+      case 'fish':
+        return 'fish';
+      case 'keto':
+        return 'keto';
+      case 'fleisch':
+      case 'meat':
+        return 'meat';
+      case 'vegetarisch':
+      case 'vegetarian':
+        return 'vegetarian';
+      case 'omnivor':
+      case 'omnivore':
+        return 'omnivore';
+      case 'vegan':
+        return 'vegan';
+      default:
+        return label;
+    }
+  }
+
+  String convertCategoryLabelToKey(String label) {
+    switch (label.toLowerCase()) {
+      case 'vorspeise':
+      case 'starter':
+        return 'starter';
+      case 'hauptgericht':
+      case 'main':
+        return 'main';
+      case 'dessert':
+        return 'dessert';
+      case 'beilage':
+      case 'side':
+        return 'side';
+      case 'snack':
+        return 'snack';
+      case 'frühstück':
+      case 'breakfast':
+        return 'breakfast';
+      case 'kalorienarm':
+      case 'low calorie':
+      case 'lowcal':
+        return 'lowcal';
+      default:
+        return label;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
 
@@ -60,13 +162,22 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
         ? theme.textTheme.bodyMedium?.color ?? Colors.white70
         : Colors.black87;
 
-    final filteredRecipes = filter.apply(widget.allRecipes);
+    final filteredRecipes = filter.apply(widget.allRecipes, context);
+
+    final localizedDiet = localizeDiet(
+      convertDietLabelToKey(widget.selectedDiet),
+      loc,
+    );
+    final localizedCategory = localizeCategory(
+      convertCategoryLabelToKey(widget.selectedCategory),
+      loc,
+    );
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text(
-          'Gefundene Rezepte',
+          loc.filteredRecipesTitle,
           style: TextStyle(
             color: textColor,
             fontWeight: FontWeight.w600,
@@ -85,7 +196,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
               controller: searchController,
               style: TextStyle(color: textColor),
               decoration: InputDecoration(
-                hintText: 'Nach Rezeptnamen suchen...',
+                hintText: loc.searchRecipeByNameHint,
                 hintStyle: TextStyle(color: textColor.withAlpha(150)),
                 prefixIcon: Icon(Icons.search, color: textColor),
                 filled: true,
@@ -97,12 +208,19 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              '$localizedDiet • $localizedCategory',
+              style: TextStyle(color: textColor.withAlpha(160)),
+            ),
+          ),
           const SizedBox(height: 8),
           Expanded(
             child: filteredRecipes.isEmpty
                 ? Center(
                     child: Text(
-                      'Keine Rezepte gefunden!',
+                      loc.noRecipesFound,
                       style: TextStyle(
                         color: textColor,
                         fontSize: 18,

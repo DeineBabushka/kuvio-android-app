@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class DrawerProfileHeader extends StatelessWidget {
   final String username;
@@ -14,6 +15,8 @@ class DrawerProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc;
+
     return Row(
       children: [
         CircleAvatar(
@@ -28,12 +31,13 @@ class DrawerProfileHeader extends StatelessWidget {
               Text(
                 username,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
-                (bio != null && bio!.isNotEmpty) ? bio! : 'Keine Beschreibung',
+                (bio != null && bio!.isNotEmpty) ? bio! : loc.noDescription,
                 style: const TextStyle(
                   color: Colors.white70,
                   fontSize: 16,

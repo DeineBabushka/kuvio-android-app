@@ -5,6 +5,7 @@ import 'package:kuvio/features/recipes/utils/favorite_navigation.dart';
 import 'package:kuvio/features/recipes/services/favorites_controller.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_delete_icon.dart';
 import 'package:kuvio/features/recipes/services/favorite_service.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class FavoriteRecipeCard extends StatelessWidget {
   final FavoriteItem item;
@@ -28,10 +29,14 @@ class FavoriteRecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final r = item.recipe;
+    final loc = context.loc;
+    final recipe = item.recipe;
+    final recipeTitle = recipe.getTitle(context);
+    final prepTime = recipe.getPreparationTime(context);
 
     return GestureDetector(
-      onTap: () => navigateToFavoriteRecipeDetail(context, r, 'fav-${r.id}'),
+      onTap: () =>
+          navigateToFavoriteRecipeDetail(context, recipe, 'fav-${recipe.id}'),
       child: Card(
         color: cardColor,
         shape: RoundedRectangleBorder(
@@ -49,11 +54,11 @@ class FavoriteRecipeCard extends StatelessWidget {
               child: SizedBox(
                 width: 100,
                 height: 150,
-                child: r.image.isNotEmpty
+                child: recipe.image.isNotEmpty
                     ? Hero(
-                        tag: 'fav-${r.id}',
+                        tag: 'fav-${recipe.id}',
                         child: Image.asset(
-                          'assets/${r.image}',
+                          'assets/${recipe.image}',
                           fit: BoxFit.cover,
                         ),
                       )
@@ -69,7 +74,7 @@ class FavoriteRecipeCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      r.title,
+                      recipeTitle,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -78,12 +83,12 @@ class FavoriteRecipeCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${r.portions} Portionen • ${r.preparationTime}',
+                      '${recipe.portions} ${loc.portionsLabel} • $prepTime',
                       style: TextStyle(fontSize: 14, color: subtitleColor),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Hinzugefügt am: ${formatDate(item.addedAt)}',
+                      '${loc.addedOn}: ${formatDate(item.addedAt)}',
                       style: TextStyle(fontSize: 12, color: timestampColor),
                     ),
                   ],
@@ -96,15 +101,15 @@ class FavoriteRecipeCard extends StatelessWidget {
                 if (user != null) {
                   await controller.removeFavorite(
                     userId: user.uid,
-                    recipeId: r.id,
+                    recipeId: recipe.id,
                     onUpdate: onUpdate,
                   );
 
                   if (!context.mounted) return;
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Favorit entfernt'),
+                    SnackBar(
+                      content: Text(loc.removedFromFavorites),
                       backgroundColor: Colors.redAccent,
                     ),
                   );

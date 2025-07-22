@@ -3,18 +3,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/features/shopping_list/services/grouped_shopping_list_service.dart';
 import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class ByRecipeShoppingListTab extends StatelessWidget {
   const ByRecipeShoppingListTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final user = FirebaseAuth.instance.currentUser;
+
     if (user == null) {
-      return const Center(
-        child: Text('Bitte einloggen, um die Einkaufsliste zu sehen.'),
+      return Center(
+        child: Text(loc.loginToViewShoppingList),
       );
     }
+
+    final lang = Localizations.localeOf(context).languageCode;
 
     return StreamBuilder<QuerySnapshot>(
       stream: GroupedShoppingListService.getUserShoppingItemsStream(user.uid),
@@ -25,13 +30,15 @@ class ByRecipeShoppingListTab extends StatelessWidget {
 
         final docs = snapshot.data!.docs;
         if (docs.isEmpty) {
-          return const Center(child: Text('Einkaufsliste ist leer'));
+          return Center(child: Text(loc.shoppingListEmpty));
         }
 
-        final grouped = GroupedShoppingListService.groupItemsByRecipe(docs);
+        final grouped =
+            GroupedShoppingListService.groupItemsByRecipe(docs, lang);
 
         return FutureBuilder<Map<String, String>>(
-          future: GroupedShoppingListService.loadRecipeTitles(grouped.keys),
+          future:
+              GroupedShoppingListService.loadRecipeTitles(grouped.keys, lang),
           builder: (context, titleSnapshot) {
             final recipeTitles = titleSnapshot.data ?? {};
 
@@ -46,12 +53,13 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                 return Card(
                   margin: const EdgeInsets.all(8),
                   child: ExpansionTile(
-                    title: Text('Rezept: $title'),
+                    title: Text('${loc.recipe}: $title'),
                     children: [
                       ...items.map((item) {
                         return ListTile(
                           title: Text(
-                              '${item.quantity} ${item.unit} ${item.name}'),
+                            '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
+                          ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
@@ -59,14 +67,15 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               await GroupedShoppingListService.deleteSingleItem(
                                 docs,
                                 recipeId,
-                                item.name,
-                                item.unit,
+                                item.name(lang),
+                                item.unit(lang),
                               );
 
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("${item.name} gelöscht"),
+                                  content:
+                                      Text(loc.itemDeleted(item.name(lang))),
                                 ),
                               );
                             },
@@ -84,16 +93,16 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content:
-                                      Text("Zutaten für '$title' gelöscht"),
+                                  content: Text(loc.recipeItemsDeleted(
+                                      recipeTitles[recipeId] ?? recipeId)),
                                 ),
                               );
                             },
                             icon: const Icon(Icons.delete_forever,
                                 color: Colors.redAccent),
-                            label: const Text(
-                              "Rezept aus Einkaufsliste entfernen",
-                              style: TextStyle(color: Colors.redAccent),
+                            label: Text(
+                              loc.removeRecipeFromShoppingList,
+                              style: const TextStyle(color: Colors.redAccent),
                             ),
                           ),
                         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/screens/recipes_singleview_screen.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
@@ -19,6 +20,11 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final heroTag = 'recipe-image-${recipe.id}';
+    final loc = AppLocalizations.of(context);
+
+    final recipeTitle = recipe.getTitle(context);
+    final prepTime = recipe.getPreparationTime(context);
+    final portionsLabel = loc?.portionsLabel ?? 'Portionen';
 
     return GestureDetector(
       onTap: () {
@@ -68,7 +74,7 @@ class RecipeCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      recipe.title,
+                      recipeTitle,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -77,7 +83,7 @@ class RecipeCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${recipe.portions} Portionen • ${recipe.preparationTime}',
+                      '${recipe.portions} $portionsLabel • $prepTime',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

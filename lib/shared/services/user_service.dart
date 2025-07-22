@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/account/services/dialog_service.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class UserService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -134,7 +135,7 @@ class UserService {
 
   Future<bool> deleteAccountWithConfirmation(BuildContext context) async {
     final password = await DialogService.askForPassword(context);
-    if (password == null) return false;
+    if (password == null || !context.mounted) return false;
 
     try {
       await deleteUserAndData(password);
@@ -142,7 +143,7 @@ class UserService {
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Fehler beim Löschen: $e')),
+          SnackBar(content: Text('${context.loc.errorDeleteAccount} $e')),
         );
       }
       return false;

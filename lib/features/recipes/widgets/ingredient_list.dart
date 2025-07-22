@@ -5,7 +5,7 @@ class IngredientList extends StatelessWidget {
   final List<Ingredient> ingredients;
   final Color textColor;
   final Color cardColor;
-  final void Function(Ingredient)? onAddToShoppingList;
+  final void Function(BuildContext, Ingredient)? onAddToShoppingList;
   final bool isLoggedIn;
 
   const IngredientList({
@@ -19,10 +19,16 @@ class IngredientList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+
     return Column(
       children: ingredients.map((ingredient) {
-        final text =
-            '${ingredient.quantity?.toStringAsFixed(2) ?? ''} ${ingredient.unit} ${ingredient.name}';
+        final name = ingredient.name[lang] ?? ingredient.name['en'] ?? '???';
+        final unit = ingredient.unit[lang] ?? ingredient.unit['en'] ?? '';
+
+        final text = ingredient.quantity != null
+            ? '${ingredient.quantity!.toStringAsFixed(2)} $unit $name'
+            : '$unit $name';
 
         return Card(
           color: cardColor,
@@ -37,7 +43,8 @@ class IngredientList extends StatelessWidget {
                 ? IconButton(
                     icon: const Icon(Icons.add_shopping_cart),
                     color: textColor,
-                    onPressed: () => onAddToShoppingList?.call(ingredient),
+                    onPressed: () =>
+                        onAddToShoppingList?.call(context, ingredient),
                   )
                 : null,
           ),

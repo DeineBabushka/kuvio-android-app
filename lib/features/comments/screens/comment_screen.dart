@@ -5,6 +5,7 @@ import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/features/comments/widgets/comment_list.dart';
 import 'package:kuvio/features/comments/widgets/comment_empty_placeholder.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class CommentScreen extends StatefulWidget {
   const CommentScreen({super.key});
@@ -47,10 +48,11 @@ class _CommentScreenState extends State<CommentScreen> {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    final loc = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meine Kommentare'),
+        title: Text(loc?.myCommentsTitle ?? 'Meine Kommentare'),
         backgroundColor: backgroundColor,
       ),
       backgroundColor: backgroundColor,

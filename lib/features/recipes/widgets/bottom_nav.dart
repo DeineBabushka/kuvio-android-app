@@ -6,6 +6,7 @@ import 'package:kuvio/features/account/screens/account_screen.dart';
 import 'package:kuvio/features/recipes/screens/favorites_screen.dart';
 import 'package:kuvio/features/comments/screens/comment_screen.dart';
 import 'package:kuvio/features/shopping_list/screens/shopping_list_screen.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class BottomNavWidget extends StatelessWidget {
   final List<Recipe> allRecipes;
@@ -50,28 +51,30 @@ class BottomNavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
     return BottomNavigationBar(
       backgroundColor: const Color(0xFF122620),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
       onTap: (index) => _onItemTapped(context, index),
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Konto',
+          icon: const Icon(Icons.person),
+          label: loc?.navAccount ?? 'Konto',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart),
-          label: 'Einkaufsliste',
+          icon: const Icon(Icons.shopping_cart),
+          label: loc?.navShoppingList ?? 'Einkaufsliste',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.chat_bubble_outline),
-          label: 'Kommentare',
+          icon: const Icon(Icons.chat_bubble_outline),
+          label: loc?.navComments ?? 'Kommentare',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_border),
-          label: 'Favoriten',
+          icon: const Icon(Icons.favorite_border),
+          label: loc?.navFavorites ?? 'Favoriten',
         ),
       ],
     );

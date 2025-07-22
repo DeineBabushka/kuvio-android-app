@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class FavoritesFilter {
   final String? category;
   final String? dietType;
@@ -42,11 +44,18 @@ class FavoritesFilter {
     );
   }
 
-  bool matchesRecipe(dynamic recipe) {
-    final titleMatch = recipe.title.toLowerCase().contains(searchQuery);
-    final categoryMatch =
-        category == null || recipe.categories.contains(category);
-    final dietMatch = dietType == null || recipe.dietTypes.contains(dietType);
+  bool matchesRecipe(dynamic recipe, BuildContext context) {
+    const filterLang = 'de';
+    final uiLang = Localizations.localeOf(context).languageCode;
+
+    final title = recipe.title[uiLang]?.toLowerCase() ?? '';
+    final categories = recipe.categories[filterLang] ?? <String>[];
+    final dietTypes = recipe.dietTypes[filterLang] ?? <String>[];
+
+    final titleMatch = title.contains(searchQuery.toLowerCase());
+    final categoryMatch = category == null || categories.contains(category);
+    final dietMatch = dietType == null || dietTypes.contains(dietType);
+
     return titleMatch && categoryMatch && dietMatch;
   }
 }

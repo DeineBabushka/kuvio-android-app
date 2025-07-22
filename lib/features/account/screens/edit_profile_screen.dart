@@ -6,6 +6,7 @@ import 'package:kuvio/features/recipes/widgets/profile_avatar.dart';
 import 'package:kuvio/features/account/widgets/account_edit_form.dart';
 import 'package:kuvio/features/account/widgets/transparent_app_bar.dart';
 import 'package:kuvio/features/account/widgets/screen_wrapper.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -16,25 +17,34 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final controller = EditProfileController();
+  bool _initialized = false;
 
   @override
-  void initState() {
-    super.initState();
-    controller.loadUserData(() => setState(() {}));
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _initialized = true;
+      controller.loadUserData(
+        context: context,
+        onUpdate: () => setState(() {}),
+        defaultKitchen: 'not_set',
+      );
+    }
   }
+
+  void refresh() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: const TransparentAppBar(title: 'Profil bearbeiten'),
+      appBar: TransparentAppBar(title: context.loc.editProfile),
       body: ScreenWrapper(
         child: Column(
           children: [
             ProfileAvatar(
               assetPath: controller.selectedProfileAsset,
-              onEdit: () =>
-                  controller.pickImage(context, () => setState(() {})),
+              onEdit: () => controller.pickImage(context, mounted, refresh),
             ),
             const SizedBox(height: 24),
             EditProfileForm(
@@ -45,12 +55,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               selectedKitchen: controller.selectedKitchen,
               onKitchenChanged: (value) {
                 setState(() {
-                  controller.selectedKitchen = value ?? 'Nicht angegeben';
+                  controller.selectedKitchen = value ?? 'not_set';
                 });
               },
               onSave: () {
                 controller.saveProfile(
                   context: context,
+                  isMounted: mounted,
                   onSuccess: () => navigateToHomeAndClearStack(context),
                   showMessage: (msg) => showSuccessMessage(context, msg),
                 );

@@ -6,6 +6,7 @@ import 'package:kuvio/features/recipes/services/favorite_service.dart';
 import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';
 import 'package:kuvio/features/recipes/services/recipe_detail_service.dart';
 import 'package:kuvio/features/recipes/utils/snackbar_helper.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class RecipeDetailController {
   final BuildContext context;
@@ -33,9 +34,12 @@ class RecipeDetailController {
     final updated = await FavoriteService.toggleFavorite(user.uid, recipeId!);
     if (!context.mounted) return updated;
 
+    final loc = AppLocalizations.of(context);
     SnackbarHelper.showMessage(
       context,
-      updated ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt",
+      updated
+          ? (loc?.addedToFavorites ?? "Zu Favoriten hinzugefügt")
+          : (loc?.removedFromFavorites ?? "Aus Favoriten entfernt"),
     );
     return updated;
   }
@@ -48,33 +52,72 @@ class RecipeDetailController {
     );
   }
 
-  Future<void> addAllToShoppingList(List<Ingredient> ingredients) async {
+  Future<void> addAllToShoppingList(
+      List<Ingredient> ingredients, String lang) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || recipeId == null) return;
 
-    await ShoppingListService.addIngredients(user.uid, ingredients, recipeId!);
+    final localizedIngredients = ingredients.map((i) {
+      return Ingredient(
+        name: {
+          'de': i.name['de'] ?? '',
+          'en': i.name['en'] ?? '',
+        },
+        unit: {
+          'de': i.unit['de'] ?? '',
+          'en': i.unit['en'] ?? '',
+        },
+        quantity: i.quantity,
+      );
+    }).toList();
+
+    await ShoppingListService.addIngredients(
+        user.uid, localizedIngredients, recipeId!);
+
     if (!context.mounted) return;
 
+    final loc = AppLocalizations.of(context);
     SnackbarHelper.showMessage(
       context,
-      "Zutaten zur Einkaufsliste hinzugefügt",
+      loc?.addedAllToShoppingList ?? "Zutaten zur Einkaufsliste hinzugefügt",
     );
   }
 
-  Future<void> addSingleToShoppingList(Ingredient ingredient) async {
+  Future<void> addSingleToShoppingList(
+    BuildContext context,
+    Ingredient ingredient,
+    String lang,
+  ) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || recipeId == null) return;
 
+    final localizedIngredient = Ingredient(
+      name: {
+        'de': ingredient.name['de'] ?? '',
+        'en': ingredient.name['en'] ?? '',
+      },
+      unit: {
+        'de': ingredient.unit['de'] ?? '',
+        'en': ingredient.unit['en'] ?? '',
+      },
+      quantity: ingredient.quantity,
+    );
+
     await ShoppingListService.addSingleIngredient(
       user.uid,
-      ingredient,
+      localizedIngredient,
       recipeId!,
     );
+
     if (!context.mounted) return;
+
+    final loc = AppLocalizations.of(context);
+    final ingredientName = localizedIngredient.name[lang] ?? '';
 
     SnackbarHelper.showMessage(
       context,
-      "${ingredient.name} hinzugefügt",
+      loc?.addedSingleToShoppingList(ingredientName) ??
+          "$ingredientName hinzugefügt",
     );
   }
 }

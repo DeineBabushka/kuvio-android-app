@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class GroupedShoppingListTab extends StatelessWidget {
   const GroupedShoppingListTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {
-      return const Center(
-        child: Text('Bitte einloggen, um die Einkaufsliste zu sehen.'),
-      );
+      return Center(child: Text(loc.loginToViewShoppingList));
     }
+
+    final lang = Localizations.localeOf(context).languageCode;
 
     final itemsRef = FirebaseFirestore.instance
         .collection('shopping_list')
@@ -32,7 +34,7 @@ class GroupedShoppingListTab extends StatelessWidget {
         final docs = snapshot.data!.docs;
 
         if (docs.isEmpty) {
-          return const Center(child: Text('Einkaufsliste ist leer'));
+          return Center(child: Text(loc.shoppingListEmpty));
         }
 
         final Map<String, ShoppingListItem> groupedItems = {};
@@ -40,12 +42,12 @@ class GroupedShoppingListTab extends StatelessWidget {
         for (var doc in docs) {
           final item =
               ShoppingListItem.fromMap(doc.data() as Map<String, dynamic>);
-          final key = item.key;
+          final key = item.key(lang);
 
           if (groupedItems.containsKey(key)) {
             groupedItems[key] = ShoppingListItem(
-              name: item.name,
-              unit: item.unit,
+              nameRaw: item.nameRaw,
+              unitRaw: item.unitRaw,
               quantity: groupedItems[key]!.quantity + item.quantity,
             );
           } else {
@@ -66,7 +68,7 @@ class GroupedShoppingListTab extends StatelessWidget {
                       onChanged: (val) =>
                           setState(() => isChecked = val ?? false),
                       title: Text(
-                        '${item.quantity} ${item.unit} ${item.name}',
+                        '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
                         style: TextStyle(
                           color: Colors.white,
                           decoration: isChecked
@@ -78,9 +80,10 @@ class GroupedShoppingListTab extends StatelessWidget {
                         icon: const Icon(Icons.delete, color: Colors.redAccent),
                         onPressed: () async {
                           final matchingDocs = docs.where((doc) {
-                            final data = doc.data() as Map<String, dynamic>;
-                            return data['name'] == item.name &&
-                                data['unit'] == item.unit;
+                            final docItem = ShoppingListItem.fromMap(
+                                doc.data() as Map<String, dynamic>);
+                            return docItem.name(lang) == item.name(lang) &&
+                                docItem.unit(lang) == item.unit(lang);
                           });
 
                           for (var doc in matchingDocs) {
@@ -89,7 +92,9 @@ class GroupedShoppingListTab extends StatelessWidget {
 
                           if (!context.mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Zutat(en) entfernt")),
+                            SnackBar(
+                                content:
+                                    Text(loc.itemDeleted(item.name(lang)))),
                           );
                         },
                       ),
@@ -115,12 +120,11 @@ class GroupedShoppingListTab extends StatelessWidget {
 
                   if (!context.mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("Gesamte Einkaufsliste gelöscht")),
+                    SnackBar(content: Text(loc.shoppingListCleared)),
                   );
                 },
                 icon: const Icon(Icons.delete_forever),
-                label: const Text("Alle Zutaten löschen"),
+                label: Text(loc.deleteAllIngredients),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
                   foregroundColor: Colors.white,

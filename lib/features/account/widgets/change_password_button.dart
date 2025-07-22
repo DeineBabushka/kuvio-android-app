@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class ChangePasswordButton extends StatelessWidget {
   final bool isLoading;
@@ -20,7 +21,7 @@ class ChangePasswordButton extends StatelessWidget {
               backgroundColor: Colors.redAccent,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Passwort ändern'),
+            child: Text(context.loc.changePassword),
           );
   }
 }

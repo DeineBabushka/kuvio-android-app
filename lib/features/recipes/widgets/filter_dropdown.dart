@@ -5,6 +5,7 @@ class FilterDropdown extends StatelessWidget {
   final String? selected;
   final String label;
   final void Function(String?) onChanged;
+  final String Function(String)? itemToString;
 
   const FilterDropdown({
     super.key,
@@ -12,6 +13,7 @@ class FilterDropdown extends StatelessWidget {
     required this.selected,
     required this.label,
     required this.onChanged,
+    this.itemToString,
   });
 
   @override
@@ -29,11 +31,21 @@ class FilterDropdown extends StatelessWidget {
       icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
       items: [
         DropdownMenuItem(
-            value: null,
-            child: Text(label, style: const TextStyle(color: Colors.white))),
-        ...items.map((val) => DropdownMenuItem(
+          value: null,
+          child: Text(
+            label,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        ...items.map(
+          (val) => DropdownMenuItem(
             value: val,
-            child: Text(val, style: const TextStyle(color: Colors.white)))),
+            child: Text(
+              itemToString?.call(val) ?? val,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
       ],
       onChanged: onChanged,
     );

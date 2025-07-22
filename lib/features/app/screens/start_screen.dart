@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/screens/filter_screen.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -7,9 +8,10 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isWide = constraints.maxWidth > 600;
@@ -27,22 +29,21 @@ class StartScreen extends StatelessWidget {
                     width: isWide ? 300 : 250,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Willkommen bei Kuvio!',
-                    style: TextStyle(
+                  Text(
+                    context.loc.welcomeTitle,
+                    style: theme.textTheme.titleLarge?.copyWith(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      'Entdecke leckere Rezepte zum Nachkochen. Egal ob Anfänger oder Küchenprofi – mit Kuvio wird Kochen einfach, kreativ und lecker!',
+                      context.loc.welcomeSubtitle,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: theme.textTheme.bodyLarge?.copyWith(fontSize: 18),
                     ),
                   ),
                   SizedBox(height: size.height * 0.1),
@@ -59,15 +60,19 @@ class StartScreen extends StatelessWidget {
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(0xFF122620),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 14),
+                        horizontal: 32,
+                        vertical: 14,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      'Los geht’s',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    child: Text(
+                      context.loc.letsGo,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

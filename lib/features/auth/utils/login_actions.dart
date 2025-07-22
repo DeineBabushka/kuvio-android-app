@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/auth/services/google_auth_service.dart';
 import 'package:kuvio/shared/services/user_service.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class LoginActions {
   final UserService _userService;
@@ -14,21 +15,23 @@ class LoginActions {
     required TextEditingController emailController,
     required TextEditingController passwordController,
   }) async {
+    final loc = AppLocalizations.of(context)!;
+
     final email = emailController.text.trim();
     final password = passwordController.text;
 
     if (email.isEmpty) {
-      _showError(context, 'Bitte gib deine E-Mail-Adresse ein.');
+      _showError(context, loc.loginErrorMissingEmail);
       return;
     }
 
     if (!email.contains('@')) {
-      _showError(context, 'Bitte gib eine gültige E-Mail-Adresse ein.');
+      _showError(context, loc.loginErrorInvalidEmail);
       return;
     }
 
     if (password.isEmpty) {
-      _showError(context, 'Bitte gib dein Passwort ein.');
+      _showError(context, loc.loginErrorMissingPassword);
       return;
     }
 
@@ -42,41 +45,42 @@ class LoginActions {
       if (!context.mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Color(0xFF2E6B4D),
+        SnackBar(
+          backgroundColor: const Color(0xFF2E6B4D),
           content: Text(
-            'Erfolgreich eingeloggt',
-            style: TextStyle(color: Colors.white),
+            loc.loginSuccess,
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       );
       Navigator.pop(context);
     } on FirebaseAuthException {
       if (context.mounted) {
-        _showError(context, 'E-Mail oder Passwort ist falsch.');
+        _showError(context, loc.loginErrorWrongCredentials);
       }
     } catch (_) {
       if (context.mounted) {
-        _showError(context, 'Unbekannter Fehler ist aufgetreten.');
+        _showError(context, loc.loginErrorUnknown);
       }
     }
   }
 
   Future<void> signInWithGoogle(BuildContext context) async {
+    final loc = AppLocalizations.of(context)!;
     final result = await _googleAuthService.signInWithGoogle();
     if (!context.mounted) return;
 
     if (result.error != null) {
-      _showError(context, 'Google-Login fehlgeschlagen: ${result.error}');
+      _showError(context, '${loc.loginErrorGoogleFailed}: ${result.error}');
       return;
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Color(0xFF2E6B4D),
+      SnackBar(
+        backgroundColor: const Color(0xFF2E6B4D),
         content: Text(
-          'Erfolgreich mit Google eingeloggt',
-          style: TextStyle(color: Colors.white),
+          loc.loginGoogleSuccess,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

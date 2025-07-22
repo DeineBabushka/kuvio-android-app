@@ -4,6 +4,7 @@ import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/change_password_button.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:kuvio/features/account/widgets/password_fields.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class ChangePasswordForm extends StatefulWidget {
   const ChangePasswordForm({super.key});
@@ -32,11 +33,12 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
     if (!mounted) return;
 
     final messenger = ScaffoldMessenger.of(context);
+    final loc = AppLocalizations.of(context)!;
 
     if (result == null) {
       messenger.showSnackBar(
-        const SnackBar(
-          content: Text('Passwort erfolgreich geändert.'),
+        SnackBar(
+          content: Text(loc.passwordChanged),
           backgroundColor: Colors.green,
         ),
       );

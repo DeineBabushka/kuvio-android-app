@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class EditProfileButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -11,9 +12,9 @@ class EditProfileButton extends StatelessWidget {
       child: TextButton.icon(
         onPressed: onTap,
         icon: const Icon(Icons.edit, color: Colors.white70),
-        label: const Text(
-          "Profil bearbeiten",
-          style: TextStyle(color: Colors.white70, fontSize: 18),
+        label: Text(
+          context.loc.editProfile,
+          style: const TextStyle(color: Colors.white70, fontSize: 18),
         ),
       ),
     );

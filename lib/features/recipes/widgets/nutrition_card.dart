@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class NutritionCard extends StatelessWidget {
   final int calories;
@@ -20,11 +21,13 @@ class NutritionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
     final values = [
-      "🔥 Kalorien: $calories kcal",
-      "💪 Protein: $protein g",
-      "🍞 Kohlenhydrate: $carbs g",
-      "🧈 Fett: $fat g",
+      "🔥 ${loc?.nutritionCalories ?? 'Kalorien'}: $calories kcal",
+      "💪 ${loc?.nutritionProtein ?? 'Protein'}: $protein g",
+      "🍞 ${loc?.nutritionCarbs ?? 'Kohlenhydrate'}: $carbs g",
+      "🧈 ${loc?.nutritionFat ?? 'Fett'}: $fat g",
     ];
 
     return Column(

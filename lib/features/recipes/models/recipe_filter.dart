@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 
 class RecipeFilter {
@@ -11,12 +12,22 @@ class RecipeFilter {
     this.searchQuery = '',
   });
 
-  List<Recipe> apply(List<Recipe> allRecipes) {
+  List<Recipe> apply(List<Recipe> allRecipes, BuildContext context) {
+    const filterLang = 'de';
+
+    final uiLang = Localizations.localeOf(context).languageCode;
+
     return allRecipes.where((recipe) {
-      final matchesDiet = recipe.dietTypes.contains(selectedDiet);
-      final matchesCategory = recipe.categories.contains(selectedCategory);
+      final title = recipe.title[uiLang]?.toLowerCase() ?? '';
+      final diets = recipe.dietTypes[filterLang] ?? <String>[];
+      final categories = recipe.categories[filterLang] ?? <String>[];
+
+      final matchesDiet = selectedDiet.isEmpty || diets.contains(selectedDiet);
+      final matchesCategory =
+          selectedCategory.isEmpty || categories.contains(selectedCategory);
       final matchesSearch =
-          recipe.title.toLowerCase().contains(searchQuery.toLowerCase());
+          searchQuery.isEmpty || title.contains(searchQuery.toLowerCase());
+
       return matchesDiet && matchesCategory && matchesSearch;
     }).toList();
   }

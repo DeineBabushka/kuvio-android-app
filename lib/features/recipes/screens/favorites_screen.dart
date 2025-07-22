@@ -3,6 +3,7 @@ import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/services/favorites_controller.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_filter_bar.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_recipe_card.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 
 class FavoritesScreen extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -38,10 +39,16 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final timestampColor = isDark ? Colors.white54 : Colors.black54;
     final cardColor = isDark ? theme.cardColor : Colors.white;
 
+    final loc = AppLocalizations.of(context);
+
+    final filteredFavorites = controller.filteredFavorites(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meine Favoriten',
-            style: TextStyle(color: Colors.white)),
+        title: Text(
+          loc?.favoritesTitle ?? 'Meine Favoriten',
+          style: const TextStyle(color: Colors.white),
+        ),
         backgroundColor: backgroundColor,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -58,18 +65,19 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
                 const SizedBox(height: 8),
                 Expanded(
-                  child: controller.filteredFavorites().isEmpty
-                      ? const Center(
+                  child: filteredFavorites.isEmpty
+                      ? Center(
                           child: Text(
-                            'Keine Favoriten vorhanden.',
-                            style: TextStyle(color: Colors.white),
+                            loc?.noFavoritesFound ??
+                                'Keine Favoriten vorhanden.',
+                            style: const TextStyle(color: Colors.white),
                           ),
                         )
                       : ListView.builder(
                           padding: const EdgeInsets.all(16),
-                          itemCount: controller.filteredFavorites().length,
+                          itemCount: filteredFavorites.length,
                           itemBuilder: (ctx, i) {
-                            final item = controller.filteredFavorites()[i];
+                            final item = filteredFavorites[i];
                             return FavoriteRecipeCard(
                               item: item,
                               cardColor: cardColor,
