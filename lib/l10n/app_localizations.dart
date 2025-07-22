@@ -232,6 +232,12 @@ abstract class AppLocalizations {
 
   String get accountDeletedSuccess;
   String get deletionFailed;
+
+  String get resetPasswordTitle;
+  String get emailAddressLabel;
+  String get submit;
+  String get resetEmailSent;
+  String get error;
 }
 
 class _AppLocalizationsDelegate

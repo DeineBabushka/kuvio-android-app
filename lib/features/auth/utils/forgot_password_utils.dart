@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 Future<void> showForgotPasswordDialog(BuildContext context) async {
   final emailController = TextEditingController();
@@ -7,20 +8,22 @@ Future<void> showForgotPasswordDialog(BuildContext context) async {
   await showDialog(
     context: context,
     builder: (context) {
+      final loc = context.loc;
+
       return AlertDialog(
-        title: const Text('Passwort zurücksetzen'),
+        title: Text(loc.resetPasswordTitle),
         content: TextField(
           controller: emailController,
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(color: Colors.black),
-          decoration: const InputDecoration(
-            labelText: 'E-Mail-Adresse',
+          decoration: InputDecoration(
+            labelText: loc.emailAddressLabel,
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Abbrechen'),
+            child: Text(loc.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -31,20 +34,20 @@ Future<void> showForgotPasswordDialog(BuildContext context) async {
                 if (context.mounted) {
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('E-Mail zum Zurücksetzen wurde gesendet.'),
+                    SnackBar(
+                      content: Text(loc.resetEmailSent),
                     ),
                   );
                 }
               } catch (e) {
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Fehler: ${e.toString()}')),
+                    SnackBar(content: Text('${loc.error}: $e')),
                   );
                 }
               }
             },
-            child: const Text('Absenden'),
+            child: Text(loc.submit),
           ),
         ],
       );
