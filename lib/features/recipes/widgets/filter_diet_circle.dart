@@ -21,20 +21,24 @@ class DietFilterCircle extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 40,
+            radius: 34,
             backgroundImage: AssetImage(assetPath),
             backgroundColor:
                 isSelected ? const Color(0xFF2E6B4D) : Colors.transparent,
           ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? const Color(0xFF2E6B4D) : textColor,
-              fontSize: 14,
+          const SizedBox(height: 6),
+          Flexible(
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                overflow: TextOverflow.ellipsis,
+                color: isSelected ? const Color(0xFF2E6B4D) : textColor,
+              ),
             ),
           ),
         ],

@@ -119,7 +119,11 @@ final _lightTheme = ThemeData(
   textTheme: const TextTheme(
     bodyMedium: TextStyle(color: Colors.white),
     bodyLarge: TextStyle(color: Colors.white),
-    titleLarge: TextStyle(color: Color(0xFF122620)),
+    titleLarge: TextStyle(
+      color: Colors.white,
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+    ),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xFF122620),

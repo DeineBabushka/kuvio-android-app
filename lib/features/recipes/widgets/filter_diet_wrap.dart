@@ -42,24 +42,31 @@ class DietFilterWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final filterOptions = FavoritesFilter();
+    final diets = filterOptions.availableDietTypes;
     final textColor = Colors.white;
     final loc = AppLocalizations.of(context);
 
-    return Wrap(
-      spacing: 20,
-      runSpacing: 20,
-      alignment: WrapAlignment.center,
-      children: [
-        for (var diet in filterOptions.availableDietTypes)
-          DietFilterCircle(
-            assetPath:
-                'assets/${isDark ? dietTypeToAssetName[diet]!.replaceAll('.png', '_dark.png') : dietTypeToAssetName[diet]!}',
-            label: localizeDiet(diet, loc),
-            isSelected: selectedDiet == diet,
-            textColor: textColor,
-            onTap: () => onSelect(diet),
-          ),
-      ],
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 0.68,
+      ),
+      itemCount: diets.length,
+      itemBuilder: (context, index) {
+        final diet = diets[index];
+        return DietFilterCircle(
+          assetPath:
+              'assets/${isDark ? dietTypeToAssetName[diet]!.replaceAll('.png', '_dark.png') : dietTypeToAssetName[diet]!}',
+          label: localizeDiet(diet, loc),
+          isSelected: selectedDiet == diet,
+          textColor: textColor,
+          onTap: () => onSelect(diet),
+        );
+      },
     );
   }
 }
