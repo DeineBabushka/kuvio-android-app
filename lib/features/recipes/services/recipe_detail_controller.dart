@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/features/recipes/services/favorite_service.dart';
+import 'package:kuvio/favorites/services/favorite_service.dart';
 import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';
 import 'package:kuvio/features/recipes/services/recipe_detail_service.dart';
 import 'package:kuvio/features/recipes/utils/snackbar_helper.dart';
@@ -102,6 +102,10 @@ class RecipeDetailController {
       user.uid,
       localizedIngredients,
       recipeId!,
+      {
+        'de': recipe.title['de'] ?? '',
+        'en': recipe.title['en'] ?? '',
+      },
     );
 
     if (!context.mounted) return;
@@ -139,6 +143,10 @@ class RecipeDetailController {
       user.uid,
       localizedIngredient,
       recipeId!,
+      {
+        'de': recipe.title['de'] ?? '',
+        'en': recipe.title['en'] ?? '',
+      },
     );
 
     if (!context.mounted) return;

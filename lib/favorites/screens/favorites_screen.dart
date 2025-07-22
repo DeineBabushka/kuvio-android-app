@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/features/recipes/services/favorites_controller.dart';
-import 'package:kuvio/features/recipes/widgets/favorite_filter_bar.dart';
+import 'package:kuvio/favorites/services/favorites_controller.dart';
+import 'package:kuvio/favorites/widgets/favorite_filter_bar.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_recipe_card.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 

@@ -8,6 +8,7 @@ class ShoppingListService {
     String uid,
     List<Ingredient> ingredients,
     String recipeId,
+    Map<String, String> recipeTitle,
   ) async {
     final itemsRef =
         _db.collection('shopping_list').doc(uid).collection('items');
@@ -28,6 +29,7 @@ class ShoppingListService {
         'quantity': ingredient.quantity,
         'addedAt': FieldValue.serverTimestamp(),
         'fromRecipeId': recipeId,
+        'recipeTitle': recipeTitle,
       });
     }
   }
@@ -36,7 +38,8 @@ class ShoppingListService {
     String uid,
     Ingredient ingredient,
     String recipeId,
+    Map<String, String> recipeTitle,
   ) async {
-    await addIngredients(uid, [ingredient], recipeId);
+    await addIngredients(uid, [ingredient], recipeId, recipeTitle);
   }
 }

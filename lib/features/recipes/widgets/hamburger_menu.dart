@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/features/account/screens/account_screen.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
-import 'package:kuvio/features/recipes/screens/favorites_screen.dart';
+import 'package:kuvio/favorites/screens/favorites_screen.dart';
 import 'package:kuvio/features/admin/screens/admin_dashboard_screen.dart';
 import 'package:kuvio/features/shopping_list/screens/shopping_list_screen.dart';
 import 'package:kuvio/features/comments/screens/comment_screen.dart';
