@@ -86,7 +86,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
             FilterTitleText(
               text: loc?.whatToCook ?? "Was möchtest du heute kochen?",
               fontSize: isWide ? 28 : 24,
-              color: theme.colorScheme.onPrimary,
+              color: theme.textTheme.bodyLarge?.color ?? Colors.white,
             ),
             const SizedBox(height: 20),
             DietFilterWrap(
