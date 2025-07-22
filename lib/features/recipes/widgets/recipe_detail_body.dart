@@ -13,18 +13,19 @@ class RecipeDetailBody extends StatelessWidget {
   final RecipeDetailController controller;
   final ValueChanged<int> onPortionChange;
   final VoidCallback onToggleFavorite;
+  final bool isOnline;
 
-  const RecipeDetailBody({
-    super.key,
-    required this.recipe,
-    required this.heroTag,
-    required this.isFavorite,
-    required this.portionCount,
-    required this.isLoggedIn,
-    required this.controller,
-    required this.onPortionChange,
-    required this.onToggleFavorite,
-  });
+  const RecipeDetailBody(
+      {super.key,
+      required this.recipe,
+      required this.heroTag,
+      required this.isFavorite,
+      required this.portionCount,
+      required this.isLoggedIn,
+      required this.controller,
+      required this.onPortionChange,
+      required this.onToggleFavorite,
+      required this.isOnline});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class RecipeDetailBody extends StatelessWidget {
             isLoggedIn: isLoggedIn,
             onToggleFavorite: onToggleFavorite,
             lang: lang,
+            isOnline: isOnline,
           ),
           SliverToBoxAdapter(
             child: Padding(

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/features/shopping_list/services/grouped_shopping_list_service.dart';
 import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class ByRecipeShoppingListTab extends StatelessWidget {
   const ByRecipeShoppingListTab({super.key});
@@ -64,6 +65,8 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
                             onPressed: () async {
+                              if (blockIfOffline(context)) return;
+
                               await GroupedShoppingListService.deleteSingleItem(
                                 docs,
                                 recipeId,
@@ -87,6 +90,8 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                         child: Center(
                           child: TextButton.icon(
                             onPressed: () async {
+                              if (blockIfOffline(context)) return;
+
                               await GroupedShoppingListService
                                   .deleteItemsForRecipe(docs, recipeId);
 

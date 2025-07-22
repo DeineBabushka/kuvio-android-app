@@ -10,16 +10,17 @@ class RecipeSliverAppBar extends StatelessWidget {
   final bool isLoggedIn;
   final VoidCallback onToggleFavorite;
   final String lang;
+  final bool isOnline;
 
-  const RecipeSliverAppBar({
-    super.key,
-    required this.recipe,
-    required this.heroTag,
-    required this.isFavorite,
-    required this.isLoggedIn,
-    required this.onToggleFavorite,
-    required this.lang,
-  });
+  const RecipeSliverAppBar(
+      {super.key,
+      required this.recipe,
+      required this.heroTag,
+      required this.isFavorite,
+      required this.isLoggedIn,
+      required this.onToggleFavorite,
+      required this.lang,
+      required this.isOnline});
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +108,7 @@ class RecipeSliverAppBar extends StatelessWidget {
           shareText: shareText,
           isFavorite: isFavorite,
           isLoggedIn: isLoggedIn,
+          isOnline: isOnline,
           onToggleFavorite: onToggleFavorite,
         ),
       ],

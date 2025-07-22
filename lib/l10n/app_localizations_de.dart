@@ -2,8 +2,6 @@
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
-// ignore_for_file: type=lint
-
 class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
@@ -193,4 +191,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get noCommentsFound => 'Keine Kommentare gefunden.';
   String get noDescription => 'Keine Beschreibung';
   String get selectProfileImage => 'Profilbild auswählen';
+  @override
+  String get profileOfflineNotAvailable =>
+      'Profilinformationen sind offline nicht verfügbar.';
 }

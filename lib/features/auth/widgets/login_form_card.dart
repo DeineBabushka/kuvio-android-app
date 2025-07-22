@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class LoginFormCard extends StatelessWidget {
   final TextEditingController emailController;
@@ -109,7 +110,10 @@ class LoginFormCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: onLogin,
+            onPressed: () {
+              if (blockIfOffline(context)) return;
+              onLogin();
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: buttonBackground,
               foregroundColor: buttonTextColor,
@@ -127,7 +131,10 @@ class LoginFormCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton.icon(
-            onPressed: onGoogleLogin,
+            onPressed: () {
+              if (blockIfOffline(context)) return;
+              onGoogleLogin();
+            },
             icon: const Icon(Icons.login),
             label: Text(loc.loginGoogle),
             style: ElevatedButton.styleFrom(
@@ -140,7 +147,10 @@ class LoginFormCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           GestureDetector(
-            onTap: onNavigateToRegister,
+            onTap: () {
+              if (blockIfOffline(context)) return;
+              onNavigateToRegister();
+            },
             child: RichText(
               text: TextSpan(
                 text: loc.loginNoAccount,

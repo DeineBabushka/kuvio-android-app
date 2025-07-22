@@ -246,6 +246,7 @@ abstract class AppLocalizations {
   String get noDescription;
 
   String get selectProfileImage;
+  String get profileOfflineNotAvailable;
 }
 
 class _AppLocalizationsDelegate
