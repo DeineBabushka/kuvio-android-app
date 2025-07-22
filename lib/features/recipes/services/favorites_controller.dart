@@ -37,8 +37,10 @@ class FavoritesController {
     onUpdate();
   }
 
-  List<FavoriteItem> filteredFavorites() {
-    return allFavorites.where((f) => filter.matchesRecipe(f.recipe)).toList();
+  List<FavoriteItem> filteredFavorites(BuildContext context) {
+    return allFavorites
+        .where((f) => filter.matchesRecipe(f.recipe, context))
+        .toList();
   }
 
   void updateFilter(FavoritesFilter newFilter, VoidCallback onUpdate) {

@@ -22,6 +22,10 @@ class RecipeCard extends StatelessWidget {
     final heroTag = 'recipe-image-${recipe.id}';
     final loc = AppLocalizations.of(context);
 
+    final recipeTitle = recipe.getTitle(context);
+    final prepTime = recipe.getPreparationTime(context);
+    final portionsLabel = loc?.portionsLabel ?? 'Portionen';
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -70,7 +74,7 @@ class RecipeCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      recipe.title,
+                      recipeTitle,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -79,7 +83,7 @@ class RecipeCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${recipe.portions} ${loc?.portionsLabel ?? 'Portionen'} • ${recipe.preparationTime}',
+                      '${recipe.portions} $portionsLabel • $prepTime',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

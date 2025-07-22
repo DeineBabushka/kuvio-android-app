@@ -1,7 +1,7 @@
 class Ingredient {
   final double? quantity;
-  final String unit;
-  final String name;
+  final Map<String, String> unit;
+  final Map<String, String> name;
 
   Ingredient({
     required this.quantity,
@@ -10,16 +10,11 @@ class Ingredient {
   });
 
   factory Ingredient.fromMap(Map<String, dynamic> map) {
-    final unitData = map['unit'];
-    final nameData = map['name'];
-
     return Ingredient(
       quantity:
           map['quantity'] != null ? (map['quantity'] as num).toDouble() : null,
-      unit:
-          (unitData is Map) ? unitData['de'] ?? '' : unitData?.toString() ?? '',
-      name:
-          (nameData is Map) ? nameData['de'] ?? '' : nameData?.toString() ?? '',
+      unit: Map<String, String>.from(map['unit'] ?? {}),
+      name: Map<String, String>.from(map['name'] ?? {}),
     );
   }
 
@@ -30,4 +25,7 @@ class Ingredient {
       'name': name,
     };
   }
+
+  String getName(String lang) => name[lang] ?? '';
+  String getUnit(String lang) => unit[lang] ?? '';
 }

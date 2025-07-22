@@ -24,6 +24,9 @@ class _CommentCardState extends State<CommentCard> {
     final cardColor = const Color(0xFF2C2C2E);
     final cwr = widget.comment.data;
 
+    final lang = Localizations.localeOf(context).languageCode;
+    final recipeTitle = cwr.recipe.title[lang] ?? 'Unbekanntes Rezept';
+
     return GestureDetector(
       onTap: () {
         if (cwr.recipe.id.isNotEmpty) {
@@ -48,9 +51,7 @@ class _CommentCardState extends State<CommentCard> {
         child: ListTile(
           leading: _buildRecipeImage(cwr.recipe.image),
           title: Text(
-            cwr.recipe.title.isNotEmpty
-                ? cwr.recipe.title
-                : 'Unbekanntes Rezept',
+            recipeTitle.isNotEmpty ? recipeTitle : 'Unbekanntes Rezept',
             style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.bold,

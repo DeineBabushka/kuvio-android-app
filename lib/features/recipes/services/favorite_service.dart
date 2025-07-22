@@ -76,15 +76,30 @@ class FavoriteService {
       final recipe = allRecipes.firstWhere(
         (r) => r.id == recipeId,
         orElse: () => Recipe(
-          id: '',
-          title: 'Unbekanntes Rezept',
+          id: recipeId,
+          title: {
+            'de': 'Unbekanntes Rezept',
+            'en': 'Unknown Recipe',
+          },
           image: '',
           portions: 0,
           ingredients: [],
-          instructions: [],
-          dietTypes: [],
-          categories: [],
-          preparationTime: '',
+          instructions: {
+            'de': ['Keine Anweisungen verfügbar.'],
+            'en': ['No instructions available.'],
+          },
+          dietTypes: {
+            'de': [],
+            'en': [],
+          },
+          categories: {
+            'de': [],
+            'en': [],
+          },
+          preparationTime: {
+            'de': '',
+            'en': '',
+          },
           calories: 0,
           proteinG: 0,
           carbohydratesG: 0,

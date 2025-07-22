@@ -4,10 +4,11 @@ import 'package:kuvio/features/recipes/models/recipe_filter.dart';
 import 'package:kuvio/features/recipes/widgets/bottom_nav.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_card.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/constants/filters.dart'; // Für Label-Lokalisierung
 
 class FilteredRecipesScreen extends StatefulWidget {
-  final String selectedDiet;
-  final String selectedCategory;
+  final String selectedDiet; // z. B. 'vegan'
+  final String selectedCategory; // z. B. 'main'
   final List<Recipe> allRecipes;
 
   const FilteredRecipesScreen({
@@ -50,6 +51,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final lang = Localizations.localeOf(context).languageCode;
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
 
@@ -62,7 +64,12 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
         ? theme.textTheme.bodyMedium?.color ?? Colors.white70
         : Colors.black87;
 
-    final filteredRecipes = filter.apply(widget.allRecipes);
+    final filteredRecipes = filter.apply(widget.allRecipes, context);
+
+    final localizedDiet =
+        dietTypeLabels[widget.selectedDiet]?[lang] ?? widget.selectedDiet;
+    final localizedCategory = categoryLabels[widget.selectedCategory]?[lang] ??
+        widget.selectedCategory;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -98,6 +105,13 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
                   borderSide: BorderSide.none,
                 ),
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              '$localizedDiet • $localizedCategory',
+              style: TextStyle(color: textColor.withAlpha(160)),
             ),
           ),
           const SizedBox(height: 8),

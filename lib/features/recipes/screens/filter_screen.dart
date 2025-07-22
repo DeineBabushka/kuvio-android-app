@@ -91,7 +91,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
             const SizedBox(height: 20),
             DietFilterWrap(
               selectedDiet: selectedDiet,
-              onSelect: (diet) => setState(() => selectedDiet = diet),
+              onSelect: (dietKey) => setState(() => selectedDiet = dietKey),
               isDark: isDark,
             ),
             const SizedBox(height: 30),
@@ -103,8 +103,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
             const SizedBox(height: 10),
             CategoryFilterWrap(
               selectedCategory: selectedCategory,
-              onSelect: (category) =>
-                  setState(() => selectedCategory = category),
+              onSelect: (catKey) => setState(() => selectedCategory = catKey),
               textColor: btnColor,
               theme: theme,
             ),

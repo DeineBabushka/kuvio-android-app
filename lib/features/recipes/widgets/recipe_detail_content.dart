@@ -18,7 +18,8 @@ class RecipeDetailContent extends StatelessWidget {
   final int portionCount;
   final ValueChanged<int> onPortionChange;
   final VoidCallback onAddAll;
-  final void Function(Ingredient) onAddSingle;
+  final void Function(BuildContext, Ingredient) onAddSingle;
+  final String lang;
 
   const RecipeDetailContent({
     super.key,
@@ -31,11 +32,14 @@ class RecipeDetailContent extends StatelessWidget {
     required this.onPortionChange,
     required this.onAddAll,
     required this.onAddSingle,
+    required this.lang,
   });
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final instructions = recipe.instructions[lang] ?? [];
+    final prepTime = recipe.preparationTime[lang] ?? '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +55,7 @@ class RecipeDetailContent extends StatelessWidget {
               textColor: textColor,
             ),
             Text(
-              '${loc?.durationLabel ?? 'Dauer'}: ${recipe.preparationTime}',
+              '${loc?.durationLabel ?? 'Dauer'}: $prepTime',
               style: TextStyle(color: textColor, fontSize: 16),
             ),
           ],
@@ -60,7 +64,10 @@ class RecipeDetailContent extends StatelessWidget {
         Text(
           loc?.ingredientsLabel ?? 'Zutaten',
           style: TextStyle(
-              color: textColor, fontSize: 22, fontWeight: FontWeight.w700),
+            color: textColor,
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 10),
         IngredientList(
@@ -76,11 +83,14 @@ class RecipeDetailContent extends StatelessWidget {
         Text(
           loc?.instructionsLabel ?? 'Zubereitung',
           style: TextStyle(
-              color: textColor, fontSize: 22, fontWeight: FontWeight.w700),
+            color: textColor,
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 10),
         InstructionList(
-          instructions: recipe.instructions,
+          instructions: instructions,
           textColor: textColor,
           cardColor: cardColor,
         ),
@@ -88,7 +98,10 @@ class RecipeDetailContent extends StatelessWidget {
         Text(
           loc?.nutritionPerPortionLabel ?? 'Nährwerte (pro Portion)',
           style: TextStyle(
-              color: textColor, fontSize: 22, fontWeight: FontWeight.w700),
+            color: textColor,
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 10),
         NutritionCard(

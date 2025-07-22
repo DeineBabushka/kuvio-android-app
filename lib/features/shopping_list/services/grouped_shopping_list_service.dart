@@ -14,15 +14,24 @@ class GroupedShoppingListService {
 
   static Map<String, Map<String, Map<String, dynamic>>> groupItemsByRecipe(
     List<QueryDocumentSnapshot> docs,
+    String lang,
   ) {
     final Map<String, Map<String, Map<String, dynamic>>> grouped = {};
 
     for (var doc in docs) {
       final data = doc.data() as Map<String, dynamic>;
       final recipeId = data['fromRecipeId'] ?? 'Unbekannt';
-      final name = data['name'];
-      final unit = data['unit'];
+      final nameRaw = data['name'];
+      final unitRaw = data['unit'];
       final quantity = (data['quantity'] as num?)?.toDouble() ?? 0.0;
+
+      final name = nameRaw is String
+          ? nameRaw
+          : (nameRaw?[lang] ?? nameRaw?['en'] ?? nameRaw?['de'] ?? '???');
+
+      final unit = unitRaw is String
+          ? unitRaw
+          : (unitRaw?[lang] ?? unitRaw?['en'] ?? unitRaw?['de'] ?? '');
 
       if (name == null || unit == null) continue;
 
@@ -45,6 +54,7 @@ class GroupedShoppingListService {
 
   static Future<Map<String, String>> loadRecipeTitles(
     Iterable<String> ids,
+    String lang,
   ) async {
     final Map<String, String> titles = {};
 
@@ -57,9 +67,19 @@ class GroupedShoppingListService {
       try {
         final doc = await _db.collection('recipes').doc(id).get();
         final data = doc.data();
-        titles[id] = data != null && data['title'] != null
-            ? data['title'] as String
-            : 'Rezept ohne Titel';
+
+        if (data != null && data['title'] != null) {
+          final titleRaw = data['title'];
+          final title = titleRaw is String
+              ? titleRaw
+              : (titleRaw?[lang] ??
+                  titleRaw?['en'] ??
+                  titleRaw?['de'] ??
+                  '???');
+          titles[id] = title;
+        } else {
+          titles[id] = 'Rezept ohne Titel';
+        }
       } catch (_) {
         titles[id] = 'Fehler beim Laden';
       }
@@ -94,9 +114,21 @@ class GroupedShoppingListService {
   ) async {
     final toDelete = docs.where((doc) {
       final data = doc.data() as Map<String, dynamic>;
+
+      final nameRaw = data['name'];
+      final unitRaw = data['unit'];
+
+      final resolvedName = nameRaw is String
+          ? nameRaw
+          : (nameRaw?['de'] ?? nameRaw?['en'] ?? '');
+
+      final resolvedUnit = unitRaw is String
+          ? unitRaw
+          : (unitRaw?['de'] ?? unitRaw?['en'] ?? '');
+
       return data['fromRecipeId'] == recipeId &&
-          data['name'] == name &&
-          data['unit'] == unit;
+          resolvedName == name &&
+          resolvedUnit == unit;
     });
 
     for (final doc in toDelete) {

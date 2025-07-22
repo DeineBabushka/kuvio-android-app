@@ -19,6 +19,8 @@ class ByRecipeShoppingListTab extends StatelessWidget {
       );
     }
 
+    final lang = Localizations.localeOf(context).languageCode;
+
     return StreamBuilder<QuerySnapshot>(
       stream: GroupedShoppingListService.getUserShoppingItemsStream(user.uid),
       builder: (context, snapshot) {
@@ -31,10 +33,12 @@ class ByRecipeShoppingListTab extends StatelessWidget {
           return Center(child: Text(loc.shoppingListEmpty));
         }
 
-        final grouped = GroupedShoppingListService.groupItemsByRecipe(docs);
+        final grouped =
+            GroupedShoppingListService.groupItemsByRecipe(docs, lang);
 
         return FutureBuilder<Map<String, String>>(
-          future: GroupedShoppingListService.loadRecipeTitles(grouped.keys),
+          future:
+              GroupedShoppingListService.loadRecipeTitles(grouped.keys, lang),
           builder: (context, titleSnapshot) {
             final recipeTitles = titleSnapshot.data ?? {};
 
@@ -54,7 +58,8 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                       ...items.map((item) {
                         return ListTile(
                           title: Text(
-                              '${item.quantity} ${item.unit} ${item.name}'),
+                            '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
+                          ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
@@ -62,16 +67,15 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               await GroupedShoppingListService.deleteSingleItem(
                                 docs,
                                 recipeId,
-                                item.name,
-                                item.unit,
+                                item.name(lang),
+                                item.unit(lang),
                               );
 
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                    loc.itemDeleted(item.name),
-                                  ),
+                                  content:
+                                      Text(loc.itemDeleted(item.name(lang))),
                                 ),
                               );
                             },
@@ -89,9 +93,8 @@ class ByRecipeShoppingListTab extends StatelessWidget {
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                    loc.recipeItemsDeleted(title),
-                                  ),
+                                  content: Text(loc.recipeItemsDeleted(
+                                      recipeTitles[recipeId] ?? recipeId)),
                                 ),
                               );
                             },

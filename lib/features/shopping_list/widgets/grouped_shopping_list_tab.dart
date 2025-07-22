@@ -13,10 +13,10 @@ class GroupedShoppingListTab extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {
-      return Center(
-        child: Text(loc.loginToViewShoppingList),
-      );
+      return Center(child: Text(loc.loginToViewShoppingList));
     }
+
+    final lang = Localizations.localeOf(context).languageCode;
 
     final itemsRef = FirebaseFirestore.instance
         .collection('shopping_list')
@@ -42,12 +42,12 @@ class GroupedShoppingListTab extends StatelessWidget {
         for (var doc in docs) {
           final item =
               ShoppingListItem.fromMap(doc.data() as Map<String, dynamic>);
-          final key = item.key;
+          final key = item.key(lang);
 
           if (groupedItems.containsKey(key)) {
             groupedItems[key] = ShoppingListItem(
-              name: item.name,
-              unit: item.unit,
+              nameRaw: item.nameRaw,
+              unitRaw: item.unitRaw,
               quantity: groupedItems[key]!.quantity + item.quantity,
             );
           } else {
@@ -68,7 +68,7 @@ class GroupedShoppingListTab extends StatelessWidget {
                       onChanged: (val) =>
                           setState(() => isChecked = val ?? false),
                       title: Text(
-                        '${item.quantity} ${item.unit} ${item.name}',
+                        '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
                         style: TextStyle(
                           color: Colors.white,
                           decoration: isChecked
@@ -80,9 +80,10 @@ class GroupedShoppingListTab extends StatelessWidget {
                         icon: const Icon(Icons.delete, color: Colors.redAccent),
                         onPressed: () async {
                           final matchingDocs = docs.where((doc) {
-                            final data = doc.data() as Map<String, dynamic>;
-                            return data['name'] == item.name &&
-                                data['unit'] == item.unit;
+                            final docItem = ShoppingListItem.fromMap(
+                                doc.data() as Map<String, dynamic>);
+                            return docItem.name(lang) == item.name(lang) &&
+                                docItem.unit(lang) == item.unit(lang);
                           });
 
                           for (var doc in matchingDocs) {
@@ -91,7 +92,9 @@ class GroupedShoppingListTab extends StatelessWidget {
 
                           if (!context.mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(loc.itemDeleted(item.name))),
+                            SnackBar(
+                                content:
+                                    Text(loc.itemDeleted(item.name(lang)))),
                           );
                         },
                       ),

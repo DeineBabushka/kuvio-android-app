@@ -52,11 +52,21 @@ class RecipeDetailController {
     );
   }
 
-  Future<void> addAllToShoppingList(List<Ingredient> ingredients) async {
+  Future<void> addAllToShoppingList(
+      List<Ingredient> ingredients, String lang) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || recipeId == null) return;
 
-    await ShoppingListService.addIngredients(user.uid, ingredients, recipeId!);
+    final localizedIngredients = ingredients.map((i) {
+      return Ingredient(
+        name: {lang: i.name[lang] ?? i.name['en'] ?? ''},
+        unit: {lang: i.unit[lang] ?? i.unit['en'] ?? ''},
+        quantity: i.quantity,
+      );
+    }).toList();
+
+    await ShoppingListService.addIngredients(
+        user.uid, localizedIngredients, recipeId!);
     if (!context.mounted) return;
 
     final loc = AppLocalizations.of(context);
@@ -66,22 +76,34 @@ class RecipeDetailController {
     );
   }
 
-  Future<void> addSingleToShoppingList(Ingredient ingredient) async {
+  Future<void> addSingleToShoppingList(
+    BuildContext context,
+    Ingredient ingredient,
+    String lang,
+  ) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || recipeId == null) return;
 
+    final localizedIngredient = Ingredient(
+      name: {lang: ingredient.name[lang] ?? ingredient.name['en'] ?? ''},
+      unit: {lang: ingredient.unit[lang] ?? ingredient.unit['en'] ?? ''},
+      quantity: ingredient.quantity,
+    );
+
     await ShoppingListService.addSingleIngredient(
       user.uid,
-      ingredient,
+      localizedIngredient,
       recipeId!,
     );
     if (!context.mounted) return;
 
     final loc = AppLocalizations.of(context);
+    final ingredientName = localizedIngredient.name[lang] ?? '';
+
     SnackbarHelper.showMessage(
       context,
-      loc?.addedSingleToShoppingList(ingredient.name) ??
-          "${ingredient.name} hinzugefügt",
+      loc?.addedSingleToShoppingList(ingredientName) ??
+          "$ingredientName hinzugefügt",
     );
   }
 }

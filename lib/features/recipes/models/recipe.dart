@@ -1,16 +1,17 @@
-import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:kuvio/shared/models/ingredient.dart';
 
 class Recipe {
   final String id;
-  final String title;
+  final Map<String, String> title;
   final String image;
   final int portions;
   final List<Ingredient> ingredients;
-  final List<String> instructions;
-  final List<String> dietTypes;
-  final List<String> categories;
-  final String preparationTime;
+  final Map<String, List<String>> instructions;
+  final Map<String, List<String>> dietTypes;
+  final Map<String, List<String>> categories;
+  final Map<String, String> preparationTime;
   final int calories;
   final int proteinG;
   final int carbohydratesG;
@@ -35,31 +36,41 @@ class Recipe {
   factory Recipe.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
 
-    final titleData = data['title'];
-    final instructionsData = data['instructions'];
-    final dietTypesData = data['diet_types'];
-    final categoriesData = data['categories'];
-    final prepTimeData = data['preparation_time'];
-
     return Recipe(
       id: doc.id,
-      title: titleData is Map ? titleData['de'] ?? '' : titleData ?? '',
+      title: Map<String, String>.from(data['title'] ?? {}),
       image: data['image'] ?? '',
       portions: data['portions'] ?? 0,
-      ingredients: (data['ingredients'] as List<dynamic>)
-          .map((item) => Ingredient.fromMap(item))
-          .toList(),
-      instructions: instructionsData is Map
-          ? List<String>.from(instructionsData['de'] ?? [])
-          : [],
-      dietTypes: dietTypesData is Map
-          ? List<String>.from(dietTypesData['de'] ?? [])
-          : [],
-      categories: categoriesData is Map
-          ? List<String>.from(categoriesData['de'] ?? [])
-          : [],
-      preparationTime:
-          prepTimeData is Map ? prepTimeData['de'] ?? '' : prepTimeData ?? '',
+      ingredients: (data['ingredients'] as List<dynamic>).map((item) {
+        try {
+          return Ingredient.fromMap(item);
+        } catch (e) {
+          debugPrint(
+              '❌ Fehler beim Parsen von Ingredient in Rezept ${doc.id}: $item\n$e');
+          // Optional: Du kannst hier stattdessen einen Dummy-Eintrag zurückgeben
+          return Ingredient(
+            quantity: 0,
+            name: {'de': 'Unbekannt', 'en': 'Unknown'},
+            unit: {'de': '-', 'en': '-'},
+          );
+        }
+      }).toList(),
+      instructions: Map<String, List<String>>.fromEntries(
+        (data['instructions'] as Map<String, dynamic>).entries.map(
+              (e) => MapEntry(e.key, List<String>.from(e.value)),
+            ),
+      ),
+      dietTypes: Map<String, List<String>>.fromEntries(
+        (data['diet_types'] as Map<String, dynamic>).entries.map(
+              (e) => MapEntry(e.key, List<String>.from(e.value)),
+            ),
+      ),
+      categories: Map<String, List<String>>.fromEntries(
+        (data['categories'] as Map<String, dynamic>).entries.map(
+              (e) => MapEntry(e.key, List<String>.from(e.value)),
+            ),
+      ),
+      preparationTime: Map<String, String>.from(data['preparation_time'] ?? {}),
       calories: data['nutrition']?['calories'] ?? 0,
       proteinG: data['nutrition']?['protein_g'] ?? 0,
       carbohydratesG: data['nutrition']?['carbohydrates_g'] ?? 0,
@@ -84,5 +95,31 @@ class Recipe {
         'fat_g': fatG,
       },
     };
+  }
+
+  // Lokalisierte Getter
+  String getTitle(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    return title[lang] ?? title.values.firstOrNull ?? 'Unbekanntes Rezept';
+  }
+
+  List<String> getInstructions(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    return instructions[lang] ?? instructions.values.firstOrNull ?? [];
+  }
+
+  List<String> getCategories(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    return categories[lang] ?? [];
+  }
+
+  List<String> getDietTypes(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    return dietTypes[lang] ?? [];
+  }
+
+  String getPreparationTime(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    return preparationTime[lang] ?? preparationTime.values.firstOrNull ?? '';
   }
 }

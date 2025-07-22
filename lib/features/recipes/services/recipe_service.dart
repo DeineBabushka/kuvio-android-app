@@ -13,10 +13,12 @@ class RecipeService {
     required List<Recipe> allRecipes,
     required String diet,
     required String category,
+    required String lang,
   }) {
     return allRecipes.where((recipe) {
-      return recipe.dietTypes.contains(diet) &&
-          recipe.categories.contains(category);
+      final diets = recipe.dietTypes[lang] ?? [];
+      final categories = recipe.categories[lang] ?? [];
+      return diets.contains(diet) && categories.contains(category);
     }).toList();
   }
 }

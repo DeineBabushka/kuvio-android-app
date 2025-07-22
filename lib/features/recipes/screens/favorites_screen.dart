@@ -41,6 +41,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
     final loc = AppLocalizations.of(context);
 
+    final filteredFavorites = controller.filteredFavorites(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -63,7 +65,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
                 const SizedBox(height: 8),
                 Expanded(
-                  child: controller.filteredFavorites().isEmpty
+                  child: filteredFavorites.isEmpty
                       ? Center(
                           child: Text(
                             loc?.noFavoritesFound ??
@@ -73,9 +75,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         )
                       : ListView.builder(
                           padding: const EdgeInsets.all(16),
-                          itemCount: controller.filteredFavorites().length,
+                          itemCount: filteredFavorites.length,
                           itemBuilder: (ctx, i) {
-                            final item = controller.filteredFavorites()[i];
+                            final item = filteredFavorites[i];
                             return FavoriteRecipeCard(
                               item: item,
                               cardColor: cardColor,
