@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class GroupedShoppingListTab extends StatelessWidget {
   const GroupedShoppingListTab({super.key});
@@ -79,6 +80,8 @@ class GroupedShoppingListTab extends StatelessWidget {
                       secondary: IconButton(
                         icon: const Icon(Icons.delete, color: Colors.redAccent),
                         onPressed: () async {
+                          if (blockIfOffline(context)) return;
+
                           final matchingDocs = docs.where((doc) {
                             final docItem = ShoppingListItem.fromMap(
                                 doc.data() as Map<String, dynamic>);
@@ -93,8 +96,8 @@ class GroupedShoppingListTab extends StatelessWidget {
                           if (!context.mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content:
-                                    Text(loc.itemDeleted(item.name(lang)))),
+                              content: Text(loc.itemDeleted(item.name(lang))),
+                            ),
                           );
                         },
                       ),
@@ -112,6 +115,8 @@ class GroupedShoppingListTab extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton.icon(
                 onPressed: () async {
+                  if (blockIfOffline(context)) return;
+
                   final batch = FirebaseFirestore.instance.batch();
                   for (var doc in docs) {
                     batch.delete(doc.reference);

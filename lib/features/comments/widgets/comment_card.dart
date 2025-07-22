@@ -3,6 +3,7 @@ import 'package:kuvio/features/recipes/screens/recipes_singleview_screen.dart';
 import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart'; // ✅ wieder hinzugefügt
 
 class CommentCard extends StatefulWidget {
   final FormattedComment comment;
@@ -86,6 +87,9 @@ class _CommentCardState extends State<CommentCard> {
 
   Future<void> _confirmAndDelete(BuildContext context) async {
     final loc = AppLocalizations.of(context)!;
+
+    // ✅ Offline blockieren
+    if (blockIfOffline(context)) return;
 
     final confirmed = await showDialog<bool>(
           context: context,

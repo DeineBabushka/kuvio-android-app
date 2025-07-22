@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class DeleteFavoriteIcon extends StatelessWidget {
   final VoidCallback onDelete;
@@ -13,6 +14,8 @@ class DeleteFavoriteIcon extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.delete, color: Colors.redAccent),
       onPressed: () async {
+        if (blockIfOffline(context)) return;
+
         final confirmed = await showDialog<bool>(
               context: context,
               builder: (_) => AlertDialog(

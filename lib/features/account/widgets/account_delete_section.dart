@@ -3,6 +3,7 @@ import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart'; // ✅ hinzugefügt
 
 class AccountDeleteSection extends StatelessWidget {
   final UserService userService;
@@ -21,6 +22,8 @@ class AccountDeleteSection extends StatelessWidget {
         ConfirmButton(
           text: context.loc.deleteAccount,
           onPressed: () async {
+            if (blockIfOffline(contextRef)) return; // ✅ Blocker eingebaut
+
             final success =
                 await userService.deleteAccountWithConfirmation(contextRef);
             if (success && contextRef.mounted) {

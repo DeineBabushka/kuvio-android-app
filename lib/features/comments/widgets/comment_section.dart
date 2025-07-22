@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/comments/models/comment.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+// import 'package:kuvio/shared/utils/block_if_offline.dart';   // ❌ weg damit
 
 class CommentSection extends StatefulWidget {
   final String recipeId;
@@ -17,6 +18,7 @@ class _CommentSectionState extends State<CommentSection> {
   final TextEditingController _controller = TextEditingController();
   List<Comment> _comments = [];
   bool _loading = true;
+  bool _offlineBlocked = false;
 
   @override
   void initState() {
@@ -25,13 +27,24 @@ class _CommentSectionState extends State<CommentSection> {
   }
 
   Future<void> _loadComments() async {
-    final comments = await CommentService.getCommentsForRecipeWithProfileImages(
-      widget.recipeId,
-    );
-    setState(() {
-      _comments = comments;
-      _loading = false;
-    });
+    try {
+      final comments =
+          await CommentService.getCommentsForRecipeWithProfileImages(
+              widget.recipeId);
+      if (!mounted) return;
+      setState(() {
+        _comments = comments;
+        _loading = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      // optional: UI ohne Dialog anpassen
+      setState(() {
+        _offlineBlocked = true;
+        _loading = false;
+        _comments = [];
+      });
+    }
   }
 
   Future<void> _submitComment() async {
@@ -59,7 +72,7 @@ class _CommentSectionState extends State<CommentSection> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return const SizedBox.shrink();
+    if (user == null || _offlineBlocked) return const SizedBox.shrink();
 
     final loc = AppLocalizations.of(context);
     final textColor =
@@ -74,10 +87,7 @@ class _CommentSectionState extends State<CommentSection> {
         Text(
           loc?.commentsTitle ?? 'Kommentare',
           style: TextStyle(
-            color: textColor,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
+              color: textColor, fontSize: 22, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 10),
         if (_loading)
@@ -92,16 +102,11 @@ class _CommentSectionState extends State<CommentSection> {
               tileColor: cardColor,
               leading: _buildProfileImage(comment.profileImage),
               title: Text(comment.username, style: TextStyle(color: textColor)),
-              subtitle: Text(
-                comment.text,
-                style: TextStyle(color: textColor.withAlpha(179)),
-              ),
+              subtitle: Text(comment.text,
+                  style: TextStyle(color: textColor.withAlpha(179))),
               trailing: Text(
                 '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – ${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
-                style: TextStyle(
-                  color: textColor.withAlpha(127),
-                  fontSize: 12,
-                ),
+                style: TextStyle(color: textColor.withAlpha(127), fontSize: 12),
               ),
             );
           }),
@@ -116,8 +121,7 @@ class _CommentSectionState extends State<CommentSection> {
                   hintText: loc?.commentHint ?? 'Kommentar schreiben...',
                   hintStyle: TextStyle(color: textColor.withAlpha(127)),
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: textColor),
-                  ),
+                      borderSide: BorderSide(color: textColor)),
                 ),
               ),
             ),
@@ -139,7 +143,6 @@ class _CommentSectionState extends State<CommentSection> {
         child: Icon(Icons.person, color: Colors.white),
       );
     }
-
     return CircleAvatar(
       radius: 20,
       backgroundColor: Colors.transparent,

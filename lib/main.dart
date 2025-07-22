@@ -4,12 +4,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:kuvio/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:kuvio/shared/services/theme_provider.dart';
+import 'package:kuvio/shared/utils/connectivity_provider.dart';
+import 'package:kuvio/shared/services/offline_cache_service.dart';
 import 'package:kuvio/features/app/screens/start_screen.dart';
 import 'package:kuvio/features/admin/screens/admin_dashboard_screen.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/l10n/l10n.dart';
 
@@ -27,9 +30,25 @@ void main() {
 
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
+    final connectivity = await Connectivity().checkConnectivity();
+    final isOnline = connectivity != ConnectivityResult.none;
+
+    if (isOnline) {
+      try {
+        await FirebaseFirestore.instance.disableNetwork();
+        await FirebaseFirestore.instance.enableNetwork();
+        await OfflineCacheService.preloadAll();
+      } catch (e) {
+        debugPrint("⚠️ Fehler beim Caching: $e");
+      }
+    }
+
     runApp(
-      ChangeNotifierProvider(
-        create: (_) => ThemeProvider(),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
+        ],
         child: const KuvioApp(),
       ),
     );
@@ -119,11 +138,7 @@ final _lightTheme = ThemeData(
   textTheme: const TextTheme(
     bodyMedium: TextStyle(color: Colors.white),
     bodyLarge: TextStyle(color: Colors.white),
-    titleLarge: TextStyle(
-      color: Colors.white,
-      fontSize: 30,
-      fontWeight: FontWeight.bold,
-    ),
+    titleLarge: TextStyle(color: Color(0xFF122620)),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xFF122620),

@@ -8,6 +8,8 @@ import 'package:kuvio/features/recipes/widgets/portion_selector.dart';
 import 'package:kuvio/features/recipes/widgets/ingredient_add_all_button.dart';
 import 'package:kuvio/features/comments/widgets/comment_section.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:kuvio/shared/utils/connectivity_provider.dart';
 
 class RecipeDetailContent extends StatelessWidget {
   final Recipe recipe;
@@ -40,6 +42,9 @@ class RecipeDetailContent extends StatelessWidget {
     final loc = AppLocalizations.of(context);
     final instructions = recipe.instructions[lang] ?? [];
     final prepTime = recipe.preparationTime[lang] ?? '';
+
+    // ↓ online-status aus Provider holen
+    final isOnline = context.watch<ConnectivityProvider>().isOnline;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +118,9 @@ class RecipeDetailContent extends StatelessWidget {
           cardColor: cardColor,
         ),
         const SizedBox(height: 20),
-        if (isLoggedIn) CommentSection(recipeId: recipe.id),
+
+        // ↓ nur wenn online + eingeloggt
+        if (isLoggedIn && isOnline) CommentSection(recipeId: recipe.id),
       ],
     );
   }

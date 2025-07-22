@@ -8,6 +8,7 @@ import 'package:kuvio/features/account/widgets/account_user_info.dart';
 import 'package:kuvio/features/account/widgets/account_delete_section.dart';
 import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
 import 'package:kuvio/shared/widgets/app_profile_header.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart'; // ✅ hinzugefügt
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -39,6 +40,8 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> _navigateToEditProfile() async {
+    if (blockIfOffline(context)) return; // ✅ Blocker eingebaut
+
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const EditProfileScreen()),

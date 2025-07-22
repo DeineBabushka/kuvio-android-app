@@ -7,6 +7,7 @@ import 'package:kuvio/features/recipes/screens/favorites_screen.dart';
 import 'package:kuvio/features/comments/screens/comment_screen.dart';
 import 'package:kuvio/features/shopping_list/screens/shopping_list_screen.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class BottomNavWidget extends StatelessWidget {
   final List<Recipe> allRecipes;
@@ -18,6 +19,10 @@ class BottomNavWidget extends StatelessWidget {
 
   void _onItemTapped(BuildContext context, int index) {
     final user = FirebaseAuth.instance.currentUser;
+
+    // Blockiere Account, Kommentare, Favoriten bei Offline
+    final requiresOnline = {0, 2, 3};
+    if (requiresOnline.contains(index) && blockIfOffline(context)) return;
 
     Widget destination;
 

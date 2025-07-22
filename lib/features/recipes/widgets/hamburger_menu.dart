@@ -16,6 +16,8 @@ import 'package:kuvio/shared/widgets/drawer_profile_header.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/auth/services/auth_service.dart';
 import 'package:kuvio/shared/widgets/language_dialog.dart';
+import 'package:kuvio/shared/utils/connectivity_provider.dart';
+import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class HamburgerDrawer extends StatefulWidget {
   final List<Recipe> allRecipes;
@@ -48,6 +50,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+    final isOnline = Provider.of<ConnectivityProvider>(context).isOnline;
     final sectionStyle =
         const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold);
     final tileColor = const Color(0xFF2E6B4D);
@@ -57,70 +60,31 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
       child: ListView(
         padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
         children: [
-          if (isLoggedIn && userData != null) ...[
+          if (isLoggedIn && isOnline && userData != null) ...[
             DrawerProfileHeader(
               username: userData!['username'] ?? 'Unbekannt',
               bio: userData!['bio'],
               profileImage: userData!['profileImage'],
             ),
-            const SizedBox(height: 32),
-            Text(context.loc.general, style: sectionStyle),
-            const SizedBox(height: 12),
-            DrawerTile(
-              icon: Icons.person,
-              title: context.loc.account,
-              onTap: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const AccountScreen()),
-                );
-                await _loadUserData();
-              },
-              tileColor: tileColor,
-            ),
-            DrawerTile(
-              icon: Icons.favorite,
-              title: context.loc.favorites,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                      FavoritesScreen(allRecipes: widget.allRecipes),
-                ),
+          ] else if (isLoggedIn && !isOnline) ...[
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(12),
               ),
-              tileColor: tileColor,
-            ),
-            DrawerTile(
-              icon: Icons.shopping_cart,
-              title: context.loc.shoppingList,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
+              child: Column(
+                children: [
+                  const Icon(Icons.cloud_off, color: Colors.white70, size: 40),
+                  const SizedBox(height: 8),
+                  Text(
+                    context.loc.profileOfflineNotAvailable,
+                    style: const TextStyle(color: Colors.white70, fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              tileColor: tileColor,
             ),
-            DrawerTile(
-              icon: Icons.comment,
-              title: context.loc.comments,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const CommentScreen(),
-                ),
-              ),
-              tileColor: tileColor,
-            ),
-            if (userData!['isAdmin'] == true)
-              DrawerTile(
-                icon: Icons.admin_panel_settings,
-                title: context.loc.adminDashboard,
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => const AdminDashboardScreen()),
-                ),
-                tileColor: tileColor,
-              ),
           ] else ...[
             const Center(
               child:
@@ -133,7 +97,76 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
             ),
-            const SizedBox(height: 32),
+          ],
+          const SizedBox(height: 32),
+          if (isLoggedIn) ...[
+            Text(context.loc.general, style: sectionStyle),
+            const SizedBox(height: 12),
+            DrawerTile(
+              icon: Icons.person,
+              title: context.loc.account,
+              onTap: () async {
+                if (blockIfOffline(context)) return;
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AccountScreen()),
+                );
+                await _loadUserData();
+              },
+              tileColor: tileColor,
+            ),
+            DrawerTile(
+              icon: Icons.favorite,
+              title: context.loc.favorites,
+              onTap: () {
+                if (blockIfOffline(context)) return;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FavoritesScreen(allRecipes: widget.allRecipes),
+                  ),
+                );
+              },
+              tileColor: tileColor,
+            ),
+            DrawerTile(
+              icon: Icons.shopping_cart,
+              title: context.loc.shoppingList,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
+                );
+              },
+              tileColor: tileColor,
+            ),
+            DrawerTile(
+              icon: Icons.comment,
+              title: context.loc.comments,
+              onTap: () {
+                if (blockIfOffline(context)) return;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CommentScreen()),
+                );
+              },
+              tileColor: tileColor,
+            ),
+            if (userData?['isAdmin'] == true)
+              DrawerTile(
+                icon: Icons.admin_panel_settings,
+                title: context.loc.adminDashboard,
+                onTap: () {
+                  if (blockIfOffline(context)) return;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const AdminDashboardScreen()),
+                  );
+                },
+                tileColor: tileColor,
+              ),
           ],
           const SizedBox(height: 24),
           Text(context.loc.customization, style: sectionStyle),
@@ -168,6 +201,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               icon: Icons.logout,
               title: context.loc.logout,
               onTap: () async {
+                if (blockIfOffline(context)) return;
                 await AuthService().signOutUser(context);
               },
               tileColor: tileColor,

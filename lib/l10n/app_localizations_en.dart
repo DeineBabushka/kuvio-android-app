@@ -187,4 +187,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noCommentsFound => 'No comments found.';
   String get noDescription => 'No description';
   String get selectProfileImage => 'Select profile image';
+  @override
+  String get profileOfflineNotAvailable =>
+      'Profile information is not available offline.';
 }
