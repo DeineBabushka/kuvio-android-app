@@ -122,7 +122,6 @@ class AccountBody extends StatelessWidget {
           Center(
             child: AccountDeleteSection(
               userService: userService,
-              contextRef: context,
             ),
           ),
         ],

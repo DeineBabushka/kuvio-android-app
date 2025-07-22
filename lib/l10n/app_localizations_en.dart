@@ -176,7 +176,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutSuccess => 'You have been logged out.';
   String get registrationFailed => 'Registration failed';
   String get registrationSuccess => 'Registration successful!';
-  String get accountDeletedSuccess => 'Your account has been deleted.';
+  String get accountDeletedSuccess =>
+      'Your account has been successfully deleted.';
   String get deletionFailed => 'Account deletion failed';
   String get resetPasswordTitle => 'Reset password';
   String get emailAddressLabel => 'Email address';

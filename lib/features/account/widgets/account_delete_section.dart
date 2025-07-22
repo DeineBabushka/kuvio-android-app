@@ -3,16 +3,14 @@ import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';
-import 'package:kuvio/shared/utils/block_if_offline.dart';
+import 'package:kuvio/features/recipes/screens/filter_screen.dart';
 
 class AccountDeleteSection extends StatelessWidget {
   final UserService userService;
-  final BuildContext contextRef;
 
   const AccountDeleteSection({
     super.key,
     required this.userService,
-    required this.contextRef,
   });
 
   @override
@@ -22,15 +20,28 @@ class AccountDeleteSection extends StatelessWidget {
         ConfirmButton(
           text: context.loc.deleteAccount,
           onPressed: () async {
-            if (blockIfOffline(contextRef)) return;
-            final success =
-                await userService.deleteAccountWithConfirmation(contextRef);
-            if (success && contextRef.mounted) {
-              Navigator.of(contextRef).pushNamedAndRemoveUntil(
-                '/login',
-                (_) => false,
-              );
-            }
+            if (!context.mounted) return;
+
+            await userService.deleteAccountWithConfirmation(
+              context: context,
+              onSuccess: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(context.loc.accountDeletedSuccess),
+                    backgroundColor: const Color(0xFF122620),
+                  ),
+                );
+
+                Future.delayed(const Duration(milliseconds: 500)).then((_) {
+                  if (context.mounted) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const RecipesScreen()),
+                      (_) => false,
+                    );
+                  }
+                });
+              },
+            );
           },
           bgColor: Colors.red,
           textColor: Colors.white,

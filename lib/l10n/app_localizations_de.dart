@@ -180,7 +180,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get logoutSuccess => 'Du wurdest abgemeldet.';
   String get registrationFailed => 'Registrierung fehlgeschlagen';
   String get registrationSuccess => 'Registrierung erfolgreich!';
-  String get accountDeletedSuccess => 'Dein Account wurde gelöscht.';
+  String get accountDeletedSuccess => 'Dein Account wurde erfolgreich gelöscht';
   String get deletionFailed => 'Löschen fehlgeschlagen';
   String get resetPasswordTitle => 'Passwort zurücksetzen';
   String get emailAddressLabel => 'E-Mail-Adresse';

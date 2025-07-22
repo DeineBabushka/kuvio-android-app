@@ -56,9 +56,12 @@ class BottomNavWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return BottomNavigationBar(
-      backgroundColor: const Color(0xFF122620),
+      backgroundColor:
+          isDark ? const Color(0xFF1A1A1A) : const Color(0xFF122620),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,

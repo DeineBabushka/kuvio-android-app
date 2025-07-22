@@ -93,11 +93,16 @@ class LoginFormCard extends StatelessWidget {
               style: TextButton.styleFrom(padding: EdgeInsets.zero),
               child: Text(
                 loc.loginForgotPassword,
-                style: const TextStyle(
-                  color: Color(0xFF122620),
+                style: TextStyle(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : const Color(0xFF122620),
                   fontSize: 15,
                   decoration: TextDecoration.underline,
-                  decorationColor: Color(0xFF122620),
+                  decorationColor:
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : const Color(0xFF122620),
                   decorationThickness: 2.0,
                 ),
               ),
