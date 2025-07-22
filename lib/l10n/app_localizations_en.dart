@@ -184,4 +184,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetEmailSent => 'Reset email sent.';
   String get error => 'Error';
   String get addedOn => 'Added on';
+  String get noCommentsFound => 'No comments found.';
+  String get noDescription => 'No description';
+  String get selectProfileImage => 'Select profile image';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuvio/l10n/context_extension.dart';
 
 class ProfileService {
   List<String> getProfileImageAssets() {
@@ -8,12 +9,13 @@ class ProfileService {
   Future<String?> openImagePickerDialog(
       BuildContext context, String? currentAsset) async {
     final assets = getProfileImageAssets();
+    final loc = context.loc;
 
     return showDialog<String>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Profilbild auswählen'),
+          title: Text(loc.selectProfileImage),
           content: SizedBox(
             width: double.maxFinite,
             child: GridView.builder(

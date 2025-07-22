@@ -190,4 +190,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get resetEmailSent => 'E-Mail zum Zurücksetzen wurde gesendet.';
   String get error => 'Fehler';
   String get addedOn => 'Hinzugefügt am';
+  String get noCommentsFound => 'Keine Kommentare gefunden.';
+  String get noDescription => 'Keine Beschreibung';
+  String get selectProfileImage => 'Profilbild auswählen';
 }

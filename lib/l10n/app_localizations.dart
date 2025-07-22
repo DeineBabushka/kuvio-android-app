@@ -240,6 +240,12 @@ abstract class AppLocalizations {
   String get error;
 
   String get addedOn;
+
+  String get noCommentsFound;
+
+  String get noDescription;
+
+  String get selectProfileImage;
 }
 
 class _AppLocalizationsDelegate
