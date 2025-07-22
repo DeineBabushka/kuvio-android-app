@@ -59,14 +59,21 @@ class RecipeDetailController {
 
     final localizedIngredients = ingredients.map((i) {
       return Ingredient(
-        name: {lang: i.name[lang] ?? i.name['en'] ?? ''},
-        unit: {lang: i.unit[lang] ?? i.unit['en'] ?? ''},
+        name: {
+          'de': i.name['de'] ?? '',
+          'en': i.name['en'] ?? '',
+        },
+        unit: {
+          'de': i.unit['de'] ?? '',
+          'en': i.unit['en'] ?? '',
+        },
         quantity: i.quantity,
       );
     }).toList();
 
     await ShoppingListService.addIngredients(
         user.uid, localizedIngredients, recipeId!);
+
     if (!context.mounted) return;
 
     final loc = AppLocalizations.of(context);
@@ -85,8 +92,14 @@ class RecipeDetailController {
     if (user == null || recipeId == null) return;
 
     final localizedIngredient = Ingredient(
-      name: {lang: ingredient.name[lang] ?? ingredient.name['en'] ?? ''},
-      unit: {lang: ingredient.unit[lang] ?? ingredient.unit['en'] ?? ''},
+      name: {
+        'de': ingredient.name['de'] ?? '',
+        'en': ingredient.name['en'] ?? '',
+      },
+      unit: {
+        'de': ingredient.unit['de'] ?? '',
+        'en': ingredient.unit['en'] ?? '',
+      },
       quantity: ingredient.quantity,
     );
 
@@ -95,6 +108,7 @@ class RecipeDetailController {
       localizedIngredient,
       recipeId!,
     );
+
     if (!context.mounted) return;
 
     final loc = AppLocalizations.of(context);

@@ -13,15 +13,16 @@ class RecipeFilter {
   });
 
   List<Recipe> apply(List<Recipe> allRecipes, BuildContext context) {
-    final lang = Localizations.localeOf(context).languageCode;
+    // Die Filterung basiert immer auf den deutschen Keys
+    const filterLang = 'de';
+
+    // Für die Titelanzeige und Suche verwenden wir die aktuelle Sprache
+    final uiLang = Localizations.localeOf(context).languageCode;
 
     return allRecipes.where((recipe) {
-      // Titel als Map<String, String>
-      final title = recipe.title[lang]?.toLowerCase() ?? '';
-
-      // dietTypes und categories als Map<String, List<String>>
-      final diets = recipe.dietTypes[lang] ?? <String>[];
-      final categories = recipe.categories[lang] ?? <String>[];
+      final title = recipe.title[uiLang]?.toLowerCase() ?? '';
+      final diets = recipe.dietTypes[filterLang] ?? <String>[];
+      final categories = recipe.categories[filterLang] ?? <String>[];
 
       final matchesDiet = selectedDiet.isEmpty || diets.contains(selectedDiet);
       final matchesCategory =

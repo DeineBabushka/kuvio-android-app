@@ -45,11 +45,13 @@ class FavoritesFilter {
   }
 
   bool matchesRecipe(dynamic recipe, BuildContext context) {
-    final lang = Localizations.localeOf(context).languageCode;
+    // Sprachunabhängig filtern → immer gegen 'de'
+    const filterLang = 'de';
+    final uiLang = Localizations.localeOf(context).languageCode;
 
-    final title = recipe.title[lang]?.toLowerCase() ?? '';
-    final categories = recipe.categories[lang] ?? <String>[];
-    final dietTypes = recipe.dietTypes[lang] ?? <String>[];
+    final title = recipe.title[uiLang]?.toLowerCase() ?? '';
+    final categories = recipe.categories[filterLang] ?? <String>[];
+    final dietTypes = recipe.dietTypes[filterLang] ?? <String>[];
 
     final titleMatch = title.contains(searchQuery.toLowerCase());
     final categoryMatch = category == null || categories.contains(category);
