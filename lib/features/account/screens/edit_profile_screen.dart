@@ -4,9 +4,9 @@ import 'package:kuvio/shared/utils/navigation_utils.dart';
 import 'package:kuvio/features/recipes/utils/snackbar_utils.dart';
 import 'package:kuvio/features/recipes/widgets/profile_avatar.dart';
 import 'package:kuvio/features/account/widgets/account_edit_form.dart';
-import 'package:kuvio/features/account/widgets/transparent_app_bar.dart';
 import 'package:kuvio/features/account/widgets/screen_wrapper.dart';
 import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/shared/utils/constants.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -37,8 +37,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: TransparentAppBar(title: context.loc.editProfile),
+      backgroundColor: AppColors.backgroundColor, // statt Colors.transparent!
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: Colors.white,
+        title: Text(context.loc.editProfile),
+      ),
       body: ScreenWrapper(
         child: Column(
           children: [
