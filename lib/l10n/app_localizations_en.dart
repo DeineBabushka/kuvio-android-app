@@ -183,4 +183,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submit => 'Submit';
   String get resetEmailSent => 'Reset email sent.';
   String get error => 'Error';
+  String get addedOn => 'Added on';
 }

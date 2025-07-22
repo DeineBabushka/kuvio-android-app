@@ -238,6 +238,8 @@ abstract class AppLocalizations {
   String get submit;
   String get resetEmailSent;
   String get error;
+
+  String get addedOn;
 }
 
 class _AppLocalizationsDelegate

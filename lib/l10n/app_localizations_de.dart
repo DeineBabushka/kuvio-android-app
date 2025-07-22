@@ -189,4 +189,5 @@ class AppLocalizationsDe extends AppLocalizations {
   String get submit => 'Absenden';
   String get resetEmailSent => 'E-Mail zum Zurücksetzen wurde gesendet.';
   String get error => 'Fehler';
+  String get addedOn => 'Hinzugefügt am';
 }
