@@ -30,6 +30,7 @@ class HamburgerDrawer extends StatefulWidget {
 
 class _HamburgerDrawerState extends State<HamburgerDrawer> {
   Map<String, dynamic>? userData;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -42,6 +43,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
     if (mounted) {
       setState(() {
         userData = data;
+        isLoading = false;
       });
     }
   }
@@ -60,7 +62,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
       child: ListView(
         padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
         children: [
-          if (isLoggedIn && isOnline && userData != null) ...[
+          if (isLoading) ...[
+            const Center(child: CircularProgressIndicator()),
+            const SizedBox(height: 40),
+          ] else if (isLoggedIn && isOnline && userData != null) ...[
             DrawerProfileHeader(
               username: userData!['username'] ?? 'Unbekannt',
               bio: userData!['bio'],
@@ -87,9 +92,8 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
           ] else ...[
             const Center(
-              child:
-                  Icon(Icons.person_outline, color: Colors.white70, size: 48),
-            ),
+                child: Icon(Icons.person_outline,
+                    color: Colors.white70, size: 48)),
             const SizedBox(height: 3),
             Center(
               child: Text(
@@ -99,7 +103,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
           ],
           const SizedBox(height: 32),
-          if (isLoggedIn) ...[
+          if (!isLoading && isLoggedIn) ...[
             Text(context.loc.general, style: sectionStyle),
             const SizedBox(height: 12),
             DrawerTile(
@@ -196,7 +200,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
           const SizedBox(height: 24),
           Text(context.loc.settings, style: sectionStyle),
           const SizedBox(height: 12),
-          if (isLoggedIn)
+          if (!isLoading && isLoggedIn)
             DrawerTile(
               icon: Icons.logout,
               title: context.loc.logout,
@@ -206,7 +210,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               },
               tileColor: tileColor,
             )
-          else
+          else if (!isLoading)
             DrawerTile(
               icon: Icons.login,
               title: context.loc.loginRegister,
