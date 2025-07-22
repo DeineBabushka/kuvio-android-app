@@ -15,7 +15,6 @@ import 'package:kuvio/l10n/l10n.dart';
 
 void main() {
   runZonedGuarded(() async {
-    // ⚠️ Alles innerhalb dieser Zone
     WidgetsFlutterBinding.ensureInitialized();
 
     await Firebase.initializeApp(
@@ -84,7 +83,6 @@ class _KuvioAppState extends State<KuvioApp> {
   }
 }
 
-// 🎨 Dark Theme
 final _darkTheme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFF1a1a1a),
   fontFamily: 'Roboto',
@@ -115,7 +113,6 @@ final _darkTheme = ThemeData(
   useMaterial3: true,
 );
 
-// 🎨 Light Theme
 final _lightTheme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFF122620),
   fontFamily: 'Roboto',

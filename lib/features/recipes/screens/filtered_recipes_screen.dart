@@ -4,11 +4,11 @@ import 'package:kuvio/features/recipes/models/recipe_filter.dart';
 import 'package:kuvio/features/recipes/widgets/bottom_nav.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_card.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
-import 'package:kuvio/shared/constants/filters.dart'; // Für Label-Lokalisierung
+import 'package:kuvio/shared/constants/filters.dart';
 
 class FilteredRecipesScreen extends StatefulWidget {
-  final String selectedDiet; // z. B. 'vegan'
-  final String selectedCategory; // z. B. 'main'
+  final String selectedDiet;
+  final String selectedCategory;
   final List<Recipe> allRecipes;
 
   const FilteredRecipesScreen({

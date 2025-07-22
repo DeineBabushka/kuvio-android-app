@@ -13,10 +13,8 @@ class RecipeFilter {
   });
 
   List<Recipe> apply(List<Recipe> allRecipes, BuildContext context) {
-    // Die Filterung basiert immer auf den deutschen Keys
     const filterLang = 'de';
 
-    // Für die Titelanzeige und Suche verwenden wir die aktuelle Sprache
     final uiLang = Localizations.localeOf(context).languageCode;
 
     return allRecipes.where((recipe) {

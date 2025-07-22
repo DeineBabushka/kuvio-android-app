@@ -25,7 +25,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (!_initialized) {
       _initialized = true;
       controller.loadUserData(
-        context: context, // ✅ Neu: für Lokalisierung nötig
+        context: context,
         onUpdate: () => setState(() {}),
         defaultKitchen: 'not_set',
       );

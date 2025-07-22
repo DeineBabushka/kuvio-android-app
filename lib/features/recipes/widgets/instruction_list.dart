@@ -20,7 +20,6 @@ class InstructionList extends StatelessWidget {
         final index = entry.key + 1;
         final stepRaw = entry.value.trim();
 
-        // Entfernt führende Nummern wie "1. ", "2)", "3:" usw.
         final stepCleaned =
             stepRaw.replaceFirst(RegExp(r'^\d+[\.\)\:]\s*'), '');
 

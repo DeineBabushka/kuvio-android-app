@@ -47,7 +47,7 @@ class Recipe {
         } catch (e) {
           debugPrint(
               '❌ Fehler beim Parsen von Ingredient in Rezept ${doc.id}: $item\n$e');
-          // Optional: Du kannst hier stattdessen einen Dummy-Eintrag zurückgeben
+
           return Ingredient(
             quantity: 0,
             name: {'de': 'Unbekannt', 'en': 'Unknown'},
@@ -97,7 +97,6 @@ class Recipe {
     };
   }
 
-  // Lokalisierte Getter
   String getTitle(BuildContext context) {
     final lang = Localizations.localeOf(context).languageCode;
     return title[lang] ?? title.values.firstOrNull ?? 'Unbekanntes Rezept';

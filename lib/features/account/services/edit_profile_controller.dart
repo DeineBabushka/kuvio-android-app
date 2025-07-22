@@ -17,7 +17,6 @@ class EditProfileController {
   String selectedKitchen = 'not_set';
   String? selectedProfileAsset;
 
-  /// Wandelt den lokalisierten Lieblingsküchenwert zurück in den internen Schlüssel
   String mapLocalizedKitchenToInternal(
       BuildContext context, String? localized) {
     if (localized == null || localized.trim().isEmpty) return 'not_set';

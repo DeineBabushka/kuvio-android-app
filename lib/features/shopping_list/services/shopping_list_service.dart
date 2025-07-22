@@ -13,7 +13,6 @@ class ShoppingListService {
         _db.collection('shopping_list').doc(uid).collection('items');
 
     for (final ingredient in ingredients) {
-      // Immer beide Sprachen sicherstellen
       final name = {
         'de': ingredient.name['de'] ?? '',
         'en': ingredient.name['en'] ?? '',

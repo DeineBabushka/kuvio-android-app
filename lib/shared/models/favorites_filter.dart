@@ -45,7 +45,6 @@ class FavoritesFilter {
   }
 
   bool matchesRecipe(dynamic recipe, BuildContext context) {
-    // Sprachunabhängig filtern → immer gegen 'de'
     const filterLang = 'de';
     final uiLang = Localizations.localeOf(context).languageCode;
 
