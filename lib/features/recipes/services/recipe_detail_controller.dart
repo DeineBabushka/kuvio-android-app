@@ -43,7 +43,7 @@ class RecipeDetailController {
 
       return recipeDoc.exists;
     } catch (e) {
-      print("Fehler beim Laden des Favoritenstatus: $e");
+      debugPrint("Fehler beim Laden des Favoritenstatus: $e");
       return false;
     }
   }
