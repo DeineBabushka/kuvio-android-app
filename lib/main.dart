@@ -34,13 +34,9 @@ void main() {
     final isOnline = connectivity != ConnectivityResult.none;
 
     if (isOnline) {
-      try {
-        await FirebaseFirestore.instance.disableNetwork();
-        await FirebaseFirestore.instance.enableNetwork();
-        await OfflineCacheService.preloadAll();
-      } catch (e) {
-        debugPrint("Fehler beim Caching: $e");
-      }
+      await FirebaseFirestore.instance.disableNetwork();
+      await FirebaseFirestore.instance.enableNetwork();
+      await OfflineCacheService.preloadAll();
     }
 
     runApp(

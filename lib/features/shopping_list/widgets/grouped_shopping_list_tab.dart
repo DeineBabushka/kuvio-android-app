@@ -76,11 +76,9 @@ class _GroupedShoppingListTabState extends State<GroupedShoppingListTab> {
                           setState(() => isChecked = val ?? false),
                       title: Text(
                         '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
-                          decoration: isChecked
-                              ? TextDecoration.lineThrough
-                              : TextDecoration.none,
+                          decoration: TextDecoration.none,
                         ),
                       ),
                       secondary: IconButton(

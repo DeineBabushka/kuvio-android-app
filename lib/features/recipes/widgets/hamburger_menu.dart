@@ -39,6 +39,16 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
   }
 
   Future<void> _loadUserData() async {
+    final isOnline =
+        Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
+
+    if (!isOnline) {
+      setState(() {
+        isLoading = false;
+      });
+      return;
+    }
+
     final data = await UserService().fetchCurrentUserData();
     if (mounted) {
       setState(() {

@@ -45,9 +45,6 @@ class Recipe {
         try {
           return Ingredient.fromMap(item);
         } catch (e) {
-          debugPrint(
-              '❌ Fehler beim Parsen von Ingredient in Rezept ${doc.id}: $item\n$e');
-
           return Ingredient(
             quantity: 0,
             name: {'de': 'Unbekannt', 'en': 'Unknown'},

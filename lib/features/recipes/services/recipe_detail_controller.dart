@@ -35,7 +35,6 @@ class RecipeDetailController {
 
       return await FavoriteService.isFavorite(user.uid, recipeId!);
     } catch (e) {
-      debugPrint("Fehler beim Laden des Favoritenstatus: $e");
       return false;
     }
   }
