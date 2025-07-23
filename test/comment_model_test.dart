@@ -25,7 +25,7 @@ void main() {
       recipeId: map['recipeId'] as String,
       text: map['text'] as String,
       timestamp: (map['timestamp'] as Timestamp).toDate(),
-      profileImage: 'character_3.png',
+      profileImage: original.profileImage,
     );
 
     expect(recreated.id, original.id);
