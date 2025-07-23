@@ -52,36 +52,22 @@ class GroupedShoppingListService {
     return grouped;
   }
 
-  static Future<Map<String, String>> loadRecipeTitles(
-    Iterable<String> ids,
+  static Map<String, String> extractStoredRecipeTitles(
+    List<QueryDocumentSnapshot> docs,
     String lang,
-  ) async {
+  ) {
     final Map<String, String> titles = {};
 
-    for (final id in ids) {
-      if (id == 'Unbekannt') {
-        titles[id] = 'Unbekanntes Rezept';
-        continue;
-      }
+    for (var doc in docs) {
+      final data = doc.data() as Map<String, dynamic>;
+      final id = data['fromRecipeId'] ?? 'Unbekannt';
+      final titleRaw = data['recipeTitle'];
+      final title = titleRaw is String
+          ? titleRaw
+          : (titleRaw?[lang] ?? titleRaw?['en'] ?? titleRaw?['de'] ?? '???');
 
-      try {
-        final doc = await _db.collection('recipes').doc(id).get();
-        final data = doc.data();
-
-        if (data != null && data['title'] != null) {
-          final titleRaw = data['title'];
-          final title = titleRaw is String
-              ? titleRaw
-              : (titleRaw?[lang] ??
-                  titleRaw?['en'] ??
-                  titleRaw?['de'] ??
-                  '???');
-          titles[id] = title;
-        } else {
-          titles[id] = 'Rezept ohne Titel';
-        }
-      } catch (_) {
-        titles[id] = 'Fehler beim Laden';
+      if (!titles.containsKey(id)) {
+        titles[id] = title;
       }
     }
 

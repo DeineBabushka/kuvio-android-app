@@ -7,13 +7,18 @@ class GoogleAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
+
   Future<({bool isAdmin, String? error})> signInWithGoogle() async {
     try {
-      final googleUser = await GoogleSignIn.instance.authenticate();
-
-      final googleAuth = GoogleSignInAuthentication(
-        idToken: googleUser.id,
+      await _googleSignIn.initialize(
+        serverClientId:
+            '544137355783-cst5n43i19qt0cj3me3pq98e0pnjq9lg.apps.googleusercontent.com',
       );
+
+      final googleUser = await _googleSignIn.authenticate(scopeHint: ['email']);
+
+      final googleAuth = googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
