@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class RegisterFormCard extends StatelessWidget {
   final GlobalKey<FormState> formKey;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 
 class InfoCardTile extends StatelessWidget {
   final String label;

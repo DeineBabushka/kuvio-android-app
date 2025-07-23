@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/services/profile_service.dart';
 import 'package:kuvio/shared/models/app_user.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/utils/constants.dart';
 
 class EditProfileController {

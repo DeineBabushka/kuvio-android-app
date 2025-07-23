@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/features/account/screens/account_screen.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:kuvio/features/favorites/screens/favorites_screen.dart';

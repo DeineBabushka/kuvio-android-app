@@ -7,7 +7,7 @@ import 'package:kuvio/features/recipes/widgets/nutrition_card.dart';
 import 'package:kuvio/features/recipes/widgets/portion_selector.dart';
 import 'package:kuvio/features/recipes/widgets/ingredient_add_all_button.dart';
 import 'package:kuvio/features/comments/widgets/comment_section.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:kuvio/shared/utils/connectivity_provider.dart';
 

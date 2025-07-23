@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 Future<void> showForgotPasswordDialog(BuildContext context) async {

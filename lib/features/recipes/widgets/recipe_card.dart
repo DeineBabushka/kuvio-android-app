@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/screens/recipes_detail_screen.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;

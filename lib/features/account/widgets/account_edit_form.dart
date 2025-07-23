@@ -3,7 +3,7 @@ import 'package:kuvio/shared/utils/constants.dart';
 import 'package:kuvio/features/account/widgets/editable_card.dart';
 import 'package:kuvio/features/account/widgets/kitchen_dropdown_card.dart';
 import 'package:kuvio/features/account/widgets/form_button.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 
 class EditProfileForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;

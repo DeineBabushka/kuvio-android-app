@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 Future<bool?> showUserDeleteDialog(BuildContext context, String username) {
   final loc = AppLocalizations.of(context)!;

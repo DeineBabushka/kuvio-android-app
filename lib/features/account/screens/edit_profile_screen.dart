@@ -5,7 +5,7 @@ import 'package:kuvio/shared/utils/snackbar_helper.dart';
 import 'package:kuvio/features/recipes/widgets/profile_avatar.dart';
 import 'package:kuvio/features/account/widgets/account_edit_form.dart';
 import 'package:kuvio/features/account/widgets/screen_wrapper.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/auth/services/google_auth_service.dart';
 import 'package:kuvio/shared/services/user_service.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class LoginActions {

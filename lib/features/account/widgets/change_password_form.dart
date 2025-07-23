@@ -4,7 +4,7 @@ import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/change_password_button.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:kuvio/features/account/widgets/password_fields.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class ChangePasswordForm extends StatefulWidget {

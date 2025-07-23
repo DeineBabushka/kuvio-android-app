@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/shopping_list/widgets/grouped_shopping_list_tab.dart';
 import 'package:kuvio/features/shopping_list/widgets/by_recipe_shopping_list_tab.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class ShoppingListScreen extends StatelessWidget {
   const ShoppingListScreen({super.key});

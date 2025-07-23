@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/account/widgets/change_password_form.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});

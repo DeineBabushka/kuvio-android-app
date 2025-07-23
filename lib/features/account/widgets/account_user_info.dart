@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/account/widgets/info_card_tile.dart';
 import 'package:kuvio/features/account/widgets/account_edit_button.dart';
