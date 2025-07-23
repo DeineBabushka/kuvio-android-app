@@ -97,15 +97,27 @@ class _CommentSectionState extends State<CommentSection> {
         else
           ..._comments.map((comment) {
             final ts = comment.timestamp.add(const Duration(hours: 2));
-            return ListTile(
-              tileColor: cardColor,
-              leading: _buildProfileImage(comment.profileImage),
-              title: Text(comment.username, style: TextStyle(color: textColor)),
-              subtitle: Text(comment.text,
-                  style: TextStyle(color: textColor.withAlpha(179))),
-              trailing: Text(
-                '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – ${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
-                style: TextStyle(color: textColor.withAlpha(127), fontSize: 12),
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: cardColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: ListTile(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  leading: _buildProfileImage(comment.profileImage),
+                  title: Text(comment.username,
+                      style: TextStyle(color: textColor)),
+                  subtitle: Text(comment.text,
+                      style: TextStyle(color: textColor.withAlpha(179))),
+                  trailing: Text(
+                    '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – ${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
+                    style: TextStyle(
+                        color: textColor.withAlpha(127), fontSize: 12),
+                  ),
+                ),
               ),
             );
           }),

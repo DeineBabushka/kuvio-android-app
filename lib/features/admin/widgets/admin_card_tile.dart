@@ -16,22 +16,24 @@ class UserCardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tileColor = const Color(0xFF2E6B4D); // identisch wie im Drawer
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      color: Colors.white,
+      color: tileColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
+        leading: const Icon(Icons.person, color: Colors.white),
         title: Text(
           user.username,
-          style: TextStyle(
-            color: cardTextColor,
+          style: const TextStyle(
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
           user.isAdmin ? 'Admin' : 'Benutzer',
-          style: TextStyle(
-            color: cardTextColor.withAlpha(204),
-          ),
+          style: const TextStyle(color: Colors.white70),
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -47,6 +49,9 @@ class UserCardTile extends StatelessWidget {
                   );
                 }
               },
+              activeColor: Colors.white,
+              inactiveThumbColor: Colors.white54,
+              inactiveTrackColor: Colors.white24,
             ),
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),

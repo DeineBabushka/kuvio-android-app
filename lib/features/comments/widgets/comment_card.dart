@@ -30,6 +30,7 @@ class _CommentCardState extends State<CommentCard> {
 
     final lang = Localizations.localeOf(context).languageCode;
     final recipeTitle = cwr.recipe.title[lang] ?? loc.unknownRecipeTitle;
+    final heroTag = 'comment-${cwr.recipe.id}';
 
     return GestureDetector(
       onTap: () {
@@ -40,7 +41,7 @@ class _CommentCardState extends State<CommentCard> {
               builder: (_) => RecipeDetailScreen(
                 recipe: cwr.recipe,
                 recipeId: cwr.recipe.id,
-                heroTag: 'comment-${cwr.recipe.id}',
+                heroTag: heroTag,
               ),
             ),
           );
@@ -48,39 +49,74 @@ class _CommentCardState extends State<CommentCard> {
       },
       child: Card(
         color: cardColor,
-        margin: const EdgeInsets.only(bottom: 12),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: ListTile(
-          leading: _buildRecipeImage(cwr.recipe.image),
-          title: Text(
-            recipeTitle,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.bold,
+        elevation: 4,
+        margin: const EdgeInsets.only(bottom: 20),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                bottomLeft: Radius.circular(16),
+              ),
+              child: SizedBox(
+                width: 100,
+                height: 150,
+                child: cwr.recipe.image.isNotEmpty
+                    ? Hero(
+                        tag: heroTag,
+                        child: Image.asset(
+                          'assets/${cwr.recipe.image}',
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) =>
+                              const Icon(Icons.image_not_supported, size: 40),
+                        ),
+                      )
+                    : const Icon(Icons.image, size: 40),
+              ),
             ),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(cwr.comment.text, style: TextStyle(color: textColor)),
-              const SizedBox(height: 4),
-              Text(
-                widget.comment.formattedDate,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: textColor.withAlpha(153),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 8,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      recipeTitle,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      cwr.comment.text,
+                      style: TextStyle(fontSize: 18, color: textColor),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.comment.formattedDate,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: textColor.withAlpha(153),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete, color: Colors.redAccent),
-            onPressed: () => _confirmAndDelete(context),
-          ),
-          contentPadding: const EdgeInsets.all(12),
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete, color: Colors.redAccent),
+              onPressed: () => _confirmAndDelete(context),
+            ),
+          ],
         ),
       ),
     );
@@ -133,35 +169,5 @@ class _CommentCardState extends State<CommentCard> {
     if (!context.mounted) return;
 
     SnackbarHelper.showMessage(context, loc.commentDeleted);
-  }
-
-  Widget _buildRecipeImage(String imageUrl) {
-    if (imageUrl.isEmpty) {
-      return const Icon(Icons.image, size: 40);
-    }
-
-    final isNetworkImage = imageUrl.contains('http');
-    final assetPath = 'assets/$imageUrl';
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: isNetworkImage
-          ? Image.network(
-              imageUrl,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) =>
-                  const Icon(Icons.image_not_supported, size: 40),
-            )
-          : Image.asset(
-              assetPath,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) =>
-                  const Icon(Icons.image_not_supported, size: 40),
-            ),
-    );
   }
 }
