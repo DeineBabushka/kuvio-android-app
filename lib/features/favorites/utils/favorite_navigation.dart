@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/features/recipes/screens/recipes_singleview_screen.dart';
+import 'package:kuvio/features/recipes/screens/recipes_detail_screen.dart';
 
 void navigateToFavoriteRecipeDetail(
   BuildContext context,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/recipes/screens/filter_screen.dart';
+import 'package:kuvio/features/recipes/screens/recipe_filter_screen.dart';
 import 'package:kuvio/features/account/screens/change_password_screen.dart';
 
 void navigateToHomeAndClearStack(BuildContext context) {
