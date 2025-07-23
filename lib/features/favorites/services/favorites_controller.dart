@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/favorites/models/favorites_filter.dart';
-import 'package:kuvio/favorites/services/favorite_service.dart';
+import 'package:kuvio/features/favorites/models/favorites_filter.dart';
+import 'package:kuvio/features/favorites/services/favorite_service.dart';
 
 class FavoritesController {
   final searchController = TextEditingController();
