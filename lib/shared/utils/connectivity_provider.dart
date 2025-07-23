@@ -9,7 +9,7 @@ class ConnectivityProvider extends ChangeNotifier {
 
   ConnectivityProvider() {
     _checkConnection();
-    Timer.periodic(const Duration(seconds: 5), (_) => _checkConnection());
+    Timer.periodic(const Duration(seconds: 2), (_) => _checkConnection());
   }
 
   Future<void> _checkConnection() async {
@@ -21,16 +21,10 @@ class ConnectivityProvider extends ChangeNotifier {
       _isOnline = false;
     }
     if (!_wasPreviouslyOnline(previousStatus) && _isOnline) {
-      debugPrint("🔄 Online zurück – lade Firestore-Daten neu");
-      try {
-        await OfflineCacheService.preloadAll();
-      } catch (e) {
-        debugPrint("⚠️ Fehler beim automatischen Nachladen: $e");
+      await OfflineCacheService.preloadAll();
+      if (_isOnline != previousStatus) {
+        notifyListeners();
       }
-    }
-
-    if (_isOnline != previousStatus) {
-      notifyListeners();
     }
   }
 

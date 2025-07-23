@@ -61,6 +61,10 @@ class CommentService {
         .where('userId', isEqualTo: user.uid)
         .get();
 
+    final recipeMap = {
+      for (final recipe in allRecipes) recipe.id: recipe,
+    };
+
     final List<CommentWithRecipe> result = [];
 
     for (final doc in commentSnapshot.docs) {
@@ -75,19 +79,9 @@ class CommentService {
 
       final comment = Comment.fromFirestore(doc, profileImage: profileImage);
 
-      final localMatches =
-          allRecipes.where((r) => r.id == comment.recipeId).toList();
-      if (localMatches.isNotEmpty) {
-        result
-            .add(CommentWithRecipe(comment: comment, recipe: localMatches[0]));
-        continue;
-      }
-
-      final remoteDoc =
-          await _db.collection('recipes').doc(comment.recipeId).get();
-      if (remoteDoc.exists) {
-        final remoteRecipe = Recipe.fromFirestore(remoteDoc);
-        result.add(CommentWithRecipe(comment: comment, recipe: remoteRecipe));
+      final recipe = recipeMap[comment.recipeId];
+      if (recipe != null) {
+        result.add(CommentWithRecipe(comment: comment, recipe: recipe));
       }
     }
 
