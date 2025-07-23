@@ -24,10 +24,10 @@ class NutritionCard extends StatelessWidget {
     final loc = AppLocalizations.of(context);
 
     final values = [
-      "🔥 ${loc?.nutritionCalories ?? 'Kalorien'}: $calories kcal",
-      "💪 ${loc?.nutritionProtein ?? 'Protein'}: $protein g",
-      "🍞 ${loc?.nutritionCarbs ?? 'Kohlenhydrate'}: $carbs g",
-      "🧈 ${loc?.nutritionFat ?? 'Fett'}: $fat g",
+      "${loc?.nutritionCalories ?? 'Kalorien'}: $calories kcal",
+      "${loc?.nutritionProtein ?? 'Protein'}: $protein g",
+      "${loc?.nutritionCarbs ?? 'Kohlenhydrate'}: $carbs g",
+      "${loc?.nutritionFat ?? 'Fett'}: $fat g",
     ];
 
     return Column(

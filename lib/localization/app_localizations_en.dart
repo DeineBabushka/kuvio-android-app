@@ -119,7 +119,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commentsTitle => 'Comments';
   String get noComments => 'No comments yet.';
   String get commentHint => 'Write a comment...';
-  String get commentLoginError => '❌ You must be logged in.';
+  String get commentLoginError => 'You must be logged in.';
   String get addedToFavorites => 'Added to favorites';
   String get removedFromFavorites => 'Removed from favorites';
   String get addedAllToShoppingList => 'Ingredients added to shopping list';

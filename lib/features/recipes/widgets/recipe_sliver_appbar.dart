@@ -34,9 +34,9 @@ class RecipeSliverAppBar extends StatelessWidget {
         .join(', ');
 
     final shareText = "🥗 $recipeTitle\n"
-        "📋 ${loc?.ingredientsLabel ?? 'Zutaten'}: $ingredients\n"
-        "📖 ${loc?.instructionsLabel ?? 'Zubereitung'}: ${instructions.take(3).join(' ')}...\n"
-        "✨ ${loc?.cookedWithKuvio ?? 'Gekocht mit der Kuvio App!'}";
+        "${loc?.ingredientsLabel ?? 'Zutaten'}: $ingredients\n"
+        "${loc?.instructionsLabel ?? 'Zubereitung'}: ${instructions.take(3).join(' ')}...\n"
+        "${loc?.cookedWithKuvio ?? 'Gekocht mit der Kuvio App!'}";
 
     return SliverAppBar(
       expandedHeight: 400,
