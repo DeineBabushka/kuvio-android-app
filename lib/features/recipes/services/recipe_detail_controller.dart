@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
@@ -34,14 +33,7 @@ class RecipeDetailController {
           Provider.of<ConnectivityProvider>(context, listen: false);
       if (!connectivity.isOnline) return false;
 
-      final recipeDoc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .collection('favorites')
-          .doc(recipeId)
-          .get();
-
-      return recipeDoc.exists;
+      return await FavoriteService.isFavorite(user.uid, recipeId!);
     } catch (e) {
       debugPrint("Fehler beim Laden des Favoritenstatus: $e");
       return false;
