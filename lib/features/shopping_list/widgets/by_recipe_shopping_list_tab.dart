@@ -21,97 +21,116 @@ class ByRecipeShoppingListTab extends StatelessWidget {
     }
 
     final lang = Localizations.localeOf(context).languageCode;
+    final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: GroupedShoppingListService.getUserShoppingItemsStream(user.uid),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
+    return ScaffoldMessenger(
+      key: scaffoldMessengerKey,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: StreamBuilder<QuerySnapshot>(
+          stream:
+              GroupedShoppingListService.getUserShoppingItemsStream(user.uid),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-        final docs = snapshot.data!.docs;
-        if (docs.isEmpty) {
-          return Center(child: Text(loc.shoppingListEmpty));
-        }
+            final docs = snapshot.data!.docs;
+            if (docs.isEmpty) {
+              return Center(child: Text(loc.shoppingListEmpty));
+            }
 
-        final grouped =
-            GroupedShoppingListService.groupItemsByRecipe(docs, lang);
-        final recipeTitles =
-            GroupedShoppingListService.extractStoredRecipeTitles(docs, lang);
+            final grouped =
+                GroupedShoppingListService.groupItemsByRecipe(docs, lang);
+            final recipeTitles =
+                GroupedShoppingListService.extractStoredRecipeTitles(
+                    docs, lang);
 
-        return ListView(
-          children: grouped.entries.map((entry) {
-            final recipeId = entry.key;
-            final items = entry.value.values
-                .map((e) => ShoppingListItem.fromMap(e))
-                .toList();
-            final title = recipeTitles[recipeId] ?? recipeId;
+            return ListView(
+              children: grouped.entries.map((entry) {
+                final recipeId = entry.key;
+                final items = entry.value.values
+                    .map((e) => ShoppingListItem.fromMap(e))
+                    .toList();
+                final title = recipeTitles[recipeId] ?? recipeId;
 
-            return Card(
-              margin: const EdgeInsets.all(8),
-              child: ExpansionTile(
-                title: Text('${loc.recipe}: $title'),
-                children: [
-                  ...items.map((item) {
-                    return ListTile(
-                      title: Text(
-                        '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.redAccent),
-                        onPressed: () async {
-                          if (blockIfOffline(context)) return;
+                return Card(
+                  margin: const EdgeInsets.all(8),
+                  child: ExpansionTile(
+                    title: Text('${loc.recipe}: $title'),
+                    children: [
+                      ...items.map((item) {
+                        return ListTile(
+                          title: Text(
+                            '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete,
+                                color: Colors.redAccent),
+                            onPressed: () async {
+                              if (blockIfOffline(context)) return;
 
-                          await GroupedShoppingListService.deleteSingleItem(
-                            docs,
-                            recipeId,
-                            item.name(lang),
-                            item.unit(lang),
-                          );
+                              await GroupedShoppingListService.deleteSingleItem(
+                                docs,
+                                recipeId,
+                                item.name(lang),
+                                item.unit(lang),
+                              );
 
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(loc.itemDeleted(item.name(lang))),
+                              scaffoldMessengerKey.currentState?.showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text(loc.itemDeleted(item.name(lang))),
+                                  backgroundColor: Colors.redAccent,
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: Center(
+                          child: TextButton.icon(
+                            onPressed: () async {
+                              if (blockIfOffline(context)) return;
+
+                              await GroupedShoppingListService
+                                  .deleteItemsForRecipe(docs, recipeId);
+
+                              scaffoldMessengerKey.currentState?.showSnackBar(
+                                SnackBar(
+                                  content: Text(loc.recipeItemsDeleted(
+                                      recipeTitles[recipeId] ?? recipeId)),
+                                  backgroundColor: Colors.redAccent,
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.delete_forever,
+                                color: Colors.redAccent),
+                            label: Text(
+                              loc.removeRecipeFromShoppingList,
+                              style: const TextStyle(color: Colors.redAccent),
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  }),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: Center(
-                      child: TextButton.icon(
-                        onPressed: () async {
-                          if (blockIfOffline(context)) return;
-
-                          await GroupedShoppingListService.deleteItemsForRecipe(
-                              docs, recipeId);
-
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(loc.recipeItemsDeleted(
-                                  recipeTitles[recipeId] ?? recipeId)),
-                            ),
-                          );
-                        },
-                        icon: const Icon(Icons.delete_forever,
-                            color: Colors.redAccent),
-                        label: Text(
-                          loc.removeRecipeFromShoppingList,
-                          style: const TextStyle(color: Colors.redAccent),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              }).toList(),
             );
-          }).toList(),
-        );
-      },
+          },
+        ),
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';
 import 'package:kuvio/features/recipes/screens/filter_screen.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class AccountDeleteSection extends StatelessWidget {
   final UserService userService;
@@ -25,11 +26,9 @@ class AccountDeleteSection extends StatelessWidget {
             await userService.deleteAccountWithConfirmation(
               context: context,
               onSuccess: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(context.loc.accountDeletedSuccess),
-                    backgroundColor: const Color(0xFF122620),
-                  ),
+                SnackbarHelper.showMessage(
+                  context,
+                  context.loc.accountDeletedSuccess,
                 );
 
                 Future.delayed(const Duration(milliseconds: 500)).then((_) {
