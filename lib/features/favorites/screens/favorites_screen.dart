@@ -3,7 +3,7 @@ import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/favorites/services/favorites_controller.dart';
 import 'package:kuvio/features/favorites/widgets/favorite_filter_bar.dart';
 import 'package:kuvio/features/recipes/widgets/favorite_recipe_card.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class FavoritesScreen extends StatefulWidget {
   final List<Recipe> allRecipes;

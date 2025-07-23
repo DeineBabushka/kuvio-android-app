@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';

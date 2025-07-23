@@ -3,7 +3,7 @@ import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/recipes/models/recipe_filter.dart';
 import 'package:kuvio/features/recipes/widgets/bottom_nav.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_card.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class FilteredRecipesScreen extends StatefulWidget {
   final String selectedDiet;

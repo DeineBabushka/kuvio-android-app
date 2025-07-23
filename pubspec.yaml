@@ -33,7 +33,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  generate: true
   
   assets:
     - assets/logo.png
@@ -190,9 +189,3 @@ flutter:
     - assets/recipe_133.jpg
     - assets/recipe_134.jpg
     - assets/recipe_135.jpg
-
-l10n:
-  arb-dir: lib/l10n
-  template-arb-file: app_en.arb
-  output-localization-file: app_localizations.dart
-  output-class: AppLocalizations

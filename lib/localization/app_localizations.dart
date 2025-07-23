@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:kuvio/l10n/app_localizations_de.dart';
-import 'package:kuvio/l10n/app_localizations_en.dart';
+import 'package:kuvio/localization/app_localizations_de.dart';
+import 'package:kuvio/localization/app_localizations_en.dart';
 
 abstract class AppLocalizations {
   AppLocalizations(String locale)

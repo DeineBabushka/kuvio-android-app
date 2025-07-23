@@ -13,8 +13,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
-import 'package:kuvio/l10n/l10n.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 void main() {
   runZonedGuarded(() async {
@@ -86,7 +85,7 @@ class _KuvioAppState extends State<KuvioApp> {
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
       locale: _locale,
-      supportedLocales: L10n.all,
+      supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: themeProvider.isDarkMode ? _darkTheme : _lightTheme,
       routes: {

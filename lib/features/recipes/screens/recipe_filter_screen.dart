@@ -8,7 +8,7 @@ import 'package:kuvio/features/recipes/widgets/filter_diet_wrap.dart';
 import 'package:kuvio/features/recipes/widgets/category_filter_wrap.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_show_button.dart';
 import 'package:kuvio/features/recipes/widgets/loading_indicator.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class RecipesScreen extends StatefulWidget {

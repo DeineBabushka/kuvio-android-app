@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/account/services/dialog_service.dart';
-import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class UserService {

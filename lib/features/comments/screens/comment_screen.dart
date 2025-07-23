@@ -5,7 +5,7 @@ import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/features/comments/widgets/comment_list.dart';
 import 'package:kuvio/features/comments/widgets/comment_empty_placeholder.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class CommentScreen extends StatefulWidget {
   const CommentScreen({super.key});

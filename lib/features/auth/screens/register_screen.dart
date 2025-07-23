@@ -3,7 +3,7 @@ import 'package:kuvio/features/auth/services/auth_service.dart';
 import 'package:kuvio/features/auth/widgets/register_form_card.dart';
 import 'package:kuvio/features/auth/models/register_user_data.dart';
 import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

@@ -6,7 +6,7 @@ import 'package:kuvio/features/account/screens/account_screen.dart';
 import 'package:kuvio/features/favorites/screens/favorites_screen.dart';
 import 'package:kuvio/features/comments/screens/comment_screen.dart';
 import 'package:kuvio/features/shopping_list/screens/shopping_list_screen.dart';
-import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 import 'package:kuvio/shared/utils/block_if_offline.dart';
 
 class BottomNavWidget extends StatelessWidget {
