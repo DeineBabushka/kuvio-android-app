@@ -20,33 +20,6 @@ class CommentService {
     return snapshot.docs.map((doc) => Comment.fromFirestore(doc)).toList();
   }
 
-  static Future<List<Comment>> getCommentsForRecipeWithProfileImages(
-      String recipeId) async {
-    final snapshot = await _db
-        .collection('comments')
-        .where('recipeId', isEqualTo: recipeId)
-        .orderBy('timestamp', descending: true)
-        .get();
-
-    final List<Comment> comments = [];
-
-    for (final doc in snapshot.docs) {
-      final data = doc.data();
-      final userId = data['userId'] ?? '';
-      String profileImage = '';
-
-      try {
-        final userDoc = await _db.collection('users').doc(userId).get();
-        profileImage = userDoc.data()?['profileImage'] ?? '';
-      } catch (_) {}
-
-      final comment = Comment.fromFirestore(doc, profileImage: profileImage);
-      comments.add(comment);
-    }
-
-    return comments;
-  }
-
   static Future<void> deleteComment(String commentId) async {
     await _db.collection('comments').doc(commentId).delete();
   }

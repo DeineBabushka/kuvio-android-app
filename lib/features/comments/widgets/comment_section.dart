@@ -29,8 +29,7 @@ class _CommentSectionState extends State<CommentSection> {
   Future<void> _loadComments() async {
     try {
       final comments =
-          await CommentService.getCommentsForRecipeWithProfileImages(
-              widget.recipeId);
+          await CommentService.getCommentsForRecipe(widget.recipeId);
       if (!mounted) return;
       setState(() {
         _comments = comments;
