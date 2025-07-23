@@ -68,18 +68,9 @@ class CommentService {
     final List<CommentWithRecipe> result = [];
 
     for (final doc in commentSnapshot.docs) {
-      final data = doc.data();
-      final userId = data['userId'] ?? '';
-      String profileImage = '';
-
-      try {
-        final userDoc = await _db.collection('users').doc(userId).get();
-        profileImage = userDoc.data()?['profileImage'] ?? '';
-      } catch (_) {}
-
-      final comment = Comment.fromFirestore(doc, profileImage: profileImage);
-
+      final comment = Comment.fromFirestore(doc);
       final recipe = recipeMap[comment.recipeId];
+
       if (recipe != null) {
         result.add(CommentWithRecipe(comment: comment, recipe: recipe));
       }

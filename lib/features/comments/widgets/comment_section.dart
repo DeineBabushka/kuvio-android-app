@@ -63,7 +63,7 @@ class _CommentSectionState extends State<CommentSection> {
       final loc = AppLocalizations.of(context);
       SnackbarHelper.showMessage(
         context,
-        loc?.commentLoginError ?? '❌ Du musst eingeloggt sein.',
+        loc?.commentLoginError ?? 'Du musst eingeloggt sein.',
       );
     }
   }

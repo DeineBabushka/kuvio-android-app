@@ -120,7 +120,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get commentsTitle => 'Kommentare';
   String get noComments => 'Keine Kommentare vorhanden.';
   String get commentHint => 'Kommentar schreiben...';
-  String get commentLoginError => '❌ Du musst eingeloggt sein.';
+  String get commentLoginError => 'Du musst eingeloggt sein.';
   String get addedToFavorites => 'Zu Favoriten hinzugefügt';
   String get removedFromFavorites => 'Aus Favoriten entfernt';
   String get addedAllToShoppingList => 'Zutaten zur Einkaufsliste hinzugefügt';
