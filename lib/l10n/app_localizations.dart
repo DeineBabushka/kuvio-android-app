@@ -246,7 +246,16 @@ abstract class AppLocalizations {
   String get noDescription;
 
   String get selectProfileImage;
+
   String get profileOfflineNotAvailable;
+
+  String get emailAlreadyInUse;
+  String get invalidEmail;
+  String get weakPassword;
+  String get offlineTitle;
+  String get offlineMessage;
+  String get offlineCheckFailed;
+  String get ok;
 }
 
 class _AppLocalizationsDelegate

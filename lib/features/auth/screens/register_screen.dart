@@ -5,6 +5,7 @@ import 'package:kuvio/features/auth/models/register_user_data.dart';
 import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -63,6 +64,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context,
         MaterialPageRoute(builder: (_) => const EditProfileScreen()),
       );
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      final loc = AppLocalizations.of(context)!;
+      String message;
+
+      switch (e.code) {
+        case 'email-already-in-use':
+          message = loc.emailAlreadyInUse;
+          break;
+        case 'invalid-email':
+          message = loc.invalidEmail;
+          break;
+        case 'weak-password':
+          message = loc.weakPassword;
+          break;
+        default:
+          message = loc.registrationFailed;
+      }
+
+      SnackbarHelper.showMessage(context, message);
     } catch (e) {
       if (!mounted) return;
       final loc = AppLocalizations.of(context)!;

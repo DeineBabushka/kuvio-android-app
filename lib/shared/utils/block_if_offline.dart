@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/shared/utils/connectivity_provider.dart';
 
 bool blockIfOffline(BuildContext context) {
+  final loc = AppLocalizations.of(context)!;
+
   try {
     final isOnline =
         Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
@@ -19,21 +22,21 @@ bool blockIfOffline(BuildContext context) {
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(Icons.cloud_off, color: Colors.white, size: 60),
-                SizedBox(height: 20),
+              children: [
+                const Icon(Icons.cloud_off, color: Colors.white, size: 60),
+                const SizedBox(height: 20),
                 Text(
-                  'Du bist offline.',
-                  style: TextStyle(
+                  loc.offlineTitle,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
-                  'Diese Funktion ist nur online verfügbar.',
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                  loc.offlineMessage,
+                  style: const TextStyle(color: Colors.white70, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -41,7 +44,8 @@ bool blockIfOffline(BuildContext context) {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK', style: TextStyle(color: Colors.white)),
+                child:
+                    Text(loc.ok, style: const TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -59,15 +63,15 @@ bool blockIfOffline(BuildContext context) {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          content: const Text(
-            '⚠️ Verbindungsstatus konnte nicht geprüft werden.',
-            style: TextStyle(color: Colors.white),
+          content: Text(
+            loc.offlineCheckFailed,
+            style: const TextStyle(color: Colors.white),
             textAlign: TextAlign.center,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK', style: TextStyle(color: Colors.white)),
+              child: Text(loc.ok, style: const TextStyle(color: Colors.white)),
             ),
           ],
         ),

@@ -195,4 +195,13 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get profileOfflineNotAvailable =>
       'Profilinformationen sind offline nicht verfügbar.';
+  String get emailAlreadyInUse => 'Diese E-Mail wird bereits verwendet.';
+  String get invalidEmail => 'Bitte gib eine gültige E-Mail-Adresse ein.';
+  String get weakPassword =>
+      'Das Passwort muss mindestens 6 Zeichen lang sein.';
+  String get offlineTitle => 'Du bist offline.';
+  String get offlineMessage => 'Diese Funktion ist nur online verfügbar.';
+  String get offlineCheckFailed =>
+      'Verbindungsstatus konnte nicht geprüft werden.';
+  String get ok => 'OK';
 }
