@@ -3,7 +3,7 @@ import 'package:kuvio/l10n/context_extension.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/features/account/widgets/confirm_button.dart';
 import 'package:kuvio/features/account/widgets/account_delete_hint.dart';
-import 'package:kuvio/features/recipes/screens/filter_screen.dart';
+import 'package:kuvio/features/recipes/screens/recipe_filter_screen.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class AccountDeleteSection extends StatelessWidget {
