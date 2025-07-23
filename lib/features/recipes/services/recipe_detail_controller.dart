@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/shared/models/ingredient.dart';
 import 'package:kuvio/features/recipes/models/recipe.dart';
-import 'package:kuvio/favorites/services/favorite_service.dart';
+import 'package:kuvio/features/favorites/services/favorite_service.dart';
 import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';
 import 'package:kuvio/features/recipes/services/recipe_detail_service.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuvio/features/recipes/screens/recipes_singleview_screen.dart';
+import 'package:kuvio/features/recipes/screens/recipes_detail_screen.dart';
 import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
