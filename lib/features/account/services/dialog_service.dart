@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/l10n/context_extension.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DialogService {
   static Future<String?> askForPassword(BuildContext context) async {
@@ -113,9 +111,9 @@ class DialogService {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.white70),
+                  child: Text(
+                    loc.cancel,
+                    style: const TextStyle(color: Colors.white70),
                   ),
                 ),
                 TextButton(
@@ -130,34 +128,6 @@ class DialogService {
           },
         ) ??
         false;
-
-    if (confirmed) {
-      try {
-        final user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          final uid = user.uid;
-
-          await FirebaseFirestore.instance
-              .collection('users')
-              .doc(uid)
-              .delete();
-          await user.delete();
-
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(context.loc.accountDeletedSuccess)),
-            );
-            Navigator.of(context).pushReplacementNamed('/login');
-          }
-        }
-      } catch (e) {
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${context.loc.deletionFailed}: $e')),
-          );
-        }
-      }
-    }
 
     return confirmed;
   }

@@ -42,14 +42,13 @@ class RecipeDetailContent extends StatelessWidget {
     final loc = AppLocalizations.of(context);
     final instructions = recipe.instructions[lang] ?? [];
     final prepTime = recipe.preparationTime[lang] ?? '';
-
     final isOnline = context.watch<ConnectivityProvider>().isOnline;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PortionSelector(
               portionCount: portionCount,
@@ -58,9 +57,17 @@ class RecipeDetailContent extends StatelessWidget {
               onIncrement: () => onPortionChange(portionCount + 1),
               textColor: textColor,
             ),
-            Text(
-              '${loc?.durationLabel ?? 'Dauer'}: $prepTime',
-              style: TextStyle(color: textColor, fontSize: 16),
+            const SizedBox(width: 16),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: Text(
+                  '${loc?.durationLabel ?? 'Dauer'}: $prepTime',
+                  style: TextStyle(color: textColor, fontSize: 16),
+                  textAlign: TextAlign.right,
+                  softWrap: true,
+                ),
+              ),
             ),
           ],
         ),

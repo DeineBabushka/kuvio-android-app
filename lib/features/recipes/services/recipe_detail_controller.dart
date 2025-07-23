@@ -6,7 +6,7 @@ import 'package:kuvio/features/recipes/models/recipe.dart';
 import 'package:kuvio/features/favorites/services/favorite_service.dart';
 import 'package:kuvio/features/shopping_list/services/shopping_list_service.dart';
 import 'package:kuvio/features/recipes/services/recipe_detail_service.dart';
-import 'package:kuvio/features/recipes/utils/snackbar_helper.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/shared/utils/block_if_offline.dart';
 import 'package:kuvio/shared/utils/connectivity_provider.dart';

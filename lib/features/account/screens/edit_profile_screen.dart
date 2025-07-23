@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/features/account/services/edit_profile_controller.dart';
 import 'package:kuvio/shared/utils/navigation_utils.dart';
-import 'package:kuvio/features/recipes/utils/snackbar_utils.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 import 'package:kuvio/features/recipes/widgets/profile_avatar.dart';
 import 'package:kuvio/features/account/widgets/account_edit_form.dart';
 import 'package:kuvio/features/account/widgets/screen_wrapper.dart';
@@ -74,7 +74,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   context: context,
                   isMounted: mounted,
                   onSuccess: () => navigateToHomeAndClearStack(context),
-                  showMessage: (msg) => showSuccessMessage(context, msg),
+                  showMessage: (msg) =>
+                      SnackbarHelper.showMessage(context, msg),
                 );
               },
               onChangePassword: () => navigateToChangePassword(context),

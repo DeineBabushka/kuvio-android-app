@@ -93,12 +93,8 @@ class GroupedShoppingListTab extends StatelessWidget {
                             await doc.reference.delete();
                           }
 
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(loc.itemDeleted(item.name(lang))),
-                            ),
-                          );
+                          showRootSnackbar(
+                              context, loc.itemDeleted(item.name(lang)));
                         },
                       ),
                       controlAffinity: ListTileControlAffinity.leading,
@@ -123,10 +119,7 @@ class GroupedShoppingListTab extends StatelessWidget {
                   }
                   await batch.commit();
 
-                  if (!context.mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(loc.shoppingListCleared)),
-                  );
+                  showRootSnackbar(context, loc.shoppingListCleared);
                 },
                 icon: const Icon(Icons.delete_forever),
                 label: Text(loc.deleteAllIngredients),
@@ -146,4 +139,18 @@ class GroupedShoppingListTab extends StatelessWidget {
       },
     );
   }
+}
+
+void showRootSnackbar(BuildContext context, String message) {
+  final rootContext = Navigator.of(context, rootNavigator: true).context;
+  ScaffoldMessenger.of(rootContext).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      backgroundColor: Colors.redAccent,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+  );
 }
