@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/admin/services/admin_service.dart';
-import 'package:kuvio/shared/utils/constants.dart';
 import 'package:kuvio/features/admin/widgets/admin_delete_dialog.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class UserCardTile extends StatelessWidget {
   final AppUser user;
@@ -41,14 +41,9 @@ class UserCardTile extends StatelessWidget {
               onChanged: (value) async {
                 await AdminService.setAdminStatus(user.id, value);
                 if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'Adminstatus von "${user.username}" geändert.',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: AppColors.snackSuccess,
-                    ),
+                  SnackbarHelper.showMessage(
+                    context,
+                    'Adminstatus von "${user.username}" geändert.',
                   );
                 }
               },
@@ -61,14 +56,9 @@ class UserCardTile extends StatelessWidget {
                 if (confirm == true) {
                   await AdminService.deleteUser(user.id);
                   if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Benutzer "${user.username}" wurde gelöscht.',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: Colors.red,
-                      ),
+                    SnackbarHelper.showMessage(
+                      context,
+                      'Benutzer "${user.username}" wurde gelöscht.',
                     );
                   }
                 }

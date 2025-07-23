@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/auth/services/google_auth_service.dart';
 import 'package:kuvio/shared/services/user_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class LoginActions {
   final UserService _userService;
@@ -24,12 +25,10 @@ class LoginActions {
       _showError(context, loc.loginErrorMissingEmail);
       return;
     }
-
     if (!email.contains('@')) {
       _showError(context, loc.loginErrorInvalidEmail);
       return;
     }
-
     if (password.isEmpty) {
       _showError(context, loc.loginErrorMissingPassword);
       return;
@@ -41,18 +40,9 @@ class LoginActions {
       if (user == null) return;
 
       await _userService.isAdmin(user.uid);
-
       if (!context.mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: const Color(0xFF2E6B4D),
-          content: Text(
-            loc.loginSuccess,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      );
+      SnackbarHelper.showMessage(context, loc.loginSuccess);
       Navigator.pop(context);
     } on FirebaseAuthException {
       if (context.mounted) {
@@ -75,24 +65,11 @@ class LoginActions {
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: const Color(0xFF2E6B4D),
-        content: Text(
-          loc.loginGoogleSuccess,
-          style: const TextStyle(color: Colors.white),
-        ),
-      ),
-    );
+    SnackbarHelper.showMessage(context, loc.loginGoogleSuccess);
     Navigator.pop(context);
   }
 
   void _showError(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: const Color(0xFF1C3C32),
-      ),
-    );
+    SnackbarHelper.showMessage(context, message);
   }
 }
