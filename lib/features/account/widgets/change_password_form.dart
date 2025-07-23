@@ -5,6 +5,7 @@ import 'package:kuvio/features/account/widgets/change_password_button.dart';
 import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:kuvio/features/account/widgets/password_fields.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class ChangePasswordForm extends StatefulWidget {
   const ChangePasswordForm({super.key});
@@ -32,16 +33,10 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
 
     if (!mounted) return;
 
-    final messenger = ScaffoldMessenger.of(context);
     final loc = AppLocalizations.of(context)!;
 
     if (result == null) {
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(loc.passwordChanged),
-          backgroundColor: Colors.green,
-        ),
-      );
+      SnackbarHelper.showMessage(context, loc.passwordChanged);
       await FirebaseAuth.instance.signOut();
       if (mounted) {
         Navigator.of(context).pushReplacement(
@@ -49,12 +44,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
         );
       }
     } else {
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(result),
-          backgroundColor: Colors.red,
-        ),
-      );
+      SnackbarHelper.showMessage(context, result);
     }
 
     if (mounted) setState(() => _isLoading = false);

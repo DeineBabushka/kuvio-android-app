@@ -4,10 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/shopping_list/models/shopping_list_item.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/shared/utils/block_if_offline.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
-class GroupedShoppingListTab extends StatelessWidget {
+class GroupedShoppingListTab extends StatefulWidget {
   const GroupedShoppingListTab({super.key});
 
+  @override
+  State<GroupedShoppingListTab> createState() => _GroupedShoppingListTabState();
+}
+
+class _GroupedShoppingListTabState extends State<GroupedShoppingListTab> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -93,8 +99,11 @@ class GroupedShoppingListTab extends StatelessWidget {
                             await doc.reference.delete();
                           }
 
-                          showRootSnackbar(
-                              context, loc.itemDeleted(item.name(lang)));
+                          if (!mounted) return;
+                          SnackbarHelper.showMessage(
+                            this.context,
+                            loc.itemDeleted(item.name(lang)),
+                          );
                         },
                       ),
                       controlAffinity: ListTileControlAffinity.leading,
@@ -119,7 +128,11 @@ class GroupedShoppingListTab extends StatelessWidget {
                   }
                   await batch.commit();
 
-                  showRootSnackbar(context, loc.shoppingListCleared);
+                  if (!mounted) return;
+                  SnackbarHelper.showMessage(
+                    this.context,
+                    loc.shoppingListCleared,
+                  );
                 },
                 icon: const Icon(Icons.delete_forever),
                 label: Text(loc.deleteAllIngredients),
@@ -139,18 +152,4 @@ class GroupedShoppingListTab extends StatelessWidget {
       },
     );
   }
-}
-
-void showRootSnackbar(BuildContext context, String message) {
-  final rootContext = Navigator.of(context, rootNavigator: true).context;
-  ScaffoldMessenger.of(rootContext).showSnackBar(
-    SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.redAccent,
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-    ),
-  );
 }

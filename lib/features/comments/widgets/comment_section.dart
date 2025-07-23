@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/features/comments/models/comment.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class CommentSection extends StatefulWidget {
   final String recipeId;
@@ -60,10 +61,9 @@ class _CommentSectionState extends State<CommentSection> {
     } catch (_) {
       if (!mounted) return;
       final loc = AppLocalizations.of(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text(loc?.commentLoginError ?? '❌ Du musst eingeloggt sein.')),
+      SnackbarHelper.showMessage(
+        context,
+        loc?.commentLoginError ?? '❌ Du musst eingeloggt sein.',
       );
     }
   }

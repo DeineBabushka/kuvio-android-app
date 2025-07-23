@@ -4,6 +4,7 @@ import 'package:kuvio/features/comments/models/comment_formatted.dart';
 import 'package:kuvio/features/comments/services/comment_service.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
 import 'package:kuvio/shared/utils/block_if_offline.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class CommentCard extends StatefulWidget {
   final FormattedComment comment;
@@ -131,12 +132,7 @@ class _CommentCardState extends State<CommentCard> {
 
     if (!context.mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(loc.commentDeleted),
-        backgroundColor: Colors.redAccent,
-      ),
-    );
+    SnackbarHelper.showMessage(context, loc.commentDeleted);
   }
 
   Widget _buildRecipeImage(String imageUrl) {

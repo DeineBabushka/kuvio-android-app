@@ -6,6 +6,7 @@ import 'package:kuvio/features/favorites/services/favorites_controller.dart';
 import 'package:kuvio/features/favorites/widgets/favorite_delete_icon.dart';
 import 'package:kuvio/features/favorites/services/favorite_service.dart';
 import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class FavoriteRecipeCard extends StatelessWidget {
   final FavoriteItem item;
@@ -107,12 +108,7 @@ class FavoriteRecipeCard extends StatelessWidget {
 
                   if (!context.mounted) return;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(loc.removedFromFavorites),
-                      backgroundColor: Colors.redAccent,
-                    ),
-                  );
+                  SnackbarHelper.showMessage(context, loc.removedFromFavorites);
                 }
               },
             ),

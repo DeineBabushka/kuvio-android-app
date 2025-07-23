@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuvio/l10n/context_extension.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 Future<void> showForgotPasswordDialog(BuildContext context) async {
   final emailController = TextEditingController();
@@ -33,17 +34,11 @@ Future<void> showForgotPasswordDialog(BuildContext context) async {
                     .sendPasswordResetEmail(email: email);
                 if (context.mounted) {
                   Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(loc.resetEmailSent),
-                    ),
-                  );
+                  SnackbarHelper.showMessage(context, loc.resetEmailSent);
                 }
               } catch (e) {
                 if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${loc.error}: $e')),
-                  );
+                  SnackbarHelper.showMessage(context, '${loc.error}: $e');
                 }
               }
             },

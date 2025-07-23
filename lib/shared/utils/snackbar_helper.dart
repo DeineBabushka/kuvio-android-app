@@ -19,8 +19,3 @@ class SnackbarHelper {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
-
-/// Für alte Verwendung (falls noch verwendet)
-void showSuccessMessage(BuildContext context, String message) {
-  SnackbarHelper.showMessage(context, message);
-}

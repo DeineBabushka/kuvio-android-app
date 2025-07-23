@@ -4,6 +4,7 @@ import 'package:kuvio/features/auth/widgets/register_form_card.dart';
 import 'package:kuvio/features/auth/models/register_user_data.dart';
 import 'package:kuvio/features/account/screens/edit_profile_screen.dart';
 import 'package:kuvio/l10n/app_localizations.dart';
+import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -52,12 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(loc.registrationSuccess),
-          duration: const Duration(seconds: 2),
-        ),
-      );
+      SnackbarHelper.showMessage(context, loc.registrationSuccess);
 
       await Future.delayed(const Duration(seconds: 2));
 
@@ -70,9 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       if (!mounted) return;
       final loc = AppLocalizations.of(context)!;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${loc.registrationFailed}: $e')),
-      );
+      SnackbarHelper.showMessage(context, '${loc.registrationFailed}: $e');
     }
   }
 
