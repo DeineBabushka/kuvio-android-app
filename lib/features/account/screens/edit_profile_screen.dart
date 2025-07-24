@@ -21,6 +21,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     if (!_initialized) {
       _initialized = true;
       controller.loadUserData(

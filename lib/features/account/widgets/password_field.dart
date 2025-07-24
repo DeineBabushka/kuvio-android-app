@@ -23,7 +23,9 @@ class PasswordInputField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: true,
-      style: TextStyle(color: textColor),
+      style: TextStyle(
+        color: textColor,
+      ),
       decoration: decoration,
       validator: validator,
     );

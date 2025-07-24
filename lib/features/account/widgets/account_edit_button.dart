@@ -11,10 +11,16 @@ class EditProfileButton extends StatelessWidget {
     return Center(
       child: TextButton.icon(
         onPressed: onTap,
-        icon: const Icon(Icons.edit, color: Colors.white70),
+        icon: const Icon(
+          Icons.edit,
+          color: Colors.white70,
+        ),
         label: Text(
           context.loc.editProfile,
-          style: const TextStyle(color: Colors.white70, fontSize: 18),
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 18,
+          ),
         ),
       ),
     );

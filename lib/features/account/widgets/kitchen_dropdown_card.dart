@@ -19,7 +19,10 @@ class KitchenDropdownCard extends StatelessWidget {
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 4,
+      ),
       child: DropdownButtonFormField<String>(
         value: selectedKitchen == 'not_set' ? null : selectedKitchen,
         decoration: InputDecoration(
@@ -28,13 +31,18 @@ class KitchenDropdownCard extends StatelessWidget {
           isDense: true,
           labelStyle: const TextStyle(color: Colors.white),
         ),
-        icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+        icon: const Icon(
+          Icons.arrow_drop_down,
+          color: Colors.white,
+        ),
         dropdownColor: AppColors.cardColor,
         style: const TextStyle(color: Colors.white),
         items: kitchenInternalToKey.entries.map((entry) {
           return DropdownMenuItem<String>(
             value: entry.key,
-            child: Text(context.loc.getString(entry.value)),
+            child: Text(
+              context.loc.getString(entry.value),
+            ),
           );
         }).toList(),
         onChanged: onChanged,

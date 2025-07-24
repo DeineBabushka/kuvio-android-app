@@ -70,8 +70,10 @@ class _CommentCardState extends State<CommentCard> {
                         child: Image.asset(
                           'assets/${cwr.recipe.image}',
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) =>
-                              const Icon(Icons.image_not_supported, size: 40),
+                          errorBuilder: (_, __, ___) => const Icon(
+                            Icons.image_not_supported,
+                            size: 40,
+                          ),
                         ),
                       )
                     : const Icon(Icons.image, size: 40),
@@ -98,7 +100,10 @@ class _CommentCardState extends State<CommentCard> {
                     const SizedBox(height: 8),
                     Text(
                       cwr.comment.text,
-                      style: TextStyle(fontSize: 18, color: textColor),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: textColor,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -145,13 +150,17 @@ class _CommentCardState extends State<CommentCard> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: Text(loc.cancel,
-                    style: const TextStyle(color: Colors.green)),
+                child: Text(
+                  loc.cancel,
+                  style: const TextStyle(color: Colors.green),
+                ),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: Text(loc.delete,
-                    style: const TextStyle(color: Colors.redAccent)),
+                child: Text(
+                  loc.delete,
+                  style: const TextStyle(color: Colors.redAccent),
+                ),
               ),
             ],
           ),

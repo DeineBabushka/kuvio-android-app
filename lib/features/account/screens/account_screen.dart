@@ -46,7 +46,10 @@ class _AccountScreenState extends State<AccountScreen> {
       context,
       MaterialPageRoute(builder: (_) => const EditProfileScreen()),
     );
-    if (mounted) _loadUserData();
+
+    if (mounted) {
+      _loadUserData();
+    }
   }
 
   @override

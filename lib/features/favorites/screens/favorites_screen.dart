@@ -33,6 +33,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+
     final backgroundColor = theme.scaffoldBackgroundColor;
     final textColor = isDark ? Colors.white : const Color(0xFF122620);
     final subtitleColor = isDark ? Colors.white70 : const Color(0xFF122620);
@@ -40,7 +41,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final cardColor = isDark ? theme.cardColor : Colors.white;
 
     final loc = AppLocalizations.of(context);
-
     final filteredFavorites = controller.filteredFavorites(context);
 
     return Scaffold(
@@ -54,14 +54,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       ),
       backgroundColor: backgroundColor,
       body: controller.isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.white))
+          ? const Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            )
           : Column(
               children: [
                 FavoritesFilterBar(
                   searchController: controller.searchController,
                   filter: controller.filter,
-                  onFilterChanged: (newFilter) =>
-                      controller.updateFilter(newFilter, () => setState(() {})),
+                  onFilterChanged: (newFilter) => controller.updateFilter(
+                    newFilter,
+                    () => setState(() {}),
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Expanded(

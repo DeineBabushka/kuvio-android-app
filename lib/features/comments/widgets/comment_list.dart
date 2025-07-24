@@ -12,7 +12,9 @@ class CommentList extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: comments.length,
-      itemBuilder: (context, index) => CommentCard(comment: comments[index]),
+      itemBuilder: (context, index) {
+        return CommentCard(comment: comments[index]);
+      },
     );
   }
 }

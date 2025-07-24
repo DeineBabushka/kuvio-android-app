@@ -5,7 +5,6 @@ class DialogService {
   static Future<String?> askForPassword(BuildContext context) async {
     final controller = TextEditingController();
     final loc = context.loc;
-
     String? result;
 
     await showModalBottomSheet(

@@ -74,7 +74,10 @@ class PasswordInputFields {
           label: context.loc.repeatPassword,
           hint: context.loc.repeatPasswordHint,
           validator: (value) => validateRepeatPassword(
-              value, newPasswordController.text, context),
+            value,
+            newPasswordController.text,
+            context,
+          ),
           textColor: inputColor,
           decoration: buildPasswordInputDecoration(
             label: context.loc.repeatPassword,

@@ -21,7 +21,9 @@ class ChangePasswordButton extends StatelessWidget {
               backgroundColor: Colors.redAccent,
               foregroundColor: Colors.white,
             ),
-            child: Text(context.loc.changePassword),
+            child: Text(
+              context.loc.changePassword,
+            ),
           );
   }
 }

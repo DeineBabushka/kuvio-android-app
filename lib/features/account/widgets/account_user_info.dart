@@ -66,6 +66,7 @@ class AccountUserInfo extends StatelessWidget {
     if (value == null || value.trim().isEmpty || value == 'not_set') {
       return context.loc.notSpecified;
     }
+
     return value;
   }
 }

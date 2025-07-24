@@ -28,6 +28,7 @@ class _CommentScreenState extends State<CommentScreen> {
     try {
       final recipeDocs =
           await FirebaseFirestore.instance.collection('recipes').get();
+
       final allRecipes =
           recipeDocs.docs.map((doc) => Recipe.fromFirestore(doc)).toList();
 

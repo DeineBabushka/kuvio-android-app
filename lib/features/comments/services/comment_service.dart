@@ -40,7 +40,11 @@ class CommentService {
         profileImage = userDoc.data()?['profileImage'] ?? '';
       } catch (_) {}
 
-      final comment = Comment.fromFirestore(doc, profileImage: profileImage);
+      final comment = Comment.fromFirestore(
+        doc,
+        profileImage: profileImage,
+      );
+
       comments.add(comment);
     }
 
@@ -72,7 +76,10 @@ class CommentService {
       final recipe = recipeMap[comment.recipeId];
 
       if (recipe != null) {
-        result.add(CommentWithRecipe(comment: comment, recipe: recipe));
+        result.add(CommentWithRecipe(
+          comment: comment,
+          recipe: recipe,
+        ));
       }
     }
 
