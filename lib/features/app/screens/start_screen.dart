@@ -18,7 +18,10 @@ class StartScreen extends StatelessWidget {
 
           return Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 24,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -43,7 +46,9 @@ class StartScreen extends StatelessWidget {
                     child: Text(
                       context.loc.welcomeSubtitle,
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge?.copyWith(fontSize: 18),
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                   SizedBox(height: size.height * 0.1),

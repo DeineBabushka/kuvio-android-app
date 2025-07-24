@@ -24,8 +24,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _obscurePassword = true;
 
-  void _toggleObscurePassword() =>
-      setState(() => _obscurePassword = !_obscurePassword);
+  void _toggleObscurePassword() {
+    setState(() => _obscurePassword = !_obscurePassword);
+  }
 
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
@@ -54,7 +55,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       if (!mounted) return;
 
-      SnackbarHelper.showMessage(context, loc.registrationSuccess);
+      SnackbarHelper.showMessage(
+        context,
+        loc.registrationSuccess,
+      );
 
       await Future.delayed(const Duration(seconds: 2));
 
@@ -62,7 +66,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+        MaterialPageRoute(
+          builder: (_) => const EditProfileScreen(),
+        ),
       );
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
@@ -87,7 +93,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       if (!mounted) return;
       final loc = AppLocalizations.of(context)!;
-      SnackbarHelper.showMessage(context, '${loc.registrationFailed}: $e');
+      SnackbarHelper.showMessage(
+        context,
+        '${loc.registrationFailed}: $e',
+      );
     }
   }
 
@@ -101,14 +110,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: theme.iconTheme.color),
+        iconTheme: IconThemeData(
+          color: theme.iconTheme.color,
+        ),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+              ),
               child: IntrinsicHeight(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
