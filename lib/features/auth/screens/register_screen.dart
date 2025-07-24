@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => const EditProfileScreen(),
+          builder: (context) => const EditProfileScreen(),
         ),
       );
     } on FirebaseAuthException catch (e) {

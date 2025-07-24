@@ -10,7 +10,7 @@ void navigateToFavoriteRecipeDetail(
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (_) => RecipeDetailScreen(
+      builder: (context) => RecipeDetailScreen(
         recipe: recipe,
         recipeId: recipe.id,
         heroTag: heroTag,

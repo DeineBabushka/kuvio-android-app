@@ -18,7 +18,7 @@ class DeleteFavoriteIcon extends StatelessWidget {
 
         final confirmed = await showDialog<bool>(
               context: context,
-              builder: (_) => AlertDialog(
+              builder: (context) => AlertDialog(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

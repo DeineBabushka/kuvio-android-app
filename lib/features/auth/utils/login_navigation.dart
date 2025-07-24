@@ -5,7 +5,7 @@ void navigateToRegister(BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (_) => const RegisterScreen(),
+      builder: (context) => const RegisterScreen(),
     ),
   );
 }

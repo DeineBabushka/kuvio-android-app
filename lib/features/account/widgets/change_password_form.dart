@@ -44,7 +44,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
 
       if (mounted) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
       }
     } else {
