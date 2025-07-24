@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/account/services/dialog_service.dart';
 import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
@@ -22,16 +21,6 @@ class UserService {
     if (user == null) return null;
     final doc = await _firestore.collection('users').doc(user.uid).get();
     return doc.exists ? doc : null;
-  }
-
-  Future<AppUser?> fetchAndParseUser() async {
-    final doc = await loadUserData();
-    return doc != null ? AppUser.fromSnapshot(doc) : null;
-  }
-
-  Future<Map<String, dynamic>?> loadEditableUserData() async {
-    final doc = await loadUserData();
-    return doc?.data() as Map<String, dynamic>?;
   }
 
   Future<Map<String, dynamic>?> fetchCurrentUserData() async {

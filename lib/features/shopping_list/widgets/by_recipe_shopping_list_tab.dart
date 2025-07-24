@@ -46,12 +46,15 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
           final recipeTitles =
               GroupedShoppingListService.extractStoredRecipeTitles(docs, lang);
 
-          return ListView(
-            children: grouped.entries.map((entry) {
+          final entries = grouped.entries.toList();
+
+          return ListView.builder(
+            itemCount: entries.length,
+            itemBuilder: (context, index) {
+              final entry = entries[index];
               final recipeId = entry.key;
-              final items = entry.value.values
-                  .map((e) => ShoppingListItem.fromMap(e))
-                  .toList();
+              final items =
+                  entry.value.values.map(ShoppingListItem.fromMap).toList();
               final title = recipeTitles[recipeId] ?? recipeId;
 
               return Card(
@@ -67,13 +70,20 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                           trailing: IconButton(
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
-                            onPressed: () {
-                              _deleteSingleItem(
-                                docs: docs,
-                                recipeId: recipeId,
-                                itemName: item.name(lang),
-                                itemUnit: item.unit(lang),
-                                lang: lang,
+                            onPressed: () async {
+                              if (blockIfOffline(context)) return;
+
+                              await GroupedShoppingListService.deleteSingleItem(
+                                docs,
+                                recipeId,
+                                item.name(lang),
+                                item.unit(lang),
+                              );
+
+                              if (!mounted) return;
+                              SnackbarHelper.showMessage(
+                                this.context,
+                                loc.itemDeleted(item.name(lang)),
                               );
                             },
                           ),
@@ -101,7 +111,7 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                   ],
                 ),
               );
-            }).toList(),
+            },
           );
         },
       ),

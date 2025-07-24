@@ -28,11 +28,15 @@ class RecipeSliverAppBar extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
-    final recipeTitle = recipe.title[lang]!;
-    final instructions = recipe.instructions[lang]!;
-    final ingredients = recipe.ingredients
-        .map((e) => "${e.quantity} ${e.unit[lang]} ${e.name[lang] ?? ''}")
-        .join(', ');
+    final recipeTitle = recipe.title[lang] ?? '';
+    final instructions = recipe.instructions[lang] ?? [];
+    final ingredients = recipe.ingredients.map((e) {
+      final unit = e.unit[lang];
+      final name = e.name[lang];
+      return "${e.quantity}"
+          "${unit != null ? ' $unit' : ''}"
+          "${name != null ? ' $name' : ''}";
+    }).join(', ');
 
     final shareText = StringBuffer()
       ..writeln(recipeTitle)

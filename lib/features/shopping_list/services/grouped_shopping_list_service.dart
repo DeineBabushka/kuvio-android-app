@@ -25,8 +25,16 @@ class GroupedShoppingListService {
       final unitRaw = data['unit'];
       final quantity = (data['quantity'] as num?)?.toDouble() ?? 0.0;
 
-      final name = nameRaw is String ? nameRaw : nameRaw![lang];
-      final unit = unitRaw is String ? unitRaw : unitRaw![lang];
+      final name = nameRaw is String
+          ? nameRaw
+          : (nameRaw?[lang] ?? nameRaw?['en'] ?? nameRaw?['de']);
+
+      final unit = unitRaw is String
+          ? unitRaw
+          : (unitRaw?[lang] ?? unitRaw?['en'] ?? unitRaw?['de']);
+
+      if (name == null || unit == null) continue;
+
       final key = '$name|$unit';
 
       grouped.putIfAbsent(recipeId, () => {});
