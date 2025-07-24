@@ -149,7 +149,9 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context);
+    if (loc == null) return const SizedBox();
+
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
 
@@ -162,17 +164,14 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
         ? theme.textTheme.bodyMedium?.color ?? Colors.white70
         : Colors.black87;
 
-    final filteredRecipes = filter.apply(widget.allRecipes, context);
+    final recipes = filter.apply(widget.allRecipes, context);
 
-    final localizedDiet = localizeDiet(
-      convertDietLabelToKey(widget.selectedDiet),
-      loc,
-    );
+    // optional Umweg zur Umwandlung
+    final dietKey = convertDietLabelToKey(widget.selectedDiet);
+    final categoryKey = convertCategoryLabelToKey(widget.selectedCategory);
 
-    final localizedCategory = localizeCategory(
-      convertCategoryLabelToKey(widget.selectedCategory),
-      loc,
-    );
+    final localizedDiet = localizeDiet(dietKey, loc);
+    final localizedCategory = localizeCategory(categoryKey, loc);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -218,7 +217,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
           ),
           const SizedBox(height: 8),
           Expanded(
-            child: filteredRecipes.isEmpty
+            child: recipes.isEmpty
                 ? Center(
                     child: Text(
                       loc.noRecipesFound,
@@ -231,9 +230,9 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
                   )
                 : ListView.builder(
                     padding: const EdgeInsets.all(16.0),
-                    itemCount: filteredRecipes.length,
+                    itemCount: recipes.length,
                     itemBuilder: (context, index) {
-                      final recipe = filteredRecipes[index];
+                      final recipe = recipes[index];
                       return RecipeCard(
                         recipe: recipe,
                         cardBackground: cardBackground,

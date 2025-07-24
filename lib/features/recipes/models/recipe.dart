@@ -41,10 +41,10 @@ class Recipe {
       title: Map<String, String>.from(data['title'] ?? {}),
       image: data['image'] ?? '',
       portions: data['portions'] ?? 0,
-      ingredients: (data['ingredients'] as List<dynamic>).map((item) {
+      ingredients: (data['ingredients'] as List).map((item) {
         try {
           return Ingredient.fromMap(item);
-        } catch (e) {
+        } catch (_) {
           return Ingredient(
             quantity: 0,
             name: {'de': 'Unbekannt', 'en': 'Unknown'},
@@ -52,20 +52,14 @@ class Recipe {
           );
         }
       }).toList(),
-      instructions: Map<String, List<String>>.fromEntries(
-        (data['instructions'] as Map<String, dynamic>).entries.map(
-              (e) => MapEntry(e.key, List<String>.from(e.value)),
-            ),
+      instructions: (data['instructions'] as Map).map(
+        (key, val) => MapEntry(key, List<String>.from(val)),
       ),
-      dietTypes: Map<String, List<String>>.fromEntries(
-        (data['diet_types'] as Map<String, dynamic>).entries.map(
-              (e) => MapEntry(e.key, List<String>.from(e.value)),
-            ),
+      dietTypes: (data['diet_types'] as Map).map(
+        (key, val) => MapEntry(key, List<String>.from(val)),
       ),
-      categories: Map<String, List<String>>.fromEntries(
-        (data['categories'] as Map<String, dynamic>).entries.map(
-              (e) => MapEntry(e.key, List<String>.from(e.value)),
-            ),
+      categories: (data['categories'] as Map).map(
+        (key, val) => MapEntry(key, List<String>.from(val)),
       ),
       preparationTime: Map<String, String>.from(data['preparation_time'] ?? {}),
       calories: data['nutrition']?['calories'] ?? 0,

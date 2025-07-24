@@ -15,7 +15,7 @@ class GoogleUserData {
     required this.username,
     required this.email,
     this.bio = '',
-    this.kitchen = 'Nicht angegeben',
+    this.kitchen = '',
     this.favdish = '',
     this.isAdmin = false,
     this.favorites = const [],
@@ -23,22 +23,25 @@ class GoogleUserData {
   }) : createdAt = createdAt ?? DateTime.now();
 
   Map<String, dynamic> toMap() {
-    return {
-      'username': username,
-      'email': email,
-      'createdAt': Timestamp.fromDate(createdAt),
-      'bio': bio,
-      'kitchen': kitchen,
-      'favdish': favdish,
-      'isAdmin': isAdmin,
-      'favorites': favorites,
-    };
+    final map = <String, dynamic>{};
+    map['username'] = username;
+    map['email'] = email;
+    map['createdAt'] = Timestamp.fromDate(createdAt);
+    map['bio'] = bio;
+    map['kitchen'] = kitchen;
+    map['favdish'] = favdish;
+    map['isAdmin'] = isAdmin;
+    map['favorites'] = favorites;
+    return map;
   }
 
   factory GoogleUserData.fromFirebaseUser(User user) {
+    final name = user.displayName;
+    final mail = user.email;
+
     return GoogleUserData(
-      username: user.displayName ?? 'Google Nutzer',
-      email: user.email ?? '',
+      username: name ?? 'Google Nutzer',
+      email: mail ?? '',
     );
   }
 }

@@ -6,7 +6,6 @@ class RecipeService {
 
   static Future<List<Recipe>> fetchAllRecipes() async {
     final querySnapshot = await _db.collection('recipes').get();
-
     return querySnapshot.docs.map((doc) => Recipe.fromFirestore(doc)).toList();
   }
 
@@ -19,7 +18,6 @@ class RecipeService {
     return allRecipes.where((recipe) {
       final diets = recipe.dietTypes[lang] ?? [];
       final categories = recipe.categories[lang] ?? [];
-
       return diets.contains(diet) && categories.contains(category);
     }).toList();
   }
