@@ -15,9 +15,9 @@ class RegisterUserData {
     String? password,
   }) {
     return RegisterUserData(
-      username: username != null ? username : this.username,
-      email: email != null ? email : this.email,
-      password: password != null ? password : this.password,
+      username: username ?? this.username,
+      email: email ?? this.email,
+      password: password ?? this.password,
     );
   }
 
