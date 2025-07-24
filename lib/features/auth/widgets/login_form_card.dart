@@ -89,7 +89,10 @@ class LoginFormCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
-              onPressed: onForgotPassword,
+              onPressed: () {
+                if (blockIfOffline(context)) return;
+                onForgotPassword();
+              },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
               ),
