@@ -166,7 +166,6 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
 
     final recipes = filter.apply(widget.allRecipes, context);
 
-    // optional Umweg zur Umwandlung
     final dietKey = convertDietLabelToKey(widget.selectedDiet);
     final categoryKey = convertCategoryLabelToKey(widget.selectedCategory);
 
