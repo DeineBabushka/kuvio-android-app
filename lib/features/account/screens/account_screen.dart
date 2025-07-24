@@ -44,7 +44,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+      MaterialPageRoute(builder: (context) => const EditProfileScreen()),
     );
 
     if (mounted) {

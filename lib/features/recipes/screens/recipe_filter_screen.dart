@@ -41,7 +41,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => FilteredRecipesScreen(
+          builder: (context) => FilteredRecipesScreen(
             selectedDiet: selectedDiet!,
             selectedCategory: selectedCategory!,
             allRecipes: allRecipesList,

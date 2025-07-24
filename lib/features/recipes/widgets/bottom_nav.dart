@@ -49,7 +49,7 @@ class BottomNavWidget extends StatelessWidget {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => destination),
+      MaterialPageRoute(builder: (context) => destination),
     );
   }
 

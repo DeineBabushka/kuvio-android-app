@@ -5,7 +5,7 @@ import 'package:kuvio/features/account/screens/change_password_screen.dart';
 void navigateToHomeAndClearStack(BuildContext context) {
   Navigator.pushAndRemoveUntil(
     context,
-    MaterialPageRoute(builder: (_) => const RecipesScreen()),
+    MaterialPageRoute(builder: (context) => const RecipesScreen()),
     (route) => false,
   );
 }
@@ -13,6 +13,6 @@ void navigateToHomeAndClearStack(BuildContext context) {
 void navigateToChangePassword(BuildContext context) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (_) => const ChangePasswordScreen()),
+    MaterialPageRoute(builder: (context) => const ChangePasswordScreen()),
   );
 }
