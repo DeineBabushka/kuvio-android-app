@@ -38,7 +38,7 @@ class _CommentCardState extends State<CommentCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => RecipeDetailScreen(
+              builder: (context) => RecipeDetailScreen(
                 recipe: cwr.recipe,
                 recipeId: cwr.recipe.id,
                 heroTag: heroTag,
@@ -134,7 +134,7 @@ class _CommentCardState extends State<CommentCard> {
 
     final confirmed = await showDialog<bool>(
           context: context,
-          builder: (_) => AlertDialog(
+          builder: (context) => AlertDialog(
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

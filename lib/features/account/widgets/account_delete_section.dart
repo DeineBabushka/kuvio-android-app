@@ -35,7 +35,7 @@ class AccountDeleteSection extends StatelessWidget {
                   if (context.mounted) {
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (_) => const RecipesScreen(),
+                        builder: (context) => const RecipesScreen(),
                       ),
                       (_) => false,
                     );

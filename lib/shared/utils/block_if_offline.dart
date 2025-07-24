@@ -15,7 +15,7 @@ bool blockIfOffline(BuildContext context) {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (_) => AlertDialog(
+          builder: (context) => AlertDialog(
             backgroundColor: const Color.fromRGBO(0, 0, 0, 0.9),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -63,7 +63,7 @@ bool blockIfOffline(BuildContext context) {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (_) => AlertDialog(
+        builder: (context) => AlertDialog(
           backgroundColor: const Color.fromRGBO(0, 0, 0, 0.9),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
