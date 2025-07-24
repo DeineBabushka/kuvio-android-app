@@ -168,6 +168,7 @@ class _FilteredRecipesScreenState extends State<FilteredRecipesScreen> {
       convertDietLabelToKey(widget.selectedDiet),
       loc,
     );
+
     final localizedCategory = localizeCategory(
       convertCategoryLabelToKey(widget.selectedCategory),
       loc,

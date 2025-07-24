@@ -41,14 +41,14 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
   Future<void> _loadUserData() async {
     final isOnline =
         Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
+
     if (!isOnline) {
-      setState(() {
-        isLoading = false;
-      });
+      setState(() => isLoading = false);
       return;
     }
 
     final data = await UserService().fetchCurrentUserData();
+
     if (mounted) {
       setState(() {
         userData = data;
@@ -62,8 +62,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
     final theme = Theme.of(context);
     final isLoggedIn = FirebaseAuth.instance.currentUser != null;
     final isOnline = Provider.of<ConnectivityProvider>(context).isOnline;
-    final sectionStyle =
-        const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold);
+    final sectionStyle = const TextStyle(
+      color: Colors.white70,
+      fontWeight: FontWeight.bold,
+    );
     final tileColor = const Color(0xFF2E6B4D);
 
     return Drawer(
@@ -93,7 +95,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                   const SizedBox(height: 8),
                   Text(
                     context.loc.profileOfflineNotAvailable,
-                    style: const TextStyle(color: Colors.white70, fontSize: 16),
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -101,8 +106,9 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             ),
           ] else ...[
             const Center(
-                child: Icon(Icons.person_outline,
-                    color: Colors.white70, size: 48)),
+              child:
+                  Icon(Icons.person_outline, color: Colors.white70, size: 48),
+            ),
             const SizedBox(height: 3),
             Center(
               child: Text(

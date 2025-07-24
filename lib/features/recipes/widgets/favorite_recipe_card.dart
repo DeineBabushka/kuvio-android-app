@@ -36,8 +36,11 @@ class FavoriteRecipeCard extends StatelessWidget {
     final prepTime = recipe.getPreparationTime(context);
 
     return GestureDetector(
-      onTap: () =>
-          navigateToFavoriteRecipeDetail(context, recipe, 'fav-${recipe.id}'),
+      onTap: () => navigateToFavoriteRecipeDetail(
+        context,
+        recipe,
+        'fav-${recipe.id}',
+      ),
       child: Card(
         color: cardColor,
         shape: RoundedRectangleBorder(
@@ -69,8 +72,10 @@ class FavoriteRecipeCard extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 8,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,12 +90,18 @@ class FavoriteRecipeCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       '${recipe.portions} ${loc.portionsLabel} • $prepTime',
-                      style: TextStyle(fontSize: 14, color: subtitleColor),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: subtitleColor,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       '${loc.addedOn}: ${formatDate(item.addedAt)}',
-                      style: TextStyle(fontSize: 12, color: timestampColor),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: timestampColor,
+                      ),
                     ),
                   ],
                 ),
@@ -99,6 +110,7 @@ class FavoriteRecipeCard extends StatelessWidget {
             DeleteFavoriteIcon(
               onDelete: () async {
                 final user = FirebaseAuth.instance.currentUser;
+
                 if (user != null) {
                   await controller.removeFavorite(
                     userId: user.uid,
@@ -108,7 +120,10 @@ class FavoriteRecipeCard extends StatelessWidget {
 
                   if (!context.mounted) return;
 
-                  SnackbarHelper.showMessage(context, loc.removedFromFavorites);
+                  SnackbarHelper.showMessage(
+                    context,
+                    loc.removedFromFavorites,
+                  );
                 }
               },
             ),

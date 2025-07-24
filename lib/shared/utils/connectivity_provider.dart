@@ -14,12 +14,14 @@ class ConnectivityProvider extends ChangeNotifier {
 
   Future<void> _checkConnection() async {
     final previousStatus = _isOnline;
+
     try {
       final result = await InternetAddress.lookup('google.com');
       _isOnline = result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } on SocketException {
       _isOnline = false;
     }
+
     if (!_wasPreviouslyOnline(previousStatus) && _isOnline) {
       await OfflineCacheService.preloadAll();
       if (_isOnline != previousStatus) {

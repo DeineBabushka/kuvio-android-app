@@ -16,6 +16,7 @@ class ProfileAvatar extends StatelessWidget {
         assetPath != null && !assetPath!.startsWith('assets/')
             ? 'assets/$assetPath'
             : (assetPath ?? 'assets/character_1.png');
+
     return Center(
       child: Stack(
         children: [

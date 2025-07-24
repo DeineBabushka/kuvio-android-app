@@ -9,6 +9,7 @@ class FavoriteShareActions extends StatelessWidget {
   final VoidCallback onToggleFavorite;
   final bool isLoggedIn;
   final bool isOnline;
+
   const FavoriteShareActions({
     super.key,
     required this.title,
@@ -18,6 +19,7 @@ class FavoriteShareActions extends StatelessWidget {
     required this.isLoggedIn,
     required this.isOnline,
   });
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,6 +28,7 @@ class FavoriteShareActions extends StatelessWidget {
           icon: const Icon(Icons.share, color: Colors.white),
           onPressed: () {
             if (blockIfOffline(context)) return;
+
             SharePlus.instance.share(
               ShareParams(
                 text: shareText,

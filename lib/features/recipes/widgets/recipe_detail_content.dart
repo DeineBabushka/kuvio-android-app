@@ -63,7 +63,10 @@ class RecipeDetailContent extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 12.0),
                 child: Text(
                   '${loc?.durationLabel ?? 'Dauer'}: $prepTime',
-                  style: TextStyle(color: textColor, fontSize: 16),
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 16,
+                  ),
                   textAlign: TextAlign.right,
                   softWrap: true,
                 ),

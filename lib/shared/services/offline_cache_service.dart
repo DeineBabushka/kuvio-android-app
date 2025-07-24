@@ -5,6 +5,7 @@ class OfflineCacheService {
   static Future<void> preloadAll() async {
     final fs = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser;
+
     await fs.collection('recipes').get(const GetOptions(source: Source.server));
 
     if (user == null) {

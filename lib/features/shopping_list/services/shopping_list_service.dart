@@ -18,6 +18,7 @@ class ShoppingListService {
         'de': ingredient.name['de'] ?? '',
         'en': ingredient.name['en'] ?? '',
       };
+
       final unit = {
         'de': ingredient.unit['de'] ?? '',
         'en': ingredient.unit['en'] ?? '',

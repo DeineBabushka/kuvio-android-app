@@ -33,7 +33,9 @@ class IngredientList extends StatelessWidget {
         return Card(
           color: cardColor,
           margin: const EdgeInsets.symmetric(vertical: 4),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: ListTile(
             title: Text(
               text.trim(),
