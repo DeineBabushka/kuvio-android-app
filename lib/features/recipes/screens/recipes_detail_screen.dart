@@ -31,19 +31,21 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   @override
   void initState() {
     super.initState();
+
     controller = RecipeDetailController(
       context: context,
       recipe: widget.recipe,
       recipeId: widget.recipeId ?? '',
     );
+
     portionCount = controller.initialPortions;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final connectivity =
           Provider.of<ConnectivityProvider>(context, listen: false);
       final online = connectivity.isOnline;
-
       final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+
       if (online && isLoggedIn) {
         final fav = await controller.loadFavoriteStatus();
         if (mounted) {

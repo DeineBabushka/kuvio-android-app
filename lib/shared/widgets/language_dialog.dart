@@ -23,7 +23,9 @@ class LanguageDialog extends StatelessWidget {
 
     return Dialog(
       backgroundColor: dialogColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         child: Column(

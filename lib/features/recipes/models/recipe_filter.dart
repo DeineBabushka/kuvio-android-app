@@ -14,7 +14,6 @@ class RecipeFilter {
 
   List<Recipe> apply(List<Recipe> allRecipes, BuildContext context) {
     const filterLang = 'de';
-
     final uiLang = Localizations.localeOf(context).languageCode;
 
     return allRecipes.where((recipe) {

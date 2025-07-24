@@ -39,13 +39,11 @@ class _GroupedShoppingListTabState extends State<GroupedShoppingListTab> {
         }
 
         final docs = snapshot.data!.docs;
-
         if (docs.isEmpty) {
           return Center(child: Text(loc.shoppingListEmpty));
         }
 
         final Map<String, ShoppingListItem> groupedItems = {};
-
         for (var doc in docs) {
           final item =
               ShoppingListItem.fromMap(doc.data() as Map<String, dynamic>);

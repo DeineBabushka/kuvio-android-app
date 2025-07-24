@@ -62,6 +62,7 @@ class GroupedShoppingListService {
       final data = doc.data() as Map<String, dynamic>;
       final id = data['fromRecipeId'] ?? 'Unbekannt';
       final titleRaw = data['recipeTitle'];
+
       final title = titleRaw is String
           ? titleRaw
           : (titleRaw?[lang] ?? titleRaw?['en'] ?? titleRaw?['de'] ?? '???');

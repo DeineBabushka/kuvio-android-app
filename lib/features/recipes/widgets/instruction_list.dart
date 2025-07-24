@@ -20,8 +20,10 @@ class InstructionList extends StatelessWidget {
         final index = entry.key + 1;
         final stepRaw = entry.value.trim();
 
-        final stepCleaned =
-            stepRaw.replaceFirst(RegExp(r'^\d+[\.\)\:]\s*'), '');
+        final stepCleaned = stepRaw.replaceFirst(
+          RegExp(r'^\d+[\.\)\:]\s*'),
+          '',
+        );
 
         return Card(
           color: cardColor,

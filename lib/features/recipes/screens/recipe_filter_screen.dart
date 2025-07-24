@@ -72,11 +72,16 @@ class _RecipesScreenState extends State<RecipesScreen> {
         backgroundColor: theme.scaffoldBackgroundColor,
         iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
-        title: Image.asset('assets/logo-horizontale.png', height: 200),
+        title: Image.asset(
+          'assets/logo-horizontale.png',
+          height: 200,
+        ),
       ),
       body: SingleChildScrollView(
-        padding:
-            EdgeInsets.symmetric(horizontal: isWide ? 64 : 32, vertical: 32),
+        padding: EdgeInsets.symmetric(
+          horizontal: isWide ? 64 : 32,
+          vertical: 32,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

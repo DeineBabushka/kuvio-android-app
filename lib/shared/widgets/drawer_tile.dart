@@ -19,12 +19,20 @@ class DrawerTile extends StatelessWidget {
     return Card(
       color: tileColor,
       margin: const EdgeInsets.symmetric(vertical: 6),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: ListTile(
         leading: Icon(icon, color: Colors.white),
-        title: Text(title, style: const TextStyle(color: Colors.white)),
-        trailing:
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white),
+        ),
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.white,
+          size: 16,
+        ),
         onTap: onTap,
       ),
     );

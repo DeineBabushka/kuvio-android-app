@@ -55,6 +55,7 @@ class RecipeDetailController {
           ? (loc?.addedToFavorites ?? "Zu Favoriten hinzugefügt")
           : (loc?.removedFromFavorites ?? "Aus Favoriten entfernt"),
     );
+
     return updated;
   }
 

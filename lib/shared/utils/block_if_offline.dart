@@ -36,7 +36,10 @@ bool blockIfOffline(BuildContext context) {
                 const SizedBox(height: 10),
                 Text(
                   loc.offlineMessage,
-                  style: const TextStyle(color: Colors.white70, fontSize: 16),
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 16,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -44,8 +47,10 @@ bool blockIfOffline(BuildContext context) {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child:
-                    Text(loc.ok, style: const TextStyle(color: Colors.white)),
+                child: Text(
+                  loc.ok,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -71,7 +76,10 @@ bool blockIfOffline(BuildContext context) {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text(loc.ok, style: const TextStyle(color: Colors.white)),
+              child: Text(
+                loc.ok,
+                style: const TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

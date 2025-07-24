@@ -37,7 +37,8 @@ class NutritionCard extends StatelessWidget {
                 color: cardColor,
                 margin: const EdgeInsets.symmetric(vertical: 6),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 elevation: 1,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

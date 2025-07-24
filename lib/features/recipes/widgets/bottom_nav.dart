@@ -19,8 +19,8 @@ class BottomNavWidget extends StatelessWidget {
 
   void _onItemTapped(BuildContext context, int index) {
     final user = FirebaseAuth.instance.currentUser;
-
     final requiresOnline = {0, 2, 3};
+
     if (requiresOnline.contains(index) && blockIfOffline(context)) return;
 
     Widget destination;

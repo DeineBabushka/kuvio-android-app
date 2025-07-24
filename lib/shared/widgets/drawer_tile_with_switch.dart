@@ -21,10 +21,15 @@ class DrawerTileWithSwitch extends StatelessWidget {
     return Card(
       color: tileColor,
       margin: const EdgeInsets.symmetric(vertical: 6),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: ListTile(
         leading: Icon(icon, color: Colors.white),
-        title: Text(title, style: const TextStyle(color: Colors.white)),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white),
+        ),
         trailing: Switch(
           value: value,
           onChanged: onChanged,

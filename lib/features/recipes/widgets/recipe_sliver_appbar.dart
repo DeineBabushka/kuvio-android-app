@@ -12,15 +12,16 @@ class RecipeSliverAppBar extends StatelessWidget {
   final String lang;
   final bool isOnline;
 
-  const RecipeSliverAppBar(
-      {super.key,
-      required this.recipe,
-      required this.heroTag,
-      required this.isFavorite,
-      required this.isLoggedIn,
-      required this.onToggleFavorite,
-      required this.lang,
-      required this.isOnline});
+  const RecipeSliverAppBar({
+    super.key,
+    required this.recipe,
+    required this.heroTag,
+    required this.isFavorite,
+    required this.isLoggedIn,
+    required this.onToggleFavorite,
+    required this.lang,
+    required this.isOnline,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,9 @@ class RecipeSliverAppBar extends StatelessWidget {
                     color: Colors.white,
                     fontSize: isCollapsed ? 20 : 24,
                     fontWeight: FontWeight.w700,
-                    shadows: const [Shadow(blurRadius: 4, color: Colors.black)],
+                    shadows: const [
+                      Shadow(blurRadius: 4, color: Colors.black),
+                    ],
                   ),
                 ),
               ),
@@ -80,7 +83,10 @@ class RecipeSliverAppBar extends StatelessWidget {
           children: [
             Hero(
               tag: heroTag,
-              child: Image.asset('assets/${recipe.image}', fit: BoxFit.cover),
+              child: Image.asset(
+                'assets/${recipe.image}',
+                fit: BoxFit.cover,
+              ),
             ),
             Container(
               decoration: BoxDecoration(
