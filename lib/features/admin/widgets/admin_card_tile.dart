@@ -53,10 +53,7 @@ class UserCardTile extends StatelessWidget {
                 if (context.mounted) {
                   SnackbarHelper.showMessage(
                     context,
-                    context.loc.adminStatusChanged.replaceFirst(
-                      '{username}',
-                      user.username,
-                    ),
+                    'Adminstatus von "${user.username}" wurde geändert.',
                   );
                 }
               },

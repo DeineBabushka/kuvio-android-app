@@ -26,7 +26,7 @@ class FavoriteService {
         .where('recipeId', isEqualTo: recipeId)
         .get();
 
-    for (var doc in snapshot.docs) {
+    for (final doc in snapshot.docs) {
       await doc.reference.delete();
     }
   }
@@ -43,6 +43,7 @@ class FavoriteService {
 
   static Future<bool> toggleFavorite(String userId, String recipeId) async {
     final isFav = await isFavorite(userId, recipeId);
+
     if (isFav) {
       await removeFavorite(userId, recipeId);
       return false;
@@ -58,7 +59,12 @@ class FavoriteService {
         .where('userId', isEqualTo: userId)
         .get();
 
-    return snapshot.docs.map((doc) => doc['recipeId'] as String).toList();
+    final ids = <String>[];
+    for (final doc in snapshot.docs) {
+      ids.add(doc['recipeId'] as String);
+    }
+
+    return ids;
   }
 
   static Future<List<FavoriteItem>> loadFavoritesWithRecipes(
@@ -68,7 +74,9 @@ class FavoriteService {
         .where('userId', isEqualTo: userId)
         .get();
 
-    return snapshot.docs.map((doc) {
+    final List<FavoriteItem> favorites = [];
+
+    for (final doc in snapshot.docs) {
       final recipeId = doc['recipeId'] as String;
       final addedAt =
           (doc['addedAt'] as Timestamp?)?.toDate() ?? DateTime.now();
@@ -107,7 +115,9 @@ class FavoriteService {
         ),
       );
 
-      return FavoriteItem(recipe: recipe, addedAt: addedAt);
-    }).toList();
+      favorites.add(FavoriteItem(recipe: recipe, addedAt: addedAt));
+    }
+
+    return favorites;
   }
 }

@@ -37,25 +37,23 @@ class GoogleAuthService {
       if (user == null) {
         return (
           isAdmin: false,
-          error: loc.noUsersFound,
+          error: 'Kein Benutzer vorhanden.',
         );
       }
 
       final userRef = _firestore.collection('users').doc(user.uid);
-      final doc = await userRef.get();
+      final snapshot = await userRef.get();
 
-      if (!doc.exists) {
-        final googleUserData =
-            GoogleUserData.fromFirebaseUser(user, loc.notSpecified);
-        await userRef.set(googleUserData.toMap());
+      if (!snapshot.exists) {
+        final newUserData = GoogleUserData.fromFirebaseUser(user);
+        await userRef.set(newUserData.toMap());
       }
 
       final userData = (await userRef.get()).data();
-      final isAdminRaw = userData?['isAdmin'];
-      final bool isAdmin = isAdminRaw is bool ? isAdminRaw : false;
+      final isAdminFlag = userData != null && userData['isAdmin'] == true;
 
       return (
-        isAdmin: isAdmin,
+        isAdmin: isAdminFlag,
         error: null,
       );
     } catch (e) {
