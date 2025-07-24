@@ -17,23 +17,18 @@ class PortionSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
+    final textStyle = TextStyle(color: textColor, fontSize: 16);
 
     return Row(
       children: [
-        Text(
-          '${loc?.portionsLabel ?? 'Portionen'}: ',
-          style: TextStyle(color: textColor, fontSize: 16),
-        ),
+        Text('${loc.portionsLabel}: ', style: textStyle),
         IconButton(
           onPressed: onDecrement,
           icon: const Icon(Icons.remove_circle_outline),
           color: textColor,
         ),
-        Text(
-          '$portionCount',
-          style: TextStyle(color: textColor, fontSize: 16),
-        ),
+        Text('$portionCount', style: textStyle),
         IconButton(
           onPressed: onIncrement,
           icon: const Icon(Icons.add_circle_outline),

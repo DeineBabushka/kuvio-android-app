@@ -53,12 +53,14 @@ class UserService {
   }
 
   Future<String?> changePassword({
+    required BuildContext context,
     required String currentPassword,
     required String newPassword,
   }) async {
+    final loc = context.loc;
     final user = _auth.currentUser;
     if (user == null || user.email == null) {
-      return 'Kein Benutzer angemeldet.';
+      return loc.noUserLoggedIn;
     }
 
     try {
@@ -73,13 +75,13 @@ class UserService {
       switch (e.code) {
         case 'wrong-password':
         case 'invalid-credential':
-          return 'Das aktuelle Passwort ist falsch.';
+          return loc.errorWrongPassword;
         case 'requires-recent-login':
-          return 'Bitte melde dich erneut an, um dein Passwort zu ändern.';
+          return loc.errorRecentLoginRequired;
         case 'user-mismatch':
-          return 'Anmeldedaten stimmen nicht mit dem aktuellen Nutzer überein.';
+          return loc.errorUserMismatch;
         default:
-          return 'Fehler beim Ändern des Passworts.';
+          return loc.errorChangePasswordFailed;
       }
     }
   }

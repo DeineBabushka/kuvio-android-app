@@ -33,6 +33,7 @@ class _CommentSectionState extends State<CommentSection> {
               widget.recipeId);
       await CommentService.getCommentsForRecipe(widget.recipeId);
       if (!mounted) return;
+
       setState(() {
         _comments = comments;
         _loading = false;
@@ -54,17 +55,20 @@ class _CommentSectionState extends State<CommentSection> {
 
     try {
       await CommentService.submitComment(
+        context: context,
         recipeId: widget.recipeId,
         text: text,
       );
+
       _controller.clear();
       _loadComments();
     } catch (_) {
       if (!mounted) return;
-      final loc = AppLocalizations.of(context);
+
+      final loc = AppLocalizations.of(context)!;
       SnackbarHelper.showMessage(
         context,
-        loc?.commentLoginError ?? 'Du musst eingeloggt sein.',
+        loc.commentLoginError,
       );
     }
   }
@@ -74,7 +78,7 @@ class _CommentSectionState extends State<CommentSection> {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null || _offlineBlocked) return const SizedBox.shrink();
 
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
     final textColor =
         Theme.of(context).textTheme.bodyLarge?.color ?? Colors.white;
     final cardColor = const Color(0xFF2C2C2E);
@@ -85,7 +89,7 @@ class _CommentSectionState extends State<CommentSection> {
         const SizedBox(height: 30),
         Divider(color: textColor.withAlpha(127)),
         Text(
-          loc?.commentsTitle ?? 'Kommentare',
+          loc.commentsTitle,
           style: TextStyle(
               color: textColor, fontSize: 22, fontWeight: FontWeight.bold),
         ),
@@ -130,7 +134,7 @@ class _CommentSectionState extends State<CommentSection> {
                 controller: _controller,
                 style: TextStyle(color: textColor),
                 decoration: InputDecoration(
-                  hintText: loc?.commentHint ?? 'Kommentar schreiben...',
+                  hintText: loc.commentHint,
                   hintStyle: TextStyle(color: textColor.withAlpha(127)),
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: textColor)),

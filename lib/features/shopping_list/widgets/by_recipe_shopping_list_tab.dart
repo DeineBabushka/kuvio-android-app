@@ -64,7 +64,8 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                   children: [
                     ...items.map((item) => ListTile(
                           title: Text(
-                            '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
+                            '${item.quantity.toStringAsFixed(2)} '
+                            '${item.unit(lang)} ${item.name(lang)}',
                           ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete,
@@ -88,27 +89,22 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                           ),
                         )),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
-                      child: TextButton.icon(
-                        onPressed: () async {
-                          if (blockIfOffline(context)) return;
-
-                          await GroupedShoppingListService.deleteItemsForRecipe(
-                            docs,
-                            recipeId,
-                          );
-
-                          if (!mounted) return;
-                          SnackbarHelper.showMessage(
-                            this.context,
-                            loc.recipeItemsDeleted(title),
-                          );
-                        },
-                        icon: const Icon(Icons.delete_forever,
-                            color: Colors.redAccent),
-                        label: Text(
-                          loc.removeRecipeFromShoppingList,
-                          style: const TextStyle(color: Colors.redAccent),
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Center(
+                        child: TextButton.icon(
+                          onPressed: () {
+                            _deleteAllItemsForRecipe(
+                              docs: docs,
+                              recipeId: recipeId,
+                              recipeTitle: recipeTitles[recipeId] ?? recipeId,
+                            );
+                          },
+                          icon: const Icon(Icons.delete_forever,
+                              color: Colors.redAccent),
+                          label: Text(
+                            loc.removeRecipeFromShoppingList,
+                            style: const TextStyle(color: Colors.redAccent),
+                          ),
                         ),
                       ),
                     ),
@@ -120,5 +116,43 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
         },
       ),
     );
+  }
+
+  Future<void> _deleteSingleItem({
+    required List<QueryDocumentSnapshot> docs,
+    required String recipeId,
+    required String itemName,
+    required String itemUnit,
+    required String lang,
+  }) async {
+    if (!mounted || blockIfOffline(context)) return;
+
+    final loc = AppLocalizations.of(context)!;
+
+    await GroupedShoppingListService.deleteSingleItem(
+      docs,
+      recipeId,
+      itemName,
+      itemUnit,
+      lang,
+    );
+
+    if (!mounted) return;
+    SnackbarHelper.showMessage(context, loc.itemDeleted(itemName));
+  }
+
+  Future<void> _deleteAllItemsForRecipe({
+    required List<QueryDocumentSnapshot> docs,
+    required String recipeId,
+    required String recipeTitle,
+  }) async {
+    if (!mounted || blockIfOffline(context)) return;
+
+    final loc = AppLocalizations.of(context)!;
+
+    await GroupedShoppingListService.deleteItemsForRecipe(docs, recipeId);
+
+    if (!mounted) return;
+    SnackbarHelper.showMessage(context, loc.recipeItemsDeleted(recipeTitle));
   }
 }

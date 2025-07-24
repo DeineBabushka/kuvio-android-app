@@ -20,7 +20,7 @@ class GroupedShoppingListService {
 
     for (var doc in docs) {
       final data = doc.data() as Map<String, dynamic>;
-      final recipeId = data['fromRecipeId'] ?? 'Unbekannt';
+      final recipeId = data['fromRecipeId'];
       final nameRaw = data['name'];
       final unitRaw = data['unit'];
       final quantity = (data['quantity'] as num?)?.toDouble() ?? 0.0;
@@ -60,12 +60,9 @@ class GroupedShoppingListService {
 
     for (var doc in docs) {
       final data = doc.data() as Map<String, dynamic>;
-      final id = data['fromRecipeId'] ?? 'Unbekannt';
+      final id = data['fromRecipeId'];
       final titleRaw = data['recipeTitle'];
-
-      final title = titleRaw is String
-          ? titleRaw
-          : (titleRaw?[lang] ?? titleRaw?['en'] ?? titleRaw?['de'] ?? '???');
+      final title = titleRaw is String ? titleRaw : titleRaw![lang];
 
       if (!titles.containsKey(id)) {
         titles[id] = title;
@@ -98,20 +95,15 @@ class GroupedShoppingListService {
     String recipeId,
     String name,
     String unit,
+    String lang,
   ) async {
     final toDelete = docs.where((doc) {
       final data = doc.data() as Map<String, dynamic>;
-
       final nameRaw = data['name'];
       final unitRaw = data['unit'];
 
-      final resolvedName = nameRaw is String
-          ? nameRaw
-          : (nameRaw?['de'] ?? nameRaw?['en'] ?? '');
-
-      final resolvedUnit = unitRaw is String
-          ? unitRaw
-          : (unitRaw?['de'] ?? unitRaw?['en'] ?? '');
+      final resolvedName = nameRaw[lang];
+      final resolvedUnit = unitRaw[lang];
 
       return data['fromRecipeId'] == recipeId &&
           resolvedName == name &&

@@ -32,8 +32,9 @@ class _CommentScreenState extends State<CommentScreen> {
       final allRecipes =
           recipeDocs.docs.map((doc) => Recipe.fromFirestore(doc)).toList();
 
-      final commentPairs =
-          await CommentService.getAllCommentsWithRecipes(allRecipes);
+      final commentPairs = await CommentService.getAllCommentsWithRecipes(
+        allRecipes,
+      );
 
       final formatted = commentPairs.map(FormattedComment.fromCWR).toList();
 
@@ -49,11 +50,11 @@ class _CommentScreenState extends State<CommentScreen> {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(loc?.myCommentsTitle ?? 'Meine Kommentare'),
+        title: Text(loc.myCommentsTitle),
         backgroundColor: backgroundColor,
       ),
       backgroundColor: backgroundColor,

@@ -17,22 +17,22 @@ class CategoryFilterWrap extends StatelessWidget {
     required this.theme,
   });
 
-  String localizeCategory(String value, AppLocalizations? loc) {
+  String localizeCategory(String value, AppLocalizations loc) {
     switch (value) {
       case 'Vorspeise':
-        return loc?.categoryStarter ?? value;
+        return loc.categoryStarter;
       case 'Hauptgericht':
-        return loc?.categoryMain ?? value;
+        return loc.categoryMain;
       case 'Dessert':
-        return loc?.categoryDessert ?? value;
+        return loc.categoryDessert;
       case 'Beilage':
-        return loc?.categorySide ?? value;
+        return loc.categorySide;
       case 'Snack':
-        return loc?.categorySnack ?? value;
+        return loc.categorySnack;
       case 'Frühstück':
-        return loc?.categoryBreakfast ?? value;
+        return loc.categoryBreakfast;
       case 'Kalorienarm':
-        return loc?.categoryLowCalorie ?? value;
+        return loc.categoryLowCalorie;
       default:
         return value;
     }
@@ -40,22 +40,21 @@ class CategoryFilterWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filterOptions = FavoritesFilter();
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
+    final categories = FavoritesFilter().availableCategories(context);
 
     return Wrap(
       spacing: 20,
       runSpacing: 20,
-      children: [
-        for (var category in filterOptions.availableCategories)
-          CategoryFilterChip(
-            category: localizeCategory(category, loc),
-            isSelected: selectedCategory == category,
-            textColor: textColor,
-            onTap: () => onSelect(category),
-            theme: theme,
-          ),
-      ],
+      children: categories.map((category) {
+        return CategoryFilterChip(
+          category: localizeCategory(category, loc),
+          isSelected: selectedCategory == category,
+          textColor: textColor,
+          onTap: () => onSelect(category),
+          theme: theme,
+        );
+      }).toList(),
     );
   }
 }

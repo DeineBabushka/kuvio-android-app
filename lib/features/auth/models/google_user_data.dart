@@ -15,7 +15,7 @@ class GoogleUserData {
     required this.username,
     required this.email,
     this.bio = '',
-    this.kitchen = 'Nicht angegeben',
+    required this.kitchen,
     this.favdish = '',
     this.isAdmin = false,
     this.favorites = const [],
@@ -35,10 +35,11 @@ class GoogleUserData {
     };
   }
 
-  factory GoogleUserData.fromFirebaseUser(User user) {
+  factory GoogleUserData.fromFirebaseUser(User user, String kitchen) {
     return GoogleUserData(
-      username: user.displayName ?? 'Google Nutzer',
-      email: user.email ?? '',
+      username: user.displayName!,
+      email: user.email!,
+      kitchen: kitchen,
     );
   }
 }

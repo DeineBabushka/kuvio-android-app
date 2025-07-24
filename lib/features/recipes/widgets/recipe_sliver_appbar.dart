@@ -25,7 +25,7 @@ class RecipeSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     final recipeTitle = recipe.title[lang] ?? '';
@@ -38,10 +38,12 @@ class RecipeSliverAppBar extends StatelessWidget {
           "${name != null ? ' $name' : ''}";
     }).join(', ');
 
-    final shareText = "$recipeTitle\n"
-        "${loc?.ingredientsLabel ?? 'Zutaten'}: $ingredients\n"
-        "${loc?.instructionsLabel ?? 'Zubereitung'}: ${instructions.take(3).join(' ')}...\n"
-        "${loc?.cookedWithKuvio ?? 'Gekocht mit der Kuvio App!'}";
+    final shareText = StringBuffer()
+      ..writeln(recipeTitle)
+      ..writeln("${loc.ingredientsLabel}: $ingredients")
+      ..writeln(
+          "${loc.instructionsLabel}: ${instructions.take(3).join(' ')}...")
+      ..writeln(loc.cookedWithKuvio);
 
     return SliverAppBar(
       expandedHeight: 400,
@@ -50,12 +52,16 @@ class RecipeSliverAppBar extends StatelessWidget {
       backgroundColor: backgroundColor,
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.parallax,
-        stretchModes: const [StretchMode.zoomBackground, StretchMode.fadeTitle],
+        stretchModes: const [
+          StretchMode.zoomBackground,
+          StretchMode.fadeTitle,
+        ],
         titlePadding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
         centerTitle: true,
         title: LayoutBuilder(
           builder: (context, constraints) {
             final isCollapsed = constraints.maxHeight < 140;
+
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               child: ConstrainedBox(
@@ -74,7 +80,10 @@ class RecipeSliverAppBar extends StatelessWidget {
                     fontSize: isCollapsed ? 20 : 24,
                     fontWeight: FontWeight.w700,
                     shadows: const [
-                      Shadow(blurRadius: 4, color: Colors.black),
+                      Shadow(
+                        blurRadius: 4,
+                        color: Colors.black,
+                      ),
                     ],
                   ),
                 ),
@@ -115,7 +124,7 @@ class RecipeSliverAppBar extends StatelessWidget {
       actions: [
         FavoriteShareActions(
           title: recipeTitle,
-          shareText: shareText,
+          shareText: shareText.toString(),
           isFavorite: isFavorite,
           isLoggedIn: isLoggedIn,
           isOnline: isOnline,

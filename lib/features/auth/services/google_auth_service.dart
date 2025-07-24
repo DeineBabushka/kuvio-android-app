@@ -1,15 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kuvio/features/auth/models/google_user_data.dart';
+import 'package:kuvio/localization/app_localizations.dart';
 
 class GoogleAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
-  Future<({bool isAdmin, String? error})> signInWithGoogle() async {
+  Future<({bool isAdmin, String? error})> signInWithGoogle(
+    BuildContext context,
+  ) async {
+    final loc = AppLocalizations.of(context)!;
+
     try {
       await _googleSignIn.initialize(
         serverClientId:
@@ -30,14 +35,18 @@ class GoogleAuthService {
       final user = userCredential.user;
 
       if (user == null) {
-        return (isAdmin: false, error: 'Kein Benutzer vorhanden.');
+        return (
+          isAdmin: false,
+          error: loc.noUsersFound,
+        );
       }
 
       final userRef = _firestore.collection('users').doc(user.uid);
       final doc = await userRef.get();
 
       if (!doc.exists) {
-        final googleUserData = GoogleUserData.fromFirebaseUser(user);
+        final googleUserData =
+            GoogleUserData.fromFirebaseUser(user, loc.notSpecified);
         await userRef.set(googleUserData.toMap());
       }
 
@@ -52,7 +61,7 @@ class GoogleAuthService {
     } catch (e) {
       return (
         isAdmin: false,
-        error: e.toString(),
+        error: loc.googleLoginError,
       );
     }
   }
