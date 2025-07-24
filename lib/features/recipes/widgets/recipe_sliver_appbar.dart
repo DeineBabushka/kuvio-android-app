@@ -33,7 +33,7 @@ class RecipeSliverAppBar extends StatelessWidget {
         .map((e) => "${e.quantity} ${e.unit[lang] ?? ''} ${e.name[lang] ?? ''}")
         .join(', ');
 
-    final shareText = "🥗 $recipeTitle\n"
+    final shareText = "$recipeTitle\n"
         "${loc?.ingredientsLabel ?? 'Zutaten'}: $ingredients\n"
         "${loc?.instructionsLabel ?? 'Zubereitung'}: ${instructions.take(3).join(' ')}...\n"
         "${loc?.cookedWithKuvio ?? 'Gekocht mit der Kuvio App!'}";
