@@ -7,7 +7,9 @@ class ProfileService {
   }
 
   Future<String?> openImagePickerDialog(
-      BuildContext context, String? currentAsset) async {
+    BuildContext context,
+    String? currentAsset,
+  ) async {
     final assets = getProfileImageAssets();
     final loc = context.loc;
 
@@ -28,6 +30,7 @@ class ProfileService {
               ),
               itemBuilder: (context, index) {
                 final assetName = assets[index];
+
                 return GestureDetector(
                   onTap: () => Navigator.pop(context, assetName),
                   child: Image.asset(assetName),

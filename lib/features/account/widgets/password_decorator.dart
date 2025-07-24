@@ -14,7 +14,9 @@ InputDecoration buildPasswordInputDecoration({
     hintStyle: TextStyle(color: labelColor.withAlpha(153)),
     filled: true,
     fillColor: fillColor,
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: labelColor.withAlpha(128)),
       borderRadius: BorderRadius.circular(8),

@@ -18,8 +18,10 @@ class FavoritesController {
     if (user == null) return;
 
     try {
-      final loaded =
-          await FavoriteService.loadFavoritesWithRecipes(user.uid, allRecipes);
+      final loaded = await FavoriteService.loadFavoritesWithRecipes(
+        user.uid,
+        allRecipes,
+      );
       allFavorites = loaded;
     } finally {
       isLoading = false;

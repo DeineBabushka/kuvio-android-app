@@ -11,9 +11,9 @@ class ChangePasswordScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(loc.changePassword),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Text(loc.changePassword),
       ),
       body: const Padding(
         padding: EdgeInsets.all(24),

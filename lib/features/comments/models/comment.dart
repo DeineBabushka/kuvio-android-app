@@ -8,6 +8,7 @@ class Comment {
   final String text;
   final DateTime timestamp;
   final String profileImage;
+
   Comment({
     required this.id,
     required this.userId,
@@ -28,9 +29,12 @@ class Comment {
     };
   }
 
-  factory Comment.fromFirestore(DocumentSnapshot doc,
-      {String profileImage = ''}) {
+  factory Comment.fromFirestore(
+    DocumentSnapshot doc, {
+    String profileImage = '',
+  }) {
     final data = doc.data() as Map<String, dynamic>;
+
     return Comment(
       id: doc.id,
       userId: data['userId'] ?? '',

@@ -19,6 +19,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
   final _currentPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
+
   bool _isLoading = false;
 
   Future<void> _submit() async {
@@ -37,7 +38,9 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
 
     if (result == null) {
       SnackbarHelper.showMessage(context, loc.passwordChanged);
+
       await FirebaseAuth.instance.signOut();
+
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const LoginScreen()),
@@ -47,13 +50,16 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
       SnackbarHelper.showMessage(context, result);
     }
 
-    if (mounted) setState(() => _isLoading = false);
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+
     final inputColor = isDark ? Colors.white : Colors.black;
     final labelColor = isDark ? Colors.white70 : const Color(0xFF122620);
     final fillColor = isDark ? Colors.grey[850]! : Colors.white;

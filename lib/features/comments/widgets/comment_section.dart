@@ -30,8 +30,9 @@ class _CommentSectionState extends State<CommentSection> {
     try {
       final comments =
           await CommentService.getCommentsForRecipeWithProfileImages(
-              widget.recipeId);
-      await CommentService.getCommentsForRecipe(widget.recipeId);
+        widget.recipeId,
+      );
+
       if (!mounted) return;
       setState(() {
         _comments = comments;
@@ -39,7 +40,6 @@ class _CommentSectionState extends State<CommentSection> {
       });
     } catch (_) {
       if (!mounted) return;
-
       setState(() {
         _offlineBlocked = true;
         _loading = false;
@@ -87,14 +87,19 @@ class _CommentSectionState extends State<CommentSection> {
         Text(
           loc?.commentsTitle ?? 'Kommentare',
           style: TextStyle(
-              color: textColor, fontSize: 22, fontWeight: FontWeight.bold),
+            color: textColor,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 10),
         if (_loading)
           const CircularProgressIndicator()
         else if (_comments.isEmpty)
-          Text(loc?.noComments ?? "Keine Kommentare vorhanden.",
-              style: TextStyle(color: textColor))
+          Text(
+            loc?.noComments ?? "Keine Kommentare vorhanden.",
+            style: TextStyle(color: textColor),
+          )
         else
           ..._comments.map((comment) {
             final ts = comment.timestamp.add(const Duration(hours: 2));
@@ -109,14 +114,24 @@ class _CommentSectionState extends State<CommentSection> {
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   leading: _buildProfileImage(comment.profileImage),
-                  title: Text(comment.username,
-                      style: TextStyle(color: textColor)),
-                  subtitle: Text(comment.text,
-                      style: TextStyle(color: textColor.withAlpha(179))),
+                  title: Text(
+                    comment.username,
+                    style: TextStyle(color: textColor),
+                  ),
+                  subtitle: Text(
+                    comment.text,
+                    style: TextStyle(color: textColor.withAlpha(179)),
+                  ),
                   trailing: Text(
-                    '${ts.day.toString().padLeft(2, '0')}.${ts.month.toString().padLeft(2, '0')}.${ts.year} – ${ts.hour.toString().padLeft(2, '0')}:${ts.minute.toString().padLeft(2, '0')}',
+                    '${ts.day.toString().padLeft(2, '0')}.'
+                    '${ts.month.toString().padLeft(2, '0')}.'
+                    '${ts.year} – '
+                    '${ts.hour.toString().padLeft(2, '0')}:'
+                    '${ts.minute.toString().padLeft(2, '0')}',
                     style: TextStyle(
-                        color: textColor.withAlpha(127), fontSize: 12),
+                      color: textColor.withAlpha(127),
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -133,7 +148,8 @@ class _CommentSectionState extends State<CommentSection> {
                   hintText: loc?.commentHint ?? 'Kommentar schreiben...',
                   hintStyle: TextStyle(color: textColor.withAlpha(127)),
                   enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: textColor)),
+                    borderSide: BorderSide(color: textColor),
+                  ),
                 ),
               ),
             ),
@@ -155,6 +171,7 @@ class _CommentSectionState extends State<CommentSection> {
         child: Icon(Icons.person, color: Colors.white),
       );
     }
+
     return CircleAvatar(
       radius: 20,
       backgroundColor: Colors.transparent,

@@ -18,7 +18,9 @@ class EditProfileController {
   String? selectedProfileAsset;
 
   String mapLocalizedKitchenToInternal(
-      BuildContext context, String? localized) {
+    BuildContext context,
+    String? localized,
+  ) {
     if (localized == null || localized.trim().isEmpty) return 'not_set';
 
     final entry = kitchenInternalToKey.entries.firstWhere(
@@ -35,6 +37,7 @@ class EditProfileController {
     required String defaultKitchen,
   }) async {
     final doc = await userService.loadUserData();
+
     if (doc != null && doc.exists) {
       final user = AppUser.fromSnapshot(doc);
 

@@ -7,7 +7,9 @@ class EmptyCommentPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(context.loc.noCommentsFound),
+      child: Text(
+        context.loc.noCommentsFound,
+      ),
     );
   }
 }

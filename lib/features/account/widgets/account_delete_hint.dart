@@ -9,7 +9,10 @@ class AccountDeleteHint extends StatelessWidget {
     return Text(
       context.loc.deleteAccountHint,
       textAlign: TextAlign.center,
-      style: const TextStyle(color: Colors.white60, fontSize: 13),
+      style: const TextStyle(
+        color: Colors.white60,
+        fontSize: 13,
+      ),
     );
   }
 }

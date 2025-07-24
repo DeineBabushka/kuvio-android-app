@@ -70,8 +70,7 @@ class FavoritesFilterBar extends StatelessWidget {
           child: TextField(
             controller: searchController,
             onChanged: (val) => onFilterChanged(
-              filter.copyWith(searchQuery: val.toLowerCase()),
-            ),
+                filter.copyWith(searchQuery: val.toLowerCase())),
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               hintText: loc?.searchRecipesHint ?? 'Suche nach Rezepten...',

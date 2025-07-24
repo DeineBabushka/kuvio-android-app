@@ -26,7 +26,9 @@ class FilterDropdown extends StatelessWidget {
         labelStyle: const TextStyle(color: Colors.white70),
         filled: true,
         fillColor: Colors.white10,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
       icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
       items: [
