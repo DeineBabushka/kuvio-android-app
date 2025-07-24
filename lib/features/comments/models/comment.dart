@@ -37,10 +37,10 @@ class Comment {
 
     return Comment(
       id: doc.id,
-      userId: data['userId'] ?? '',
-      username: data['username'] ?? '',
-      recipeId: data['recipeId'] ?? '',
-      text: data['text'] ?? '',
+      userId: data['userId'],
+      username: data['username'],
+      recipeId: data['recipeId'],
+      text: data['text'],
       timestamp: (data['timestamp'] as Timestamp).toDate(),
       profileImage: profileImage,
     );

@@ -21,37 +21,38 @@ class IngredientList extends StatelessWidget {
   Widget build(BuildContext context) {
     final lang = Localizations.localeOf(context).languageCode;
 
+    final ingredientCards = ingredients.map((ingredient) {
+      final name = ingredient.name[lang] ?? ingredient.name['en'] ?? '???';
+      final unit = ingredient.unit[lang] ?? ingredient.unit['en'] ?? '';
+
+      final text = ingredient.quantity != null
+          ? '${ingredient.quantity!.toStringAsFixed(2)} $unit $name'
+          : '$unit $name';
+
+      return Card(
+        color: cardColor,
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: ListTile(
+          title: Text(
+            text.trim(),
+            style: TextStyle(color: textColor, fontSize: 16),
+          ),
+          trailing: (isLoggedIn && onAddToShoppingList != null)
+              ? IconButton(
+                  icon: const Icon(Icons.add_shopping_cart),
+                  color: textColor,
+                  onPressed: () =>
+                      onAddToShoppingList?.call(context, ingredient),
+                )
+              : null,
+        ),
+      );
+    }).toList();
     return Column(
-      children: ingredients.map((ingredient) {
-        final name = ingredient.name[lang] ?? ingredient.name['en'] ?? '???';
-        final unit = ingredient.unit[lang] ?? ingredient.unit['en'] ?? '';
-
-        final text = ingredient.quantity != null
-            ? '${ingredient.quantity!.toStringAsFixed(2)} $unit $name'
-            : '$unit $name';
-
-        return Card(
-          color: cardColor,
-          margin: const EdgeInsets.symmetric(vertical: 4),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: ListTile(
-            title: Text(
-              text.trim(),
-              style: TextStyle(color: textColor, fontSize: 16),
-            ),
-            trailing: (isLoggedIn && onAddToShoppingList != null)
-                ? IconButton(
-                    icon: const Icon(Icons.add_shopping_cart),
-                    color: textColor,
-                    onPressed: () =>
-                        onAddToShoppingList?.call(context, ingredient),
-                  )
-                : null,
-          ),
-        );
-      }).toList(),
+      children: ingredientCards,
     );
   }
 }

@@ -27,11 +27,11 @@ class GroupedShoppingListService {
 
       final name = nameRaw is String
           ? nameRaw
-          : (nameRaw?[lang] ?? nameRaw?['en'] ?? nameRaw?['de'] ?? '???');
+          : (nameRaw?[lang] ?? nameRaw?['en'] ?? nameRaw?['de']);
 
       final unit = unitRaw is String
           ? unitRaw
-          : (unitRaw?[lang] ?? unitRaw?['en'] ?? unitRaw?['de'] ?? '');
+          : (unitRaw?[lang] ?? unitRaw?['en'] ?? unitRaw?['de']);
 
       if (name == null || unit == null) continue;
 

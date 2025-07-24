@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/shared/services/user_service.dart';
-import 'package:kuvio/features/account/services/profile_service.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/utils/constants.dart';
@@ -12,7 +11,6 @@ class EditProfileController {
   final dishController = TextEditingController();
 
   final userService = UserService();
-  final profileService = ProfileService();
 
   String selectedKitchen = 'not_set';
   String? selectedProfileAsset;
@@ -94,10 +92,8 @@ class EditProfileController {
     bool isMounted,
     VoidCallback onUpdate,
   ) async {
-    final selected = await profileService.openImagePickerDialog(
-      context,
-      selectedProfileAsset,
-    );
+    final selected =
+        await _openImagePickerDialog(context, selectedProfileAsset);
 
     if (!isMounted) return;
 
@@ -105,5 +101,41 @@ class EditProfileController {
       selectedProfileAsset = selected;
       onUpdate();
     }
+  }
+
+  Future<String?> _openImagePickerDialog(
+    BuildContext context,
+    String? currentAsset,
+  ) async {
+    final assets = List.generate(9, (i) => 'assets/character_${i + 1}.png');
+    final loc = context.loc;
+
+    return showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(loc.selectProfileImage),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: assets.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemBuilder: (context, index) {
+                final assetName = assets[index];
+                return GestureDetector(
+                  onTap: () => Navigator.pop(context, assetName),
+                  child: Image.asset(assetName),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 }

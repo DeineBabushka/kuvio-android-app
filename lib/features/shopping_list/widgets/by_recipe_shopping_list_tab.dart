@@ -22,9 +22,7 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {
-      return Center(
-        child: Text(loc.loginToViewShoppingList),
-      );
+      return Center(child: Text(loc.loginToViewShoppingList));
     }
 
     final lang = Localizations.localeOf(context).languageCode;
@@ -48,12 +46,15 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
           final recipeTitles =
               GroupedShoppingListService.extractStoredRecipeTitles(docs, lang);
 
-          return ListView(
-            children: grouped.entries.map((entry) {
+          final entries = grouped.entries.toList();
+
+          return ListView.builder(
+            itemCount: entries.length,
+            itemBuilder: (context, index) {
+              final entry = entries[index];
               final recipeId = entry.key;
-              final items = entry.value.values
-                  .map((e) => ShoppingListItem.fromMap(e))
-                  .toList();
+              final items =
+                  entry.value.values.map(ShoppingListItem.fromMap).toList();
               final title = recipeTitles[recipeId] ?? recipeId;
 
               return Card(
@@ -61,64 +62,60 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                 child: ExpansionTile(
                   title: Text('${loc.recipe}: $title'),
                   children: [
-                    ...items.map((item) {
-                      return ListTile(
-                        title: Text(
-                          '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
-                        ),
-                        trailing: IconButton(
-                          icon:
-                              const Icon(Icons.delete, color: Colors.redAccent),
-                          onPressed: () async {
-                            if (blockIfOffline(context)) return;
+                    ...items.map((item) => ListTile(
+                          title: Text(
+                            '${item.quantity.toStringAsFixed(2)} ${item.unit(lang)} ${item.name(lang)}',
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete,
+                                color: Colors.redAccent),
+                            onPressed: () async {
+                              if (blockIfOffline(context)) return;
 
-                            await GroupedShoppingListService.deleteSingleItem(
-                              docs,
-                              recipeId,
-                              item.name(lang),
-                              item.unit(lang),
-                            );
+                              await GroupedShoppingListService.deleteSingleItem(
+                                docs,
+                                recipeId,
+                                item.name(lang),
+                                item.unit(lang),
+                              );
 
-                            if (!mounted) return;
-                            SnackbarHelper.showMessage(
-                              this.context,
-                              loc.itemDeleted(item.name(lang)),
-                            );
-                          },
-                        ),
-                      );
-                    }),
+                              if (!mounted) return;
+                              SnackbarHelper.showMessage(
+                                this.context,
+                                loc.itemDeleted(item.name(lang)),
+                              );
+                            },
+                          ),
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
-                      child: Center(
-                        child: TextButton.icon(
-                          onPressed: () async {
-                            if (blockIfOffline(context)) return;
+                      child: TextButton.icon(
+                        onPressed: () async {
+                          if (blockIfOffline(context)) return;
 
-                            await GroupedShoppingListService
-                                .deleteItemsForRecipe(docs, recipeId);
+                          await GroupedShoppingListService.deleteItemsForRecipe(
+                            docs,
+                            recipeId,
+                          );
 
-                            if (!mounted) return;
-                            SnackbarHelper.showMessage(
-                              this.context,
-                              loc.recipeItemsDeleted(
-                                recipeTitles[recipeId] ?? recipeId,
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.delete_forever,
-                              color: Colors.redAccent),
-                          label: Text(
-                            loc.removeRecipeFromShoppingList,
-                            style: const TextStyle(color: Colors.redAccent),
-                          ),
+                          if (!mounted) return;
+                          SnackbarHelper.showMessage(
+                            this.context,
+                            loc.recipeItemsDeleted(title),
+                          );
+                        },
+                        icon: const Icon(Icons.delete_forever,
+                            color: Colors.redAccent),
+                        label: Text(
+                          loc.removeRecipeFromShoppingList,
+                          style: const TextStyle(color: Colors.redAccent),
                         ),
                       ),
                     ),
                   ],
                 ),
               );
-            }).toList(),
+            },
           );
         },
       ),
