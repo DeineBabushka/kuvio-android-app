@@ -256,6 +256,19 @@ abstract class AppLocalizations {
   String get offlineMessage;
   String get offlineCheckFailed;
   String get ok;
+
+  String get adminStatusChanged;
+  String get userDeleted;
+  String get noUsersFound;
+
+  String get googleLoginError;
+
+  String get noUsernameFound;
+
+  String get unknownUsername;
+
+  String get errorRecentLoginRequired;
+  String get errorChangePasswordFailed;
 }
 
 class _AppLocalizationsDelegate

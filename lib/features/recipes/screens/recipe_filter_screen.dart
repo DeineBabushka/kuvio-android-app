@@ -9,6 +9,7 @@ import 'package:kuvio/features/recipes/widgets/category_filter_wrap.dart';
 import 'package:kuvio/features/recipes/widgets/recipe_show_button.dart';
 import 'package:kuvio/features/recipes/widgets/loading_indicator.dart';
 import 'package:kuvio/localization/app_localizations.dart';
+import 'package:kuvio/features/favorites/models/favorites_filter.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
 
 class RecipesScreen extends StatefulWidget {
@@ -36,14 +37,15 @@ class _RecipesScreenState extends State<RecipesScreen> {
   }
 
   void _handleShowRecipes() {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
+
     if (selectedDiet != null && selectedCategory != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FilteredRecipesScreen(
-            selectedDiet: selectedDiet!,
-            selectedCategory: selectedCategory!,
+          builder: (_) => FilteredRecipesScreen(
+            selectedDiet: _mapToGermanDiet(selectedDiet!, context),
+            selectedCategory: _mapToGermanCategory(selectedCategory!, context),
             allRecipes: allRecipesList,
           ),
         ),
@@ -51,20 +53,52 @@ class _RecipesScreenState extends State<RecipesScreen> {
     } else {
       SnackbarHelper.showMessage(
         context,
-        loc?.selectDietAndCategory ?? 'Bitte wähle Ernährungstyp und Kategorie',
+        loc.selectDietAndCategory,
       );
     }
   }
 
+  String _mapToGermanDiet(String value, BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    if (lang == 'de') return value;
+
+    final localized = FavoritesFilter.localizedDietTypes[lang];
+    final de = FavoritesFilter.localizedDietTypes['de'];
+    final index = localized?.indexOf(value);
+
+    if (index == null || index < 0 || de == null || index >= de.length) {
+      return value;
+    }
+
+    return de[index];
+  }
+
+  String _mapToGermanCategory(String value, BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    if (lang == 'de') return value;
+
+    final localized = FavoritesFilter.localizedCategories[lang];
+    final de = FavoritesFilter.localizedCategories['de'];
+    final index = localized?.indexOf(value);
+
+    if (index == null || index < 0 || de == null || index >= de.length) {
+      return value;
+    }
+
+    return de[index];
+  }
+
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final btnColor = isDark ? Colors.white : const Color(0xFF122620);
     final isWide = MediaQuery.of(context).size.width > 600;
 
-    if (isLoading) return const Scaffold(body: LoadingIndicator());
+    if (isLoading) {
+      return const Scaffold(body: LoadingIndicator());
+    }
 
     return Scaffold(
       drawer: HamburgerDrawer(allRecipes: allRecipesList),
@@ -86,7 +120,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FilterTitleText(
-              text: loc?.whatToCook ?? "Was möchtest du heute kochen?",
+              text: loc.whatToCook,
               fontSize: isWide ? 28 : 24,
               color: theme.textTheme.bodyLarge?.color ?? Colors.white,
             ),
@@ -98,7 +132,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
             ),
             const SizedBox(height: 30),
             FilterTitleText(
-              text: loc?.selectCategory ?? "Wähle die Gerichtskategorie:",
+              text: loc.selectCategory,
               fontSize: 20,
               color: theme.textTheme.bodyLarge?.color ?? Colors.white,
             ),

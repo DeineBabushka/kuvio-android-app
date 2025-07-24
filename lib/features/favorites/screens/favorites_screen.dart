@@ -40,13 +40,13 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final timestampColor = isDark ? Colors.white54 : Colors.black54;
     final cardColor = isDark ? theme.cardColor : Colors.white;
 
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
     final filteredFavorites = controller.filteredFavorites(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          loc?.favoritesTitle ?? 'Meine Favoriten',
+          loc.favoritesTitle,
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: backgroundColor,
@@ -72,8 +72,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   child: filteredFavorites.isEmpty
                       ? Center(
                           child: Text(
-                            loc?.noFavoritesFound ??
-                                'Keine Favoriten vorhanden.',
+                            loc.noFavoritesFound,
                             style: const TextStyle(color: Colors.white),
                           ),
                         )

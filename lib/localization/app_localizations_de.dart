@@ -204,4 +204,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get offlineCheckFailed =>
       'Verbindungsstatus konnte nicht geprüft werden.';
   String get ok => 'OK';
+  String get adminStatusChanged => 'Adminstatus von "{username}" geändert.';
+  String get userDeleted => 'Benutzer "{username}" wurde gelöscht.';
+  String get noUsersFound => 'Keine Benutzer gefunden.';
+  String get googleLoginError => 'Google-Login fehlgeschlagen.';
+  String get noUsernameFound => 'Benutzername nicht gefunden.';
+  String get unknownUsername => 'Unbekannter Benutzername';
+  String get errorRecentLoginRequired =>
+      'Bitte melde dich erneut an, um dein Passwort zu ändern.';
+  String get errorChangePasswordFailed => 'Fehler beim Ändern des Passworts.';
 }

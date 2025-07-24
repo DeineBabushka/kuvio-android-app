@@ -39,8 +39,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
   }
 
   Future<void> _loadUserData() async {
-    final isOnline =
-        Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
+    final isOnline = Provider.of<ConnectivityProvider>(
+      context,
+      listen: false,
+    ).isOnline;
 
     if (!isOnline) {
       setState(() => isLoading = false);
@@ -62,10 +64,12 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
     final theme = Theme.of(context);
     final isLoggedIn = FirebaseAuth.instance.currentUser != null;
     final isOnline = Provider.of<ConnectivityProvider>(context).isOnline;
+
     final sectionStyle = const TextStyle(
       color: Colors.white70,
       fontWeight: FontWeight.bold,
     );
+
     final tileColor = const Color(0xFF2E6B4D);
 
     return Drawer(
@@ -78,7 +82,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             const SizedBox(height: 40),
           ] else if (isLoggedIn && isOnline && userData != null) ...[
             DrawerProfileHeader(
-              username: userData!['username'] ?? 'Unbekannt',
+              username: userData!['username'],
               bio: userData!['bio'],
               profileImage: userData!['profileImage'],
             ),
@@ -184,7 +188,8 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AdminDashboardScreen()),
+                      builder: (_) => const AdminDashboardScreen(),
+                    ),
                   );
                 },
                 tileColor: tileColor,
@@ -198,8 +203,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             title: context.loc.darkMode,
             value: Provider.of<ThemeProvider>(context).isDarkMode,
             onChanged: (value) {
-              final themeProvider =
-                  Provider.of<ThemeProvider>(context, listen: false);
+              final themeProvider = Provider.of<ThemeProvider>(
+                context,
+                listen: false,
+              );
               themeProvider.toggleTheme();
             },
             tileColor: tileColor,

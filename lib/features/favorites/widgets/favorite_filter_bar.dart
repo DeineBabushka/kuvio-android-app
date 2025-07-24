@@ -17,24 +17,24 @@ class FavoritesFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
 
     String localizeCategory(String key) {
       switch (key) {
         case 'Vorspeise':
-          return loc?.categoryStarter ?? key;
+          return loc.categoryStarter;
         case 'Hauptgericht':
-          return loc?.categoryMain ?? key;
+          return loc.categoryMain;
         case 'Dessert':
-          return loc?.categoryDessert ?? key;
+          return loc.categoryDessert;
         case 'Beilage':
-          return loc?.categorySide ?? key;
+          return loc.categorySide;
         case 'Snack':
-          return loc?.categorySnack ?? key;
+          return loc.categorySnack;
         case 'Frühstück':
-          return loc?.categoryBreakfast ?? key;
+          return loc.categoryBreakfast;
         case 'Kalorienarm':
-          return loc?.categoryLowCalorie ?? key;
+          return loc.categoryLowCalorie;
         default:
           return key;
       }
@@ -43,21 +43,21 @@ class FavoritesFilterBar extends StatelessWidget {
     String localizeDiet(String key) {
       switch (key) {
         case 'Rohkost':
-          return loc?.dietRaw ?? key;
+          return loc.dietRaw;
         case 'Glutenfrei':
-          return loc?.dietGlutenFree ?? key;
+          return loc.dietGlutenFree;
         case 'Fisch':
-          return loc?.dietFish ?? key;
+          return loc.dietFish;
         case 'Keto':
-          return loc?.dietKeto ?? key;
+          return loc.dietKeto;
         case 'Fleisch':
-          return loc?.dietMeat ?? key;
+          return loc.dietMeat;
         case 'Vegetarisch':
-          return loc?.dietVegetarian ?? key;
+          return loc.dietVegetarian;
         case 'Omnivor':
-          return loc?.dietOmnivore ?? key;
+          return loc.dietOmnivore;
         case 'Vegan':
-          return loc?.dietVegan ?? key;
+          return loc.dietVegan;
         default:
           return key;
       }
@@ -70,10 +70,11 @@ class FavoritesFilterBar extends StatelessWidget {
           child: TextField(
             controller: searchController,
             onChanged: (val) => onFilterChanged(
-                filter.copyWith(searchQuery: val.toLowerCase())),
+              filter.copyWith(searchQuery: val.toLowerCase()),
+            ),
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: loc?.searchRecipesHint ?? 'Suche nach Rezepten...',
+              hintText: loc.searchRecipesHint,
               hintStyle: const TextStyle(color: Colors.white70),
               filled: true,
               fillColor: Colors.white10,
@@ -91,9 +92,9 @@ class FavoritesFilterBar extends StatelessWidget {
             children: [
               Expanded(
                 child: FilterDropdown(
-                  items: filter.availableCategories,
+                  items: filter.availableCategories(context),
                   selected: filter.category,
-                  label: loc?.categoryLabel ?? 'Kategorie',
+                  label: loc.categoryLabel,
                   onChanged: (val) =>
                       onFilterChanged(filter.copyWith(category: val)),
                   itemToString: localizeCategory,
@@ -102,9 +103,9 @@ class FavoritesFilterBar extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: FilterDropdown(
-                  items: filter.availableDietTypes,
+                  items: filter.availableDietTypes(context),
                   selected: filter.dietType,
-                  label: loc?.dietTypeLabel ?? 'Ernährungsform',
+                  label: loc.dietTypeLabel,
                   onChanged: (val) =>
                       onFilterChanged(filter.copyWith(dietType: val)),
                   itemToString: localizeDiet,
