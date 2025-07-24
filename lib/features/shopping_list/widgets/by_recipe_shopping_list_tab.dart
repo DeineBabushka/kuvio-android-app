@@ -71,19 +71,12 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                             icon: const Icon(Icons.delete,
                                 color: Colors.redAccent),
                             onPressed: () async {
-                              if (blockIfOffline(context)) return;
-
-                              await GroupedShoppingListService.deleteSingleItem(
-                                docs,
-                                recipeId,
-                                item.name(lang),
-                                item.unit(lang),
-                              );
-
-                              if (!mounted) return;
-                              SnackbarHelper.showMessage(
-                                this.context,
-                                loc.itemDeleted(item.name(lang)),
+                              await _deleteSingleItem(
+                                docs: docs,
+                                recipeId: recipeId,
+                                itemName: item.name(lang),
+                                itemUnit: item.unit(lang),
+                                lang: lang,
                               );
                             },
                           ),
@@ -96,7 +89,7 @@ class _ByRecipeShoppingListTabState extends State<ByRecipeShoppingListTab> {
                             _deleteAllItemsForRecipe(
                               docs: docs,
                               recipeId: recipeId,
-                              recipeTitle: recipeTitles[recipeId] ?? recipeId,
+                              recipeTitle: title,
                             );
                           },
                           icon: const Icon(Icons.delete_forever,

@@ -97,8 +97,7 @@ class _CommentSectionState extends State<CommentSection> {
         if (_loading)
           const CircularProgressIndicator()
         else if (_comments.isEmpty)
-          Text(loc?.noComments ?? "Keine Kommentare vorhanden.",
-              style: TextStyle(color: textColor))
+          Text(loc.noComments, style: TextStyle(color: textColor))
         else
           ..._comments.map((comment) {
             final ts = comment.timestamp.add(const Duration(hours: 2));
@@ -168,8 +167,6 @@ class _CommentSectionState extends State<CommentSection> {
           width: 40,
           height: 40,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) =>
-              const Icon(Icons.error, color: Colors.red),
         ),
       ),
     );
