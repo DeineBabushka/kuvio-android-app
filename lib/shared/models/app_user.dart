@@ -22,7 +22,7 @@ class AppUser {
   factory AppUser.fromMap(String id, Map<String, dynamic> data) {
     return AppUser(
       id: id,
-      username: data['username'] ?? 'Unbekannt',
+      username: data['username'],
       profileImage: data['profileImage'],
       bio: data['bio'],
       favoriteKitchen: data['kitchen'],

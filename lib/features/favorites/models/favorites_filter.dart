@@ -11,26 +11,19 @@ class FavoritesFilter {
     this.searchQuery = '',
   });
 
-  List<String> get availableCategories => const [
-        "Vorspeise",
-        "Hauptgericht",
-        "Dessert",
-        "Beilage",
-        "Snack",
-        "Frühstück",
-        "Kalorienarm",
-      ];
+  List<String> availableCategories(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    final categories = localizedCategories[lang];
+    if (categories != null) return categories;
+    return localizedCategories['de']!;
+  }
 
-  List<String> get availableDietTypes => const [
-        'Rohkost',
-        'Glutenfrei',
-        'Fisch',
-        'Keto',
-        'Fleisch',
-        'Vegetarisch',
-        'Omnivor',
-        'Vegan',
-      ];
+  List<String> availableDietTypes(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    final dietTypes = localizedDietTypes[lang];
+    if (dietTypes != null) return dietTypes;
+    return localizedDietTypes['de']!;
+  }
 
   FavoritesFilter copyWith({
     String? category,
@@ -45,17 +38,64 @@ class FavoritesFilter {
   }
 
   bool matchesRecipe(dynamic recipe, BuildContext context) {
-    const filterLang = 'de';
-    final uiLang = Localizations.localeOf(context).languageCode;
+    final lang = Localizations.localeOf(context).languageCode;
 
-    final title = recipe.title[uiLang]?.toLowerCase() ?? '';
-    final categories = recipe.categories[filterLang] ?? <String>[];
-    final dietTypes = recipe.dietTypes[filterLang] ?? <String>[];
+    final title = recipe.title[lang];
+    final categories = recipe.categories['de'];
+    final dietTypes = recipe.dietTypes['de'];
 
-    final titleMatch = title.contains(searchQuery.toLowerCase());
+    if (title == null || categories == null || dietTypes == null) {
+      return false;
+    }
+
+    final titleMatch = title.toLowerCase().contains(searchQuery.toLowerCase());
     final categoryMatch = category == null || categories.contains(category);
     final dietMatch = dietType == null || dietTypes.contains(dietType);
 
     return titleMatch && categoryMatch && dietMatch;
   }
+
+  static const Map<String, List<String>> localizedDietTypes = {
+    'de': [
+      'Rohkost',
+      'Glutenfrei',
+      'Fisch',
+      'Keto',
+      'Fleisch',
+      'Vegetarisch',
+      'Omnivor',
+      'Vegan',
+    ],
+    'en': [
+      'Rohkost',
+      'Glutenfrei',
+      'Fisch',
+      'Keto',
+      'Fleisch',
+      'Vegetarisch',
+      'Omnivor',
+      'Vegan',
+    ],
+  };
+
+  static const Map<String, List<String>> localizedCategories = {
+    'de': [
+      'Vorspeise',
+      'Hauptgericht',
+      'Dessert',
+      'Beilage',
+      'Snack',
+      'Frühstück',
+      'Kalorienarm',
+    ],
+    'en': [
+      'Starter',
+      'Main course',
+      'Dessert',
+      'Side dish',
+      'Snack',
+      'Breakfast',
+      'Low calorie',
+    ],
+  };
 }

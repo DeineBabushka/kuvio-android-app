@@ -197,4 +197,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get offlineMessage => 'This feature is only available online.';
   String get offlineCheckFailed => 'Could not check connection status.';
   String get ok => 'OK';
+  String get adminStatusChanged => 'Admin status of "{username}" changed.';
+  String get userDeleted => 'User "{username}" has been deleted.';
+  String get noUsersFound => 'No users found.';
+  String get googleLoginError => 'Google-Login failed';
+  String get noUsernameFound => 'Username not found.';
+  String get unknownUsername => 'Unknown Username';
+  String get errorRecentLoginRequired =>
+      'Please log in again to change your password.';
+  String get errorChangePasswordFailed => 'Failed to change password.';
 }

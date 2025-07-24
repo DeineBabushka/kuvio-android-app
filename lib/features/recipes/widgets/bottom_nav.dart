@@ -55,7 +55,7 @@ class BottomNavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -69,19 +69,19 @@ class BottomNavWidget extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
-          label: loc?.navAccount ?? 'Konto',
+          label: loc.navAccount,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.shopping_cart),
-          label: loc?.navShoppingList ?? 'Einkaufsliste',
+          label: loc.navShoppingList,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.chat_bubble_outline),
-          label: loc?.navComments ?? 'Kommentare',
+          label: loc.navComments,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.favorite_border),
-          label: loc?.navFavorites ?? 'Favoriten',
+          label: loc.navFavorites,
         ),
       ],
     );
