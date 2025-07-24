@@ -76,9 +76,16 @@ class RegisterFormCard extends StatelessWidget {
                 labelStyle: TextStyle(color: labelColor),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) return loc.emailEmptyError;
+                if (value == null || value.isEmpty) {
+                  return loc.emailEmptyError;
+                }
+
                 final emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$');
-                if (!emailRegex.hasMatch(value)) return loc.emailInvalidError;
+
+                if (!emailRegex.hasMatch(value)) {
+                  return loc.emailInvalidError;
+                }
+
                 return null;
               },
             ),
@@ -107,15 +114,19 @@ class RegisterFormCard extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttonBackground,
                 foregroundColor: buttonTextColor,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 14,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
               child: Text(
                 loc.registerLabel,
-                style: TextStyle(color: buttonTextColor),
+                style: TextStyle(
+                  color: buttonTextColor,
+                ),
               ),
             ),
           ],

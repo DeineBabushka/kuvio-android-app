@@ -16,7 +16,9 @@ class GoogleAuthService {
             '544137355783-cst5n43i19qt0cj3me3pq98e0pnjq9lg.apps.googleusercontent.com',
       );
 
-      final googleUser = await _googleSignIn.authenticate(scopeHint: ['email']);
+      final googleUser = await _googleSignIn.authenticate(
+        scopeHint: ['email'],
+      );
 
       final googleAuth = googleUser.authentication;
 
@@ -26,6 +28,7 @@ class GoogleAuthService {
 
       final userCredential = await _auth.signInWithCredential(credential);
       final user = userCredential.user;
+
       if (user == null) {
         return (isAdmin: false, error: 'Kein Benutzer vorhanden.');
       }
@@ -42,9 +45,15 @@ class GoogleAuthService {
       final isAdminRaw = userData?['isAdmin'];
       final bool isAdmin = isAdminRaw is bool ? isAdminRaw : false;
 
-      return (isAdmin: isAdmin, error: null);
+      return (
+        isAdmin: isAdmin,
+        error: null,
+      );
     } catch (e) {
-      return (isAdmin: false, error: e.toString());
+      return (
+        isAdmin: false,
+        error: e.toString(),
+      );
     }
   }
 }

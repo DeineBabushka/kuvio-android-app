@@ -20,7 +20,9 @@ class UserList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(color: Colors.white),
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
         }
 
@@ -30,7 +32,9 @@ class UserList extends StatelessWidget {
           return const Center(
             child: Text(
               'Keine Benutzer gefunden.',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           );
         }

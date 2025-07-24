@@ -11,7 +11,9 @@ class AdminDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      appBar: const CustomAppBar(title: 'Admin Dashboard'),
+      appBar: const CustomAppBar(
+        title: 'Admin Dashboard',
+      ),
       body: UserList(
         userStream: AdminService.getUserStream(),
         cardTextColor: AppColors.cardText,

@@ -44,7 +44,10 @@ class AuthService {
     await _auth.signOut();
 
     if (context.mounted) {
-      SnackbarHelper.showMessage(context, loc.logoutSuccess);
+      SnackbarHelper.showMessage(
+        context,
+        loc.logoutSuccess,
+      );
     }
   }
 }

@@ -12,11 +12,15 @@ Future<void> showForgotPasswordDialog(BuildContext context) async {
       final loc = context.loc;
 
       return AlertDialog(
-        title: Text(loc.resetPasswordTitle),
+        title: Text(
+          loc.resetPasswordTitle,
+        ),
         content: TextField(
           controller: emailController,
           keyboardType: TextInputType.emailAddress,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.black,
+          ),
           decoration: InputDecoration(
             labelText: loc.emailAddressLabel,
           ),
@@ -32,13 +36,20 @@ Future<void> showForgotPasswordDialog(BuildContext context) async {
               try {
                 await FirebaseAuth.instance
                     .sendPasswordResetEmail(email: email);
+
                 if (context.mounted) {
                   Navigator.of(context).pop();
-                  SnackbarHelper.showMessage(context, loc.resetEmailSent);
+                  SnackbarHelper.showMessage(
+                    context,
+                    loc.resetEmailSent,
+                  );
                 }
               } catch (e) {
                 if (context.mounted) {
-                  SnackbarHelper.showMessage(context, '${loc.error}: $e');
+                  SnackbarHelper.showMessage(
+                    context,
+                    '${loc.error}: $e',
+                  );
                 }
               }
             },
