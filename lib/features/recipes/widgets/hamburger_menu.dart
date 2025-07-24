@@ -39,8 +39,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
   }
 
   Future<void> _loadUserData() async {
-    final isOnline =
-        Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
+    final isOnline = Provider.of<ConnectivityProvider>(
+      context,
+      listen: false,
+    ).isOnline;
 
     if (!isOnline) {
       setState(() => isLoading = false);
@@ -62,10 +64,12 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
     final theme = Theme.of(context);
     final isLoggedIn = FirebaseAuth.instance.currentUser != null;
     final isOnline = Provider.of<ConnectivityProvider>(context).isOnline;
+
     final sectionStyle = const TextStyle(
       color: Colors.white70,
       fontWeight: FontWeight.bold,
     );
+
     final tileColor = const Color(0xFF2E6B4D);
 
     return Drawer(
@@ -78,7 +82,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             const SizedBox(height: 40),
           ] else if (isLoggedIn && isOnline && userData != null) ...[
             DrawerProfileHeader(
-              username: userData!['username'] ?? 'Unbekannt',
+              username: userData!['username'],
               bio: userData!['bio'],
               profileImage: userData!['profileImage'],
             ),
@@ -128,7 +132,8 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 if (blockIfOffline(context)) return;
                 await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const AccountScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const AccountScreen()),
                 );
                 await _loadUserData();
               },
@@ -142,7 +147,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) =>
+                    builder: (context) =>
                         FavoritesScreen(allRecipes: widget.allRecipes),
                   ),
                 );
@@ -155,7 +160,8 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const ShoppingListScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ShoppingListScreen()),
                 );
               },
               tileColor: tileColor,
@@ -167,7 +173,8 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 if (blockIfOffline(context)) return;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const CommentScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const CommentScreen()),
                 );
               },
               tileColor: tileColor,
@@ -181,7 +188,8 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const AdminDashboardScreen()),
+                      builder: (_) => const AdminDashboardScreen(),
+                    ),
                   );
                 },
                 tileColor: tileColor,
@@ -195,8 +203,10 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             title: context.loc.darkMode,
             value: Provider.of<ThemeProvider>(context).isDarkMode,
             onChanged: (value) {
-              final themeProvider =
-                  Provider.of<ThemeProvider>(context, listen: false);
+              final themeProvider = Provider.of<ThemeProvider>(
+                context,
+                listen: false,
+              );
               themeProvider.toggleTheme();
             },
             tileColor: tileColor,
@@ -207,7 +217,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (_) => const LanguageDialog(),
+                builder: (context) => const LanguageDialog(),
               );
             },
             tileColor: tileColor,
@@ -233,7 +243,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
               tileColor: tileColor,

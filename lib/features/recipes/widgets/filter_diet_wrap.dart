@@ -16,24 +16,24 @@ class DietFilterWrap extends StatelessWidget {
     required this.isDark,
   });
 
-  String localizeDiet(String value, AppLocalizations? loc) {
+  String localizeDiet(String value, AppLocalizations loc) {
     switch (value) {
       case 'Rohkost':
-        return loc?.dietRaw ?? value;
+        return loc.dietRaw;
       case 'Glutenfrei':
-        return loc?.dietGlutenFree ?? value;
+        return loc.dietGlutenFree;
       case 'Fisch':
-        return loc?.dietFish ?? value;
+        return loc.dietFish;
       case 'Keto':
-        return loc?.dietKeto ?? value;
+        return loc.dietKeto;
       case 'Fleisch':
-        return loc?.dietMeat ?? value;
+        return loc.dietMeat;
       case 'Vegetarisch':
-        return loc?.dietVegetarian ?? value;
+        return loc.dietVegetarian;
       case 'Omnivor':
-        return loc?.dietOmnivore ?? value;
+        return loc.dietOmnivore;
       case 'Vegan':
-        return loc?.dietVegan ?? value;
+        return loc.dietVegan;
       default:
         return value;
     }
@@ -41,10 +41,9 @@ class DietFilterWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filterOptions = FavoritesFilter();
-    final diets = filterOptions.availableDietTypes;
-    final textColor = Colors.white;
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
+    final lang = Localizations.localeOf(context).languageCode;
+    final diets = FavoritesFilter.localizedDietTypes[lang] ?? [];
 
     return GridView.builder(
       shrinkWrap: true,
@@ -58,11 +57,17 @@ class DietFilterWrap extends StatelessWidget {
       itemCount: diets.length,
       itemBuilder: (context, index) {
         final diet = diets[index];
+        final assetName = dietTypeToAssetName[diet];
+
+        if (assetName == null) {
+          return const SizedBox();
+        }
+
         return DietFilterCircle(
-          assetPath: 'assets/${dietTypeToAssetName[diet]!}',
+          assetPath: 'assets/$assetName',
           label: localizeDiet(diet, loc),
           isSelected: selectedDiet == diet,
-          textColor: textColor,
+          textColor: Colors.white,
           onTap: () => onSelect(diet),
         );
       },

@@ -9,10 +9,7 @@ class LoginActions {
   final UserService _userService;
   final GoogleAuthService _googleAuthService;
 
-  LoginActions(
-    this._userService,
-    this._googleAuthService,
-  );
+  LoginActions(this._userService, this._googleAuthService);
 
   Future<void> handleLogin({
     required BuildContext context,
@@ -42,18 +39,13 @@ class LoginActions {
     try {
       final credential = await _userService.loginWithEmail(email, password);
       final user = credential.user;
-
       if (user == null) return;
 
       await _userService.isAdmin(user.uid);
 
       if (!context.mounted) return;
 
-      SnackbarHelper.showMessage(
-        context,
-        loc.loginSuccess,
-      );
-
+      SnackbarHelper.showMessage(context, loc.loginSuccess);
       Navigator.pop(context);
     } on FirebaseAuthException {
       if (context.mounted) {
@@ -69,23 +61,16 @@ class LoginActions {
   Future<void> signInWithGoogle(BuildContext context) async {
     final loc = AppLocalizations.of(context)!;
 
-    final result = await _googleAuthService.signInWithGoogle();
+    final result = await _googleAuthService.signInWithGoogle(context);
 
     if (!context.mounted) return;
 
     if (result.error != null) {
-      _showError(
-        context,
-        '${loc.loginErrorGoogleFailed}: ${result.error}',
-      );
+      _showError(context, '${loc.loginErrorGoogleFailed}: ${result.error}');
       return;
     }
 
-    SnackbarHelper.showMessage(
-      context,
-      loc.loginGoogleSuccess,
-    );
-
+    SnackbarHelper.showMessage(context, loc.loginGoogleSuccess);
     Navigator.pop(context);
   }
 

@@ -91,7 +91,7 @@ class DialogService {
   static Future<bool> confirmAccountDeletion(BuildContext context) async {
     final loc = context.loc;
 
-    final confirmed = await showDialog<bool>(
+    return await showDialog<bool>(
           context: context,
           builder: (context) {
             return AlertDialog(
@@ -127,7 +127,5 @@ class DialogService {
           },
         ) ??
         false;
-
-    return confirmed;
   }
 }

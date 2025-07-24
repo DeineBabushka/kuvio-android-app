@@ -7,9 +7,18 @@ class ConnectivityProvider extends ChangeNotifier {
   bool _isOnline = true;
   bool get isOnline => _isOnline;
 
+  late final Timer _timer;
+
   ConnectivityProvider() {
     _checkConnection();
-    Timer.periodic(const Duration(seconds: 2), (_) => _checkConnection());
+    _timer =
+        Timer.periodic(const Duration(seconds: 2), (_) => _checkConnection());
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   Future<void> _checkConnection() async {
@@ -22,13 +31,11 @@ class ConnectivityProvider extends ChangeNotifier {
       _isOnline = false;
     }
 
-    if (!_wasPreviouslyOnline(previousStatus) && _isOnline) {
-      await OfflineCacheService.preloadAll();
-      if (_isOnline != previousStatus) {
-        notifyListeners();
+    if (_isOnline != previousStatus) {
+      if (_isOnline) {
+        await OfflineCacheService.preloadAll();
       }
+      notifyListeners();
     }
   }
-
-  bool _wasPreviouslyOnline(bool previous) => previous == true;
 }

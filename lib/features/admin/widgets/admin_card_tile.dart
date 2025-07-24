@@ -3,6 +3,7 @@ import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/admin/services/admin_service.dart';
 import 'package:kuvio/features/admin/widgets/admin_delete_dialog.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
+import 'package:kuvio/localization/context_extension.dart';
 
 class UserCardTile extends StatelessWidget {
   final AppUser user;
@@ -75,7 +76,10 @@ class UserCardTile extends StatelessWidget {
                   if (context.mounted) {
                     SnackbarHelper.showMessage(
                       context,
-                      'Benutzer "${user.username}" wurde gelöscht.',
+                      context.loc.userDeleted.replaceFirst(
+                        '{username}',
+                        user.username,
+                      ),
                     );
                   }
                 }

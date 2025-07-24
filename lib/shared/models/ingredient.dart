@@ -13,8 +13,8 @@ class Ingredient {
     return Ingredient(
       quantity:
           map['quantity'] != null ? (map['quantity'] as num).toDouble() : null,
-      unit: Map<String, String>.from(map['unit'] ?? {}),
-      name: Map<String, String>.from(map['name'] ?? {}),
+      unit: Map<String, String>.from(map['unit']),
+      name: Map<String, String>.from(map['name']),
     );
   }
 

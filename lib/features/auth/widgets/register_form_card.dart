@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuvio/localization/app_localizations.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegisterFormCard extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -79,13 +80,9 @@ class RegisterFormCard extends StatelessWidget {
                 if (value == null || value.isEmpty) {
                   return loc.emailEmptyError;
                 }
-
-                final emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$');
-
-                if (!emailRegex.hasMatch(value)) {
+                if (!EmailValidator.validate(value)) {
                   return loc.emailInvalidError;
                 }
-
                 return null;
               },
             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/shared/services/user_service.dart';
-import 'package:kuvio/features/account/utils/account_user_loader.dart';
 import 'package:kuvio/features/account/widgets/account_app_bar.dart';
 import 'package:kuvio/features/account/widgets/account_user_info.dart';
 import 'package:kuvio/features/account/widgets/account_delete_section.dart';
@@ -19,7 +18,6 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final UserService _userService = UserService();
-  late final UserLoader _userLoader = UserLoader(_userService);
   AppUser? appUser;
   bool isLoading = true;
 
@@ -30,7 +28,9 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final user = await _userLoader.loadUser();
+    final doc = await _userService.loadUserData();
+    final user = doc != null ? AppUser.fromSnapshot(doc) : null;
+
     if (!mounted) return;
 
     setState(() {
@@ -44,12 +44,9 @@ class _AccountScreenState extends State<AccountScreen> {
 
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+      MaterialPageRoute(builder: (context) => const EditProfileScreen()),
     );
-
-    if (mounted) {
-      _loadUserData();
-    }
+    _loadUserData();
   }
 
   @override

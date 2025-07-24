@@ -13,7 +13,7 @@ class ShowRecipesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
 
     return ElevatedButton(
       onPressed: onPressed,
@@ -21,7 +21,7 @@ class ShowRecipesButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       ),
       child: Text(
-        loc?.showRecipesButton ?? 'Zeige mir Rezepte',
+        loc.showRecipesButton,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,

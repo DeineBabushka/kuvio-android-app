@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/account/services/dialog_service.dart';
 import 'package:kuvio/localization/context_extension.dart';
 import 'package:kuvio/shared/utils/snackbar_helper.dart';
@@ -22,16 +21,6 @@ class UserService {
     if (user == null) return null;
     final doc = await _firestore.collection('users').doc(user.uid).get();
     return doc.exists ? doc : null;
-  }
-
-  Future<AppUser?> fetchAndParseUser() async {
-    final doc = await loadUserData();
-    return doc != null ? AppUser.fromSnapshot(doc) : null;
-  }
-
-  Future<Map<String, dynamic>?> loadEditableUserData() async {
-    final doc = await loadUserData();
-    return doc?.data() as Map<String, dynamic>?;
   }
 
   Future<Map<String, dynamic>?> fetchCurrentUserData() async {
@@ -64,12 +53,14 @@ class UserService {
   }
 
   Future<String?> changePassword({
+    required BuildContext context,
     required String currentPassword,
     required String newPassword,
   }) async {
+    final loc = context.loc;
     final user = _auth.currentUser;
     if (user == null || user.email == null) {
-      return 'Kein Benutzer angemeldet.';
+      return loc.noUserLoggedIn;
     }
 
     try {
@@ -84,13 +75,13 @@ class UserService {
       switch (e.code) {
         case 'wrong-password':
         case 'invalid-credential':
-          return 'Das aktuelle Passwort ist falsch.';
+          return loc.errorWrongPassword;
         case 'requires-recent-login':
-          return 'Bitte melde dich erneut an, um dein Passwort zu ändern.';
+          return loc.errorRecentLoginRequired;
         case 'user-mismatch':
-          return 'Anmeldedaten stimmen nicht mit dem aktuellen Nutzer überein.';
+          return loc.errorUserMismatch;
         default:
-          return 'Fehler beim Ändern des Passworts.';
+          return loc.errorChangePasswordFailed;
       }
     }
   }

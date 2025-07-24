@@ -14,12 +14,10 @@ class OfflineCacheService {
 
     final uid = user.uid;
 
-    await Future.wait([
-      fs
-          .collection('shopping_list')
-          .doc(uid)
-          .collection('items')
-          .get(const GetOptions(source: Source.server)),
-    ]);
+    await fs
+        .collection('shopping_list')
+        .doc(uid)
+        .collection('items')
+        .get(const GetOptions(source: Source.server));
   }
 }

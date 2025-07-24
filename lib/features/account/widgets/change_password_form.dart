@@ -28,6 +28,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
     setState(() => _isLoading = true);
 
     final result = await UserService().changePassword(
+      context: context,
       currentPassword: _currentPasswordController.text.trim(),
       newPassword: _newPasswordController.text.trim(),
     );
@@ -43,7 +44,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
 
       if (mounted) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
       }
     } else {

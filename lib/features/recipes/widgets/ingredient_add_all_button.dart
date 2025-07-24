@@ -11,13 +11,13 @@ class AddAllIngredientsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
 
     return Center(
       child: ElevatedButton.icon(
         onPressed: onPressed,
         icon: const Icon(Icons.add_shopping_cart),
-        label: Text(loc?.addAllIngredients ?? 'Alle Zutaten hinzufügen'),
+        label: Text(loc.addAllIngredients),
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.white,

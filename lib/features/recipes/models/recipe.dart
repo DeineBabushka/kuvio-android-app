@@ -61,11 +61,11 @@ class Recipe {
       categories: (data['categories'] as Map).map(
         (key, val) => MapEntry(key, List<String>.from(val)),
       ),
-      preparationTime: Map<String, String>.from(data['preparation_time'] ?? {}),
-      calories: data['nutrition']?['calories'] ?? 0,
-      proteinG: data['nutrition']?['protein_g'] ?? 0,
-      carbohydratesG: data['nutrition']?['carbohydrates_g'] ?? 0,
-      fatG: data['nutrition']?['fat_g'] ?? 0,
+      preparationTime: Map<String, String>.from(data['preparation_time']),
+      calories: data['nutrition']?['calories'],
+      proteinG: data['nutrition']?['protein_g'],
+      carbohydratesG: data['nutrition']?['carbohydrates_g'],
+      fatG: data['nutrition']?['fat_g'],
     );
   }
 
@@ -100,12 +100,12 @@ class Recipe {
 
   List<String> getCategories(BuildContext context) {
     final lang = Localizations.localeOf(context).languageCode;
-    return categories[lang] ?? [];
+    return categories[lang] ?? categories.values.firstOrNull ?? [];
   }
 
   List<String> getDietTypes(BuildContext context) {
     final lang = Localizations.localeOf(context).languageCode;
-    return dietTypes[lang] ?? [];
+    return dietTypes[lang] ?? dietTypes.values.firstOrNull ?? [];
   }
 
   String getPreparationTime(BuildContext context) {

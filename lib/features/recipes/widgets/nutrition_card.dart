@@ -21,37 +21,39 @@ class NutritionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context)!;
 
     final values = [
-      "${loc?.nutritionCalories ?? 'Kalorien'}: $calories kcal",
-      "${loc?.nutritionProtein ?? 'Protein'}: $protein g",
-      "${loc?.nutritionCarbs ?? 'Kohlenhydrate'}: $carbs g",
-      "${loc?.nutritionFat ?? 'Fett'}: $fat g",
+      "${loc.nutritionCalories}: $calories kcal",
+      "${loc.nutritionProtein}: $protein g",
+      "${loc.nutritionCarbs}: $carbs g",
+      "${loc.nutritionFat}: $fat g",
     ];
+
+    final cards = values.map((info) {
+      return Card(
+        color: cardColor,
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        elevation: 1,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              info,
+              style: TextStyle(fontSize: 16, color: textColor),
+            ),
+          ),
+        ),
+      );
+    });
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: values
-          .map((info) => Card(
-                color: cardColor,
-                margin: const EdgeInsets.symmetric(vertical: 6),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      info,
-                      style: TextStyle(fontSize: 16, color: textColor),
-                    ),
-                  ),
-                ),
-              ))
-          .toList(),
+      children: cards.toList(),
     );
   }
 }

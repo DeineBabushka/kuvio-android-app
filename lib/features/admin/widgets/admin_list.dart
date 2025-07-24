@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kuvio/shared/models/app_user.dart';
 import 'package:kuvio/features/admin/widgets/admin_card_tile.dart';
+import 'package:kuvio/localization/context_extension.dart';
 
 class UserList extends StatelessWidget {
   final Stream<QuerySnapshot> userStream;
@@ -29,10 +30,10 @@ class UserList extends StatelessWidget {
         final users = snapshot.data?.docs ?? [];
 
         if (users.isEmpty) {
-          return const Center(
+          return Center(
             child: Text(
-              'Keine Benutzer gefunden.',
-              style: TextStyle(
+              context.loc.noUsersFound,
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),

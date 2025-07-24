@@ -7,8 +7,6 @@ import 'package:kuvio/shared/services/theme_provider.dart';
 import 'package:kuvio/shared/utils/connectivity_provider.dart';
 import 'package:kuvio/shared/services/offline_cache_service.dart';
 import 'package:kuvio/features/app/screens/start_screen.dart';
-import 'package:kuvio/features/admin/screens/admin_dashboard_screen.dart';
-import 'package:kuvio/features/auth/screens/login_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -88,10 +86,6 @@ class _KuvioAppState extends State<KuvioApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: themeProvider.isDarkMode ? _darkTheme : _lightTheme,
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/admin': (context) => const AdminDashboardScreen(),
-      },
       home: const StartScreen(),
     );
   }
