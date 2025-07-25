@@ -1,16 +1,37 @@
-# kuvio
+## How to get Kuvio 
 
-A new Flutter project.
+1. **Repository klonen**
 
-## Getting Started
+`git clone https://gitlab.ai.it.hs-worms.de/ema-ss25/team_3.git`
 
-This project is a starting point for a Flutter application.
+`cd team_3`
 
-A few resources to get you started if this is your first Flutter project:
+2. **Abhängigkeiten installieren**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+`flutter pub get`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. **Firebase** 
+
+Die Datei google-services.json für Android ist bereits im Repo, eine zusätzliche Einrichtung ist nicht nötig.
+
+4. **App starten**
+
+`flutter run`
+
+
+## Testaccounts
+
+Zum Testen gibt es folgende Accounts:
+
+**Normaler Nutzer**
+ - E-Mail: testuser@kuvio.de
+ - Passwort: test123!
+
+**Admin**
+ - E-Mail: admin@kuvio.de
+ - Passwort: admin123!
+
+Für mehr siehe Dokumentation.
+
+
+
