@@ -23,16 +23,17 @@ class GoogleUserData {
   }) : createdAt = createdAt ?? DateTime.now();
 
   Map<String, dynamic> toMap() {
-    final map = <String, dynamic>{};
-    map['username'] = username;
-    map['email'] = email;
-    map['createdAt'] = Timestamp.fromDate(createdAt);
-    map['bio'] = bio;
-    map['kitchen'] = kitchen;
-    map['favdish'] = favdish;
-    map['isAdmin'] = isAdmin;
-    map['favorites'] = favorites;
-    return map;
+    return {
+      'username': username,
+      'email': email,
+      'createdAt': Timestamp.fromDate(createdAt),
+      'bio': bio,
+      'kitchen': kitchen,
+      'favdish': favdish,
+      'isAdmin': isAdmin,
+      'favorites': favorites,
+      'disabled': false,
+    };
   }
 
   factory GoogleUserData.fromFirebaseUser(User user) {

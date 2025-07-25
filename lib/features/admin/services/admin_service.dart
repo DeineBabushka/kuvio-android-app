@@ -4,14 +4,20 @@ class AdminService {
   static final _db = FirebaseFirestore.instance;
 
   static Stream<QuerySnapshot> getUserStream() {
-    return _db.collection('users').snapshots();
+    return _db
+        .collection('users')
+        .where('disabled', isEqualTo: false)
+        .snapshots();
   }
 
   static Future<void> setAdminStatus(String userId, bool isAdmin) async {
     await _db.collection('users').doc(userId).update({'isAdmin': isAdmin});
   }
 
-  static Future<void> deleteUser(String userId) async {
+  static Future<void> disableUserAndDeleteData(String userId) async {
+    await _db.collection('users').doc(userId).update({
+      'disabled': true,
+    });
     final comments = await _db
         .collection('comments')
         .where('userId', isEqualTo: userId)
@@ -32,6 +38,5 @@ class AdminService {
       await item.reference.delete();
     }
     await shoppingListRef.delete();
-    await _db.collection('users').doc(userId).delete();
   }
 }
