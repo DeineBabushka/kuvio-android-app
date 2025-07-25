@@ -34,6 +34,7 @@ class AuthService {
       'isAdmin': false,
       'favorites': [],
       'profileImage': 'assets/character_9.png',
+      'disabled': false,
     });
   }
 

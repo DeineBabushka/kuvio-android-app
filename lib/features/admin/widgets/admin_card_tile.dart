@@ -72,7 +72,7 @@ class UserCardTile extends StatelessWidget {
                   user.username,
                 );
                 if (confirm == true) {
-                  await AdminService.deleteUser(user.id);
+                  await AdminService.disableUserAndDeleteData(user.id);
                   if (context.mounted) {
                     SnackbarHelper.showMessage(
                       context,
