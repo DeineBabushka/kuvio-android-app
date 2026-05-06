@@ -4,6 +4,16 @@ A cross-platform mobile recipe app built with **Flutter** and **Firebase**, deve
 
 ---
 
+## Badges
+
+![Flutter](https://img.shields.io/badge/Framework-Flutter-blue)
+![Dart](https://img.shields.io/badge/Language-Dart-lightblue)
+![Firebase](https://img.shields.io/badge/Backend-Firebase-orange)
+![Firestore](https://img.shields.io/badge/Database-Firestore-yellow)
+![Platform](https://img.shields.io/badge/Platform-Android-green)
+
+---
+
 ## Features
 
 - **Recipe browsing** – Filter recipes by diet type (e.g. vegetarian, vegan, keto) and category (e.g. main course, dessert, breakfast)
@@ -34,34 +44,36 @@ A cross-platform mobile recipe app built with **Flutter** and **Firebase**, deve
 
 ---
 
-##  Screenshots
+## App Preview
 
-### Start & Filter
-| Welcome Screen | Recipe Filter |
-|---|---|
-| ![Start](screenshots/start.png) | ![Filter](screenshots/filter.png) |
+### Welcome Screen
+![Start](screenshots/Start.png)
 
-### Recipes
-| Recipe List | Recipe Detail |
-|---|---|
-| ![List](screenshots/recipe_list.png) | ![Detail](screenshots/recipe_detail.png) |
+### Recipe Filter
+![Filter](screenshots/Filter.png)
 
-### User Features
-| Favorites | Shopping List | Comments |
-|---|---|---|
-| ![Favorites](screenshots/favorites.png) | ![Shopping](screenshots/shopping_list.png) | ![Comments](screenshots/comments.png) |
+### Recipe List
+![Recipes](screenshots/Gefundene_Rezepte.png)
 
-### Account
-| Profile | Edit Profile | Hamburger Menu |
-|---|---|---|
-| ![Profile](screenshots/profile.png) | ![Edit](screenshots/profile_edit.png) | ![Menu](screenshots/ham_menu.png) |
+### Recipe Detail View
+![Detail](screenshots/Rezeptansicht.png)
 
-### Admin
-| Admin Dashboard |
-|---|
-| ![Admin](screenshots/admin.png) |
+### Favorites
+![Favorites](screenshots/Meine_Favoriten.png)
 
-> All screenshots are located in the `screenshots/` folder.
+### Shopping List
+![Shopping](screenshots/Einkaufsliste.png)
+
+### Comments
+![Comments](screenshots/Kommentare_neu.png)
+
+### Profile
+![Profile](screenshots/Konto_ansicht.png)
+
+### Admin Dashboard
+![Admin](screenshots/Admin-Dashboard.png)
+
+> All screenshots are located in the `screenshots/` folder and can be updated at any time.
 
 ---
 
