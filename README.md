@@ -143,4 +143,7 @@ Developed by:
 
 ## License
 
-This project was developed for academic purposes at Hochschule Worms.
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+This project was developed for academic purposes at Hochschule Worms (SS 2025).  
+Viewing the source code is permitted. Copying, modifying, or distributing is **not allowed**.
